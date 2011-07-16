@@ -1,0 +1,21 @@
+Controller:
+  tableName: system_controller
+  columns:
+    module_id:
+      type: integer
+    name:
+      type: string(255)
+      
+  relations:
+    Module:
+      class: Module
+      type: one
+
+    Actions:
+      class: Action
+      type: many
+
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8

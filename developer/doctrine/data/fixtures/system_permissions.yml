@@ -1,0 +1,30 @@
+Model_Entity_Permission:
+  Member_1:
+    Story: Access_Desktop
+    Role: Member
+  Member_2:
+    Story: Change_Profile
+    Role: Member
+
+  Admin_1:
+    Story: Access_Desktop
+    Role: Admin
+  Admin_2:
+    Story: Change_Profile
+    Role: Admin
+  Admin_3:
+    Story: User_Management
+    Role: Admin
+  Admin_4:
+    Story: Feedback_Management
+    Role: Admin
+  Admin_5:
+    Story: Role_Management
+    Role: Admin
+  Admin_6:
+    Story: Story_Management
+    Role: Admin
+  Admin_7:
+    Story: Application_Management
+    Role: Admin
+    

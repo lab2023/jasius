@@ -1,0 +1,67 @@
+#Controllers
+Model_Entity_Controller:
+  # DEFAULT MODULE #######################################################
+  Default_Backend:
+    Module: Default
+    name: backend
+
+  Default_Error:
+    Module: Default
+    name: error
+
+  Default_Index:
+    Module: Default
+    name: index
+
+  # KEBAB MODULE #########################################################
+  Kebab_Password:
+    Module: Kebab
+    name: password
+
+  Kebab_Session:
+    Module: Kebab
+    name: session
+
+  Kebab_ForgotPassword:
+    Module: Kebab
+    name: forgot-password
+
+  Kebab_Story:
+    Module: Kebab
+    name: story
+
+  Kebab_Feedback:
+    Module: Kebab
+    name: feedback
+
+  Kebab_FeedbackManager:
+    Module: Kebab
+    name: feedback-manager
+
+  Kebab_Profile:
+    Module: Kebab
+    name: profile
+
+  Kebab_Role:
+    Module: Kebab
+    name: role
+
+  Kebab_RoleStory:
+    Module: Kebab
+    name: role-story
+
+  Kebab_User:
+    Module: Kebab
+    name: user
+
+  Kebab_UserRole:
+    Module: Kebab
+    name: user-role
+
+  Kebab_UserInvitation:
+    Module: Kebab
+    name: user-invitation
+
+  Kebab_Application:
+    Module: Kebab
+    name: application

@@ -1,0 +1,16 @@
+Module:
+  tableName: system_module
+  columns:
+    name:
+      type: string(255)
+      unique: true
+
+  relations:
+    Controllers:
+      class: Controller
+      type: many
+      
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8

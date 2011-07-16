@@ -1,0 +1,13 @@
+#Actions
+Model_Entity_Action:
+
+  # Logout
+  Kebab_Session_Delete:
+    Controller: Kebab_Session
+    name: delete
+    
+  # Access the desktop
+  Default_Backend_Desktop:
+    Controller: Default_Backend
+    name: desktop
+

@@ -1,0 +1,74 @@
+<?php
+$this->headTitle($this->translate('Desktop'));
+
+$this->headLink()
+     ->appendStylesheet($this->asset('desktop.css')->distribution()->theme()->get());
+$this->headScript()
+     ->appendFile($this->asset('library')->get())
+     ->appendFile($this->asset('kernel/desktop/Application.js')->distribution()->get())
+     ->appendFile($this->asset('kernel/desktop/Indicator.js')->distribution()->get())
+     ->appendFile($this->asset('kernel/indicators/Session.js')->distribution()->get())
+     ->appendFile($this->asset('kernel/indicators/Connection.js')->distribution()->get())
+     ->appendFile($this->asset('kernel/indicators/User.js')->distribution()->get())
+     ->appendFile($this->asset('kernel/indicators/SystemTime.js')->distribution()->get())
+     ->appendFile($this->asset('kernel/indicators/QuickStart.js')->distribution()->get())
+     ->appendFile($this->asset('kernel/indicators/Language.js')->distribution()->get())
+     ->appendFile($this->asset('kernel/desktop/Panel.js')->distribution()->get())
+     ->appendFile($this->asset('kernel/desktop/Desktop.js')->distribution()->get())
+     ->appendFile($this->asset('kernel/desktop/Kernel.js')->distribution()->get());
+?>
+
+    <?php
+    // BEGIN: Kernel Boot & All Applications Load ------------------------------
+    foreach ($this->applications as $application) {  // KBBTODO Move to DOM
+        
+        // TODO Load on-demand
+        $this->headLink()->appendStylesheet(
+            $this->assetApplication($application['name'] .'/web/theme/style.css')
+                 ->department($application['department'])
+                 ->get(),
+            'screen', true, array('id' => $application['identity'] . '-style')
+        );
+        
+        $this->headScript()->appendFile(
+            $this->assetApplication($application['name'])
+             ->department($application['department'])
+             ->version($application['version'])
+             ->get()
+        );
+    }
+    ?>
+    <script type="text/javascript">
+    Ext.namespace('KebabOS', 'KebabOS.kernel');
+    KebabOS.kernel = new Kebab.OS.Kernel({
+        distribution    : "<?php echo $this->variable('os')->distributions->current; ?>",
+        assets          : <?php echo json_encode($this->variable('assets')->toArray()); ?>,
+        settings        : {project: <?php echo json_encode($this->settings('project')->toArray()); ?>},
+        user            : <?php echo json_encode($this->user); ?>,
+        apps            : <?php echo json_encode($this->applications); ?>,
+        stories         : <?php echo json_encode($this->stories); ?>
+    });
+    </script>
+    <?php // END: Kernel Boot & All Applications Load ------------------------?>
+
+    <?php // BEGIN: OS Panel -------------------------------------------------?>
+    <div id="kebab-os-panel" class="kebab-shadow-std">
+        <div id="kebab-os-panel-main-menu"></div>
+        <div id="kebab-os-panel-window-list"></div>
+        <div id="kebab-os-panel-indicators"></div>
+        <div class="kebab-os-panel-clear"></div>
+    </div>
+    <?php // END: OS Panel ---------------------------------------------------?>
+
+    <?php // BEGIN: OS Desktop Environment -----------------------------------?>
+    <div id="kebab-os-desktop"> 
+        <dl id="kebab-os-desktop-shortcuts">
+            <?php foreach ($this->applications as $application): // KBBTODO Move to DOM ?>
+            <dt ext:qtip="<?php echo $application['title']['description']; ?>" id="<?php echo $application['identity']; ?>-shortcut">
+                <div></div>
+                <span><?php echo strlen($application['title']['text']) > 23 ? substr($application['title']['text'], 0, 23). '...' : $application['title']['text']; ?></span>
+            </dt>
+            <?php endforeach; ?>
+        </dl>
+    </div>
+    <?php // END: OS Desktop Environment -------------------------------------?>

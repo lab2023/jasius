@@ -1,0 +1,20 @@
+UserRole:
+  tableName: system_user_role
+  columns:
+    user_id:
+      type: integer
+      primary: true
+    role_id:
+      type: integer
+      primary: true
+
+  relations:
+    User:
+      class: User
+    Role:
+      class: Role
+
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8

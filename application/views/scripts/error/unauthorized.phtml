@@ -1,0 +1,12 @@
+<?php
+$this->headTitle($this->translate('Unauthorized Access')); ?>
+
+<div id="kebab-system-auth-container" class="kebab-standart-container kebab-rounded-corners kebab-shadow kebab-opacity">
+
+    <h1 class="kebab-heading"><?php echo $this->translate('Unauthorized Access'); ?></h1>
+
+    <p class="kebab-paragraph"><?php echo $this->translate('You are not authorized to see this field.'); ?></p>
+
+    <p class="kebab-paragraph"><?php echo $this->translate('Please'); ?> <a href="<?php echo $this->baseUrl('backend')?>"><?php echo $this->translate('Sign in'); ?></a></p>
+    
+</div>

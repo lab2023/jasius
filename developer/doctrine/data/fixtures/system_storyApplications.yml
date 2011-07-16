@@ -1,0 +1,28 @@
+Model_Entity_StoryApplication:
+  Record_1:
+    Story: Access_Desktop
+    Application: AboutMeApplication
+
+  Record_2:
+    Story: Access_Desktop
+    Application: FeedbackApplication
+
+  Record_3:
+    Story: User_Management
+    Application: UserManagerApplication
+
+  Record_4:
+    Story: Feedback_Management
+    Application: FeedbackManagerApplication
+
+  Record_5:
+    Story: Role_Management
+    Application: RoleManagerApplication
+
+  Record_6:
+    Story: Story_Management
+    Application: StoryManagerApplication
+
+  Record_7:
+    Story: Application_Management
+    Application: ApplicationManager

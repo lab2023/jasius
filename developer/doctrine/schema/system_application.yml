@@ -1,0 +1,38 @@
+Application:
+  tableName: system_application
+  columns:
+    identity: 
+      type: string(255)
+      unique: true    
+    className:
+      type: string(255)
+    name:
+        type: string(255)
+    department:
+        type: string(255)
+    version:
+        type: string(255)
+    type:
+      type: enum
+      length: 11
+      values: ['application', 'system']
+    title:
+      type: string(255)
+    description:
+      type: clob    
+    active:
+      type: boolean
+  actAs:
+    I18n:
+      fields: [title, description]
+      className: ApplicationTranslation
+      length: 2
+      actAs:
+        Searchable:
+          fields: [title, description]
+          className: SystemApplicationSearch
+      
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8

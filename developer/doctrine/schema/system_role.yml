@@ -1,0 +1,41 @@
+Role:
+  tableName: system_role
+  columns:
+    id:
+      type: integer
+      primary: true
+      autoincrement: true
+    title:
+      type: string(255)
+    description:
+      type: clob
+    active:
+      type: boolean
+      
+  actAs:
+    Timestampable:
+    Blameable:
+    I18n:
+      fields: [title, description]
+      className: RoleTranslation
+      length: 2
+      actAs:
+        Searchable:
+          fields: [title]
+          className: SystemRoleSearch
+
+  relations:
+    Users:
+      foreignAlias : Roles
+      class: User
+      refClass: UserRole
+     
+    Stories:
+      foreignAlias : Stories
+      class: Story
+      refClass: Permission
+
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8

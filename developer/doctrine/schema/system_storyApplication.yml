@@ -1,0 +1,20 @@
+StoryApplication:
+  tableName: system_story_application
+  columns:
+    story_id: 
+      type: integer
+      primary: true
+    application_id:
+      type: integer
+      primary: true
+  
+  relations:
+    Story:
+      class: Story
+    Application:
+      class: Application
+    
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8

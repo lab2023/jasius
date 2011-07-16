@@ -1,0 +1,32 @@
+Feedback:
+  tableName: system_feedback
+  columns:
+    user_id: 
+      type: integer
+      notnull: true
+    application_id:
+      type: integer
+    description:
+      type: clob
+    status:
+      type: enum
+      length: 7
+      values: ['open', 'progress', 'closed']
+
+  relations:
+    User:
+      class: User
+      type: one
+    Application:
+      class: Application
+      type: one
+      
+  actAs:
+    Timestampable:
+    SoftDelete:
+    Blameable:
+  
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8

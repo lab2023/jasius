@@ -1,0 +1,8 @@
+Model_Entity_UserRole:
+  Member:
+    User: Member
+    Role: Member
+
+  Admin:
+    User: Admin
+    Role: Admin

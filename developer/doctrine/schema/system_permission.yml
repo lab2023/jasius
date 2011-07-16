@@ -1,0 +1,22 @@
+Permission:
+  tableName: system_permission
+  columns:
+    role_id:
+      type: integer
+      primary: true
+    story_id:
+      type: integer
+      primary: true
+
+  relations:
+    Role:
+      class: Role
+      type: one
+    Story:
+      class: Story
+      type: one
+
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8

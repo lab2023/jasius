@@ -1,0 +1,19 @@
+Model_Entity_User:
+
+  Member:
+    userName: member
+    password: aa08769cdcb26674c6706093503ff0a3
+    fullName: Member User
+    email: member@kebab-project.com
+    language: tr
+    status: approved
+    active: '1'
+
+  Admin:
+    userName: admin
+    password: 21232f297a57a5a743894a0e4a801fc3
+    fullName: Admin User
+    email: admin@kebab-project.com
+    language: en
+    status: approved
+    active: '1'

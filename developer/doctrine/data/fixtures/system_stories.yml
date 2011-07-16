@@ -1,0 +1,77 @@
+Model_Entity_Story:
+  Access_Desktop:
+    name: access_desktop
+    Translation:
+      en:
+        title: Access to desktop
+        description: Access the desktop after login. 
+      tr:
+        title: Masaüstüne erişim
+        description: Çevirimiçi olduktan sonra masaüstüne erişim
+    active: true
+
+  Change_Profile:
+    name: profile_management
+    Translation:
+      en:
+        title: Profile management
+        description: User can change name, surname, language etc.
+      tr:
+        title: Profil yönetimi
+        description: Kullanıcılar isim, soyisim, dil seçimi gibi bilgilerini değiştirebilir.
+    active: true
+
+  User_Management:
+    name: user_management
+    active: 1
+    Translation:
+      en:
+        title: User management
+        description: User add, edit and remove.
+      tr:
+        title: Kullanıcı yönetimi
+        description: Kullanıcı ekleyin çıkarın düzenleyin.
+
+  Role_Management:
+    name: role_management
+    active: 1
+    Translation:
+      en:
+        title: Role management
+        description: Manage system roles
+      tr:
+        title: Rol yönetimi
+        description: Sistem rollerini yönetin
+    
+  Story_Management:
+    name: story_management
+    active: 1
+    Translation:
+      en:
+        title: Story management
+        description: Manage the user stories.
+      tr:
+        title: Kullanım hikayeleri yönetimi
+        description: Kullanıcı hikayelerini yönetin.
+
+  Application_Management:
+    name: application_management
+    active: 1
+    Translation:
+      en:
+        title: Application management
+        description: Manage Kebab applications.
+      tr:
+        title: Uygulama Yöneticisi
+        description: Kebab uygulamalarını yönetin.
+
+  Feedback_Management:
+    name: feedback_management
+    active: 1
+    Translation:
+      en:
+        title: Feedback management
+        description: Manage user feedbacks
+      tr:
+        title: Geribildirim yönetimi
+        description: Kullanıcı geri bildirimlerini yönetin

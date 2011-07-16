@@ -1,0 +1,64 @@
+Model_Entity_Service:
+
+  # Access Desktop Stories
+  Desktop_1:
+    Story: Access_Desktop
+    Action: Default_Backend_Desktop
+
+  # Logout
+  Desktop_2:
+    Story: Access_Desktop
+    Action: Kebab_Session_Delete
+    
+  # Send Feedback
+  Desktop_3:
+    Story: Access_Desktop
+    Resource: Kebab_Feedback
+    
+  # Change Password
+  Profile_2:
+    Story: Change_Profile
+    Resource: Kebab_Password
+
+  # Manage Feedbacks
+  ManageFeedbacks_1:
+    Story: Feedback_Management
+    Resource: Kebab_FeedbackManager
+
+  # Manage Roles
+  ManageRoles_1:
+    Story: Role_Management
+    Resource: Kebab_Role
+
+  ManageRoles_2:
+    Story: Role_Management
+    Resource: Kebab_RoleStory
+
+  # Manage Users
+  ManageUsers_1:
+    Story: User_Management
+    Resource: Kebab_User
+    
+  ManageUsers_2:
+    Story: User_Management
+    Resource: Kebab_UserRole
+
+  ManageUsers_3:
+    Story: User_Management
+    Resource: Kebab_UserInvitation
+
+
+  # Manage Story
+  Kebab_Story_1:
+    Story: Story_Management
+    Resource: Kebab_Story
+
+  # Change Profile
+  Kebab_Profile:
+    Story: Change_Profile
+    Resource: Kebab_Profile
+
+  # Application Manager
+  Kebab_Application:
+    Story: Application_Management
+    Resource: Kebab_Application

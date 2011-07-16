@@ -1,0 +1,26 @@
+Service:
+  tableName: system_service
+  columns:
+    story_id:
+      type: integer
+    controller_id:
+      type: integer
+    action_id:
+      type: integer
+      
+  relations:
+    Story:
+      class: Story
+      type: one
+    Resource:
+      class: Controller
+      type: one
+    Action:
+      class: Action
+      type: one
+    
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8
+      

@@ -1,0 +1,50 @@
+User:
+  tableName: system_user
+  columns:
+    fullName:
+      type: string(255)
+    userName:
+      type: string(55)
+      unique: true
+    email:
+      type: string(255)
+      unique: true
+      notnull: true
+    password:
+      type: string(255)
+    language:
+      type: enum
+      length: 2
+      values: ['en', 'tr']
+    activationKey:
+      type: string(255)
+      unique: true
+    status:
+      type: enum
+      length: 8
+      values: ['pending', 'banned', 'approved']
+    active:
+      type: boolean
+
+  actAs:
+    Timestampable:
+    SoftDelete:
+    Blameable:
+    Sluggable:
+      fields: [fullName]
+    Searchable:
+      fields: [fullName, userName, email]
+      className: SystemUserSearch
+
+  relations:
+    Roles:
+      foreignAlias : Users
+      class: Role
+      refClass: UserRole
+
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8
+    
+    

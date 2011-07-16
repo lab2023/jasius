@@ -1,0 +1,17 @@
+Action:
+  tableName: system_action
+  columns:
+    controller_id:
+       type: integer
+    name:
+      type: string(255)
+
+  relations:
+    Controller:
+      class: Controller
+      type: one
+
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8

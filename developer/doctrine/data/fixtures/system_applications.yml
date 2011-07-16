@@ -1,0 +1,112 @@
+Model_Entity_Application:
+  AboutMeApplication:
+    identity: aboutMe-application
+    className: KebabOS.applications.aboutMe.application.Bootstrap
+    name: about-me
+    type: system
+    department: preferences
+    version: 0.0.1
+    active: 1
+    Translation:
+      en:
+        title: About Me
+        description: Set your personal information.
+      tr:
+        title: Kişisel Bilgilerim
+        description: Kişisel bilgilerinizi yönetin.
+
+  FeedbackApplication:
+    identity: feedback-application
+    className: KebabOS.applications.feedback.application.Bootstrap
+    name: feedback
+    type: system
+    department: preferences
+    version: 0.0.1
+    active: 1
+    Translation:
+      en:
+        title: Feedback
+        description: Send feedback.
+      tr:
+        title: Geri Bildirim
+        description: Geribildirim gönderin.
+
+  UserManagerApplication:
+    identity: userManager-application
+    className: KebabOS.applications.userManager.application.Bootstrap
+    name: user-manager
+    type: system
+    department: administration
+    version: 0.0.1
+    active: 1
+    Translation:
+      en:
+        title: User Manager
+        description: User add, edit and remove.
+      tr:
+        title: Kullanıcı Yönetici
+        description: Kullanıcı ekleyin çıkarın düzenleyin.
+
+  FeedbackManagerApplication:
+    identity: feedbackManager-application
+    className: KebabOS.applications.feedbackManager.application.Bootstrap
+    name: feedback-manager
+    type: system
+    department: administration
+    version: 0.0.1
+    active: 1
+    Translation:
+      en:
+        title: Feedback Manager
+        description: Feedback edit.
+      tr:
+        title: Geri Bildirim Yöneticisi
+        description: Geri bildirim düzenleyin.
+
+  StoryManagerApplication:
+    identity: storyManager-application
+    className: KebabOS.applications.storyManager.application.Bootstrap
+    name: story-manager
+    type: system
+    department: administration
+    version: 0.0.1
+    active: 1
+    Translation:
+      en:
+        title: Story Manager
+        description: Manage system stories.
+      tr:
+        title: Kullanıcı Hikayeleri Yöneticisi
+        description: Kullanıcı hikayelerini düzenleyin.
+
+  RoleManagerApplication:
+    identity: roleManager-application
+    className: KebabOS.applications.roleManager.application.Bootstrap
+    name: role-manager
+    type: system
+    department: administration
+    version: 0.0.1
+    active: 1
+    Translation:
+      en:
+        title: Role Manager
+        description: Roles managment.
+      tr:
+        title: Rol Yöneticisi
+        description: Rolleri yönetin.
+
+  ApplicationManager:
+    identity: applicationManager-application
+    className: KebabOS.applications.applicationManager.application.Bootstrap
+    name: application-manager
+    type: system
+    department: administration
+    version: 0.0.1
+    active: 1
+    Translation:
+      en:
+        title: Application Manager
+        description: Manage Kebab applications
+      tr:
+        title: Uygulama Yöneticisi
+        description: Kebab uygulamalarını yönetin

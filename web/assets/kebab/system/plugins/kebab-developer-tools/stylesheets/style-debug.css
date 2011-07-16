@@ -1,0 +1,70 @@
+#kebab-developer-tools {
+    background: #000;
+    position:fixed;
+    left:0;
+    margin:auto; padding: 0;
+    width:100%;
+    overflow: hidden;
+    height:30px;
+    z-index:999;
+}
+div.kebab-developer-tools-top {
+    border-bottom:1px solid #fff;
+    top:0;
+}
+div.kebab-developer-tools-bottom {
+    border-top:1px solid #fff;
+    bottom:0;
+}
+#kebab-developer-tools p {    
+    margin:0px;
+    padding:0px;
+    position:absolute;
+    top:5px;
+    left:30px;
+}
+#kebab-developer-tools p strong {
+    font-weight: bold;
+}
+#kebab-developer-tools p strong, #kebab-developer-tools p span {
+    color: #fff;
+    font-size:12px;
+}
+#kebab-developer-tools span.env-production   { color:chartreuse }
+#kebab-developer-tools span.env-staging      { color:aqua }
+#kebab-developer-tools span.env-testing      { color:yellow }
+#kebab-developer-tools span.env-development  { color:orangered }
+
+#kebab-developer-tools em {
+    color: #eee;
+    font-size: 10px !important;
+    font-style: italic;
+    position: absolute;
+    right: 10px;
+    top: 7px;
+}
+#kebab-developer-tools-terminal-icon  {
+    background:url('../images/terminal.png') no-repeat;
+    width:22px; height:22px;
+    float:left;
+    margin-left:5px;
+    margin-top: 7px;
+    cursor:pointer;
+}
+#kebab-developer-tools-console {
+    clear:both;
+    margin:5px;
+    padding:5px;
+    display:none;
+}
+#kebab-developer-tools-console textarea {
+    font-family: "Lucida Console";
+    font-size:11px;
+    height: 100px;
+    color:#000;
+    width:100%;
+    border:1px solid;
+}
+
+/* Overrides */
+#project-info {right:15px !important; bottom:50px !important;}

@@ -1,0 +1,21 @@
+Model_Entity_Role:
+  Member:
+    active: 1
+    Translation:
+      en:
+        title: Member
+        description: Member Role
+      tr:
+        title: Üye
+        description: Üye Rolü
+  
+  Admin:
+    active: 1
+    Translation:
+      en:
+        title: Admin
+        description: Admin Role
+      tr:
+        title: Yönetici
+        description: Yönetici Rolü
+
