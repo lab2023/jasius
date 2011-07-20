@@ -69,6 +69,7 @@ class Model_Entity_Data extends Doctrine_Record
              array(
               0 => 'textValue',
              ),
+             'className' => 'SystemDataSearch',
              ));
         $this->actAs($softdelete0);
         $this->actAs($timestampable0);
