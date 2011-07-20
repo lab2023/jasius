@@ -1,0 +1,217 @@
+Type:
+  tableName: docloud_type
+  columns:
+    title:
+      type: string(255)
+      notnull: true
+    active:
+      type: boolean
+      notnull: true
+
+  relations:
+    Property:
+      type: many
+    Content:
+      type: many
+
+  actAs:
+    Timestampable:
+    SoftDelete:
+    Blameable:
+    I18n:
+      fields: [title]
+      className: TypeTranslation
+      lenghth: 1
+      actAs:
+        Searchable:
+          fields: [title]
+          className: SystemTypeSearch
+
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8
+
+Property:
+  tableName: docloud_property
+  columns:
+    type_id:
+      type: integer
+      notnull: true
+    title:
+      type: string(255)
+      notnull: true
+    dataType:
+      type: enum
+      length: 9
+      values: ['integer', 'string', 'boolean', 'enum', 'float', 'decimal', 'array', 'object', 'blob', 'clob', 'timestamp', 'time', 'date', 'gzip']
+      notnull: true
+    isUnique:
+      type: boolean
+      notnull: true
+    isRequire:
+      type: boolean
+      notnull: true
+    defaultValue:
+      type: string(255)
+      notnull: true
+    enum:
+      type: object
+      notnull: true
+    weight:
+      type: integer
+      notnull: true
+
+  relations:
+    Type:
+      type: one
+    Data:
+      type: many
+
+  actAs:
+    SoftDelete:
+    Timestampable:
+    Blameable:
+    I18n:
+      fields: [title, defaultValue]
+      className: PropertyTranslation
+      length: 2
+
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8
+
+Content:
+  tableName: docloud_content
+  columns:
+    type_id:
+      type: integer
+      notnull: true
+    title:
+      type: string(255)
+      notnull: true
+
+  relations:
+    Type:
+      type: one
+    Data:
+      type: many
+    File:
+      type: many
+    Access:
+      type: many
+
+  actAs:
+    SoftDelete:
+    Timestampable:
+    Blameable:
+
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8
+
+Data:
+  tableName: docloud_data
+  columns:
+    property_id:
+      type: integer
+      notnull: true
+    content_id:
+      type: integer
+      notnull: true
+    numberValue:
+      type: integer
+      notnull: true
+    textValue:
+      type: string(255)
+      notnull: true
+    timeValue:
+      type: timestamp
+      notnull: true
+
+  relations:
+    Property:
+      type: one
+    Content:
+      type: one
+
+  actAs:
+    SoftDelete:
+    Timestampable:
+    Blameable:
+    Searchable:
+      fields: [textValue]
+      className: SystemDataSearch
+
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8
+
+File:
+  tableName: docloud_file
+  columns:
+    content_id:
+      type: integer
+      notnull: true
+    size:
+      type: integer
+      notnull: true
+    mime:
+      type: string(20)
+      
+
+  relations:
+    Content:
+      type: one
+
+  actAs:
+    Timestampable:
+    Blameable:
+
+  options:
+    type: INNODB
+    collate: utf8_bin
+    charset: utf8
+
+Access:
+  tableName: docloud_access
+  columns:
+    content_id:
+      type: integer
+      notnull: true
+    access:
+      type: enum
+      length: 8
+      values: ['all', 'user', 'specific']
+      notnull: true
+    allowUser:
+      type: integer
+      notnull: true
+    allowRole:
+      type: integer
+      notnull: true
+  relations:
+    Content:
+      type: one
+
+  actAs:
+    SoftDelete:
+    Timestampable:
+    Blameable:
+
+  options:
+      type: INNODB
+      collate: utf8_bin
+      charset: utf8
+
+
+
+        
+
+
+
+
+
