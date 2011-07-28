@@ -21,11 +21,11 @@ Type:
     I18n:
       fields: [title]
       className: TypeTranslation
-      lenghth: 1
+      lenghth: 2
       actAs:
         Searchable:
           fields: [title]
-          className: SystemTypeSearch
+          className: DocloudTypeSearch
 
   options:
     type: INNODB

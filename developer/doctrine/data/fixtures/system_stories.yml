@@ -75,3 +75,27 @@ Model_Entity_Story:
       tr:
         title: Geribildirim yönetimi
         description: Kullanıcı geri bildirimlerini yönetin
+
+
+  # Docloud
+  Docloud_See_Document_Type:
+    name: see_document_type
+    active: 1
+    Translation:
+      en:
+        title: See all document types
+        description: User can see all document types
+      tr:
+        title: Bütün döküman tiplerini görme
+        description: Kullanıcı bütün döküman tiplerini görebilir
+
+  Docloud_Property:
+    name: docloud_property
+    active: 1
+    Translation:
+      en:
+        title: Property Managment
+        description: Property Managmanent
+      tr:
+        title: Özellik Yönetimi
+        description: Özellik Yönetimi

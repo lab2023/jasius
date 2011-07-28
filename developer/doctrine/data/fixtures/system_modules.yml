@@ -4,3 +4,5 @@ Model_Entity_Module:
     name: default
   Kebab:
     name: kebab
+  Docloud:
+    name: docloud

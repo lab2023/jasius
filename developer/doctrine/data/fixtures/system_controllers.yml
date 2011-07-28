@@ -65,3 +65,11 @@ Model_Entity_Controller:
   Kebab_Application:
     Module: Kebab
     name: application
+
+  # Docloud MODULE #########################################################
+  Docloud_Type:
+    Module: Docloud
+    name: type
+  Docloud_Property:
+    Module: Docloud
+    name: property

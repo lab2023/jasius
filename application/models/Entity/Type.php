@@ -55,14 +55,14 @@ class Model_Entity_Type extends Doctrine_Record
               0 => 'title',
              ),
              'className' => 'TypeTranslation',
-             'lenghth' => 1,
+             'lenghth' => 2,
              ));
         $searchable1 = new Doctrine_Template_Searchable(array(
              'fields' => 
              array(
               0 => 'title',
              ),
-             'className' => 'SystemTypeSearch',
+             'className' => 'DocloudTypeSearch',
              ));
         $i18n0->addChild($searchable1);
         $this->actAs($timestampable0);

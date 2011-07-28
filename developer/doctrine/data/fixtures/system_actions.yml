@@ -11,3 +11,7 @@ Model_Entity_Action:
     Controller: Default_Backend
     name: desktop
 
+  # Get all types
+  Docloud_Type_Index:
+    Controller: Docloud_Type
+    name: index

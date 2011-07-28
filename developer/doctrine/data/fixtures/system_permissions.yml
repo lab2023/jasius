@@ -5,6 +5,12 @@ Model_Entity_Permission:
   Member_2:
     Story: Change_Profile
     Role: Member
+  Member_3:
+    Story: Docloud_See_Document_Type
+    Role: Member
+  Member_4:
+    Story: Docloud_Property
+    Role: Member
 
   Admin_1:
     Story: Access_Desktop
@@ -26,5 +32,11 @@ Model_Entity_Permission:
     Role: Admin
   Admin_7:
     Story: Application_Management
+    Role: Admin
+  Admin_8:
+    Story: Docloud_See_Document_Type
+    Role: Admin
+  Admin_9:
+    Story: Docloud_Property
     Role: Admin
     
