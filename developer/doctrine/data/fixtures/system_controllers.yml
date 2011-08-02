@@ -76,3 +76,6 @@ Model_Entity_Controller:
   Docloud_Content:
     Module: Docloud
     name: content
+  Docloud_Access:
+    Module: Docloud
+    name: access
