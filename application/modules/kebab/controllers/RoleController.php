@@ -96,25 +96,31 @@ class Kebab_RoleController extends Kebab_Rest_Controller
         Doctrine_Manager::connection()->beginTransaction();
         try {
             // Doctrine
+            $retData = array();
             foreach ($collection as $record) {
+                $retRoleData = array();
                 $role = new Model_Entity_Role();
+
                 if (array_key_exists('active', $record)) {
-                    $role->active = $record['active'];
+                    $role->active = $retRoleData['active'] = $record['active'];
                 }
 
                 if (array_key_exists('title', $record)) {
-                    $role->Translation[$lang]->title = $record['title'];
+                    $role->Translation[$lang]->title =  $retRoleData['title'] = $record['title'];
                 }
 
                 if (array_key_exists('description', $record)) {
-                    $role->Translation[$lang]->description = $record['description'];
+                    $role->Translation[$lang]->description = $retRoleData['description'] = $record['description'];
                 }
 
                 $role->save();
+                
+                $retRoleData['id'] = $role->id;
+                $retData[] = $retRoleData;
             }
             Doctrine_Manager::connection()->commit();
             // Response
-            $this->_helper->response(true, 200)->addNotification('INFO', 'Record was created.')->getResponse();
+            $this->_helper->response(true, 200)->addNotification('INFO', 'Record was created.')->addData($retData)->getResponse();
         } catch (Zend_Exception $e) {
             Doctrine_Manager::connection()->rollback();
             throw $e;
