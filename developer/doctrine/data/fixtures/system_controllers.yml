@@ -73,3 +73,6 @@ Model_Entity_Controller:
   Docloud_Property:
     Module: Docloud
     name: property
+  Docloud_Content:
+    Module: Docloud
+    name: content

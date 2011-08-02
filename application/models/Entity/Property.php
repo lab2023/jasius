@@ -8,8 +8,8 @@
  * @property integer $type_id
  * @property string $title
  * @property enum $dataType
- * @property boolean $isUnique
- * @property boolean $isRequire
+ * @property int $isUnique
+ * @property int $isRequire
  * @property string $defaultValue
  * @property object $enum
  * @property integer $weight
@@ -28,7 +28,6 @@ class Model_Entity_Property extends Doctrine_Record
         $this->setTableName('docloud_property');
         $this->hasColumn('type_id', 'integer', null, array(
              'type' => 'integer',
-             'notnull' => true,
              ));
         $this->hasColumn('title', 'string', 255, array(
              'type' => 'string',
@@ -57,22 +56,22 @@ class Model_Entity_Property extends Doctrine_Record
              ),
              'notnull' => true,
              ));
-        $this->hasColumn('isUnique', 'boolean', null, array(
-             'type' => 'boolean',
+        $this->hasColumn('isUnique', 'int', 1, array(
+             'type' => 'int',
              'notnull' => true,
+             'length' => '1',
              ));
-        $this->hasColumn('isRequire', 'boolean', null, array(
-             'type' => 'boolean',
+        $this->hasColumn('isRequire', 'int', 1, array(
+             'type' => 'int',
              'notnull' => true,
+             'length' => '1',
              ));
         $this->hasColumn('defaultValue', 'string', 255, array(
              'type' => 'string',
-             'notnull' => true,
              'length' => '255',
              ));
         $this->hasColumn('enum', 'object', null, array(
              'type' => 'object',
-             'notnull' => true,
              ));
         $this->hasColumn('weight', 'integer', null, array(
              'type' => 'integer',
@@ -102,7 +101,6 @@ class Model_Entity_Property extends Doctrine_Record
              'fields' => 
              array(
               0 => 'title',
-              1 => 'defaultValue',
              ),
              'className' => 'PropertyTranslation',
              'length' => 2,

@@ -38,11 +38,33 @@ class Docloud_Model_Property
     {
         $lang = Zend_Auth::getInstance()->getIdentity()->language;
         $query =  Doctrine_Query::create()
+                    ->select('
+                        property.id,
+                        propertyTranslation.title as title,
+                        property.dataType,
+                        property.isUnique,
+                        property.isRequire,
+                        property.defaultValue,
+                        property.enum,
+                        property.weight
+                    ')
                     ->from('Model_Entity_Property property')
                     ->leftJoin('property.Translation propertyTranslation')
                     ->where('propertyTranslation.lang = ?', $lang)
                     ->andWhere('property.type_id = ?', $typeId)
+                    ->orderBy('property.weight ASC')
                     ->setHydrationMode(Doctrine::HYDRATE_ARRAY);
+        return $query;
+    }
+
+    public static function get($id)
+    {
+        $query = Doctrine_Query::create()
+                    ->select('property.id, property.dataType, property.isUnique, property.isRequire ,property.defaultValue, property.enum')
+                    ->from('Model_Entity_Property property')
+                    ->where('property.id = ?', $id)
+                    ->setHydrationMode(Doctrine::HYDRATE_ARRAY)
+                    ->useQueryCache(Kebab_Cache_Query::isEnable());
         return $query;
     }
 }

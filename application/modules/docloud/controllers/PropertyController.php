@@ -36,10 +36,17 @@ class Docloud_PropertyController extends Kebab_Rest_Controller
 {
     public function indexAction()
     {
-        $param = $this->_helper->param();
-        //Zend_Debug::dump($param['id']);
+        
+    }
 
+    public function getAction()
+    {
+        //KBBTODO Move to index action
+        $param = $this->_helper->param();
         $retData = Docloud_Model_Property::getAllPropertyByTypeId($param['id'])->execute();
-        $this->_helper->response(true, 200)->addData($retData)->addTotal(count($retData))->getResponse();
+        $this->_helper->response(true, 200)
+                ->addTotal(count($retData))
+                ->addData($retData)
+                ->getResponse();
     }
 }

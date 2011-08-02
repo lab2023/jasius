@@ -7,7 +7,7 @@
  * 
  * @property integer $property_id
  * @property integer $content_id
- * @property integer $numberValue
+ * @property decimal $numberValue
  * @property string $textValue
  * @property timestamp $timeValue
  * @property Model_Entity_Property $Property
@@ -31,9 +31,11 @@ class Model_Entity_Data extends Doctrine_Record
              'type' => 'integer',
              'notnull' => true,
              ));
-        $this->hasColumn('numberValue', 'integer', null, array(
-             'type' => 'integer',
+        $this->hasColumn('numberValue', 'decimal', 24, array(
+             'type' => 'decimal',
+             'scale' => 6,
              'notnull' => true,
+             'length' => '24',
              ));
         $this->hasColumn('textValue', 'string', 255, array(
              'type' => 'string',
@@ -67,9 +69,11 @@ class Model_Entity_Data extends Doctrine_Record
         $searchable0 = new Doctrine_Template_Searchable(array(
              'fields' => 
              array(
-              0 => 'textValue',
+              0 => 'numberValue',
+              1 => 'textValue',
+              2 => 'timeValue',
              ),
-             'className' => 'SystemDataSearch',
+             'className' => 'DocloudDataSearch',
              ));
         $this->actAs($softdelete0);
         $this->actAs($timestampable0);

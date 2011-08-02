@@ -37,7 +37,6 @@ Property:
   columns:
     type_id:
       type: integer
-      notnull: true
     title:
       type: string(255)
       notnull: true
@@ -47,17 +46,15 @@ Property:
       values: ['integer', 'string', 'boolean', 'enum', 'float', 'decimal', 'array', 'object', 'blob', 'clob', 'timestamp', 'time', 'date', 'gzip']
       notnull: true
     isUnique:
-      type: boolean
+      type: int(1)
       notnull: true
     isRequire:
-      type: boolean
+      type: int(1)
       notnull: true
     defaultValue:
       type: string(255)
-      notnull: true
     enum:
       type: object
-      notnull: true
     weight:
       type: integer
       notnull: true
@@ -73,7 +70,7 @@ Property:
     Timestampable:
     Blameable:
     I18n:
-      fields: [title, defaultValue]
+      fields: [title]
       className: PropertyTranslation
       length: 2
 
@@ -122,7 +119,8 @@ Data:
       type: integer
       notnull: true
     numberValue:
-      type: integer
+      type: decimal(24)
+      scale: 6
       notnull: true
     textValue:
       type: string(255)
@@ -142,8 +140,8 @@ Data:
     Timestampable:
     Blameable:
     Searchable:
-      fields: [textValue]
-      className: SystemDataSearch
+      fields: [numberValue, textValue, timeValue]
+      className: DocloudDataSearch
 
   options:
     type: INNODB

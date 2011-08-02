@@ -1,0 +1,81 @@
+# Invoice
+Model_Entity_Type:
+  Invoice:
+    Translation:
+      en:
+        title: Invoice
+      tr:
+        title: Fatura
+    active: true
+
+Model_Entity_Property:
+  Invoice_No:
+    Type: Invoice
+    Translation:
+      en:
+        title: No
+      tr:
+        title: No
+    dataType: string
+    isUnique: true
+    isRequire: true
+    #defaultValue:
+    #enum:
+    weight: 1
+
+  Invoice_Date:
+    Type: Invoice
+    Translation:
+      en:
+        title: Date
+      tr:
+        title: Tarihi
+    dataType: timestamp
+    isUnique: false
+    isRequire: true
+    #defaultValue:
+    #enum:
+    weight: 2
+
+  Invoice_Customer:
+    Type: Invoice
+    Translation:
+      en:
+        title: Customer
+      tr:
+        title: müşteri
+    dataType: string
+    isUnique: false
+    isRequire: true
+    #defaultValue:
+    #enum:
+    weight: 3
+
+  Invoice_Amount:
+    Type: Invoice
+    Translation:
+      en:
+        title: Amount
+      tr:
+        title: Tutar
+    dataType: decimal
+    isUnique: false
+    isRequire: true
+    #defaultValue:
+    #enum:
+    weight: 4
+
+  Invoice_Description:
+    Type: Invoice
+    Translation:
+      en:
+        title: Description
+      tr:
+        title: Açıklama
+    dataType: clob
+    isUnique: false
+    isRequire: false
+    #defaultValue:
+    #enum:
+    weight: 5
+

@@ -250,7 +250,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                                   'user-sign-up',
                                   'user-activation',
                                   'user-invitation',
-                                  'application')
+                                  'application'),
+                 'docloud' => array('type', 'property', 'content')
             )
         );
         $front->getRouter()->addRoute('rest', $restRoute);

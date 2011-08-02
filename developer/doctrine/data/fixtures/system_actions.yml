@@ -8,10 +8,13 @@ Model_Entity_Action:
     
   # Access the desktop
   Default_Backend_Desktop:
-    Controller: Default_Backend
+    Controller: Default_Backend 
     name: desktop
 
   # Get all types
   Docloud_Type_Index:
     Controller: Docloud_Type
     name: index
+  Docloud_Content_Post:
+    Controller: Docloud_Content
+    name: post

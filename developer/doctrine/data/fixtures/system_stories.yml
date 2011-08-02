@@ -99,3 +99,14 @@ Model_Entity_Story:
       tr:
         title: Özellik Yönetimi
         description: Özellik Yönetimi
+
+  Docloud_Add_Content:
+    name: docloud_add_content
+    active: 1
+    Translation:
+      en:
+        title: Add a new document
+        description: Add a new document
+      tr:
+        title: Yeni döküman ekleme
+        description: Yeni döküman ekleme

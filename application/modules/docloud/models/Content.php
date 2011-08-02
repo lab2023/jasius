@@ -1,6 +1,7 @@
 <?php
+ 
 /**
- * Kebab Project
+ * Kebab Framework
  *
  * LICENSE
  *
@@ -12,42 +13,35 @@
  * obtain it through the world-wide-web, please send an email
  * to info@lab2023.com so we can send you a copy immediately.
  *
- * @category   Kebab
+ * @category   Kebab (kebab-reloaded)
  * @package    Kebab
- * @subpackage Controllers
+ * @subpackage Library
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
- * @author     Tayfun Öziş ERİKAN <tayfun.ozis.erikan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
-
+ 
 /**
- * Kebab Application Index Controller
+ * 
  *
- * @category   Kebab
- * @package    Kebab
- * @subpackage Controllers
+ * @category   Kebab (kebab-reloaded)
+ * @package    
+ * @subpackage 
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
- * @author     Tayfun Öziş ERİKAN <tayfun.ozis.erikan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
-class IndexController extends Kebab_Controller_Action
+class Docloud_Model_Content
 {
-    /**
-     * Front-end area index action
-     * @return void
-     */
-    public function indexAction()
+    public static function add($type_id, $title)
     {
-        $this->_helper->layout->disableLayout();
-        $this->_helper->viewRenderer->setNoRender();
+        $content = new Model_Entity_Content();
+        $content->type_id = $type_id;
+        $content->title = $title;
+        $content->save();
 
-        $this->getRequest()->setParam('query', 100.04);
-        $ids = $this->_helper->search('Model_Entity_Data');
-
-        print_r($ids);
+        return is_object($content) ? $content : false;
     }
 }
