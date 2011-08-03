@@ -47,4 +47,17 @@ class Jasius_Model_Type
                     ->setHydrationMode(Doctrine::HYDRATE_ARRAY);
         return $query;
     }
+
+    public static function getTypeById($typeId)
+    {
+        $lang = Zend_Auth::getInstance()->getIdentity()->language;
+        $query =  Doctrine_Query::create()
+                    ->select('type.id, typeTranslation.title as title')
+                    ->from('Model_Entity_Type type')
+                    ->leftJoin('type.Translation typeTranslation')
+                    ->where('typeTranslation.lang = ?', $lang)
+                    ->andWhereIn('type.id', $typeId)
+                    ->setHydrationMode(Doctrine::HYDRATE_SCALAR);
+        return $query;
+    }
 }

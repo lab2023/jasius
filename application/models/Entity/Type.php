@@ -19,7 +19,7 @@ class Model_Entity_Type extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('docloud_type');
+        $this->setTableName('jasius_type');
         $this->hasColumn('title', 'string', 255, array(
              'type' => 'string',
              'notnull' => true,
@@ -62,7 +62,7 @@ class Model_Entity_Type extends Doctrine_Record
              array(
               0 => 'title',
              ),
-             'className' => 'DocloudTypeSearch',
+             'className' => 'JasiusTypeSearch',
              ));
         $i18n0->addChild($searchable1);
         $this->actAs($timestampable0);
