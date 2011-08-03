@@ -20,7 +20,7 @@ class Model_Entity_Access extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('docloud_access');
+        $this->setTableName('jasius_access');
         $this->hasColumn('content_id', 'integer', null, array(
              'type' => 'integer',
              'notnull' => true,

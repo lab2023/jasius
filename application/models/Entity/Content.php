@@ -21,7 +21,7 @@ class Model_Entity_Content extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('docloud_content');
+        $this->setTableName('jasius_content');
         $this->hasColumn('type_id', 'integer', null, array(
              'type' => 'integer',
              'notnull' => true,

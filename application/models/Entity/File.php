@@ -19,7 +19,7 @@ class Model_Entity_File extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('docloud_file');
+        $this->setTableName('jasius_file');
         $this->hasColumn('content_id', 'integer', null, array(
              'type' => 'integer',
              'notnull' => true,

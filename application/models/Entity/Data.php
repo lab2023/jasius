@@ -22,7 +22,7 @@ class Model_Entity_Data extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('docloud_data');
+        $this->setTableName('jasius_data');
         $this->hasColumn('property_id', 'integer', null, array(
              'type' => 'integer',
              'notnull' => true,
@@ -73,7 +73,7 @@ class Model_Entity_Data extends Doctrine_Record
               1 => 'textValue',
               2 => 'timeValue',
              ),
-             'className' => 'DocloudDataSearch',
+             'className' => 'JasiusDataSearch',
              ));
         $this->actAs($softdelete0);
         $this->actAs($timestampable0);
