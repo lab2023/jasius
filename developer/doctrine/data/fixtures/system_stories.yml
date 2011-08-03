@@ -100,8 +100,8 @@ Model_Entity_Story:
         title: Özellik Yönetimi
         description: Özellik Yönetimi
 
-  Docloud_Add_Content:
-    name: docloud_add_content
+  Docloud_Add_Document:
+    name: docloud_add_document
     active: 1
     Translation:
       en:

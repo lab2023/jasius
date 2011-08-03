@@ -72,10 +72,10 @@ Model_Entity_Service:
     Story: Docloud_Property
     Resource: Docloud_Property
 
-  Docloud_Add_Content_0:
-    Story: Docloud_Add_Content
+  Docloud_Add_Document_Content_Post:
+    Story: Docloud_Add_Document
     Action: Docloud_Content_Post
 
-  Docloud_Add_Content_1:
-    Story: Docloud_Add_Content
+  Docloud_Add_Document_Access_Post:
+    Story: Docloud_Add_Document
     Action: Docloud_Access_Post

@@ -12,7 +12,7 @@ Model_Entity_Permission:
     Story: Docloud_Property
     Role: Member
   Member_5:
-    Story: Docloud_Add_Content
+    Story: Docloud_Add_Document
     Role: Member
 
   Admin_1:
@@ -43,6 +43,6 @@ Model_Entity_Permission:
     Story: Docloud_Property
     Role: Admin
   Admin_10:
-    Story: Docloud_Add_Content
+    Story: Docloud_Add_Document
     Role: Admin
     
