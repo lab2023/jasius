@@ -134,6 +134,11 @@ class Kebab_Controller_Helper_Pagination extends Zend_Controller_Action_Helper_A
         );
     }
 
+    /**
+     * direct()
+     * 
+     * @return  System_Controller_Helper_Pager
+     */
     public function direct($query = null)
     {
         if (is_null($query)) {

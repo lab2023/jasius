@@ -134,6 +134,9 @@ class Kebab_Controller_Helper_Filter extends Zend_Controller_Action_Helper_Abstr
         return $query;
     }
     
+    /**
+     * direct() : Strategy Design Pattern
+     */
     public function direct($query, $mapping)
     {
         return $this->populateCriteria($query, $mapping);

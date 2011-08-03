@@ -117,7 +117,7 @@ Kebab.OS.Indicators.Connection = Ext.extend(Kebab.OS.Indicator, {
      */
     requestCompleteAction: function(connection, response, options) {
         // KBBTODO Listen and notice requests for server side messages
-
+        
         this.reqStop = new Date();
         
         // Request diff time
@@ -126,26 +126,33 @@ Kebab.OS.Indicators.Connection = Ext.extend(Kebab.OS.Indicator, {
         this.setTooltip('Time: ' + reqDiff + ' seconds');
         this.setIconClass('icon-server-connect');
 
-        try { // Populate and log data
-            var responseData = Ext.util.JSON.decode(response.responseText);
-            this.logAction({
-                url: options.url,
-                method: options.method,
-                status: response.status,
-                statusText: response.statusText,
-                response: responseData,
-                success: responseData.success,
-                time: reqDiff
-            });
+         // Populate and log data
+        var responseData = Ext.util.JSON.decode(response.responseText);
+
+        try {
+            if (responseData.notifications.length > 0 ) {
+                Ext.each(responseData.notifications, function(notification) {
+                    Kebab.helper.message('Server Message', notification.message, notification.keep, notification.type);
+                });
+            }
         } catch(e) {}
 
+        this.logAction({
+            url: options.url,
+            method: options.method,
+            status: response.status,
+            statusText: response.statusText,
+            response: responseData,
+            success: responseData.success,
+            time: reqDiff
+        });
     },
 
     /**
      * Request exception action
      */
     requestExceptionAction: function(connection, response, options) {
-
+        
         this.setIconClass('icon-server-disconnect');
         if (response.status == 401) {
             // KBBTODO This way is too bad but time is everything :( I will review code and implement observer design pattern later.

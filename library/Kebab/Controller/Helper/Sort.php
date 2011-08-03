@@ -101,11 +101,11 @@ class Kebab_Controller_Helper_Sort extends Zend_Controller_Action_Helper_Abstrac
     {
         $this->_dirValue = $_dirValue;
     }
-
+    
     /**
-     * @throws Kebab_Controller_Helper_Exception
-     * @param $mapping
-     * @return 
+     * direct()
+     * 
+     * @return  System_Controller_Helper_Pager
      */
     public function direct($mapping)
     {

@@ -148,9 +148,8 @@ class Kebab_Controller_Helper_Param extends Zend_Controller_Action_Helper_Abstra
     }
 
     /**
-     * @throws Kebab_Controller_Helper_Exception
-     * @param $params
-     * @return array
+     *
+     * @param array | string
      */
     public function decodeJsonFields($params)
     {
@@ -171,8 +170,8 @@ class Kebab_Controller_Helper_Param extends Zend_Controller_Action_Helper_Abstra
     }
 
     /**
-     * @param bool $decodeJsonFields
-     * @return array
+     * direct() : Stragry Design Pattern
+     * 
      */
     public function direct($decodeJsonFields = true)
     {
