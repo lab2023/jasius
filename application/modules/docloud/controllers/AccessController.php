@@ -44,7 +44,6 @@ class Docloud_AccessController extends Kebab_Rest_Controller
             'roleId' => array(),
             'userId' => array()
         );
-        die(var_dump($param));
         $response = $this->_helper->response(true);
         $success = Docloud_Model_Access::add($param['contentId'], $param['type'], $param['roleId'], $param['userId']);
 
