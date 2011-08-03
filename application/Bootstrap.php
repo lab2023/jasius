@@ -251,7 +251,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                                   'user-activation',
                                   'user-invitation',
                                   'application'),
-                 'docloud' => array('type', 'property', 'content', 'access')
+                 'jasius' => array('type', 'property', 'content', 'access')
             )
         );
         $front->getRouter()->addRoute('rest', $restRoute);

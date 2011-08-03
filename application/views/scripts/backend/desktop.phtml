@@ -24,7 +24,7 @@ $this->headScript()
         
         // TODO Load on-demand
         $this->headLink()->appendStylesheet(
-            $this->assetApplication($application['name'] .'/web/theme/style.css')
+            @$this->assetApplication($application['name'] .'/web/theme/style.css')
                  ->department($application['department'])
                  ->get(),
             'screen', true, array('id' => $application['identity'] . '-style')

@@ -77,9 +77,9 @@ Model_Entity_Story:
         description: Kullanıcı geri bildirimlerini yönetin
 
 
-  # Docloud
-  Docloud_See_Document_Type:
-    name: see_document_type
+  # Jasius
+  Jasius_See_Document_Type:
+    name: jasius_see_document_type
     active: 1
     Translation:
       en:
@@ -89,8 +89,8 @@ Model_Entity_Story:
         title: Bütün döküman tiplerini görme
         description: Kullanıcı bütün döküman tiplerini görebilir
 
-  Docloud_Property:
-    name: docloud_property
+  Jasius_Property:
+    name: jasius_property
     active: 1
     Translation:
       en:
@@ -100,8 +100,8 @@ Model_Entity_Story:
         title: Özellik Yönetimi
         description: Özellik Yönetimi
 
-  Docloud_Add_Document:
-    name: docloud_add_document
+  Jasius_Add_Document:
+    name: jasius_add_document
     active: 1
     Translation:
       en:

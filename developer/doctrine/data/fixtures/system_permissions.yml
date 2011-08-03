@@ -6,13 +6,13 @@ Model_Entity_Permission:
     Story: Change_Profile
     Role: Member
   Member_3:
-    Story: Docloud_See_Document_Type
+    Story: Jasius_See_Document_Type
     Role: Member
   Member_4:
-    Story: Docloud_Property
+    Story: Jasius_Property
     Role: Member
   Member_5:
-    Story: Docloud_Add_Document
+    Story: Jasius_Add_Document
     Role: Member
 
   Admin_1:
@@ -37,12 +37,12 @@ Model_Entity_Permission:
     Story: Application_Management
     Role: Admin
   Admin_8:
-    Story: Docloud_See_Document_Type
+    Story: Jasius_See_Document_Type
     Role: Admin
   Admin_9:
-    Story: Docloud_Property
+    Story: Jasius_Property
     Role: Admin
   Admin_10:
-    Story: Docloud_Add_Document
+    Story: Jasius_Add_Document
     Role: Admin
     

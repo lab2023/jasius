@@ -33,7 +33,7 @@
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
-class Docloud_Model_Data
+class Jasius_Model_Data
 {
     /**
      * @static
@@ -45,7 +45,7 @@ class Docloud_Model_Data
     public static function add($typeId, $contentId, array $propertyFormData)
     {
         // assertion count($propertyFormData) === count($propertyDataStructrue)
-        $propertyDataStructure = Docloud_Model_Property::getAllPropertyByTypeId($typeId)->execute();
+        $propertyDataStructure = Jasius_Model_Property::getAllPropertyByTypeId($typeId)->execute();
 
         // Check type_id is in $propertyFormData
         if (array_key_exists('type_id', $propertyFormData)) {

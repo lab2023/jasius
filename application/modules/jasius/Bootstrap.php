@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Kebab Framework
+ * Kebab Project
  *
  * LICENSE
  *
@@ -14,30 +15,25 @@
  *
  * @category   Kebab
  * @package    Modules
- * @subpackage Controller
+ * @subpackage Kebab
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
- 
+
 /**
- * 
+ * Kebab SysAdministration Module Bootstrapping Class
  *
  * @category   Kebab
  * @package    Modules
- * @subpackage Controller
+ * @subpackage Bootstrap
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
-class Docloud_TypeController extends Kebab_Rest_Controller
+class Jasius_Bootstrap extends Kebab_Application_Module_Bootstrap
 {
-    public function indexAction()
-    {
-        $typeIds = $this->_helper->search('Model_Entity_Type', true);
-        $retData = Docloud_Model_Type::getAllTypes($typeIds)->execute();
-        $this->_helper->response(true, 200)->addData($retData)->addTotal(count($retData))->getResponse();
-    }
+
 }

@@ -13,8 +13,8 @@
  * to info@lab2023.com so we can send you a copy immediately.
  *
  * @category   Kebab
- * @package    Modules
- * @subpackage Controller
+ * @package    Kebab
+ * @subpackage Library
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
@@ -25,28 +25,26 @@
  * 
  *
  * @category   Kebab
- * @package    Modules
- * @subpackage Controller
+ * @package    
+ * @subpackage 
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
-class Docloud_PropertyController extends Kebab_Rest_Controller
+class Jasius_Model_Type
 {
-    public function indexAction()
+    public static function getAllTypes($typeIds)
     {
-        
-    }
-
-    public function getAction()
-    {
-        //KBBTODO Move to index action
-        $param = $this->_helper->param();
-        $retData = Docloud_Model_Property::getAllPropertyByTypeId($param['id'])->execute();
-        $this->_helper->response(true, 200)
-                ->addTotal(count($retData))
-                ->addData($retData)
-                ->getResponse();
+        $lang = Zend_Auth::getInstance()->getIdentity()->language;
+        $query =  Doctrine_Query::create()
+                    ->select('type.id, typeTranslation.title as title')
+                    ->from('Model_Entity_Type type')
+                    ->leftJoin('type.Translation typeTranslation')
+                    ->where('typeTranslation.lang = ?', $lang)
+                    ->andWhere('type.active = 1')
+                    ->andWhereIn('type.id', $typeIds)
+                    ->setHydrationMode(Doctrine::HYDRATE_ARRAY);
+        return $query;
     }
 }

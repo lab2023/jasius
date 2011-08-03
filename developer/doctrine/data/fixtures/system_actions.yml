@@ -12,14 +12,14 @@ Model_Entity_Action:
     name: desktop
 
   # Get all types
-  Docloud_Type_Index:
-    Controller: Docloud_Type
+  Jasius_Type_Index:
+    Controller: Jasius_Type
     name: index
     
-  Docloud_Content_Post:
-    Controller: Docloud_Content
+  Jasius_Content_Post:
+    Controller: Jasius_Content
     name: post
 
-  Docloud_Access_Post:
-    Controller: Docloud_Access
+  Jasius_Access_Post:
+    Controller: Jasius_Access
     name: post

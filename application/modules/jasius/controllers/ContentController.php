@@ -33,7 +33,7 @@
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
-class Docloud_ContentController extends Kebab_Rest_Controller
+class Jasius_ContentController extends Kebab_Rest_Controller
 {
     public function postAction()
     {
@@ -52,8 +52,8 @@ class Docloud_ContentController extends Kebab_Rest_Controller
         Doctrine_Manager::connection()->beginTransaction();
         try {
 
-            $content = Docloud_Model_Content::add($postData['type_id'], $postData['title']);
-            $retData = Docloud_Model_Data::add($postData['type_id'], $content->id, $postData);
+            $content = Jasius_Model_Content::add($postData['type_id'], $postData['title']);
+            $retData = Jasius_Model_Data::add($postData['type_id'], $content->id, $postData);
 
             if (is_bool($retData) && $retData === true) {
                 $success = Doctrine_Manager::connection()->commit();

@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Kebab Project
+ * Kebab Framework
  *
  * LICENSE
  *
@@ -15,25 +14,39 @@
  *
  * @category   Kebab
  * @package    Modules
- * @subpackage Kebab
+ * @subpackage Controller
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
-
+ 
 /**
- * Kebab SysAdministration Module Bootstrapping Class
+ * 
  *
  * @category   Kebab
  * @package    Modules
- * @subpackage Bootstrap
+ * @subpackage Controller
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
-class Docloud_Bootstrap extends Kebab_Application_Module_Bootstrap
+class Jasius_PropertyController extends Kebab_Rest_Controller
 {
+    public function indexAction()
+    {
+        
+    }
 
+    public function getAction()
+    {
+        //KBBTODO Move to index action
+        $param = $this->_helper->param();
+        $retData = Jasius_Model_Property::getAllPropertyByTypeId($param['id'])->execute();
+        $this->_helper->response(true, 200)
+                ->addTotal(count($retData))
+                ->addData($retData)
+                ->getResponse();
+    }
 }

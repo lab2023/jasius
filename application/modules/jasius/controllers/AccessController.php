@@ -33,7 +33,7 @@
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
-class Docloud_AccessController extends Kebab_Rest_Controller
+class Jasius_AccessController extends Kebab_Rest_Controller
 {
     public function postAction()
     {
@@ -45,7 +45,7 @@ class Docloud_AccessController extends Kebab_Rest_Controller
             'userId' => array()
         );
         $response = $this->_helper->response(true);
-        $success = Docloud_Model_Access::add($param['contentId'], $param['type'], $param['roleId'], $param['userId']);
+        $success = Jasius_Model_Access::add($param['contentId'], $param['type'], $param['roleId'], $param['userId']);
 
         if ($success) {
             $response->addNotification('INFO', 'Erişimler başarı ile kaydedilmiştir.');

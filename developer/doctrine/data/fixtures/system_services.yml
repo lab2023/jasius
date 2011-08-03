@@ -63,19 +63,19 @@ Model_Entity_Service:
     Story: Application_Management
     Resource: Kebab_Application
 
-  # Docloud Type Access
-  Docloud_See_Document_Type:
-    Story: Docloud_See_Document_Type
-    Action: Docloud_Type_Index
+  # Jasius Type Access
+  Jasius_See_Document_Type:
+    Story: Jasius_See_Document_Type
+    Action: Jasius_Type_Index
 
-  Docloud_Property:
-    Story: Docloud_Property
-    Resource: Docloud_Property
+  Jasius_Property:
+    Story: Jasius_Property
+    Resource: Jasius_Property
 
-  Docloud_Add_Document_Content_Post:
-    Story: Docloud_Add_Document
-    Action: Docloud_Content_Post
+  Jasius_Add_Document_Content_Post:
+    Story: Jasius_Add_Document
+    Action: Jasius_Content_Post
 
-  Docloud_Add_Document_Access_Post:
-    Story: Docloud_Add_Document
-    Action: Docloud_Access_Post
+  Jasius_Add_Document_Access_Post:
+    Story: Jasius_Add_Document
+    Action: Jasius_Access_Post

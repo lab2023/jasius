@@ -33,7 +33,7 @@
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
-class Docloud_Model_Access
+class Jasius_Model_Access
 {
     public static function add($contentId, $type, $roleIds = array(), $userIds = array())
     {

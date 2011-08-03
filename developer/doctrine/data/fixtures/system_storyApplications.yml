@@ -28,5 +28,5 @@ Model_Entity_StoryApplication:
     Application: ApplicationManager
 
   Record_8:
-    Story: Docloud_Add_Document
+    Story: Jasius_Add_Document
     Application: DocumentManager

@@ -1,5 +1,5 @@
 Type:
-  tableName: docloud_type
+  tableName: jasius_type
   columns:
     title:
       type: string(255)
@@ -25,7 +25,7 @@ Type:
       actAs:
         Searchable:
           fields: [title]
-          className: DocloudTypeSearch
+          className: JasiusTypeSearch
 
   options:
     type: INNODB
@@ -33,7 +33,7 @@ Type:
     charset: utf8
 
 Property:
-  tableName: docloud_property
+  tableName: jasius_property
   columns:
     type_id:
       type: integer
@@ -80,7 +80,7 @@ Property:
     charset: utf8
 
 Content:
-  tableName: docloud_content
+  tableName: jasius_content
   columns:
     type_id:
       type: integer
@@ -110,7 +110,7 @@ Content:
     charset: utf8
 
 Data:
-  tableName: docloud_data
+  tableName: jasius_data
   columns:
     property_id:
       type: integer
@@ -141,7 +141,7 @@ Data:
     Blameable:
     Searchable:
       fields: [numberValue, textValue, timeValue]
-      className: DocloudDataSearch
+      className: JasiusDataSearch
 
   options:
     type: INNODB
@@ -149,7 +149,7 @@ Data:
     charset: utf8
 
 File:
-  tableName: docloud_file
+  tableName: jasius_file
   columns:
     content_id:
       type: integer
@@ -175,7 +175,7 @@ File:
     charset: utf8
 
 Access:
-  tableName: docloud_access
+  tableName: jasius_access
   columns:
     content_id:
       type: integer

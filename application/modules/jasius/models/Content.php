@@ -1,4 +1,5 @@
 <?php
+ 
 /**
  * Kebab Framework
  *
@@ -12,7 +13,7 @@
  * obtain it through the world-wide-web, please send an email
  * to info@lab2023.com so we can send you a copy immediately.
  *
- * @category   Kebab
+ * @category   Kebab (kebab-reloaded)
  * @package    Kebab
  * @subpackage Library
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
@@ -24,7 +25,7 @@
 /**
  * 
  *
- * @category   Kebab
+ * @category   Kebab (kebab-reloaded)
  * @package    
  * @subpackage 
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
@@ -32,19 +33,15 @@
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
-class Docloud_Model_Type 
+class Jasius_Model_Content
 {
-    public static function getAllTypes($typeIds)
+    public static function add($type_id, $title)
     {
-        $lang = Zend_Auth::getInstance()->getIdentity()->language;
-        $query =  Doctrine_Query::create()
-                    ->select('type.id, typeTranslation.title as title')
-                    ->from('Model_Entity_Type type')
-                    ->leftJoin('type.Translation typeTranslation')
-                    ->where('typeTranslation.lang = ?', $lang)
-                    ->andWhere('type.active = 1')
-                    ->andWhereIn('type.id', $typeIds)
-                    ->setHydrationMode(Doctrine::HYDRATE_ARRAY);
-        return $query;
+        $content = new Model_Entity_Content();
+        $content->type_id = $type_id;
+        $content->title = $title;
+        $content->save();
+
+        return is_object($content) ? $content : false;
     }
 }

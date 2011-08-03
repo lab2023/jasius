@@ -66,16 +66,16 @@ Model_Entity_Controller:
     Module: Kebab
     name: application
 
-  # Docloud MODULE #########################################################
-  Docloud_Type:
-    Module: Docloud
+  # Jasius MODULE #########################################################
+  Jasius_Type:
+    Module: Jasius
     name: type
-  Docloud_Property:
-    Module: Docloud
+  Jasius_Property:
+    Module: Jasius
     name: property
-  Docloud_Content:
-    Module: Docloud
+  Jasius_Content:
+    Module: Jasius
     name: content
-  Docloud_Access:
-    Module: Docloud
+  Jasius_Access:
+    Module: Jasius
     name: access
