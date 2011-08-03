@@ -110,3 +110,19 @@ Model_Entity_Application:
       tr:
         title: Uygulama Yöneticisi
         description: Kebab uygulamalarını yönetin
+
+  DocumentManager:
+    identity: documentManager-application
+    className: KebabOS.applications.documentManager.application.Bootstrap
+    name: document-manager
+    type: application
+    department: jasius
+    version: 0.0.1
+    active: 1
+    Translation:
+      en:
+        title: Document Manager
+        description: Manage your documents
+      tr:
+        title: Doküman Yöneticisi
+        description: Dokümanlarınızı yönetin

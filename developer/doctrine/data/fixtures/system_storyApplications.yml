@@ -26,3 +26,7 @@ Model_Entity_StoryApplication:
   Record_7:
     Story: Application_Management
     Application: ApplicationManager
+
+  Record_8:
+    Story: Docloud_Add_Document
+    Application: DocumentManager

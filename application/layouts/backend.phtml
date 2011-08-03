@@ -68,7 +68,7 @@
 
     <!-- PROJECT INFO BUBBLE -->
     <div id="project-info" class="kebab-rounded-corners kebab-shadow">
-        <a href="http://www.kebab-project.com" target="_blank">
+        <a href="<?php echo $this->settings('project')->url; ?>" target="_blank">
             <p><?php echo $this->settings('project')->info; ?></p>
             <p><strong>Version:</strong><br/><?php echo $this->settings('project')->version; ?></p>
             <p><strong>Release Date:</strong><br/><?php echo $this->settings('project')->releaseDate; ?></p>
