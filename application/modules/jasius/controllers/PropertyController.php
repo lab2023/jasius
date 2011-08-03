@@ -43,8 +43,12 @@ class Jasius_PropertyController extends Kebab_Rest_Controller
     {
         //KBBTODO Move to index action
         $param = $this->_helper->param();
+        $typeArray = Jasius_Model_Type::getTypeById($param['id'])->fetchOne();
+        $type = array('id' => $typeArray['type_id'], 'text' => $typeArray['typeTranslation_title']);
+        
         $retData = Jasius_Model_Property::getAllPropertyByTypeId($param['id'])->execute();
         $this->_helper->response(true, 200)
+                ->add('type', $type)
                 ->addTotal(count($retData))
                 ->addData($retData)
                 ->getResponse();

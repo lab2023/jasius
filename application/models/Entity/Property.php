@@ -25,7 +25,7 @@ class Model_Entity_Property extends Doctrine_Record
 {
     public function setTableDefinition()
     {
-        $this->setTableName('docloud_property');
+        $this->setTableName('jasius_property');
         $this->hasColumn('type_id', 'integer', null, array(
              'type' => 'integer',
              ));
