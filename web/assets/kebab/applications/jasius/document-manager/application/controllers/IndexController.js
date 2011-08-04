@@ -51,9 +51,6 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
                     var data = Ext.util.JSON.decode(res.responseText);
                     this._buildAddDocumentWindow(data);
                 },
-                failure: function(){
-                    Kebab.helper.message('Hata', 'İstek başarısız');
-                },
                 scope:this
             });
         }
@@ -64,9 +61,9 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
             activeForm.getForm().submit({
                 method: 'POST',
                 url: Kebab.helper.url('jasius/content'),
-                waitMsg: 'Kaydediliyor...',
+                waitMsg: 'Saving...',
                 success: function() {
-                    this.fireEvent('nextStep');
+                    // KBBTODO save & nextstep
                 }
             });
         }
@@ -89,7 +86,7 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
             win = new KebabOS.applications.documentManager.application.views.DocumentAddWindow({
                 id: data.type.id + '-add-window',
                 animateTarget: 'document-add-button',
-                title: 'Yeni "' + data.type.text + '" Ekleme Sihirbazı',
+                title: Kebab.helper.translate('Add new document wizard') + ' : ' + data.type.text,
                 iconCls: 'icon-add',
                 bootstrap: this,
                 propertyData: data,

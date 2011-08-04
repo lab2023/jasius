@@ -43,7 +43,7 @@ KebabOS.applications.documentManager.application.views.DocumentAddFormPanel = Ex
             value: this.propertyData.type.id
         };
         items[1] = new Ext.form.TextField({
-            fieldLabel: 'Başlık',
+            fieldLabel: Kebab.helper.translate('Document Title'),
             name: 'title',
             allowBlank:false
         });
@@ -88,7 +88,10 @@ KebabOS.applications.documentManager.application.views.DocumentAddFormPanel = Ex
                 field = new Ext.form.TimeField(config);
                 break;
             case "timestamp":
-                field = new Ext.ux.form.DateTime(config);
+                field = new Ext.ux.form.DateTime(Ext.apply(config, {
+                    dateFormat: 'd-m-Y',
+                    timeFormat: 'H:i:s'
+                }));
                 break;
             case "enum":
                 field = new Ext.form.ComboBox(Ext.apply(config, {
@@ -98,7 +101,7 @@ KebabOS.applications.documentManager.application.views.DocumentAddFormPanel = Ex
                     mode: 'local',
                     store: new Ext.data.ArrayStore({
                         fields: ['value'],
-                        data: [['test'], ['mest']]
+                        data: [property.enum]
                     }),
                     valueField: 'value',
                     displayField: 'value',

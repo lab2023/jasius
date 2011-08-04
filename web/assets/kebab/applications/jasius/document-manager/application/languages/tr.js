@@ -25,5 +25,14 @@
  * @version    1.5.0
  */
 KebabOS.applications.documentManager.application.languages.tr = {
-
+    'Please select your file type...': 'Dosya tipini seçiniz...' ,
+    'Add' : 'Ekle',
+    'Document Properties' : 'Doküman Özellikleri',
+    'Returns to the previous screen' : 'Bir önceki ekrana döner',
+    'Save current informations and go to next screen' : 'Şu anki bilgileri kaydeder ve bir sonraki ekrana geçer',
+    '&laquo; Previous' : '&laquo; Önceki',
+    'Save &raquo;' : 'Kaydet &raquo;',
+    'Document Title' : 'Doküman Başlığı',
+    'Add new document wizard' : 'Yeni doküman ekleme sihirbazı',
+    'Saving...' : 'Kaydediliyor...'
 };

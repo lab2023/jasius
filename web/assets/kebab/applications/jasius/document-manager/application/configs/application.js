@@ -31,5 +31,5 @@ KebabOS.applications.documentManager.application.configs.application = {
     "kebab-version"   : "",
     "license"         : "",
 
-    "languages"       : []
+    "languages"       : ['tr', 'en']
 };

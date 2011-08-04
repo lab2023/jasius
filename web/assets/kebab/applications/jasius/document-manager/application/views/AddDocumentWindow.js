@@ -36,7 +36,7 @@ KebabOS.applications.documentManager.application.views.DocumentAddWindow = Ext.e
     buildItems: function() {
 
         this.formPanel = new KebabOS.applications.documentManager.application.views.DocumentAddFormPanel({
-            title: 'Doküman Özellikleri',
+            title: Kebab.helper.translate('Document Properties'),
             frame:true,
             propertyData: this.propertyData
         });
@@ -54,13 +54,13 @@ KebabOS.applications.documentManager.application.views.DocumentAddWindow = Ext.e
         return ['->', {
             id: this.id + '-prev',
             disabled: true,
-            tooltip: 'Bir önceki ekrana döner',
-            text: '&laquo; Önceki'
+            tooltip: Kebab.helper.translate('Returns to the previous screen'),
+            text: Kebab.helper.translate('&laquo; Previous')
         },{
             id: this.id + '-next',
             iconCls: 'icon-disk',
-            tooltip: 'Şu anki bilgileri kaydeder ve bir sonraki ekrana geçer',
-            text: 'Kaydet &raquo;',
+            tooltip: Kebab.helper.translate('Save current informations and go to next screen'),
+            text: Kebab.helper.translate('Save &raquo;'),
             handler: function() {
                 this.fireEvent('submitActiveForm', this.getLayout().activeItem);
             },

@@ -43,7 +43,7 @@ Model_Entity_Property:
       en:
         title: Customer
       tr:
-        title: müşteri
+        title: Müşteri
     dataType: string
     isUnique: false
     isRequire: true

@@ -55,7 +55,7 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
     buildTbar: function() {
 
         var typesCombo = new Kebab.library.ext.AutocompleteComboBox({
-            emptyText: 'Dosya tipini seçiniz...',
+            emptyText: Kebab.helper.translate('Please select your file type...'),
             name: 'type',
             tpl:'<tpl for="."><div class="x-combo-list-item">{title}</div></tpl>',
             triggerAction: 'all',
@@ -85,7 +85,7 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
             typesCombo,
             '-', {
                 id: 'document-add-button',
-                text: Kebab.helper.translate('Ekle'),
+                text: Kebab.helper.translate('Add'),
                 iconCls: 'icon-add',
                 disabled:true,
                 handler: function() {
