@@ -60,9 +60,10 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
     },
 
     submitActiveFormAction: function(activeForm){
-        if (activeForm.isValid()){
-            activeForm.submit({
-                url: 'hede/hodo',
+        if (activeForm.getForm().isValid()){
+            activeForm.getForm().submit({
+                method: 'POST',
+                url: 'jasius/content',
                 waitMsg: 'Kaydediliyor...',
                 success: function() {
                     this.fireEvent('nextStep');

@@ -37,23 +37,15 @@ class Jasius_ContentController extends Kebab_Rest_Controller
 {
     public function postAction()
     {
-        $postData = array(
-            'type_id' => 1,
-            'title' => 'A faturası',
-            'item_1' => '123456132',
-            'item_2' => '2011-10-08',
-            'item_3' => 'Aydem',
-            'item_4' =>  100.04,
-            'item_5' => 'Hacı na haber'
-        );
+        $param = $this->_helper->param();
 
         $response = $this->_helper->response();
 
         Doctrine_Manager::connection()->beginTransaction();
         try {
 
-            $content = Jasius_Model_Content::add($postData['type_id'], $postData['title']);
-            $retData = Jasius_Model_Data::add($postData['type_id'], $content->id, $postData);
+            $content = Jasius_Model_Content::add($param['type_id'], $param['title']);
+            $retData = Jasius_Model_Data::add($param['type_id'], $content->id, $param);
 
             if (is_bool($retData) && $retData === true) {
                 $success = Doctrine_Manager::connection()->commit();

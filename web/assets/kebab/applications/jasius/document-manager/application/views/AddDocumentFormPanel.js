@@ -35,10 +35,23 @@ KebabOS.applications.documentManager.application.views.DocumentAddFormPanel = Ex
 
     buildItems: function() {
 
-        var items = [], i = 0;
+        var items = [], i = 2;
+
+        items[0] = {
+            hidden:true,
+            name: 'type_id',
+            value: this.propertyData.type.id
+        };
+        items[1] = new Ext.form.TextField({
+            fieldLabel: 'Başlık',
+            name: 'title',
+            allowBlank:false
+        });
+
         Ext.each(this.propertyData.data, function(property) {
             items[i++] = this._getFormItem(property);
         }, this);
+
         return [items];
     },
 
@@ -98,18 +111,5 @@ KebabOS.applications.documentManager.application.views.DocumentAddFormPanel = Ex
         }
 
         return field;
-    },
-
-    onSubmit: function() {
-        
-        if (this.getForm().isValid()) {
-            this.getForm().submit({
-                url: 'hede/hodo',
-                waitMsg: 'Kaydediliyor...',
-                success: function() {
-                    this.fireEvent('nextStep');
-                }
-            });
-        }
     }
 });
