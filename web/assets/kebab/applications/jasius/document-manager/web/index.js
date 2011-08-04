@@ -46,9 +46,10 @@ KebabOS.applications.documentManager.application.Bootstrap = function() {
 
         // Application Launcher Settings
         launcher: {
+            autoStart: true,
             iconCls: 'documentManager-application-launcher-icon'
         }
     });
 
     KebabOS.applications.documentManager.application.Bootstrap.superclass.constructor.call(this);
-}
+};

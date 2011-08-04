@@ -27,7 +27,82 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
     // Initialize and define routing settings
     init: function() {
 
-    }
+        this.bootstrap.layout.documentsGrid.on('addDocument', this.addDocumentAction, this);
 
-    // Actions ----------------------------------------------------------------- 
+    },
+
+    // Actions -----------------------------------------------------------------
+
+    /**
+     * Get selected types by document properties and show document add wizard
+     * @param typeId object
+     * @return void
+     */
+    addDocumentAction: function(typeId) {
+        
+        if (typeId) {
+            Ext.Ajax.request({
+                url: Kebab.helper.url('jasius/property'),
+                method: 'GET',
+                params: {
+                    id: parseInt(typeId)
+                },
+                success: function(res){
+                    var data = Ext.util.JSON.decode(res.responseText);
+                    this._buildAddDocumentWindow(data);
+                },
+                failure: function(){
+                    Kebab.helper.message('Hata', 'İstek başarısız');
+                },
+                scope:this
+            });
+        }
+    },
+
+    submitActiveFormAction: function(activeForm){
+        if (activeForm.isValid()){
+            activeForm.submit({
+                url: 'hede/hodo',
+                waitMsg: 'Kaydediliyor...',
+                success: function() {
+                    this.fireEvent('nextStep');
+                }
+            });
+        }
+    },
+
+
+    // Utils --------------------------------------------------------------------
+
+    /**
+     * Document add wizard window builder
+     * @private
+     * @param data
+     * @return void
+     */
+    _buildAddDocumentWindow: function(data) {
+
+        var win = Ext.getCmp(data.type.id + '-add-window');
+        
+        if (!win) {
+            win = new KebabOS.applications.documentManager.application.views.DocumentAddWindow({
+                id: data.type.id + '-add-window',
+                animateTarget: 'document-add-button',
+                title: 'Yeni "' + data.type.text + '" Ekleme Sihirbazı',
+                iconCls: 'icon-add',
+                bootstrap: this,
+                propertyData: data,
+                width:600,
+                height:400,
+                maximizable: true,
+                manager: this.bootstrap.app.getDesktop().getManager()
+            });
+            win.show();
+
+            win.on('submitActiveForm', this.submitActiveFormAction, this);
+
+        } else {
+            win.show();
+        }
+    }
 });

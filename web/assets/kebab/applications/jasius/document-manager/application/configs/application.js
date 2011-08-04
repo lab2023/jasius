@@ -24,12 +24,12 @@
  * @version    1.5.0
  */
 KebabOS.applications.documentManager.application.configs.application = {
-"author"          : "",
-"email"           : "",
-"url"             : "",
-"version"         : "",
-"kebab-version"   : "",
-"license"         : "",
+    "author"          : "",
+    "email"           : "",
+    "url"             : "",
+    "version"         : "",
+    "kebab-version"   : "",
+    "license"         : "",
 
-"languages"       : []
+    "languages"       : []
 };

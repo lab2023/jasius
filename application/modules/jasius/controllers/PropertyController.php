@@ -34,14 +34,8 @@
  */
 class Jasius_PropertyController extends Kebab_Rest_Controller
 {
-    public function indexAction()
-    {
-        
-    }
-
     public function getAction()
     {
-        //KBBTODO Move to index action
         $param = $this->_helper->param();
         $typeArray = Jasius_Model_Type::getTypeById($param['id'])->fetchOne();
         $type = array('id' => $typeArray['type_id'], 'text' => $typeArray['typeTranslation_title']);

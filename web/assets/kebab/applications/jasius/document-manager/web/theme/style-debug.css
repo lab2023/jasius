@@ -7,3 +7,10 @@
 #documentManager-application-shortcut div {
     background-image: url(images/shortcut.png);
 }
+
+.kirmizi{
+    color:red;
+}
+.yesil {
+    color:green;
+}

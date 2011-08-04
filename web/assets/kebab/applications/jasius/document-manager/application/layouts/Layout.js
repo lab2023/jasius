@@ -14,16 +14,18 @@ KebabOS.applications.documentManager.application.layouts.Layout = Ext.extend(Ext
     bootstrap: null,
 
     layout: 'fit',
+    
     border: false,
 
     initComponent: function() {
 
+        this.documentsGrid = new KebabOS.applications.documentManager.application.views.DocumentsGridPanel({
+            bootstrap: this.bootstrap
+        });
+        
         Ext.apply(this, {
-            items: [
-                {
-                    html: 'fit'
-                }
-            ]
+            items: this.documentsGrid
+
         });
 
         KebabOS.applications.documentManager.application.layouts.Layout.superclass.initComponent.call(this);

@@ -18,8 +18,8 @@ Ext.extend(KebabOS.applications.documentManager.application.Bootstrap, Kebab.OS.
         if (!app) {
 
             // desktop width and heigth
-            var winWidth = parseInt(desktop.getWinWidth() / 1);
-            var winHeight = parseInt(desktop.getWinHeight() / 1);
+            var winWidth = parseInt(desktop.getWinWidth() / 1.2);
+            var winHeight = parseInt(desktop.getWinHeight() / 1.2);
 
             // Default layout
             this.layout = new KebabOS.applications.documentManager.application.layouts.Layout({
