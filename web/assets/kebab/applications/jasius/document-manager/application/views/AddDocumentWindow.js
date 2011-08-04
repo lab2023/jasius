@@ -51,7 +51,13 @@ KebabOS.applications.documentManager.application.views.DocumentAddWindow = Ext.e
     },
 
     buildFbar: function() {
-        return ['->', {
+
+        var progress = new Ext.ProgressBar({
+            id: 'document-progress',
+            width: 100
+        });
+
+        return ['->',progress, {
             id: this.id + '-prev',
             disabled: true,
             tooltip: Kebab.helper.translate('Returns to the previous screen'),
