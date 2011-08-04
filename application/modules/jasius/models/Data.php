@@ -56,6 +56,15 @@ class Jasius_Model_Data
         if (array_key_exists('title', $propertyFormData)) {
             unset($propertyFormData['title']);
         }
+        if (array_key_exists('controller', $propertyFormData)) {
+            unset($propertyFormData['controller']);
+        }
+         if (array_key_exists('action', $propertyFormData)) {
+            unset($propertyFormData['action']);
+        }
+         if (array_key_exists('module', $propertyFormData)) {
+            unset($propertyFormData['module']);
+        }
         // Sort $propertyFormData with $item_id
         ksort($propertyFormData);
 
