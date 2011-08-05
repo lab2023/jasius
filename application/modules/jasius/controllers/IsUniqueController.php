@@ -1,5 +1,4 @@
 <?php
- 
 /**
  * Kebab Framework
  *
@@ -13,9 +12,9 @@
  * obtain it through the world-wide-web, please send an email
  * to info@lab2023.com so we can send you a copy immediately.
  *
- * @category   Kebab (kebab-reloaded)
- * @package    Kebab
- * @subpackage Library
+ * @category   Kebab
+ * @package    Module
+ * @subpackage Controller
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
@@ -24,10 +23,9 @@
  
 /**
  * 
- *
- * @category   Kebab (kebab-reloaded)
- * @package    
- * @subpackage 
+ * @category   Kebab
+ * @package    Module
+ * @subpackage Controller
  * @author     Mehmet Ali KÜÇÜK <mehmet.a.kucuk@gmail.com.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing

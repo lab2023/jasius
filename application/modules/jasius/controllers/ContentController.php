@@ -43,17 +43,7 @@ class Jasius_ContentController extends Kebab_Rest_Controller
 
         Doctrine_Manager::connection()->beginTransaction();
         try {
-
-            $content = Jasius_Model_Content::add($param['type_id'], $param['title']);
             // Check type_id is in $propertyFormData
-            if (array_key_exists('type_id', $param)) {
-                unset($param['type_id']);
-            }
-
-            // Check type_id is in $propertyFormData
-            if (array_key_exists('title', $param)) {
-                unset($param['title']);
-            }
             if (array_key_exists('controller', $param)) {
                 unset($param['controller']);
             }
@@ -63,16 +53,24 @@ class Jasius_ContentController extends Kebab_Rest_Controller
              if (array_key_exists('module', $param)) {
                 unset($param['module']);
             }
-            $retData = Jasius_Model_Data::add($param['type_id'], $content->id, $param);
 
-            if (is_bool($retData) && $retData === true) {
-                $success = Doctrine_Manager::connection()->commit();
-            } else {
-                $success = false;
+            $keys = array_keys($param);
+            $expProperty = explode('_',$keys[0]);
+            $propertyId =$expProperty[count($expProperty)-1];
+
+            $type = Doctrine_Core::getTable('Model_Entity_Property')->find($propertyId);
+            if (is_bool($type)){
+                $response->getResponse();
             }
+            $content = Jasius_Model_Content::add($type->type_id);
+            $retData = Jasius_Model_Data::add($type->type_id, $content->id, $param);
+
+            $success = is_bool($retData) && $retData === true
+                     ? Doctrine_Manager::connection()->commit()
+                     : false;
 
             if ($success) {
-                $response->setSuccess($success)->addNotification('INFO', 'Belgeniz basari ile kaydedilmiştir');
+                $response->setSuccess($success)->addNotification('INFO', 'Document is saved');
             } else {
                 $response->setErrors($retData);
             }

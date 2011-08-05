@@ -35,6 +35,15 @@
  */
 class Jasius_Model_Access
 {
+    /**
+     * @static
+     * @throws Doctrine_Exception|Zend_Exception
+     * @param $contentId
+     * @param $type
+     * @param array $roleIds
+     * @param array $userIds
+     * @return bool
+     */
     public static function add($contentId, $type, $roleIds = array(), $userIds = array())
     {
         Doctrine_Manager::connection()->beginTransaction();
@@ -86,7 +95,53 @@ class Jasius_Model_Access
         return $retVal;
     }
 
-    public static function setAccess(Doctrine_Query $query)
+    /**
+     * @static
+     * @param $contentId
+     * @param $type
+     * @param array $roleIds
+     * @param array $userIds
+     * @return void
+     */
+    public static function put($contentId, $type, $roleIds = array(), $userIds = array())
+    {
+        self::del($contentId);
+        self::add($contentId, $type, $roleIds, $userIds);
+    }
+
+    /**
+     * @static
+     * @throws Doctrine_Exception|Zend_Exception
+     * @param $contentId
+     * @return bool
+     */
+    public static function del($contentId)
+    {
+        Doctrine_Manager::connection()->beginTransaction();
+        try {
+                Doctrine_Query::create()
+                    ->delete('Model_Entity_ContentAccess contentAccess')
+                    ->where('contentAccess.content_id = ?', $contentId)
+                    ->execute();
+
+            $retVal = Doctrine_Manager::connection()->commit();
+        } catch (Doctrine_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            throw $e;
+        } catch (Zend_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            throw $e;
+        }
+
+        return $retVal;
+    }
+
+    /**
+     * @static
+     * @param Doctrine_Query $query
+     * @return Doctrine_Query
+     */
+    public static function set(Doctrine_Query $query)
     {
         $query->where('access.access = ?', 'all');
         if (Zend_Auth::getInstance()->hasIdentity()) {
