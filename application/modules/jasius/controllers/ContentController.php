@@ -66,7 +66,7 @@ class Jasius_ContentController extends Kebab_Rest_Controller
             $retData = Jasius_Model_Data::add($type->type_id, $content->id, $param);
 
             $success = is_bool($retData) && $retData === true
-                     ? $success = Doctrine_Manager::connection()->commit()
+                     ? Doctrine_Manager::connection()->commit()
                      : false;
 
             if ($success) {
