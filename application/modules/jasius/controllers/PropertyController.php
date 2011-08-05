@@ -34,7 +34,12 @@
  */
 class Jasius_PropertyController extends Kebab_Rest_Controller
 {
-    public function getAction()
+    public function getAction(){
+        $param = $this->_helper->param();
+        $retData = Jasius_Model_Property::get($param['id'])->execute();
+        $this->_helper->response(true)->addData($retData)->getResponse();
+    }
+    public function indexAction()
     {
         $param = $this->_helper->param();
         $typeArray = Jasius_Model_Type::getTypeById($param['id'])->fetchOne();

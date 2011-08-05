@@ -79,3 +79,7 @@ Model_Entity_Service:
   Jasius_Add_Document_Access_Post:
     Story: Jasius_Add_Document
     Action: Jasius_Access_Post
+
+  Jasius_IsUnique:
+    Story: Jasius_Add_Document
+    Resource: Jasius_IsUnique

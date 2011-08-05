@@ -79,3 +79,6 @@ Model_Entity_Controller:
   Jasius_Access:
     Module: Jasius
     name: access
+  Jasius_IsUnique:
+    Module: Jasius
+    name: is-unique

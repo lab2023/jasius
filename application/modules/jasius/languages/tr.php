@@ -36,5 +36,9 @@
 return array(
 
     // SignUpController
-    'An other user uses this email.' => 'Başka bir kullanıcı bu mail adresini kullanıyor.'
+    'An other user uses this email.' => 'Başka bir kullanıcı bu mail adresini kullanıyor.',
+    'Field cannot be left blank' => 'Bu alan boş bırakılamaz',
+    'Data type is not appropriate in this area' => 'Data tipi bu alan için uygun değildir',
+    'Please select from the list' => 'Lütfen listeden seçiniz',
+    'Same record entered before' => 'Bu kayıt daha önce girilmiş'
 );

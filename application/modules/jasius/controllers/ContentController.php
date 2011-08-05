@@ -45,6 +45,24 @@ class Jasius_ContentController extends Kebab_Rest_Controller
         try {
 
             $content = Jasius_Model_Content::add($param['type_id'], $param['title']);
+            // Check type_id is in $propertyFormData
+            if (array_key_exists('type_id', $param)) {
+                unset($param['type_id']);
+            }
+
+            // Check type_id is in $propertyFormData
+            if (array_key_exists('title', $param)) {
+                unset($param['title']);
+            }
+            if (array_key_exists('controller', $param)) {
+                unset($param['controller']);
+            }
+             if (array_key_exists('action', $param)) {
+                unset($param['action']);
+            }
+             if (array_key_exists('module', $param)) {
+                unset($param['module']);
+            }
             $retData = Jasius_Model_Data::add($param['type_id'], $content->id, $param);
 
             if (is_bool($retData) && $retData === true) {

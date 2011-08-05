@@ -47,24 +47,7 @@ class Jasius_Model_Data
         // assertion count($propertyFormData) === count($propertyDataStructrue)
         $propertyDataStructure = Jasius_Model_Property::getAllPropertyByTypeId($typeId)->execute();
 
-        // Check type_id is in $propertyFormData
-        if (array_key_exists('type_id', $propertyFormData)) {
-            unset($propertyFormData['type_id']);
-        }
 
-        // Check type_id is in $propertyFormData
-        if (array_key_exists('title', $propertyFormData)) {
-            unset($propertyFormData['title']);
-        }
-        if (array_key_exists('controller', $propertyFormData)) {
-            unset($propertyFormData['controller']);
-        }
-         if (array_key_exists('action', $propertyFormData)) {
-            unset($propertyFormData['action']);
-        }
-         if (array_key_exists('module', $propertyFormData)) {
-            unset($propertyFormData['module']);
-        }
         // Sort $propertyFormData with $item_id
         ksort($propertyFormData);
 
@@ -79,19 +62,19 @@ class Jasius_Model_Data
             // Check dataType
             $dataTypeCheck = Doctrine_Validator::isValidType($propertyValue, $propertyDataStructure[$i]['dataType']);
             if (!$dataTypeCheck) {
-                $errorMessage[$propertyKey] = 'Veri tipiniz bu alana uygun degil.';
+                $errorMessage[$propertyKey] = 'Data type is not appropriate in this area';
             }
 
             // Check Require
             if ($propertyDataStructure[$i]['isRequire'] && is_null($propertyValue)) {
-                $errorMessage[$propertyKey] = 'Bu alan bos bırakılamaz.';
+                $errorMessage[$propertyKey] = 'Field cannot be left blank';
             }
 
             // Check enum
             if ($propertyDataStructure[$i]['dataType'] === 'enum') {
                 $enum = unserialize($propertyDataStructure[$i]['enum']);
                 if (!in_array($propertyValue, $enum)) {
-                    $errorMessage[$propertyKey] = 'Lütfen listeden bir tane seçiniz';
+                    $errorMessage[$propertyKey] = 'Please select from the list';
                 }
             }
 
@@ -108,7 +91,7 @@ class Jasius_Model_Data
                                 : false;
 
                 if ($isUniqueCheck) {
-                    $errorMessage[$propertyKey] = 'Daha önce böyle bir kayıt girilmiştir.';
+                    $errorMessage[$propertyKey] = 'Same record entered before';
                 }
             }
 
