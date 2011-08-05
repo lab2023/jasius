@@ -47,7 +47,6 @@ class Jasius_Model_Data
         // assertion count($propertyFormData) === count($propertyDataStructrue)
         $propertyDataStructure = Jasius_Model_Property::getAllPropertyByTypeId($typeId)->execute();
 
-
         // Sort $propertyFormData with $item_id
         ksort($propertyFormData);
 
@@ -115,6 +114,32 @@ class Jasius_Model_Data
         }
 
         return $retVal;
+    }
+
+    public static function getDataForLoadDocumentForm($contentId)
+    {
+        $query = Doctrine_Query::create()
+                    ->select('
+                        data.property_id,
+                        data.numberValue,
+                        data.textValue,
+                        data.timeValue,
+                        property.dataType as dataType
+                    ')
+                    ->from('Model_Entity_Data data')
+                    ->leftJoin('data.Property property')
+                    ->where('data.content_id = ?', $contentId)
+                    ->orderBy('property.weight ASC')
+                    ->setHydrationMode(Doctrine::HYDRATE_ARRAY);
+
+        $rawData = $query->execute();
+
+        $retData = array();
+        foreach($rawData as $item) {
+            $retData['property_item_'. $item['property_id']] = $item[self::mapping($item['dataType'])];
+        }
+
+        return $retData;
     }
 
     public static function mapping($dataType)
