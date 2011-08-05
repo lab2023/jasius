@@ -82,10 +82,10 @@ return array(
 
     //index
     'Front-end' => 'Ön-yüz',
-    'Welcome to Kebab Project front-end area...' => 'Kebab Project\'in ön yüzüne hoşgeldiniz...',
+    'Welcome to Jasi.us Project Frontpage area...' => 'Jasius\'ın ön yüzüne hoşgeldiniz...',
     'Go to back-end' => 'Arka-yüz\'e git',
     ' or ' => ' veya ',
-    'Visit Kebab Project\'s web site' => 'Kebab Project\'in web sitesini ziyaret et.',
+    'Visit Jasi.us Project\'s web site' => 'Jasius Project\'in web sitesini ziyaret et.',
 
     //sign-up mail
     'Welcome' => 'Hoşgeldiniz',

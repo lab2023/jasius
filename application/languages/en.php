@@ -33,6 +33,9 @@
  * @version    1.5.0
  */
 return array(
-    // Sample
-    'Hello World!' => 'Merhaba Dünya!',
+
+    // index
+    'Welcome to Jasi.us Project Frontpage area...' => 'Welcome to Jasius Project Frontpage area...',
+    ' or ' => ' or ',
+    'Visit Jasi.us Project\'s web site' => 'Visit Jasi.us Project\'s web site'
 );
