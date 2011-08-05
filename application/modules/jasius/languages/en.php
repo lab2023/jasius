@@ -40,5 +40,6 @@ return array(
     'Field cannot be left blank' => 'Field cannot be left blank',
     'Data type is not appropriate in this area' => 'Data type is not appropriate in this area',
     'Please select from the list' => 'Please select from the list',
-    'Same record entered before' => 'Same record entered before'
+    'Same record entered before' => 'Same record entered before',
+    'Document is saved' => 'Document is saved'
 );
