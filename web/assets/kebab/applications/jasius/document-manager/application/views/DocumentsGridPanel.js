@@ -39,18 +39,20 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
 
     listeners: {
         afterRender: function(grid) {
-
+            
             var controller = grid.bootstrap.defaultController;
-
             controller.on('propertiesBeforeLoad', function() {
-                console.log(this.getTopToolbar().getEl());
+                grid.getTopToolbar().getEl().mask('Properties loading...');
             });
             controller.on('propertiesLoaded', function() {
-                this.getTopToolbar().getEl().unmask();
+                Ext.getCmp('document-add-button').enable();
+                grid.getTopToolbar().getEl().unmask();
             });
             controller.on('propertiesLoadException', function() {
-                this.getTopToolbar().getEl().unmask();
+                Ext.getCmp('document-add-button').disable();
+                grid.getTopToolbar().getEl().unmask();
             });
+            
         },
         scope: this
     },

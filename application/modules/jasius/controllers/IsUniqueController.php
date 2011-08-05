@@ -33,7 +33,7 @@
  */
 class Jasius_IsUniqueController extends Kebab_Rest_Controller
 {
-    public function getAction()
+    public function indexAction()
     {
         $param = $this->_helper->param();
         $response = $this->_helper->response();
@@ -46,7 +46,7 @@ class Jasius_IsUniqueController extends Kebab_Rest_Controller
         if (is_bool($retData) && $retData === true){
             $response->setSuccess(true);
         } else {
-            $response->setErrors($retData);
+            $response->add('msg', $retData);
         }
         $response->getResponse();
     }

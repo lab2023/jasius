@@ -37,6 +37,7 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
     // Actions -----------------------------------------------------------------
 
     getPropertiesByTypeIdAction: function(typeId) {
+
         if (typeId) {
             this.fireEvent('propertiesBeforeLoad');
             Ext.Ajax.request({
@@ -47,6 +48,7 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
                 },
                 success: function(res){
                     this.fireEvent('propertiesLoaded', res);
+                    this.setPropertyData(res.responseText);
                 },
                 failure: function(){
                     this.fireEvent('propertiesLoadException');
@@ -84,7 +86,7 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
      * Get property data
      * @return object
      */
-    getProperty: function() {
+    getPropertyData: function() {
         return this.propertyData;
     },
 
@@ -94,7 +96,7 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
      * @return
      */
     setPropertyData: function(data) {
-        return this.propertyData = data;
+        this.propertyData = Ext.util.JSON.decode(data);
     },
 
     /**
@@ -104,27 +106,31 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
      */
     _buildAddDocumentWindow: function() {
 
-        var win = Ext.getCmp(data.type.id + '-add-window');
-        
-        if (!win) {
-            win = new KebabOS.applications.documentManager.application.views.DocumentAddWindow({
-                id: data.type.id + '-add-window',
-                animateTarget: 'document-add-button',
-                title: Kebab.helper.translate('Add new document wizard') + ' : ' + data.type.text,
-                iconCls: 'icon-add',
-                bootstrap: this,
-                propertyData: data,
-                width:600,
-                height:400,
-                maximizable: true,
-                manager: this.bootstrap.app.getDesktop().getManager()
-            });
-            win.show();
+        var data = this.getPropertyData();
 
-            win.on('submitActiveForm', this.submitActiveFormAction, this);
+        if (data) {
+            var win = Ext.getCmp(data.type.id + '-add-window');
 
-        } else {
-            win.show();
+            if (!win) {
+                win = new KebabOS.applications.documentManager.application.views.DocumentAddWindow({
+                    id: data.type.id + '-add-window',
+                    animateTarget: 'document-add-button',
+                    title: Kebab.helper.translate('Add new document wizard') + ' : ' + data.type.text,
+                    iconCls: 'icon-add',
+                    bootstrap: this.bootstrap,
+                    propertyData: this.getPropertyData(),
+                    width:600,
+                    height:400,
+                    maximizable: true,
+                    manager: this.bootstrap.app.getDesktop().getManager()
+                });
+                win.show();
+
+                win.on('submitActiveForm', this.submitActiveFormAction, this);
+
+            } else {
+                win.show();
+            }
         }
     }
 });

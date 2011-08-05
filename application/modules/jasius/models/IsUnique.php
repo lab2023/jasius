@@ -38,8 +38,10 @@ class Jasius_Model_IsUnique
     public static function isUniqueProperty($propertyId, $value)
     {
         $retVal = true;
+        
         $property = Jasius_Model_Property::get($propertyId)->fetchOne();
-        $errorMessage = array();
+
+        $errorMessage = '';
         $field = Jasius_Model_Data::mapping($property['dataType']);
         $isUniqueCheck = Doctrine_Query::create()
                                  ->from('Model_Entity_Data data')
@@ -48,10 +50,10 @@ class Jasius_Model_IsUnique
                         : false;
 
         if ($isUniqueCheck) {
-            $errorMessage['property_item_'.$propertyId] = 'Same record entered before';
+            $errorMessage = 'Same record entered before';
         }
         
-        if (count($errorMessage)) {
+        if ($errorMessage != '') {
             $retVal = $errorMessage;
         }
 

@@ -13,7 +13,7 @@ KebabOS.applications.documentManager.application.views.DocumentAddFormPanel = Ex
 
     bootstrap: null,
 
-    propertyData: null,
+    owner: null,
 
     initComponent: function() {
 
@@ -33,17 +33,13 @@ KebabOS.applications.documentManager.application.views.DocumentAddFormPanel = Ex
         KebabOS.applications.documentManager.application.views.DocumentAddFormPanel.superclass.initComponent.call(this);
     },
 
-    listeners: {
-        afterRender: function() {
-            Ext.getCmp('document-progress').updateProgress(.3, 'Step -1-');
-        }
-    },
-
     buildItems: function() {
 
-        var items = [], i = 0;
+        var propertyData = this.owner.propertyData.data,
+            items = [],
+            i = 0;
 
-        Ext.each(this.propertyData.data, function(property) {
+        Ext.each(propertyData, function(property) {
             items[i++] = this._getFormItem(property);
         }, this);
 
@@ -55,7 +51,7 @@ KebabOS.applications.documentManager.application.views.DocumentAddFormPanel = Ex
         var field = null;
 
         var config = {
-            name: 'item_' + property.id,
+            name: property.name,
             fieldLabel: property.title,
             allowBlank: property.isRequired ? true : false,
             tabIndex: property.weight
@@ -100,7 +96,7 @@ KebabOS.applications.documentManager.application.views.DocumentAddFormPanel = Ex
                     }),
                     valueField: 'value',
                     displayField: 'value',
-                    hiddenName: 'item_' + property.id
+                    hiddenName: property.name
                 }));
                 break;
             default:
@@ -108,6 +104,35 @@ KebabOS.applications.documentManager.application.views.DocumentAddFormPanel = Ex
                 break;
         }
 
+
+
+        if (parseInt(property.isUnique) == 1) {
+            field.on('blur', this.onCheckIsUnique, this);
+        }
+
         return field;
+    },
+
+    onCheckIsUnique: function(field) {
+
+        field.disable();
+        
+        Ext.Ajax.request({
+            url: Kebab.helper.url('jasius/is-unique'),
+            method: 'GET',
+            params: {
+                name: field.getName(),
+                value: field.getValue()
+            },
+            success: function(res){
+                field.enable();
+                var response = Ext.util.JSON.decode(res.responseText);
+                if (!response.success) {
+                    field.markInvalid(response.msg);
+                }
+            },
+            scope:this
+        });
     }
+
 });

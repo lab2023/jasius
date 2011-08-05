@@ -37,8 +37,8 @@ KebabOS.applications.documentManager.application.views.DocumentAddWindow = Ext.e
 
         this.formPanel = new KebabOS.applications.documentManager.application.views.DocumentAddFormPanel({
             title: Kebab.helper.translate('Document Properties'),
-            frame:true,
-            propertyData: this.propertyData
+            frame: true,
+            owner: this
         });
 
         return [
@@ -52,12 +52,7 @@ KebabOS.applications.documentManager.application.views.DocumentAddWindow = Ext.e
 
     buildFbar: function() {
 
-        var progress = new Ext.ProgressBar({
-            id: 'document-progress',
-            width: 100
-        });
-
-        return ['->',progress, {
+        return ['->', {
             id: this.id + '-prev',
             disabled: true,
             tooltip: Kebab.helper.translate('Returns to the previous screen'),
