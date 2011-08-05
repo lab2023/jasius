@@ -85,4 +85,18 @@ class Jasius_Model_Access
 
         return $retVal;
     }
+
+    public static function setAccess(Doctrine_Query $query)
+    {
+        $query->where('access.access = ?', 'all');
+        if (Zend_Auth::getInstance()->hasIdentity()) {
+            $userSessionId = Zend_Auth::getInstance()->getIdentity()->id;
+            $userSessionRoles = Zend_Auth::getInstance()->getIdentity()->roles;
+            $query->orWhere('access.access = ?', 'user');
+            $query->orWhere('access.user_id = ?', $userSessionId);
+            $query->orWhereIn('access.role_id', $userSessionRoles);
+        };
+
+        return $query;
+    }
 }
