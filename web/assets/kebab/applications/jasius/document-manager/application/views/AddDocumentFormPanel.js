@@ -41,18 +41,7 @@ KebabOS.applications.documentManager.application.views.DocumentAddFormPanel = Ex
 
     buildItems: function() {
 
-        var items = [], i = 2;
-
-        items[0] = {
-            hidden:true,
-            name: 'type_id',
-            value: this.propertyData.type.id
-        };
-        items[1] = new Ext.form.TextField({
-            fieldLabel: Kebab.helper.translate('Document Title'),
-            name: 'title',
-            allowBlank:false
-        });
+        var items = [], i = 0;
 
         Ext.each(this.propertyData.data, function(property) {
             items[i++] = this._getFormItem(property);

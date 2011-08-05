@@ -13,6 +13,8 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
     // Application bootstrap
     bootstrap: null,
 
+    propertyData: null,
+
     constructor: function(config) {
 
         // Base Config
@@ -27,33 +29,39 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
     // Initialize and define routing settings
     init: function() {
 
+        this.bootstrap.layout.documentsGrid.on('selectType', this.getPropertiesByTypeIdAction, this);
         this.bootstrap.layout.documentsGrid.on('addDocument', this.addDocumentAction, this);
 
     },
 
     // Actions -----------------------------------------------------------------
 
-    /**
-     * Get selected types by document properties and show document add wizard
-     * @param typeId object
-     * @return void
-     */
-    addDocumentAction: function(typeId) {
-        
+    getPropertiesByTypeIdAction: function(typeId) {
         if (typeId) {
+            this.fireEvent('propertiesBeforeLoad');
             Ext.Ajax.request({
                 url: Kebab.helper.url('jasius/property'),
                 method: 'GET',
                 params: {
-                    id: parseInt(typeId)
+                    typeId: parseInt(typeId)
                 },
                 success: function(res){
-                    var data = Ext.util.JSON.decode(res.responseText);
-                    this._buildAddDocumentWindow(data);
+                    this.fireEvent('propertiesLoaded', res);
+                },
+                failure: function(){
+                    this.fireEvent('propertiesLoadException');
                 },
                 scope:this
             });
         }
+    },
+
+    /**
+     * Get selected types by document properties and show document add wizard
+     * @return void
+     */
+    addDocumentAction: function() {
+        this._buildAddDocumentWindow();
     },
 
     submitActiveFormAction: function(activeForm){
@@ -73,12 +81,28 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
     // Utils --------------------------------------------------------------------
 
     /**
+     * Get property data
+     * @return object
+     */
+    getProperty: function() {
+        return this.propertyData;
+    },
+
+    /**
+     * Set and return the properties
+     * @param data object
+     * @return
+     */
+    setPropertyData: function(data) {
+        return this.propertyData = data;
+    },
+
+    /**
      * Document add wizard window builder
      * @private
-     * @param data
      * @return void
      */
-    _buildAddDocumentWindow: function(data) {
+    _buildAddDocumentWindow: function() {
 
         var win = Ext.getCmp(data.type.id + '-add-window');
         

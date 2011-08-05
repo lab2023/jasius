@@ -37,6 +37,24 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
         KebabOS.applications.documentManager.application.views.DocumentsGridPanel.superclass.initComponent.call(this);
     },
 
+    listeners: {
+        afterRender: function(grid) {
+
+            var controller = grid.bootstrap.defaultController;
+
+            controller.on('propertiesBeforeLoad', function() {
+                console.log(this.getTopToolbar().getEl());
+            });
+            controller.on('propertiesLoaded', function() {
+                this.getTopToolbar().getEl().unmask();
+            });
+            controller.on('propertiesLoadException', function() {
+                this.getTopToolbar().getEl().unmask();
+            });
+        },
+        scope: this
+    },
+
     /**
      * Build grid columns
      */
@@ -55,6 +73,7 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
     buildTbar: function() {
 
         var typesCombo = new Kebab.library.ext.AutocompleteComboBox({
+            id: 'document-types-combo',
             emptyText: Kebab.helper.translate('Please select your file type...'),
             name: 'type',
             tpl:'<tpl for="."><div class="x-combo-list-item">{title}</div></tpl>',
@@ -71,13 +90,11 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
             scope:this,
             listeners: {
                 select: function(combo) {
-                    var addButton = Ext.getCmp('document-add-button');
                     if(combo.getValue()) {
-                        addButton.enable();
-                    } else {
-                        addButton.disable();
+                        this.fireEvent('selectType', combo.getValue());
                     }
-                }
+                },
+                scope:this
             }
         });
 
@@ -89,7 +106,7 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
                 iconCls: 'icon-add',
                 disabled:true,
                 handler: function() {
-                    this.fireEvent('addDocument', typesCombo.getValue());
+                    this.fireEvent('addDocument');
                 },
                 scope: this
             }
