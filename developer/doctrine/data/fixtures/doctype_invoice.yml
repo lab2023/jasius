@@ -9,6 +9,19 @@ Model_Entity_Type:
     active: true
 
 Model_Entity_Property:
+  Invoice_Title:
+    Type: Invoice
+    Translation:
+      en:
+        title: Invoice Title
+      tr:
+        title: Döküman Başlığı
+    dataType: string
+    isUnique: false
+    isRequire: true
+    #defaultValue:
+    #enum:
+    weight: 1
   Invoice_No:
     Type: Invoice
     Translation:
@@ -21,7 +34,7 @@ Model_Entity_Property:
     isRequire: true
     #defaultValue:
     #enum:
-    weight: 1
+    weight: 2
 
   Invoice_Date:
     Type: Invoice
@@ -35,7 +48,7 @@ Model_Entity_Property:
     isRequire: true
     #defaultValue:
     #enum:
-    weight: 2
+    weight: 3
 
   Invoice_Customer:
     Type: Invoice
@@ -49,7 +62,7 @@ Model_Entity_Property:
     isRequire: true
     #defaultValue:
     #enum:
-    weight: 3
+    weight: 4
 
   Invoice_Amount:
     Type: Invoice
@@ -63,7 +76,7 @@ Model_Entity_Property:
     isRequire: true
     #defaultValue:
     #enum:
-    weight: 4
+    weight: 5
 
   Invoice_Description:
     Type: Invoice
@@ -77,5 +90,5 @@ Model_Entity_Property:
     isRequire: false
     #defaultValue:
     #enum:
-    weight: 5
+    weight: 6
 

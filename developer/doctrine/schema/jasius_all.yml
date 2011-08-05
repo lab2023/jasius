@@ -85,10 +85,7 @@ Content:
     type_id:
       type: integer
       notnull: true
-    title:
-      type: string(255)
-      notnull: true
-
+          
   relations:
     Type:
       type: one

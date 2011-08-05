@@ -35,11 +35,10 @@
  */
 class Jasius_Model_Content
 {
-    public static function add($type_id, $title)
+    public static function add($type_id)
     {
         $content = new Model_Entity_Content();
         $content->type_id = $type_id;
-        $content->title = $title;
         $content->save();
 
         return is_object($content) ? $content : false;
