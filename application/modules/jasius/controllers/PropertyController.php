@@ -41,31 +41,6 @@ class Jasius_PropertyController extends Kebab_Rest_Controller
         $type = array('id' => $typeArray['type_id'], 'text' => $typeArray['typeTranslation_title']);
 
         $retData = Jasius_Model_Property::getAllPropertyByTypeId($param['typeId'])->execute();
-        $typeIdArray = array(
-            'id' => $param['typeId'],
-            'name' => 'type_' .$param['typeId'],
-            'dataType' => "hidden",
-            'isUnique' =>  "0",
-            'isRequire' => "1",
-            'defaultValue' => $param['typeId'],
-            'weight' => null,
-            'title' => null
-        );
-        $typeTitleArray =  array(
-            'id' => $param['typeId'],
-            'name' => 'type_title',
-            'dataType' => "string",
-            'isUnique' =>  "0",
-            'isRequire' => "1",
-            'defaultValue' => null,
-            'enum' => null,
-            'weight' => 0,
-            'title' => "Döküman Başlığı"
-        );
-
-        $retData[] = $typeIdArray;
-        $retData[] = $typeTitleArray;
-
         $this->_helper->response(true, 200)
                 ->add('type', $type)
                 ->addTotal(count($retData))

@@ -39,7 +39,7 @@ class Jasius_Model_Property
         $lang = Zend_Auth::getInstance()->getIdentity()->language;
         $query =  Doctrine_Query::create()
                     ->select('
-                        property.id,
+                        CONCAT("property_item_", property.id) as name,
                         propertyTranslation.title as title,
                         property.dataType,
                         property.isUnique,
