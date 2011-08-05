@@ -48,7 +48,7 @@ class Jasius_Model_IsUnique
                         : false;
 
         if ($isUniqueCheck) {
-            $errorMessage['property_id_'.$propertyId] = 'Same record entered before';
+            $errorMessage['property_item_'.$propertyId] = 'Same record entered before';
         }
         
         if (count($errorMessage)) {
