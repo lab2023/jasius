@@ -60,7 +60,7 @@ class Jasius_ContentController extends Kebab_Rest_Controller
 
             $type = Doctrine_Core::getTable('Model_Entity_Property')->find($propertyId);
             if (is_bool($type)){
-                return;
+                $response->setSuccess(false)->getResponse();
             }
             $content = Jasius_Model_Content::add($type->type_id);
             $retData = Jasius_Model_Data::add($type->type_id, $content->id, $param);
