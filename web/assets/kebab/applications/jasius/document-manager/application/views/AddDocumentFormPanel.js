@@ -33,6 +33,12 @@ KebabOS.applications.documentManager.application.views.DocumentAddFormPanel = Ex
         KebabOS.applications.documentManager.application.views.DocumentAddFormPanel.superclass.initComponent.call(this);
     },
 
+    listeners: {
+        afterRender: function() {
+            Ext.getCmp('document-progress').updateProgress(.3, 'Step -1-');
+        }
+    },
+
     buildItems: function() {
 
         var items = [], i = 2;
