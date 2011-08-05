@@ -2,7 +2,6 @@
 Model_Entity_Content:
   Invoice_1:
     Type: Invoice
-    title: lab2023 Faturası
 
 Model_Entity_Data:
   Data_Invoice_1:
@@ -34,4 +33,10 @@ Model_Entity_Data:
     Content: Invoice_1
     #numberValue:
     textValue: 'lab2023 firmasının fatura örneğidir'
+    #timeValue:
+  Data_Invoice_6:
+    Property: Invoice_Title
+    Content: Invoice_1
+    #numberValue:
+    textValue: 'Lab-2023 Haziran Faturası'
     #timeValue:
