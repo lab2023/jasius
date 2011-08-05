@@ -60,19 +60,17 @@ class Jasius_ContentController extends Kebab_Rest_Controller
 
             $type = Doctrine_Core::getTable('Model_Entity_Property')->find($propertyId);
             if (is_bool($type)){
-                $response->setSuccess(false)->getResponse();
+                $response->getResponse();
             }
             $content = Jasius_Model_Content::add($type->type_id);
             $retData = Jasius_Model_Data::add($type->type_id, $content->id, $param);
 
-            if (is_bool($retData) && $retData === true) {
-                $success = Doctrine_Manager::connection()->commit();
-            } else {
-                $success = false;
-            }
+            $success = is_bool($retData) && $retData === true
+                     ? $success = Doctrine_Manager::connection()->commit()
+                     : false;
 
             if ($success) {
-                $response->setSuccess($success)->addNotification('INFO', 'Belgeniz basari ile kaydedilmiştir');
+                $response->setSuccess($success)->addNotification('INFO', 'Document is saved');
             } else {
                 $response->setErrors($retData);
             }
