@@ -67,10 +67,7 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
     },
 
     submitActiveFormAction: function(window){
-        var activeItem = window.getLayout().activeItem;
-        if (activeItem.onSubmit()) {
-            this.wizardNext(window);
-        }
+        window.getLayout().activeItem.onSubmit();
     },
 
     wizardNext : function (window) {
@@ -124,14 +121,15 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
                     iconCls: 'icon-add',
                     bootstrap: this.bootstrap,
                     propertyData: this.getPropertyData(),
-                    width:600,
-                    height:400,
+                    width:400,
+                    height:200,
                     maximizable: true,
                     manager: this.bootstrap.app.getDesktop().getManager()
                 });
                 win.show();
 
                 win.on('submitActiveForm', this.submitActiveFormAction, this);
+                win.on('showNextItem', this.wizardNext, this);
 
             } else {
                 win.show();

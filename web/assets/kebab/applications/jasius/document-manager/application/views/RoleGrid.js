@@ -37,7 +37,7 @@ KebabOS.applications.documentManager.application.views.RoleGrid = Ext.extend(Ext
                 },
                 columns: [
                     sm,
-                    {header: "Title", width: 200, dataIndex: 'title'}
+                    {header: Kebab.helper.translate('Title'), width: 200, dataIndex: 'title'}
                 ]
             }),
             sm: sm,

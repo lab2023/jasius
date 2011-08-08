@@ -46,6 +46,7 @@ class Jasius_Model_Access
      */
     public static function add($contentId, $type, $roleIds = array(), $userIds = array())
     {
+        $retVal = false;
         Doctrine_Manager::connection()->beginTransaction();
         try {
 

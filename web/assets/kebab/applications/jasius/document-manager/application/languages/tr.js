@@ -34,5 +34,10 @@ KebabOS.applications.documentManager.application.languages.tr = {
     'Save &raquo;' : 'Kaydet &raquo;',
     'Document Title' : 'Doküman Başlığı',
     'Add new document wizard' : 'Yeni doküman ekleme sihirbazı',
-    'Saving...' : 'Kaydediliyor...'
+    'Saving...' : 'Kaydediliyor...',
+    'There is exist in list' : 'Listede mevcuttur',
+    'Name Surname or E-mail write...' : 'Ad soyad veya e-posta adresi yazınız...',
+    'Full Name': 'Tam Adı',
+    'Delete User' : 'Kullanıcıyı Sil',
+    'Title' : 'Başlık'
 };

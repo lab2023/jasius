@@ -70,7 +70,7 @@ class Jasius_ContentController extends Kebab_Rest_Controller
                      : false;
 
             if ($success) {
-                $response->setSuccess($success)->addNotification('INFO', 'Document is saved');
+                $response->setSuccess($success)->add('contentId',$content->id)->addNotification('INFO', 'Document is saved');
             } else {
                 $response->setErrors($retData);
             }

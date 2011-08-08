@@ -30,7 +30,7 @@ KebabOS.applications.documentManager.application.views.UserGrid = Ext.extend(Ext
         };
         var userCombobox = new Kebab.library.ext.AutocompleteComboBox({
             tpl:'<tpl for="."><div ext:qtip="{fullName}" class="x-combo-list-item">{fullName} - {email}</div></tpl>',
-            emptyText:'Ad soyad veya e-posta adresi yazınız.',
+            emptyText:Kebab.helper.translate('Name Surname or E-mail write...'),
             typeAhead: true,
             triggerAction: 'all',
             forceSelection: true,
@@ -41,54 +41,53 @@ KebabOS.applications.documentManager.application.views.UserGrid = Ext.extend(Ext
             displayField: 'fullName',
             hiddenName: 'userId',
             scope:this,
-            width:300
+            width:300,
+            listeners: {
+                select : {fn:function (combo) {
+                    if(this.store.find('id', combo.getValue()) == -1){
+                        var record = new this.store.recordType({
+                            id: combo.getValue(),
+                            fullName: combo.lastSelectionText
+                        });
+                        this.store.insert(0, record);
+                    } else {
+                        Kebab.helper.message(Kebab.helper.translate('Warning'),
+                            Kebab.helper.translate('There is exist in list'),
+                            true,
+                            'WARN');
+                    }
+                    combo.setValue(null);
+                }},
+                scope :this
+            }
         });
 
         this.tbar = [
-        userCombobox,{
-                text:'Ekle',
-                iconCls:'icon-accept',
-                handler:function(){
-
-                    var finded = this.store.find('id', userCombobox.value);
-                    if(finded == -1){
-                        var record = new this.store.recordType({
-                            id: userCombobox.value,
-                            fullName: userCombobox.lastSelectionText
-                        });
-                        this.store.insert(0, record);
-                    }
-                },
-                scope:this
-            },{
-                text:'Çıkar',
-                iconCls:'icon-cancel',
-                handler:function() {
-                    var sm = this.getSelectionModel();
-
-                    if (!sm.getCount()) {
-                        return false;
-                    } else {
-                        sm.each(function(selection) {
-                            this.store.remove(selection);
-                        }, this);
-                    }
-                },
-                scope:this
-            }
+            userCombobox
         ];
         this.columns = [
             {
                 header   : 'ID',
-                width:12,
+                width:5,
                 dataIndex: 'id',
                 sortable:true
             },
                 {
-                header   : 'Tam Adı',
-                width:100,
+                header   : Kebab.helper.translate('Full Name'),
+                width:90,
                 dataIndex: 'fullName',
                 sortable:true
+            },{
+                xtype: 'actioncolumn',
+                width: 5,
+                items: [{
+                    iconCls   : 'icon-delete',  // Use a URL in the icon config
+                    tooltip: Kebab.helper.translate('Delete User'),
+                    handler: function(grid, rowIndex) {
+                        var rec = grid.getStore().getAt(rowIndex);
+                        grid.getStore().remove(rec);
+                    }
+                }]
             }
         ];
 

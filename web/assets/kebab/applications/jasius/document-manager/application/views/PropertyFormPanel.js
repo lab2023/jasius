@@ -9,7 +9,7 @@
  * @license     http://www.kebab-project.com/cms/licensing
  */
 
-KebabOS.applications.documentManager.application.views.DocumentAddFormPanel = Ext.extend(Ext.FormPanel, {
+KebabOS.applications.documentManager.application.views.PropertyFormPanel = Ext.extend(Ext.FormPanel, {
 
     owner: null,
 
@@ -28,7 +28,13 @@ KebabOS.applications.documentManager.application.views.DocumentAddFormPanel = Ex
 
         this.items = this.buildItems();
 
-        KebabOS.applications.documentManager.application.views.DocumentAddFormPanel.superclass.initComponent.call(this);
+        KebabOS.applications.documentManager.application.views.PropertyFormPanel.superclass.initComponent.call(this);
+    },
+
+    listeners: {
+        activate: function(panel) {
+            panel.doLayout();
+        }
     },
 
     buildItems: function() {
@@ -135,17 +141,14 @@ KebabOS.applications.documentManager.application.views.DocumentAddFormPanel = Ex
 
     onSubmit: function() {
         var form = this.getForm();
-        
         if (form.isValid()) {
-            return form.submit({
+            form.submit({
                 method: 'POST',
                 url: Kebab.helper.url('jasius/content'),
                 waitMsg: 'Saving...',
-                success: function() {
-                    return true;
-                },
-                failure: function() {
-                    return false;
+                success: function(form, action) {
+                    form.owner.contentId = action.result.contentId;
+                    form.owner.fireEvent('showNextItem', form.owner);
                 }
             });
         }

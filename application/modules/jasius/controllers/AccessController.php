@@ -37,18 +37,14 @@ class Jasius_AccessController extends Kebab_Rest_Controller
 {
     public function postAction()
     {
-        //$param = $this->_helper->param();
-        $param = array(
-            'contentId' => 1,
-            'type' => 'user',
-            'roleId' => array(),
-            'userId' => array()
-        );
-        $response = $this->_helper->response(true);
-        $success = Jasius_Model_Access::add($param['contentId'], $param['type'], $param['roleId'], $param['userId']);
+        $param = $this->_helper->param();
+        $response = $this->_helper->response();
+        $roles = array_key_exists('roleId',$param) ? $param['roleId'] : array();
+        $users = array_key_exists('userId',$param) ? $param['userId'] : array();
+        $success = Jasius_Model_Access::add($param['contentId'], $param['accessType'], $roles, $users);
 
         if ($success) {
-            $response->addNotification('INFO', 'Erişimler başarı ile kaydedilmiştir.');
+            $response->setSuccess(true)->addNotification('INFO', 'Erişimler başarı ile kaydedilmiştir.');
         } else {
             $response->addNotification('ERR', 'Erişim Kaydı Başarısız..');
         }

@@ -23,7 +23,7 @@ KebabOS.applications.documentManager.application.views.AccessPanel = Ext.extend(
 
     initComponent: function() {
 
-        this.accessFrom = new KebabOS.applications.documentManager.application.views.AccessForm({
+        this.accessFrom = new KebabOS.applications.documentManager.application.views.AccessFormPanel({
             owner: this,
             autoHeight:true,
             border:false,
@@ -58,7 +58,7 @@ KebabOS.applications.documentManager.application.views.AccessPanel = Ext.extend(
             disabled: true,
             layout: {
                 type: 'hbox',
-                align : 'stretch',
+                align:'stretch',
                 pack  : 'start'
             },
             border:false,
@@ -74,5 +74,46 @@ KebabOS.applications.documentManager.application.views.AccessPanel = Ext.extend(
         });
 
         KebabOS.applications.documentManager.application.views.AccessPanel.superclass.initComponent.call(this);
+    },
+
+    listeners: {
+        activate: function(panel) { // HBox layout bug fix
+            panel.doLayout();
+        }
+    },
+
+    onSubmit: function() {
+        
+        var accessForm = this.accessFrom.getForm(), userIds = [], roleIds = [], i = 0, y = 0;
+
+        var params = {
+            contentId : this.owner.contentId
+        };
+
+        if (accessForm.findField('accessType').getGroupValue() == 'specific') {
+
+            Ext.each(this.roleGrid.getSelectionModel().getSelections(), function(data) {
+                roleIds[i++] = data.id;
+            });
+            Ext.each(this.userGrid.store.data.items, function(data) {
+                userIds[y++] = data.data.id;
+            });
+
+            Ext.apply(params, {
+                roleId:Ext.util.JSON.encode(roleIds),
+                userId:Ext.util.JSON.encode(userIds)
+            });
+        }
+
+        if(accessForm.isValid()){
+            accessForm.submit({
+                params: params || null,
+                url: Kebab.helper.url('jasius/access'),
+                waitMsg: 'Saving...',
+                success: function(form) {
+                    form.owner.owner.fireEvent('showNextItem', form.owner.owner);
+                }
+            });
+        }
     }
 });
