@@ -11,7 +11,10 @@
 
 KebabOS.applications.documentManager.application.views.AccessForm = Ext.extend(Ext.FormPanel, {
 
+    owner: this,
+    
     url: null,
+    
     border:false,
 
     initComponent: function() {
@@ -19,67 +22,21 @@ KebabOS.applications.documentManager.application.views.AccessForm = Ext.extend(E
         var config = {
             url: Kebab.helper.url('jasius/access'),
             labelAlign: 'top',
-            hideLabels:true,
-            items:[
-                {
-                    xtype: 'radiogroup',
-                    items: [
-                        {boxLabel: 'Herkes', name: 'allow', inputValue: 'all', checked: true},
-                        {boxLabel: 'Üyeler', name: 'allow', inputValue: 'user'},
-                        {boxLabel: 'Özel', name: 'allow', inputValue: 'specific',
-                            listeners: {
-                                check: function(field, checked) {
-                                        this.fireEvent('allowAll', !checked);
-                                }, scope:this
-                            }
+            hideLabels:false,
+            labelSeparator: '',
+            items:[{
+                xtype: 'radiogroup',
+                fieldLabel: Kebab.helper.translate('Belgeye kimler erişebilir ?'),
+                items: [
+                    {boxLabel: Kebab.helper.translate('Herkes erişebilir'), name: 'allow', inputValue: 'all', checked: true},
+                    {boxLabel: Kebab.helper.translate('Sadece üyeler erişebilir'), name: 'allow', inputValue: 'user'},
+                    {boxLabel: Kebab.helper.translate('Özel erişim belirlemek istiyorum'), name: 'allow', inputValue: 'specific',
+                        listeners: {
+                            check: function(field, checked) {
+                                this.fireEvent('allowAll', !checked);
+                            }, scope:this
                         }
-                    ]
-                }
-            ],
-            buttons:[
-                {
-                    text:'Yayınla',
-                    iconCls:'icon-accept',
-                    handler: function() {
-                        var userIds = [], roleIds = [];
-                        var i = 0;
-                        Ext.each(this.bootstrap.layout.roleGrid.getSelectionModel().getSelections(), function(data) {
-                            roleIds[i++] = data.id;
-                        });
-                        var i = 0;
-                        Ext.each(this.bootstrap.layout.userGrid.store.data.items, function(data) {
-                            userIds[i++] = data.data.id;
-                        });
-                        Ext.each(this.getForm().items.items, function(data) {
-                            if(data.xtype =='radiogroup'){
-                                Ext.each(data.items.items, function(items) {
-                                    if(items.checked){;
-                                        accessTpye = items.inputValue;
-                                    }
-                                });
-                            }
-                        });
-                        var accessType = accessTpye
-                        if(this.getForm().isValid()){
-                            Ext.Ajax.request({
-                                url: this.url,
-                                method: 'POST',
-                                params: {
-                                    accessType:Ext.util.JSON.encode(accessType),
-                                    roleId:Ext.util.JSON.encode(roleIds),
-                                    userId:Ext.util.JSON.encode(userIds)
-                                },
-                                success : function() {
-                                     Kebab.helper.message(this.bootstrap.launcher.text, 'İşlem Başarılı');
-                                },
-
-                                failure : function() {
-                                    Kebab.helper.message(this.bootstrap.launcher.text, 'İşlem Başarısız');
-                                }, scope:this
-                            });
-                        }
-                    },
-                    scope:this
+                    }]
                 }
             ]
         };
@@ -87,5 +44,49 @@ KebabOS.applications.documentManager.application.views.AccessForm = Ext.extend(E
         Ext.apply(this, Ext.apply(this.initialConfig, config));
 
         KebabOS.applications.documentManager.application.views.AccessForm.superclass.initComponent.apply(this, arguments);
+    },
+
+    onSubmit: function() {
+        var userIds = [], roleIds = [];
+        var i = 0;
+        Ext.each(this.owner.roleGrid.getSelectionModel().getSelections(), function(data) {
+            roleIds[i++] = data.id;
+        });
+        var y = 0;
+        Ext.each(this.bootstrap.layout.userGrid.store.data.items, function(data) {
+            userIds[y++] = data.data.id;
+        });
+
+
+        var accessType = null;
+
+        Ext.each(this.getForm().items.items, function(data) {
+            if(data.xtype =='radiogroup'){
+                Ext.each(data.items.items, function(items) {
+                    if(items.checked){
+                        accessType = items.inputValue;
+                    }
+                });
+            }
+        });
+
+        if(this.getForm().isValid()){
+            Ext.Ajax.request({
+                url: this.url,
+                method: 'POST',
+                params: {
+                    accessType: Ext.util.JSON.encode(accessType),
+                    roleId:Ext.util.JSON.encode(roleIds),
+                    userId:Ext.util.JSON.encode(userIds)
+                },
+                success : function() {
+                     Kebab.helper.message(this.bootstrap.launcher.text, 'İşlem Başarılı');
+                },
+
+                failure : function() {
+                    Kebab.helper.message(this.bootstrap.launcher.text, 'İşlem Başarısız');
+                }, scope:this
+            });
+        }
     }
 });

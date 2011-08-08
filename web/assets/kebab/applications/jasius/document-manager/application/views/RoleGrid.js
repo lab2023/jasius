@@ -12,21 +12,18 @@
 KebabOS.applications.documentManager.application.views.RoleGrid = Ext.extend(Ext.grid.GridPanel, {
 
     // Application bootstrap
-    bootstrap: null,
+    owner: null,
 
     initComponent: function() {
 
         // json data store
-        var store = new KebabOS.applications.documentManager.application.models.RoleDataStore({
-            bootstrap:this.bootstrap
-        });
+        var store = new KebabOS.applications.documentManager.application.models.RoleDataStore();
 
         var sm = new Ext.grid.CheckboxSelectionModel();
 
         var config = {
             stripeRows: true,
             trackMouseOver:true,
-            columnLines: true,
             clicksToEdit: true,
             viewConfig: {
                 emptyText: Kebab.helper.translate('Record not found...'),

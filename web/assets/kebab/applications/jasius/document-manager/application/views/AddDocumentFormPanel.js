@@ -11,8 +11,6 @@
 
 KebabOS.applications.documentManager.application.views.DocumentAddFormPanel = Ext.extend(Ext.FormPanel, {
 
-    bootstrap: null,
-
     owner: null,
 
     initComponent: function() {
@@ -133,6 +131,24 @@ KebabOS.applications.documentManager.application.views.DocumentAddFormPanel = Ex
             },
             scope:this
         });
+    },
+
+    onSubmit: function() {
+        var form = this.getForm();
+        
+        if (form.isValid()) {
+            return form.submit({
+                method: 'POST',
+                url: Kebab.helper.url('jasius/content'),
+                waitMsg: 'Saving...',
+                success: function() {
+                    return true;
+                },
+                failure: function() {
+                    return false;
+                }
+            });
+        }
     }
 
 });

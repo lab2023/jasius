@@ -17,12 +17,14 @@ KebabOS.applications.documentManager.application.views.DocumentAddWindow = Ext.e
 
     formPanel: null,
 
+    accessPanel: null,
+
     initComponent: function() {
 
         var config = {
             border: false,
             layout: 'card',
-            activeItem: 1
+            activeItem: 0
         };
 
         Ext.apply(this, config);
@@ -36,15 +38,17 @@ KebabOS.applications.documentManager.application.views.DocumentAddWindow = Ext.e
     buildItems: function() {
 
         this.formPanel = new KebabOS.applications.documentManager.application.views.DocumentAddFormPanel({
+            itemNumber: 0,
             title: Kebab.helper.translate('Document Properties'),
             frame: true,
             owner: this
         });
 
-        this.accessPanel = new KebabOS.applications.documentManager.application.views.AccessFormPanel({
+        this.accessPanel = new KebabOS.applications.documentManager.application.views.AccessPanel({
             title: Kebab.helper.translate('Document Properties'),
+            itemNumber: 1,
             frame: true,
-            bootstrap: this
+            owner: this
         });
 
         return [

@@ -12,14 +12,12 @@
 KebabOS.applications.documentManager.application.views.UserGrid = Ext.extend(Ext.grid.GridPanel, {
 
     // Application bootstrap
-    bootstrap: null,
+    owner: null,
 
     initComponent: function() {
 
         // json data store
-        this.comboStore = new KebabOS.applications.documentManager.application.models.UserDataStore({
-            bootstrap:this.bootstrap
-        });
+        this.comboStore = new KebabOS.applications.documentManager.application.models.UserDataStore();
         this.store = new Ext.data.ArrayStore({
             fields: ['id', 'fullName']
         });
