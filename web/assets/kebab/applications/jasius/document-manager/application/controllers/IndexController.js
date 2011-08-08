@@ -66,9 +66,9 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
         this._buildAddDocumentWindow();
     },
 
-    submitActiveFormAction: function(activeForm){
-        if (activeForm.getForm().isValid()){
-            activeForm.getForm().submit({
+    submitActiveFormAction: function(window){
+         if (window.getLayout().activeItem.getForm().isValid()){
+            window.getLayout().activeItem.getForm().submit({
                 method: 'POST',
                 url: Kebab.helper.url('jasius/content'),
                 waitMsg: 'Saving...',
@@ -79,7 +79,17 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
         }
     },
 
-
+    wizardNext : function (window) {
+        if (window.getLayout().activeItem < window.items.length){
+            window.getLayout().setActiveItem(window.getLayout().activeItem + 1);
+        }
+    },
+    
+    wizardPrev : function () {
+        if (window.getLayout().activeItem > 0){
+            window.getLayout().setActiveItem(window.getLayout().activeItem - 1);
+        }
+    },
     // Utils --------------------------------------------------------------------
 
     /**

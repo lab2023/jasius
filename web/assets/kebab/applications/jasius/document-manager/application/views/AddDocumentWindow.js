@@ -22,7 +22,7 @@ KebabOS.applications.documentManager.application.views.DocumentAddWindow = Ext.e
         var config = {
             border: false,
             layout: 'card',
-            activeItem: 0
+            activeItem: 1
         };
 
         Ext.apply(this, config);
@@ -41,10 +41,15 @@ KebabOS.applications.documentManager.application.views.DocumentAddWindow = Ext.e
             owner: this
         });
 
+        this.accessPanel = new KebabOS.applications.documentManager.application.views.AccessFormPanel({
+            title: Kebab.helper.translate('Document Properties'),
+            frame: true,
+            bootstrap: this
+        });
+
         return [
-            this.formPanel, {
-                title: 'panel 2'
-            }, {
+            this.formPanel,
+            this.accessPanel, {
                 title: 'panel 3'
             }
         ];
@@ -63,7 +68,7 @@ KebabOS.applications.documentManager.application.views.DocumentAddWindow = Ext.e
             tooltip: Kebab.helper.translate('Save current informations and go to next screen'),
             text: Kebab.helper.translate('Save &raquo;'),
             handler: function() {
-                this.fireEvent('submitActiveForm', this.getLayout().activeItem);
+                this.fireEvent('submitActiveForm', this);
             },
             scope:this
         }];
