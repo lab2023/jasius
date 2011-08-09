@@ -35,6 +35,10 @@
  */
 class Jasius_ContentController extends Kebab_Rest_Controller
 {
+    public function indexAction()
+    {
+        die('index');
+    }
     public function postAction()
     {
         $param = $this->_helper->param();
@@ -86,4 +90,23 @@ class Jasius_ContentController extends Kebab_Rest_Controller
         $response->getResponse();
 
     }
+
+    public function getAction()
+    {
+        $param = $this->_helper->param();
+        $response = $this->_helper->response();
+        $content = Doctrine_Core::getTable('Model_Entity_Content')->find($param['contentId']);
+        $retData = is_object($content)
+                ? Jasius_Model_Data::getDataForLoadDocumentForm($content->id)
+                : array();
+
+        if(count($retData)>0){
+            $response->setSuccess(true)->addData($retData);
+        } else {
+            $response->setSuccess(false)->add('msg','Property bulunamadı.');
+        }
+        $response->getResponse();
+
+    }
+
 }

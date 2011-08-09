@@ -74,12 +74,25 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
         var activeItem = window.getLayout().activeItem;
         if (window.items.indexOf(activeItem) < window.items.length){
             window.getLayout().setActiveItem(window.items.indexOf(activeItem) + 1);
+            this.btnPrevControl(window);
         }
     },
+
+    btnPrevControl: function(window){
+         var btnPrev = Ext.getCmp(window.id + '-prev');
+            if(window.items.indexOf(window.getLayout().activeItem) > 0){
+                btnPrev.enable();
+            } else
+            {
+                btnPrev.disable();
+            }
+    },
     
-    wizardPrev : function () {
-        if (window.getLayout().activeItem > 0){
-            window.getLayout().setActiveItem(window.getLayout().activeItem - 1);
+    wizardPrev : function (window) {
+        var activeItem = window.getLayout().activeItem;
+        if (window.items.indexOf(activeItem)> 0){
+            window.getLayout().setActiveItem(window.items.indexOf(activeItem)- 1);
+            this.btnPrevControl(window);
         }
     },
     // Utils --------------------------------------------------------------------
@@ -109,7 +122,7 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
     _buildAddDocumentWindow: function() {
 
         var data = this.getPropertyData();
-
+        
         if (data) {
             var win = Ext.getCmp(data.type.id + '-add-window');
 
@@ -130,6 +143,7 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
 
                 win.on('submitActiveForm', this.submitActiveFormAction, this);
                 win.on('showNextItem', this.wizardNext, this);
+                win.on('showPrevItem', this.wizardPrev, this);
 
             } else {
                 win.show();

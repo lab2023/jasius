@@ -34,6 +34,7 @@ KebabOS.applications.documentManager.application.views.PropertyFormPanel = Ext.e
     listeners: {
         activate: function(panel) {
             panel.doLayout();
+            this.onLoad();
         }
     },
 
@@ -147,11 +148,23 @@ KebabOS.applications.documentManager.application.views.PropertyFormPanel = Ext.e
                 url: Kebab.helper.url('jasius/content'),
                 waitMsg: 'Saving...',
                 success: function(form, action) {
+                    form.reset();
                     form.owner.contentId = action.result.contentId;
                     form.owner.fireEvent('showNextItem', form.owner);
                 }
             });
         }
-    }
+    },
 
+    onLoad: function() {
+        var contentId = this.owner.contentId;
+        if (contentId != null) {
+            this.getForm().load({
+                url : Kebab.helper.url('jasius/content')+'/contentId/'+contentId,
+                method:'GET',
+                success : function (form, action) {
+                }
+            });
+        }
+    }
 });

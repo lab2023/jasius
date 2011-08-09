@@ -68,9 +68,9 @@ KebabOS.applications.documentManager.application.views.AccessFormPanel = Ext.ext
             xtype: 'radiogroup',
             fieldLabel: Kebab.helper.translate('Belgeye kimler erişebilir ?'),
             items: [
-                {boxLabel: Kebab.helper.translate('Herkes erişebilir'), name: 'allow', inputValue: 'all', checked: true},
-                {boxLabel: Kebab.helper.translate('Sadece üyeler erişebilir'), name: 'allow', inputValue: 'user'},
-                {boxLabel: Kebab.helper.translate('Özel erişim belirlemek istiyorum'), name: 'allow', inputValue: 'specific',
+                {boxLabel: Kebab.helper.translate('Herkes erişebilir'), name: 'accessType', inputValue: 'all', checked: true},
+                {boxLabel: Kebab.helper.translate('Sadece üyeler erişebilir'), name: 'accessType', inputValue: 'user'},
+                {boxLabel: Kebab.helper.translate('Özel erişim belirlemek istiyorum'), name: 'accessType', inputValue: 'specific',
                     listeners: {
                         check: function(field, checked) {
                             this.fireEvent('allowAll', !checked);

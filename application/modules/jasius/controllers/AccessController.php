@@ -41,7 +41,13 @@ class Jasius_AccessController extends Kebab_Rest_Controller
         $response = $this->_helper->response();
         $roles = array_key_exists('roleId',$param) ? $param['roleId'] : array();
         $users = array_key_exists('userId',$param) ? $param['userId'] : array();
-        $success = Jasius_Model_Access::add($param['contentId'], $param['accessType'], $roles, $users);
+
+        $sucDel = Jasius_Model_Access::del($param['contentId']);
+        if ($sucDel){
+            $success = Jasius_Model_Access::add($param['contentId'], $param['accessType'], $roles, $users);
+        } else {
+            $success = false;
+        }
 
         if ($success) {
             $response->setSuccess(true)->addNotification('INFO', 'Erişimler başarı ile kaydedilmiştir.');
@@ -50,5 +56,21 @@ class Jasius_AccessController extends Kebab_Rest_Controller
         }
 
         $response->getResponse();
+    }
+
+    public function indexAction()
+    {
+        $param = $this->_helper->param();
+        $response = $this->_helper->response();
+        $query = Jasius_Model_Access::getAllRightAccess($param['contentId']);
+
+        if (is_bool($query)){
+            $response->setSuccess($query);
+        } else {
+            $response->setSuccess(true)->addData($query);
+        }
+
+        $response->getResponse();
+
     }
 }

@@ -79,17 +79,35 @@ KebabOS.applications.documentManager.application.views.AccessPanel = Ext.extend(
     listeners: {
         activate: function(panel) { // HBox layout bug fix
             panel.doLayout();
+            this.onLoad();
         }
     },
+    onLoad: function() {
+        var contentId = this.owner.contentId;
 
+        if (contentId != null) {
+            this.roleGrid.getSelectionModel().deselectRange(0, this.roleGrid.store.getCount() - 1 );
+            this.accessFrom.getForm().load({
+                url : Kebab.helper.url('jasius/access'),
+                params: {
+                    contentId : contentId
+                },
+                method:'GET',
+                success : function (form, action) {
+                    console.log(action.result);
+                    // /form.findField('accessType').setGroupValue(actin)
+                }
+            });
+        }
+    },
+    
     onSubmit: function() {
         
         var accessForm = this.accessFrom.getForm(), userIds = [], roleIds = [], i = 0, y = 0;
-
         var params = {
             contentId : this.owner.contentId
         };
-
+        
         if (accessForm.findField('accessType').getGroupValue() == 'specific') {
 
             Ext.each(this.roleGrid.getSelectionModel().getSelections(), function(data) {
@@ -111,6 +129,7 @@ KebabOS.applications.documentManager.application.views.AccessPanel = Ext.extend(
                 url: Kebab.helper.url('jasius/access'),
                 waitMsg: 'Saving...',
                 success: function(form) {
+                    form.reset();
                     form.owner.owner.fireEvent('showNextItem', form.owner.owner);
                 }
             });

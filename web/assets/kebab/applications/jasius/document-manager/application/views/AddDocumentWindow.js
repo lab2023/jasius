@@ -24,7 +24,7 @@ KebabOS.applications.documentManager.application.views.DocumentAddWindow = Ext.e
         var config = {
             border: false,
             layout: 'card',
-            activeItem: 1
+            activeItem: 0
         };
 
         Ext.apply(this, config);
@@ -34,7 +34,7 @@ KebabOS.applications.documentManager.application.views.DocumentAddWindow = Ext.e
 
         KebabOS.applications.documentManager.application.views.DocumentAddWindow.superclass.initComponent.call(this);
     },
-
+    
     buildItems: function() {
 
         this.formPanel = new KebabOS.applications.documentManager.application.views.PropertyFormPanel({
@@ -65,7 +65,11 @@ KebabOS.applications.documentManager.application.views.DocumentAddWindow = Ext.e
             id: this.id + '-prev',
             disabled: true,
             tooltip: Kebab.helper.translate('Returns to the previous screen'),
-            text: Kebab.helper.translate('&laquo; Previous')
+            text: Kebab.helper.translate('&laquo; Previous'),
+            handler : function (){
+                this.fireEvent('showPrevItem', this);
+            },
+            scope:this
         },{
             id: this.id + '-next',
             iconCls: 'icon-disk',

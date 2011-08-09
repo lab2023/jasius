@@ -111,6 +111,61 @@ class Jasius_Model_Access
     }
 
     /**
+     * Yetkiye göre wall döndürür
+     *
+     * @static
+     * @param string $sort
+     * @return Doctrine_Query
+     */
+    public static function getAllRightAccess($contentId)
+    {
+        $query = Doctrine_Query::create()
+                    ->select('access.content_id, access.access, access.allowuser, access.allowrole')
+                    ->from('Model_Entity_Access access')
+                    ->where('access.content_id = ?', $contentId)
+                    ->setHydrationMode(Doctrine::HYDRATE_ARRAY)->execute();
+        if (count($query) == 0) {
+            return false;
+        }
+
+        $access = array();
+        $users = array(); $roles = array();
+        for ($i = 0; $i < count($query); $i++){
+            $access['accessType'] = $query[$i]['access'];
+            if ($query[$i]['allowUser'] != 0) {
+                $users[] = $query[$i]['allowUser'];
+            }
+            if ($query[$i]['allowRole'] != 0) {
+                $roles[] = $query[$i]['allowRole'];
+            }
+        }
+        if (count($users) > 0){
+
+            $queryUser = Doctrine_Query::create()
+                       ->select('user.id, user.fullname')
+                       ->from('Model_Entity_User user')
+                       ->whereIn('user.id',$users)
+                       ->setHydrationMode(Doctrine::HYDRATE_ARRAY)->execute();
+
+            $access['users'] = $queryUser;
+        }
+        if (count($roles) > 0){
+            $lang = Zend_Auth::getInstance()->getIdentity()->language;
+            $queryRole = Doctrine_Query::create()
+                       ->select('role.id, roleTranslation.title as title')
+                       ->from('Model_Entity_Role role')
+                       ->leftJoin('role.Translation roleTranslation')
+                       ->where('roleTranslation.lang = ?', $lang)
+                       ->andWhereIn('role.id',$roles)
+                       ->setHydrationMode(Doctrine::HYDRATE_ARRAY)->execute();
+            
+            $access['roles'] = $queryRole;
+        }
+
+
+        return $access;
+    }
+    /**
      * @static
      * @throws Doctrine_Exception|Zend_Exception
      * @param $contentId
@@ -121,7 +176,7 @@ class Jasius_Model_Access
         Doctrine_Manager::connection()->beginTransaction();
         try {
                 Doctrine_Query::create()
-                    ->delete('Model_Entity_ContentAccess contentAccess')
+                    ->delete('Model_Entity_Access contentAccess')
                     ->where('contentAccess.content_id = ?', $contentId)
                     ->execute();
 

@@ -20,6 +20,6 @@ Model_Entity_Action:
     Controller: Jasius_Content
     name: post
 
-  Jasius_Access_Post:
-    Controller: Jasius_Access
-    name: post
+  Jasius_Content_Get:
+    Controller: Jasius_Content
+    name: get

@@ -26,7 +26,7 @@ Ext.extend(KebabOS.applications.documentManager.application.Bootstrap, Kebab.OS.
                 bootstrap: this
             });
 
-            // Default controlller
+            // Default controller
             this.defaultController = new KebabOS.applications.documentManager.application.controllers.Index({
                 bootstrap: this
             });
