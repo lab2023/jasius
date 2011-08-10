@@ -29,8 +29,30 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
     // Initialize and define routing settings
     init: function() {
 
-        this.bootstrap.layout.documentsGrid.on('selectType', this.getPropertiesByTypeIdAction, this);
-        this.bootstrap.layout.documentsGrid.on('addDocument', this.addDocumentAction, this);
+        var documentsGrid = this.bootstrap.layout.documentsGrid;
+
+        documentsGrid.on('selectType', this.getPropertiesByTypeIdAction, this);
+        documentsGrid.on('addDocument', this.addDocumentAction, this);
+        documentsGrid.on('updateDocument', this.updateDocumentAction, this);
+
+        this.on('propertiesBeforeLoad', function() {
+            var button = Ext.getCmp('document-add-button');
+            button.setIconClass('icon-loading');
+            button.disable();
+        });
+        this.on('propertiesLoaded', function() {
+            var button = Ext.getCmp('document-add-button');
+            button.setIconClass('icon-add');
+            button.enable();
+            if (this.bootstrap.layout.documentsGrid.setColumnModel(this.getPropertyData())) {
+                this.bootstrap.layout.documentsGrid.getStore().load();
+            }
+        });
+        this.on('propertiesLoadException', function() {
+            var button = Ext.getCmp('document-add-button');
+            button.setIconClass('icon-add');
+            button.enable();
+        });
 
     },
 
@@ -39,6 +61,10 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
     getPropertiesByTypeIdAction: function(typeId) {
 
         if (typeId) {
+
+            var store = this.bootstrap.layout.documentsGrid.getStore();
+            store.setBaseParam('typeId', typeId);
+            
             this.fireEvent('propertiesBeforeLoad');
             Ext.Ajax.request({
                 url: Kebab.helper.url('jasius/property'),
@@ -47,8 +73,8 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
                     typeId: parseInt(typeId)
                 },
                 success: function(res){
-                    this.fireEvent('propertiesLoaded', res);
                     this.setPropertyData(res.responseText);
+                    this.fireEvent('propertiesLoaded', res);
                 },
                 failure: function(){
                     this.fireEvent('propertiesLoadException');
@@ -58,12 +84,16 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
         }
     },
 
+    updateDocumentAction : function(contentId) {
+        this._buildDocumentWindow(contentId);
+    },
+
     /**
      * Get selected types by document properties and show document add wizard
      * @return void
      */
     addDocumentAction: function() {
-        this._buildAddDocumentWindow();
+        this._buildDocumentWindow(null);
     },
 
     submitActiveFormAction: function(window){
@@ -74,25 +104,13 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
         var activeItem = window.getLayout().activeItem;
         if (window.items.indexOf(activeItem) < window.items.length){
             window.getLayout().setActiveItem(window.items.indexOf(activeItem) + 1);
-            this.btnPrevControl(window);
         }
-    },
-
-    btnPrevControl: function(window){
-         var btnPrev = Ext.getCmp(window.id + '-prev');
-            if(window.items.indexOf(window.getLayout().activeItem) > 0){
-                btnPrev.enable();
-            } else
-            {
-                btnPrev.disable();
-            }
     },
     
     wizardPrev : function (window) {
         var activeItem = window.getLayout().activeItem;
         if (window.items.indexOf(activeItem)> 0){
             window.getLayout().setActiveItem(window.items.indexOf(activeItem)- 1);
-            this.btnPrevControl(window);
         }
     },
     // Utils --------------------------------------------------------------------
@@ -119,7 +137,7 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
      * @private
      * @return void
      */
-    _buildAddDocumentWindow: function() {
+    _buildDocumentWindow: function(id) {
 
         var data = this.getPropertyData();
         
@@ -130,6 +148,7 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
                 win = new KebabOS.applications.documentManager.application.views.DocumentAddWindow({
                     id: data.type.id + '-add-window',
                     animateTarget: 'document-add-button',
+                    contentId : id,
                     title: Kebab.helper.translate('Add new document wizard') + ' : ' + data.type.text,
                     iconCls: 'icon-add',
                     bootstrap: this.bootstrap,
@@ -144,6 +163,7 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
                 win.on('submitActiveForm', this.submitActiveFormAction, this);
                 win.on('showNextItem', this.wizardNext, this);
                 win.on('showPrevItem', this.wizardPrev, this);
+                win.on('buttoncontrol', this.buttonControl, this);
 
             } else {
                 win.show();

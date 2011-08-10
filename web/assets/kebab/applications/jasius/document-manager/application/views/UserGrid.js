@@ -18,7 +18,7 @@ KebabOS.applications.documentManager.application.views.UserGrid = Ext.extend(Ext
 
         // json data store
         this.comboStore = new KebabOS.applications.documentManager.application.models.UserDataStore();
-        this.store = new Ext.data.ArrayStore({
+        this.store = new Ext.data.JsonStore({
             fields: ['id', 'fullName']
         });
         var config = {
@@ -81,7 +81,7 @@ KebabOS.applications.documentManager.application.views.UserGrid = Ext.extend(Ext
                 xtype: 'actioncolumn',
                 width: 5,
                 items: [{
-                    iconCls   : 'icon-delete',  // Use a URL in the icon config
+                    iconCls   : 'icon-delete action-cloumn',  // Use a URL in the icon config
                     tooltip: Kebab.helper.translate('Delete User'),
                     handler: function(grid, rowIndex) {
                         var rec = grid.getStore().getAt(rowIndex);

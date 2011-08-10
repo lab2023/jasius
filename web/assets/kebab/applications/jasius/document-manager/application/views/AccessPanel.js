@@ -84,21 +84,28 @@ KebabOS.applications.documentManager.application.views.AccessPanel = Ext.extend(
     },
     onLoad: function() {
         var contentId = this.owner.contentId;
-
         if (contentId != null) {
-            this.roleGrid.getSelectionModel().deselectRange(0, this.roleGrid.store.getCount() - 1 );
             this.accessFrom.getForm().load({
                 url : Kebab.helper.url('jasius/access'),
+                waitMsg: 'Loading...',
                 params: {
                     contentId : contentId
                 },
                 method:'GET',
                 success : function (form, action) {
-                    console.log(action.result);
-                    // /form.findField('accessType').setGroupValue(actin)
-                }
+                    if (action.result.data.accessType == 'specific') {
+                        Ext.each(action.result.data.roles, this.loadRole, form.owner.roleGrid);
+                        form.owner.userGrid.getStore().loadData(action.result.data.users);
+                    }
+                },
+                scope:this
             });
         }
+    },
+
+    loadRole : function(role){
+        var rowIndex = this.getStore().find('id',role.id);
+        this.getSelectionModel().selectRow(rowIndex, true);
     },
     
     onSubmit: function() {
@@ -130,6 +137,8 @@ KebabOS.applications.documentManager.application.views.AccessPanel = Ext.extend(
                 waitMsg: 'Saving...',
                 success: function(form) {
                     form.reset();
+                    form.owner.roleGrid.getSelectionModel().deselectRange(0, form.owner.roleGrid.store.getCount() - 1 );
+                    form.owner.userGrid.getStore().removeAll();
                     form.owner.owner.fireEvent('showNextItem', form.owner.owner);
                 }
             });

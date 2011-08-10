@@ -41,24 +41,58 @@ KebabOS.applications.documentManager.application.views.DocumentAddWindow = Ext.e
             itemNumber: 0,
             title: Kebab.helper.translate('Document Properties'),
             frame: true,
-            owner: this
+            owner: this,
+            listeners:{
+                activate: function(){
+                    this.owner.buttonControl();
+                }
+            }
         });
 
         this.accessPanel = new KebabOS.applications.documentManager.application.views.AccessPanel({
             title: Kebab.helper.translate('Document Accessing Settings'),
             itemNumber: 1,
             frame: true,
-            owner: this
+            owner: this,
+            listeners:{
+                activate: function(){
+                    this.owner.buttonControl();
+                }
+            }
         });
 
         return [
             this.formPanel,
             this.accessPanel, {
-                title: 'panel 3'
+                title: 'panel 3',
+                owner: this,
+                listeners:{
+                    activate: function(){
+                        this.owner.buttonControl();
+                    }
+                }
             }
         ];
     },
+    buttonControl: function () {
+        var index = this.items.indexOf(this.getLayout().activeItem);
+        var count = this.items.length;
+        var btnNext = Ext.getCmp(this.id + '-next');
+        var btnPrev = Ext.getCmp(this.id + '-prev');
+        
+        if (index < count - 1) {
+            if (index == 0){
+                this.contentId != null ? btnNext.enable() : btnNext.disable();
+            } else {
+                btnNext.enable();
+            }
 
+        } else {
+           btnNext.disable()
+        }
+        
+        index > 0 ?  btnPrev.enable() : btnPrev.disable();
+    },
     buildFbar: function() {
 
         return ['->', {
@@ -72,9 +106,18 @@ KebabOS.applications.documentManager.application.views.DocumentAddWindow = Ext.e
             scope:this
         },{
             id: this.id + '-next',
+            disabled: true,
+            tooltip: Kebab.helper.translate('Returns to the next screen'),
+            text: Kebab.helper.translate('Next &raquo;'),
+            handler : function (){
+                this.fireEvent('showNextItem', this);
+            },
+            scope:this
+        },{
+            id: this.id + '-save',
             iconCls: 'icon-disk',
             tooltip: Kebab.helper.translate('Save current informations and go to next screen'),
-            text: Kebab.helper.translate('Save &raquo;'),
+            text: Kebab.helper.translate('Save'),
             handler: function() {
                 this.fireEvent('submitActiveForm', this);
             },

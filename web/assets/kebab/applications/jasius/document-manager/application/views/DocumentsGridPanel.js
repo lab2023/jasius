@@ -36,25 +36,18 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
 
         KebabOS.applications.documentManager.application.views.DocumentsGridPanel.superclass.initComponent.call(this);
     },
+    setColumnModel : function (propertyDt) {
+        var propertyData = propertyDt.data,
+        i = 0;
 
-    listeners: {
-        afterRender: function(grid) {
-            
-            var controller = grid.bootstrap.defaultController;
-            controller.on('propertiesBeforeLoad', function() {
-                grid.getTopToolbar().getEl().mask('Properties loading...');
-            });
-            controller.on('propertiesLoaded', function() {
-                Ext.getCmp('document-add-button').enable();
-                grid.getTopToolbar().getEl().unmask();
-            });
-            controller.on('propertiesLoadException', function() {
-                Ext.getCmp('document-add-button').disable();
-                grid.getTopToolbar().getEl().unmask();
-            });
-            
-        },
-        scope: this
+        Ext.each(propertyData, function(property) {
+            ++i;
+            if (this.getColumnModel().getColumnHeader(i) != property.title ) {
+                this.addColumn(property.title, property.title, i);
+            }
+        }, this);
+
+        return true;
     },
 
     /**
@@ -64,14 +57,51 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
         return [{
             header   : Kebab.helper.translate('ID'),
             dataIndex: 'id',
+            width:5,
             sortable:true
         },{
-            header   : Kebab.helper.translate('Title'),
-            dataIndex: 'title',
-            sortable:true
+                xtype: 'actioncolumn',
+                width: 10,
+                items: [{
+                    iconCls   : 'icon-page-edit action-cloumn',  // Use a URL in the icon config
+                    tooltip: Kebab.helper.translate('Update Content'),
+                    handler: function(grid, rowIndex) {
+                        var rec = grid.getStore().getAt(rowIndex);
+                        this.fireEvent('updateDocument',rec.data.id);
+                    },
+                    scope : this
+                },{
+                    iconCls   : 'icon-page-delete action-cloumn',  // Use a URL in the icon config
+                    tooltip: Kebab.helper.translate('Delete Content'),
+                    handler: function(grid, rowIndex) {
+                        Ext.Msg.confirm('Warning', 'Are you sure to delete content?', function(btn, text){
+                            if (btn == 'yes'){
+                                grid.deleteRow(grid, rowIndex);
+                            }
+                        });
+                    }
+                }]
         }];
     },
 
+    deleteRow: function(grid , rowIndex) {
+        var rec = grid.getStore().getAt(rowIndex);
+        Ext.Ajax.request({
+                url: Kebab.helper.url('jasius/content'),
+                method: 'DELETE',
+                params: {
+                    contentId: rec.data.id
+                },
+                success: function(){
+                    this.getStore().remove(this.getStore().getAt(rowIndex));
+                },
+                failure: function(){
+                    Kebab.helper.message('Error','Record can not delete',false, 'ERR');
+                },
+                scope:this
+            });
+
+    },
     buildTbar: function() {
 
         var typesCombo = new Kebab.library.ext.AutocompleteComboBox({

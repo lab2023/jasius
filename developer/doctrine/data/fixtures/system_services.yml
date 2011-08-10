@@ -80,6 +80,14 @@ Model_Entity_Service:
     Story: Jasius_Add_Document
     Action: Jasius_Content_Get
 
+  Jasius_Add_Document_Content_Index:
+    Story: Jasius_Add_Document
+    Action: Jasius_Content_Index
+
+  Jasius_Add_Document_Content_Delete:
+    Story: Jasius_Add_Document
+    Action: Jasius_Content_Delete
+
   Jasius_Add_Document_Access:
     Story: Jasius_Add_Document
     Resource: Jasius_Access

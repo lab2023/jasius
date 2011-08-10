@@ -43,4 +43,24 @@ class Jasius_Model_Content
 
         return is_object($content) ? $content : false;
     }
+    public static function del($contentId)
+    {
+        Doctrine_Manager::connection()->beginTransaction();
+        try {
+                Doctrine_Query::create()
+                    ->delete('Model_Entity_Content content')
+                    ->where('content.id = ?', $contentId)
+                    ->execute();
+
+            $retVal = Doctrine_Manager::connection()->commit();
+        } catch (Doctrine_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            throw $e;
+        } catch (Zend_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            throw $e;
+        }
+
+        return $retVal;
+    }
 }

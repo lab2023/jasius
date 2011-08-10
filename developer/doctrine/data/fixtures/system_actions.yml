@@ -23,3 +23,11 @@ Model_Entity_Action:
   Jasius_Content_Get:
     Controller: Jasius_Content
     name: get
+
+  Jasius_Content_Index:
+    Controller: Jasius_Content
+    name: index
+
+  Jasius_Content_Delete:
+    Controller: Jasius_Content
+    name: delete

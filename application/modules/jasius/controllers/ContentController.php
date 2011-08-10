@@ -35,9 +35,27 @@
  */
 class Jasius_ContentController extends Kebab_Rest_Controller
 {
+    public function deleteAction()
+    {
+        $param = $this->_helper->param();
+        $response = $this->_helper->response();
+        $retVal = Jasius_Model_Content::del($param['contentId']);
+        $response->setSuccess(true)->getResponse();
+    }
+    
     public function indexAction()
     {
-        die('index');
+        $param = $this->_helper->param();
+        $response = $this->_helper->response();
+        $content    =Doctrine_Core::getTable('Model_Entity_Content')
+                    ->findBy('type_id', $param['typeId'])
+                    ->toArray();
+        if (is_bool($content)) {
+            $response->setSuccess(false);
+        } else {
+            $response->setSuccess(true)->addData($content);
+        }
+        $response->getResponse();
     }
     public function postAction()
     {
