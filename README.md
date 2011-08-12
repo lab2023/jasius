@@ -1,10 +1,12 @@
+Jasi.us is open source, cloud, document management system web application 
+
 Requirements
 ------------
 Kebab Project 1.5.x is only supported on PHP 5.3.3 and up.
 
-    - Zend Framework 1.11.8 (http://framework.zend.com)
-    - Doctrine 1.2.3        (http://www.doctrine-project.org)
-    - ExtJS 3.3.1           (http://www.sencha.com)
+    - Zend Framework 1.11.10 (http://framework.zend.com)
+    - Doctrine 1.2.4        (http://www.doctrine-project.org)
+    - ExtJS 3.4.0          (http://www.sencha.com)
 More info is here: 
     - http://www.kebab-project.com/wiki/en/Requirements_for_Kebab_1.5.x
 
