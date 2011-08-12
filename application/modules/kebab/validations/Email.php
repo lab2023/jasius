@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Kebab Project
  *
@@ -13,28 +12,38 @@
  * obtain it through the world-wide-web, please send an email
  * to info@lab2023.com so we can send you a copy immediately.
  *
- * @category   Kebab
- * @package    Kebab
- * @subpackage Languages
+ * @category   
+ * @package    
+ * @subpackage 
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
-
+ 
 /**
- * Kebab Administration Module Turkish Translations
+ * 
  *
- * @category   Kebab
- * @package    Kebab
- * @subpackage Languages
+ * @category   
+ * @package    
+ * @subpackage 
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
-return array(
-
-    // SignUpController
-    'An other user uses this email.' => 'Başka bir kullanıcı bu mail adresini kullanıyor.'
-);
+class Kebab_Validation_Email 
+{
+    /**
+     * Validate email
+     * 
+     * @static
+     * @param $email
+     * @return bool
+     */
+    public static function isValid($email)
+    {
+        $validatorEmail = new Zend_Validate_EmailAddress();
+        return $validatorEmail->isValid($email);
+    }
+}

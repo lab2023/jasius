@@ -96,31 +96,28 @@ class Kebab_RoleController extends Kebab_Rest_Controller
         Doctrine_Manager::connection()->beginTransaction();
         try {
             // Doctrine
-            $retData = array();
             foreach ($collection as $record) {
-                $retRoleData = array();
                 $role = new Model_Entity_Role();
+                $role->assignIdentifier($record['id']);
+                unset($record['id']);
 
                 if (array_key_exists('active', $record)) {
-                    $role->active = $retRoleData['active'] = $record['active'];
+                    $role->active = $record['active'];
                 }
 
                 if (array_key_exists('title', $record)) {
-                    $role->Translation[$lang]->title =  $retRoleData['title'] = $record['title'];
+                    $role->Translation[$lang]->title = $record['title'];
                 }
 
                 if (array_key_exists('description', $record)) {
-                    $role->Translation[$lang]->description = $retRoleData['description'] = $record['description'];
+                    $role->Translation[$lang]->description = $record['description'];
                 }
 
                 $role->save();
-                
-                $retRoleData['id'] = $role->id;
-                $retData[] = $retRoleData;
             }
             Doctrine_Manager::connection()->commit();
             // Response
-            $this->_helper->response(true, 200)->addNotification('INFO', 'Record was created.')->addData($retData)->getResponse();
+            $this->_helper->response(true, 201)->addNotification(Kebab_Notification::INFO, 'Record was updated.')->getResponse();
         } catch (Zend_Exception $e) {
             Doctrine_Manager::connection()->rollback();
             throw $e;
@@ -167,7 +164,7 @@ class Kebab_RoleController extends Kebab_Rest_Controller
             }
             Doctrine_Manager::connection()->commit();
             // Response
-            $this->_helper->response(true, 201)->addNotification('INFO', 'Record was updated.')->getResponse();
+            $this->_helper->response(true, 201)->addNotification(Kebab_Notification::INFO, 'Record was updated.')->getResponse();
         } catch (Zend_Exception $e) {
             Doctrine_Manager::connection()->rollback();
             throw $e;
