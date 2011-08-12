@@ -63,4 +63,29 @@ class Jasius_Model_Content
 
         return $retVal;
     }
+
+    public static function getAllContentByTypeId ($typeId)
+    {
+        $contentList = Doctrine_Core::getTable('Model_Entity_Content')
+                        ->findBy('type_id', $typeId)
+                        ->toArray();
+        $propertyList = Jasius_Model_Property::getAllPropertyByTypeId($typeId)->execute();
+
+        $retData = array();
+        $i = 0;
+        foreach($contentList as $content){
+            $val = array();
+            $val['id'] = $content['id'];
+            $data = Jasius_Model_Data::getDataForLoadDocumentForm($content['id']);
+            $j = 0;
+            foreach ($propertyList as $property) {
+                $val[$property['title']] = $data[$j][Jasius_Model_Data::mapping($property['dataType'])];
+                $j++;
+            }
+            $retData[$i]  =$val;
+            $i++;
+        }
+        
+        return $retData;
+    }
 }

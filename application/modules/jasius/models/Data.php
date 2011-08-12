@@ -134,12 +134,7 @@ class Jasius_Model_Data
 
         $rawData = $query->execute();
 
-        $retData = array();
-        foreach($rawData as $item) {
-            $retData['property_item_'. $item['property_id']] = $item[self::mapping($item['dataType'])];
-        }
-
-        return $retData;
+        return $rawData;
     }
 
     public static function mapping($dataType)

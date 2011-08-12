@@ -18,14 +18,14 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
 
         // json data store
         this.store = new KebabOS.applications.documentManager.application.models.DocumentsDataStore();
-
         var config = {
             columnLines:true,
             stripeRows:true,
             loadMask: true,
             viewConfig: {
-                forceFit: true
+                forceFit: false
             }
+
         };
         
         Ext.apply(this, config);
@@ -37,17 +37,45 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
         KebabOS.applications.documentManager.application.views.DocumentsGridPanel.superclass.initComponent.call(this);
     },
     setColumnModel : function (propertyDt) {
-        var propertyData = propertyDt.data,
-        i = 0;
-
+        var propertyData = propertyDt.data;
+        
         Ext.each(propertyData, function(property) {
-            ++i;
-            if (this.getColumnModel().getColumnHeader(i) != property.title ) {
-                this.addColumn(property.title, property.title, i);
+            if(this.colModel.findColumnIndex(property.title) < 0) {
+                var field = {
+                    name : property.title,
+                    type : this.getDataType(property.dataType)
+                };
+                var column = {
+                    header : property.title,
+                    dataIndex : property.title,
+                    width :150
+                }
+                this.addColumn(field, column);
             }
         }, this);
-
+        
+        delete this.store.reader.ef;
+        this.store.reader.buildExtractors();
         return true;
+    },
+
+    getDataType : function(dataType) {
+        switch (dataType) {
+            case "decimal" || "float":
+                return 'double';
+                break;
+            case "integer" :
+                return 'integer'
+            case "boolean":
+                return 'boolean';
+                break;
+            case "date" || "time" || "timestamp":
+                return 'date';
+                break;
+            default:
+                return 'string';
+                break;
+        }
     },
 
     /**
@@ -55,13 +83,8 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
      */
     buildColumns: function() {
         return [{
-            header   : Kebab.helper.translate('ID'),
-            dataIndex: 'id',
-            width:5,
-            sortable:true
-        },{
                 xtype: 'actioncolumn',
-                width: 10,
+                width: 50,
                 items: [{
                     iconCls   : 'icon-page-edit action-cloumn',  // Use a URL in the icon config
                     tooltip: Kebab.helper.translate('Update Content'),
@@ -81,6 +104,11 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
                         });
                     }
                 }]
+        },{
+            header   : 'ID',
+            dataIndex: 'id',
+            width:30,
+            sortable:true
         }];
     },
 
@@ -99,7 +127,7 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
                     Kebab.helper.message('Error','Record can not delete',false, 'ERR');
                 },
                 scope:this
-            });
+        });
 
     },
     buildTbar: function() {

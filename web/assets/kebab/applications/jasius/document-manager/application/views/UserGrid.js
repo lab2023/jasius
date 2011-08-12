@@ -71,8 +71,7 @@ KebabOS.applications.documentManager.application.views.UserGrid = Ext.extend(Ext
                 width:5,
                 dataIndex: 'id',
                 sortable:true
-            },
-                {
+            },{
                 header   : Kebab.helper.translate('Full Name'),
                 width:90,
                 dataIndex: 'fullName',

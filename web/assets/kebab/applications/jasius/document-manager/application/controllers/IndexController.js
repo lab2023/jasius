@@ -40,12 +40,13 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
             button.setIconClass('icon-loading');
             button.disable();
         });
-        this.on('propertiesLoaded', function() {
+        this.on('propertiesLoaded', function(typeId) {
             var button = Ext.getCmp('document-add-button');
+            var grid = this.bootstrap.layout.documentsGrid;
             button.setIconClass('icon-add');
             button.enable();
-            if (this.bootstrap.layout.documentsGrid.setColumnModel(this.getPropertyData())) {
-                this.bootstrap.layout.documentsGrid.getStore().load();
+            if (grid.setColumnModel(this.getPropertyData())) {
+                grid.getStore().load();
             }
         });
         this.on('propertiesLoadException', function() {
@@ -64,7 +65,6 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
 
             var store = this.bootstrap.layout.documentsGrid.getStore();
             store.setBaseParam('typeId', typeId);
-            
             this.fireEvent('propertiesBeforeLoad');
             Ext.Ajax.request({
                 url: Kebab.helper.url('jasius/property'),
@@ -74,7 +74,7 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
                 },
                 success: function(res){
                     this.setPropertyData(res.responseText);
-                    this.fireEvent('propertiesLoaded', res);
+                    this.fireEvent('propertiesLoaded');
                 },
                 failure: function(){
                     this.fireEvent('propertiesLoadException');

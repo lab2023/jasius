@@ -54,11 +54,10 @@ KebabOS.applications.documentManager.application.views.PropertyFormPanel = Ext.e
     _getFormItem: function(property) {
 
         var field = null;
-
         var config = {
             name: property.name,
             fieldLabel: property.title,
-            allowBlank: property.isRequired ? true : false,
+            allowBlank: property.isRequire == 1 ? false : true,
             tabIndex: property.weight
         };
 
@@ -78,10 +77,14 @@ KebabOS.applications.documentManager.application.views.PropertyFormPanel = Ext.e
                 field = new Ext.form.TextArea(config);
                 break;
             case "date":
-                field = new Ext.form.DateField(config);
+                field = new Ext.form.DateField(Ext.apply(config, {
+                    format: 'd-m-Y'
+                }));
                 break;
             case "time":
-                field = new Ext.form.TimeField(config);
+                field = new Ext.form.TimeField(Ext.apply(config, {
+                    format: 'H:i:s'
+                }));
                 break;
             case "timestamp":
                 field = new Ext.ux.form.DateTime(Ext.apply(config, {
