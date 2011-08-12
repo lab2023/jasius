@@ -36,6 +36,10 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
 
         KebabOS.applications.documentManager.application.views.DocumentsGridPanel.superclass.initComponent.call(this);
     },
+    rowDoubleClick : function(grid, rowIndex, obj) {
+        var rec = grid.getStore().getAt(rowIndex);
+        grid.fireEvent('updateDocument',rec.data.id);
+    },
     setColumnModel : function (propertyDt) {
         var propertyData = propertyDt.data;
         
@@ -61,7 +65,10 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
 
     getDataType : function(dataType) {
         switch (dataType) {
-            case "decimal" || "float":
+            case "decimal":
+                return 'double';
+                break;
+            case "float":
                 return 'double';
                 break;
             case "integer" :
@@ -69,7 +76,13 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
             case "boolean":
                 return 'boolean';
                 break;
-            case "date" || "time" || "timestamp":
+            case "date":
+                return 'date';
+                break;
+            case "time":
+                return 'date';
+                break;
+            case "timestamp":
                 return 'date';
                 break;
             default:

@@ -34,6 +34,7 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
         documentsGrid.on('selectType', this.getPropertiesByTypeIdAction, this);
         documentsGrid.on('addDocument', this.addDocumentAction, this);
         documentsGrid.on('updateDocument', this.updateDocumentAction, this);
+        documentsGrid.on('rowDblClick',this.bootstrap.layout.documentsGrid.rowDoubleClick, this);
 
         this.on('propertiesBeforeLoad', function() {
             var button = Ext.getCmp('document-add-button');

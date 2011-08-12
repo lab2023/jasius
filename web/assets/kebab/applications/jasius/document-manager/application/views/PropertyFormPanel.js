@@ -65,9 +65,16 @@ KebabOS.applications.documentManager.application.views.PropertyFormPanel = Ext.e
             Ext.apply(config, {value: property.defaultValue});
         }
 
+        console.log(property.dataType);
         switch (property.dataType) {
 
-            case "integer" || "decimal" || "float":
+            case "integer":
+                field = new Ext.form.NumberField(config);
+                break;
+            case "decimal":
+                field = new Ext.form.NumberField(config);
+                break;
+            case "float":
                 field = new Ext.form.NumberField(config);
                 break;
             case "boolean":
@@ -117,7 +124,6 @@ KebabOS.applications.documentManager.application.views.PropertyFormPanel = Ext.e
         if (parseInt(property.isUnique) == 1) {
             field.on('blur', this.onCheckIsUnique, this);
         }
-
         return field;
     },
 
