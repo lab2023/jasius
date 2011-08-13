@@ -34,17 +34,14 @@ class Model_Entity_Data extends Doctrine_Record
         $this->hasColumn('numberValue', 'decimal', 24, array(
              'type' => 'decimal',
              'scale' => 6,
-             'notnull' => true,
              'length' => '24',
              ));
         $this->hasColumn('textValue', 'string', 255, array(
              'type' => 'string',
-             'notnull' => true,
              'length' => '255',
              ));
         $this->hasColumn('timeValue', 'timestamp', null, array(
              'type' => 'timestamp',
-             'notnull' => true,
              ));
 
         $this->option('type', 'INNODB');
