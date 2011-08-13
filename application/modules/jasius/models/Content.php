@@ -43,6 +43,14 @@ class Jasius_Model_Content
 
         return is_object($content) ? $content : false;
     }
+    /**
+     * Delete by contentId
+     * 
+     * @static
+     * @throws Doctrine_Exception|Zend_Exception
+     * @param $contentId
+     * @return bool
+     */
     public static function del($contentId)
     {
         Doctrine_Manager::connection()->beginTransaction();
@@ -64,11 +72,13 @@ class Jasius_Model_Content
         return $retVal;
     }
 
-    public static function getAllContentByTypeId ($typeId)
+   
+    public static function getAllContentByTypeId($typeId, $dataIds)
     {
         $contentList = Doctrine_Core::getTable('Model_Entity_Content')
                         ->findBy('type_id', $typeId)
                         ->toArray();
+
         $propertyList = Jasius_Model_Property::getAllPropertyByTypeId($typeId)->execute();
 
         $retData = array();
@@ -82,7 +92,7 @@ class Jasius_Model_Content
                 $val[$property['title']] = $data[$j][Jasius_Model_Data::mapping($property['dataType'])];
                 $j++;
             }
-            $retData[$i]  =$val;
+            $retData[$i] = $val;
             $i++;
         }
         
