@@ -45,15 +45,8 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
         
         Ext.each(propertyData, function(property) {
             if(this.colModel.findColumnIndex(property.title) < 0) {
-                var field = {
-                    name : property.title,
-                    type : this.getDataType(property.dataType)
-                };
-                var column = {
-                    header : property.title,
-                    dataIndex : property.title,
-                    width :150
-                }
+                var field = this.getStoreField(property);
+                var column = this.getGridColumn(property);
                 this.addColumn(field, column);
             }
         }, this);
@@ -63,32 +56,72 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
         return true;
     },
 
-    getDataType : function(dataType) {
-        switch (dataType) {
-            case "decimal":
-                return 'double';
-                break;
-            case "float":
-                return 'double';
-                break;
-            case "integer" :
-                return 'integer'
-            case "boolean":
-                return 'boolean';
-                break;
+    getGridColumn : function(property) {
+        var column = {
+            header : property.title,
+            dataIndex : property.title,
+            width :150
+        };
+        switch (property.dataType) {
             case "date":
-                return 'date';
+                Ext.apply(column, {
+                    xtype : 'datecolumn',
+                    format :'d-m-Y'
+                });
                 break;
             case "time":
-                return 'date';
+                Ext.apply(column, {
+                    xtype : 'datecolumn',
+                    format :'H:i:s'
+                });
                 break;
-            case "timestamp":
-                return 'date';
+            case  "timestamp":
+                Ext.apply(column, {
+                    xtype : 'datecolumn',
+                    format :'d-m-Y H:i:s'
+                });
                 break;
             default:
-                return 'string';
                 break;
         }
+        return column;
+    },
+    getStoreField : function(property) {
+        var field = {
+            name : property.title
+        };
+        switch (property.dataType) {
+            case "decimal":
+                Ext.apply(field, {type : 'double'});
+                break;
+            case "float":
+                Ext.apply(field, {type : 'double'});
+                break;
+            case "integer" :
+                Ext.apply(field, {type : 'integer'});
+            case "boolean":
+                Ext.apply(field, {type : 'boolean'});
+                break;
+            case "date":
+                Ext.apply(field, {
+                    type : 'date'
+                });
+                break;
+            case "time":
+                Ext.apply(field, {
+                    type : 'date'
+                });
+                break;
+            case  "timestamp":
+                Ext.apply(field, {
+                    type : 'date'
+                });
+                break;
+            default:
+                Ext.apply(field, {type : 'string'});
+                break;
+        }
+        return field;
     },
 
     /**
