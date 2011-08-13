@@ -60,7 +60,7 @@ class Jasius_ContentController extends Kebab_Rest_Controller
             );
         }
 
-        if (array_key_exists('start', $param)) {
+        if (array_key_exists('start', $param) && array_key_exists('limit', $param)) {
             $options['pagination'] = array (
                 'start' => $param['start'],
                 'limit' => $param['limit']

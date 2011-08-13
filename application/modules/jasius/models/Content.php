@@ -82,10 +82,12 @@ class Jasius_Model_Content
                             ->where('content.type_id = ?', $typeId)
                             ->setHydrationMode(Doctrine::HYDRATE_ARRAY);
 
+        // Search Options
         if (isset($options['search'])) {
             $contentQuery->andWhereIn('data.id', $options['search']);
         }
 
+        // Order Options
         if (isset($options['order'])) {
             $dir  = $options['order']['dir'];
             $sort = $options['order']['sort'];
