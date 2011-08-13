@@ -42,7 +42,6 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
     },
     setColumnModel : function (propertyDt) {
         var propertyData = propertyDt.data;
-        
         Ext.each(propertyData, function(property) {
             if(this.colModel.findColumnIndex(property.title) < 0) {
                 var field = this.getStoreField(property);
@@ -59,8 +58,9 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
     getGridColumn : function(property) {
         var column = {
             header : property.title,
-            dataIndex : property.title,
-            width :150
+            dataIndex : property.name,
+            width :150,
+            sortable:true
         };
         switch (property.dataType) {
             case "date":
@@ -88,7 +88,7 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
     },
     getStoreField : function(property) {
         var field = {
-            name : property.title
+            name : property.name
         };
         switch (property.dataType) {
             case "decimal":
