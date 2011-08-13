@@ -47,12 +47,38 @@ class Jasius_ContentController extends Kebab_Rest_Controller
     {
         $param = $this->_helper->param();
         $response = $this->_helper->response();
-        $content    = Jasius_Model_Content::getAllContentByTypeId($param['typeId']);
+
+        $options = array();
+        if (array_key_exists('query', $param)) {
+            $options['search'] = $this->_helper->search('Model_Entity_Data');
+        }
+
+        if (array_key_exists('sort', $param)) {
+            $options['order'] = array (
+                'sort' => $param['sort'],
+                'dir'  => $param['dir']
+            );
+        }
+
+        if (array_key_exists('start', $param)) {
+            $options['pagination'] = array (
+                'start' => $param['start'],
+                'limit' => $param['limit']
+            );
+        }
+
+        if (array_key_exists('filter', $param)) {
+            $options['filter'] = $param['filter'];
+        }
+
+        $content = Jasius_Model_Content::getAllContentByTypeId($param['typeId'], $options);
+
         if (is_bool($content)) {
             $response->setSuccess(false);
         } else {
             $response->setSuccess(true)->addData($content);
         }
+
         $response->getResponse();
     }
     public function postAction()

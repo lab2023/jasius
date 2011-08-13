@@ -73,23 +73,46 @@ class Jasius_Model_Content
     }
 
    
-    public static function getAllContentByTypeId($typeId, $dataIds)
+    public static function getAllContentByTypeId($typeId, Array $options = array())
     {
-        $contentList = Doctrine_Core::getTable('Model_Entity_Content')
-                        ->findBy('type_id', $typeId)
-                        ->toArray();
+        $contentQuery = Doctrine_Query::create()
+                            ->select('content.id')
+                            ->from('Model_Entity_Content content')
+                            ->leftJoin('content.Data data ON data.content_id = content.id')
+                            ->where('content.type_id = ?', $typeId)
+                            ->setHydrationMode(Doctrine::HYDRATE_ARRAY);
+
+        if (isset($options['search'])) {
+            $contentQuery->andWhereIn('data.id', $options['search']);
+        }
+
+        if (isset($options['order'])) {
+            $dir  = $options['order']['dir'];
+            $sort = $options['order']['sort'];
+            $propertyArray = explode('_', $sort);
+            if($propertyArray[count($propertyArray) -1] == 'id') {
+                $sortKey = 'content.id';
+            } else {
+                $sortKey = 'data.'
+                           . Jasius_Model_Data::mapping(Doctrine_Core::getTable('Model_Entity_Property')->find($propertyArray[2])->dataType);
+            }
+
+            $contentQuery->orderBy("data.property_id ASC, $sortKey $dir");
+        }
+
+        $contentList = $contentQuery->execute();
 
         $propertyList = Jasius_Model_Property::getAllPropertyByTypeId($typeId)->execute();
 
         $retData = array();
         $i = 0;
-        foreach($contentList as $content){
+        foreach ($contentList as $content){
             $val = array();
             $val['id'] = $content['id'];
             $data = Jasius_Model_Data::getDataForLoadDocumentForm($content['id']);
             $j = 0;
             foreach ($propertyList as $property) {
-                $val[$property['title']] = $data[$j][Jasius_Model_Data::mapping($property['dataType'])];
+                $val[$property['name']] = $data[$j][Jasius_Model_Data::mapping($property['dataType'])];
                 $j++;
             }
             $retData[$i] = $val;
