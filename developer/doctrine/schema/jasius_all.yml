@@ -118,13 +118,10 @@ Data:
     numberValue:
       type: decimal(24)
       scale: 6
-      notnull: true
     textValue:
       type: string(255)
-      notnull: true
     timeValue:
       type: timestamp
-      notnull: true
 
   relations:
     Property:
