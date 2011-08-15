@@ -31,3 +31,7 @@ Model_Entity_Action:
   Jasius_Content_Delete:
     Controller: Jasius_Content
     name: delete
+
+  Jasius_Content_Put:
+    Controller: Jasius_Content
+    name: put

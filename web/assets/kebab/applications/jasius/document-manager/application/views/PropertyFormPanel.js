@@ -64,8 +64,6 @@ KebabOS.applications.documentManager.application.views.PropertyFormPanel = Ext.e
         if (property.defaultValue) {
             Ext.apply(config, {value: property.defaultValue});
         }
-
-        console.log(property.dataType);
         switch (property.dataType) {
 
             case "integer":
@@ -130,14 +128,22 @@ KebabOS.applications.documentManager.application.views.PropertyFormPanel = Ext.e
     onCheckIsUnique: function(field) {
 
         field.disable();
+
+        var params = {
+             name: field.getName(),
+             value: field.getValue()
+        }
+
+        if  (this.owner.contentId != null) {
+            Ext.apply(params, {
+                contentId :this.owner.contentId
+            })
+        }
         
         Ext.Ajax.request({
             url: Kebab.helper.url('jasius/is-unique'),
             method: 'GET',
-            params: {
-                name: field.getName(),
-                value: field.getValue()
-            },
+            params: params,
             success: function(res){
                 field.enable();
                 var response = Ext.util.JSON.decode(res.responseText);
@@ -153,8 +159,11 @@ KebabOS.applications.documentManager.application.views.PropertyFormPanel = Ext.e
         var form = this.getForm();
         if (form.isValid()) {
             form.submit({
-                method: 'POST',
+                method: this.owner.contentId != null ? 'PUT' :'POST',
                 url: Kebab.helper.url('jasius/content'),
+                params : {
+                    contentId : this.owner.contentId != null ? this.owner.contentId : 0
+                },
                 waitMsg: 'Saving...',
                 success: function(form, action) {
                     form.reset();

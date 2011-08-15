@@ -38,11 +38,15 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
 
         this.on('propertiesBeforeLoad', function() {
             var button = Ext.getCmp('document-add-button');
+            var buttonSearch = Ext.getCmp('document-search-button');
+            buttonSearch.disable();
             button.setIconClass('icon-loading');
             button.disable();
         });
         this.on('propertiesLoaded', function(typeId) {
             var button = Ext.getCmp('document-add-button');
+            var buttonSearch = Ext.getCmp('document-search-button');
+            buttonSearch.enable();
             var grid = this.bootstrap.layout.documentsGrid;
             button.setIconClass('icon-add');
             button.enable();
@@ -52,6 +56,8 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
         });
         this.on('propertiesLoadException', function() {
             var button = Ext.getCmp('document-add-button');
+            var buttonSearch = Ext.getCmp('document-search-button');
+            buttonSearch.enable();
             button.setIconClass('icon-add');
             button.enable();
         });

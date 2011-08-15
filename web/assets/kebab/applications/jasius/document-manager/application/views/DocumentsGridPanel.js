@@ -18,6 +18,7 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
 
         // json data store
         this.store = new KebabOS.applications.documentManager.application.models.DocumentsDataStore();
+
         var config = {
             columnLines:true,
             stripeRows:true,
@@ -25,7 +26,6 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
             viewConfig: {
                 forceFit: false
             }
-
         };
         
         Ext.apply(this, config);
@@ -43,7 +43,7 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
     setColumnModel : function (propertyDt) {
         var propertyData = propertyDt.data;
         Ext.each(propertyData, function(property) {
-            if(this.colModel.findColumnIndex(property.title) < 0) {
+            if(this.colModel.findColumnIndex(property.name) < 0) {
                 var field = this.getStoreField(property);
                 var column = this.getGridColumn(property);
                 this.addColumn(field, column);
@@ -55,12 +55,52 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
         return true;
     },
 
+    getGridFilter : function (property) {
+        var filter = {
+            dataIndex: property.name
+        };
+
+        switch (property.dataType) {
+            case "decimal":
+                Ext.apply(filter, {type : 'numeric'});
+                break;
+            case "float":
+                Ext.apply(filter, {type : 'numeric'});
+                break;
+            case "integer" :
+                Ext.apply(filter, {type : 'numeric'});
+            case "boolean":
+                Ext.apply(filter, {type : 'numeric'});
+                break;
+            case "date":
+                Ext.apply(filter, {
+                    type : 'date'
+                });
+                break;
+            case "time":
+                Ext.apply(filter, {
+                    type : 'date'
+                });
+                break;
+            case  "timestamp":
+                Ext.apply(filter, {
+                    type : 'date'
+                });
+                break;
+            default:
+                Ext.apply(filter, {type : 'string'});
+                break;
+        }
+
+        return filter;
+    },
     getGridColumn : function(property) {
         var column = {
             header : property.title,
             dataIndex : property.name,
             width :150,
-            sortable:true
+            sortable:true,
+            filterable: true
         };
         switch (property.dataType) {
             case "date":
@@ -154,7 +194,8 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
             header   : 'ID',
             dataIndex: 'id',
             width:30,
-            sortable:true
+            sortable:true,
+            filterable:true
         }];
     },
 
@@ -204,6 +245,14 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
             }
         });
 
+        var serachField = new Ext.ux.form.SearchField({
+            id: 'document-search-button',
+            store: this.getStore(),
+            emptyText: Kebab.helper.translate('Please type keyword here...'),
+            width:180,
+            disabled : true
+        });
+
         return  [
             typesCombo,
             '-', {
@@ -215,7 +264,9 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
                     this.fireEvent('addDocument');
                 },
                 scope: this
-            }
+            },
+            '->',
+            serachField
         ];
     },
 

@@ -41,7 +41,11 @@ class Jasius_IsUniqueController extends Kebab_Rest_Controller
         $expProperty = explode('_',$param['name']);
         $propertyId = $expProperty[count($expProperty)-1];
 
-        $retData = Jasius_Model_IsUnique::isUniqueProperty($propertyId, $param['value']);
+        $contentId = array_key_exists('contentId',$param) ?
+                     $param['contentId'] : 0;
+
+
+        $retData = Jasius_Model_IsUnique::isUniqueProperty($propertyId, $param['value'], $contentId);
 
         if (is_bool($retData) && $retData === true){
             $response->setSuccess(true);
