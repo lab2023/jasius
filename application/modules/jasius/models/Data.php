@@ -42,15 +42,86 @@ class Jasius_Model_Data
      * @param array $propertyFormData
      * @return array|bool
      */
-    public static function add($typeId, $contentId, array $propertyFormData)
+    public static $validate = false;
+    
+    public static function add($contentId, array $propertyFormData)
     {
-        // assertion count($propertyFormData) === count($propertyDataStructrue)
-        $propertyDataStructure = Jasius_Model_Property::getAllPropertyByTypeId($typeId)->execute();
+        // Sort $propertyFormData with $item_id
+        ksort($propertyFormData);
+        // Validation
+        $retData = self::validation($contentId, $propertyFormData);
 
+        if (!self::$validate) {
+            $retVal = $retData;
+        } else {
+            // Save collection
+            $dataCollection = new Doctrine_Collection('Model_Entity_Data');
+            $dataCollection->fromArray($retData);
+            $dataCollection->save();
+            unset($dataCollection);
+            
+            $retVal = true;
+        }
+
+        return $retVal;
+    }
+
+    public static function update($contentId, $propertyFormData)
+    {
         // Sort $propertyFormData with $item_id
         ksort($propertyFormData);
 
-        // Validation
+        $retData = self::validation($contentId, $propertyFormData);
+
+        if (!self::$validate)
+        {
+            $retVal = $retData;
+        } else {
+            Doctrine_Manager::connection()->beginTransaction();
+            try {
+                foreach ($retData as $data) {
+
+                    $col = self::getDataColumn($data);
+                    $query = Doctrine_Query::create()
+                        ->update('Model_Entity_Data data')
+                        ->set('data.'.$col, "$data[$col]")
+                        ->where('data.property_id = ?', $data['property_id'])
+                        ->andWhere('data.content_id = ?', $data['content_id']);
+                    die($query->getSqlQuery());
+
+                }
+                Doctrine_Manager::connection()->commit();
+                unset($retData);
+                $retVal = true;
+            } catch (Doctrine_Exception $e) {
+                Doctrine_Manager::connection()->rollback();
+                print_r($e);
+            } catch (Zend_Exception $e) {
+                Doctrine_Manager::connection()->rollback();
+                print_r($e);
+            }
+        }
+        return $retVal;
+    }
+
+    public static function getDataColumn($data) {
+        if (array_key_exists('timeValue', $data)) {
+            return 'timeValue';
+        }
+        if (array_key_exists('textValue', $data)) {
+            return 'textValue';
+        }
+        if (array_key_exists('numberValue', $data)) {
+            return 'numberValue';
+        }
+    }
+
+    public static function validation ($contentId, $propertyFormData)
+    {
+        self::$validate = false;
+        $content = Doctrine_Core::getTable('Model_Entity_Content')->find($contentId);
+        $propertyDataStructure = Jasius_Model_Property::getAllPropertyByTypeId($content->type_id)->execute();
+
         $i = 0;
         $errorMessage = array();
         $dataCollectionArray = array();
@@ -85,7 +156,9 @@ class Jasius_Model_Data
             // Check isUnique
             if ($propertyDataStructure[$i]['isUnique']) {
                 $field = self::mapping($propertyDataStructure[$i]['dataType']);
-                $isUniqueCheck = Doctrine_Query::create()->from('Model_Entity_Data data')->where($field . '= ?', $propertyValue)->count() > 0
+                $isUniqueCheck = Doctrine_Query::create()->from('Model_Entity_Data data')
+                                         ->where($field . '= ?', $propertyValue)
+                                         ->andWhere('data.content_id != ?', $contentId)->count() > 0
                                 ? true
                                 : false;
 
@@ -101,19 +174,13 @@ class Jasius_Model_Data
             $i++;
         } // eof foreach
 
-        if (count($errorMessage)) {
-            $retVal = $errorMessage;
+        if (count($errorMessage) > 0) {
+            self::$validate = false;
+            return $errorMessage;
         } else {
-            // Save collection
-            $dataCollection = new Doctrine_Collection('Model_Entity_Data');
-            $dataCollection->fromArray($dataCollectionArray);
-            $dataCollection->save();
-            unset($dataCollection);
-            
-            $retVal = true;
+            self::$validate = true;
+            return $dataCollectionArray;
         }
-
-        return $retVal;
     }
 
     public static function getDataForLoadDocumentForm($contentId)
@@ -137,6 +204,26 @@ class Jasius_Model_Data
         return $rawData;
     }
 
+    public static function del($contentId)
+    {
+        Doctrine_Manager::connection()->beginTransaction();
+        try {
+                Doctrine_Query::create()
+                    ->delete('Model_Entity_Data data')
+                    ->where('data.content_id = ?', $contentId)
+                    ->execute();
+            
+            $retVal = Doctrine_Manager::connection()->commit();
+        } catch (Doctrine_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            throw $e;
+        } catch (Zend_Exception $e) {
+            Doctrine_Manager::connection()->rollback();
+            throw $e;
+        }
+
+        return $retVal;
+    }
     public static function mapping($dataType)
     {
         switch ($dataType) {

@@ -35,7 +35,7 @@
  */
 class Jasius_Model_IsUnique
 {
-    public static function isUniqueProperty($propertyId, $value)
+    public static function isUniqueProperty($propertyId, $value, $contentId)
     {
         $retVal = true;
         
@@ -45,7 +45,9 @@ class Jasius_Model_IsUnique
         $field = Jasius_Model_Data::mapping($property['dataType']);
         $isUniqueCheck = Doctrine_Query::create()
                                  ->from('Model_Entity_Data data')
-                                 ->where($field . '= ?', $value)->count() > 0
+                                 ->where($field . '= ?', $value)
+                                 ->andWhere('content_id != ?', $contentId)
+                                 ->count() > 0
                         ? true
                         : false;
 
