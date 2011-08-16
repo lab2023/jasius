@@ -81,28 +81,27 @@ class Jasius_Model_Data
             try {
                 foreach ($retData as $data) {
                     $col = self::getDataColumn($data);
-                    $query = Doctrine_Query::create()
+                    Doctrine_Query::create()
                         ->update('Model_Entity_Data')
-                        ->set($col, $data[$col])
+                        ->set("$col", '?', $data[$col])
                         ->where('property_id = ?', $data['property_id'])
                         ->andWhere('content_id = ?', $data['content_id'])
                         ->execute();
                 }
-                Doctrine_Manager::connection()->commit();
-                unset($retData);
-                $retVal = true;
+                $retVal = Doctrine_Manager::connection()->commit();
             } catch (Doctrine_Exception $e) {
                 Doctrine_Manager::connection()->rollback();
-                print_r($e);
+                throw $e;
             } catch (Zend_Exception $e) {
                 Doctrine_Manager::connection()->rollback();
-                print_r($e);
+                throw $e;
             }
         }
         return $retVal;
     }
 
-    public static function getDataColumn($data) {
+    public static function getDataColumn($data)
+    {
         if (array_key_exists('timeValue', $data)) {
             return 'timeValue';
         }
