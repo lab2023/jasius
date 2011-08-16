@@ -169,45 +169,34 @@ class Jasius_ContentController extends Kebab_Rest_Controller
 
         $response = $this->_helper->response();
 
-        Doctrine_Manager::connection()->beginTransaction();
-        try {
-           // Check type_id is in $propertyFormData
-           if (array_key_exists('controller', $param)) {
-               unset($param['controller']);
-           }
-
-           if (array_key_exists('action', $param)) {
-               unset($param['action']);
-           }
-
-           if (array_key_exists('module', $param)) {
-               unset($param['module']);
-           }
-
-           if (array_key_exists('contentId', $param)) {
-              $contentId = $param['contentId'];
-              unset($param['contentId']);
-           }
-           $retData = Jasius_Model_Data::update($contentId, $param);
-
-           $success = is_bool($retData) && $retData === true
-                     ? true
-                     : false;
-
-           if ($success) {
-               $response->setSuccess($success)->add('contentId',$contentId)->addNotification('INFO', 'Document is saved');
-           } else {
-               $response->setErrors($retData);
-           }
-
-        } catch (Zend_Exception $e) {
-           Doctrine_Manager::connection()->rollback();
-           throw $e;
-        } catch (Doctrine_Exception $e) {
-           Doctrine_Manager::connection()->rollback();
-           throw $e;
+        // Check type_id is in $propertyFormData
+        if (array_key_exists('controller', $param)) {
+           unset($param['controller']);
         }
 
+        if (array_key_exists('action', $param)) {
+           unset($param['action']);
+        }
+
+        if (array_key_exists('module', $param)) {
+           unset($param['module']);
+        }
+
+        if (array_key_exists('contentId', $param)) {
+          $contentId = $param['contentId'];
+          unset($param['contentId']);
+        }
+        $retData = Jasius_Model_Data::update($contentId, $param);
+
+        $success = is_bool($retData) && $retData === true
+                 ? true
+                 : false;
+
+        if ($success) {
+           $response->setSuccess($success)->add('contentId',$contentId)->addNotification('INFO', 'Document is saved');
+        } else {
+           $response->setErrors($retData);
+        }
         $response->getResponse();
     }
 }

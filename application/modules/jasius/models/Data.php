@@ -73,22 +73,21 @@ class Jasius_Model_Data
 
         $retData = self::validation($contentId, $propertyFormData);
 
-        if (!self::$validate)
-        {
+        if (!self::$validate) {
             $retVal = $retData;
         } else {
             Doctrine_Manager::connection()->beginTransaction();
             try {
                 foreach ($retData as $data) {
                     $col = self::getDataColumn($data);
-                    Doctrine_Query::create()
+                    $query = Doctrine_Query::create()
                         ->update('Model_Entity_Data')
                         ->set("$col", '?', $data[$col])
-                        ->where('property_id = ?', $data['property_id'])
-                        ->andWhere('content_id = ?', $data['content_id'])
-                        ->execute();
+                        ->where('property_id = ?', (int) $data['property_id'])
+                        ->andWhere('content_id = ?', (int) $data['content_id']);
+                    $query->execute();
                 }
-                $retVal = Doctrine_Manager::connection()->commit();
+                return Doctrine_Manager::connection()->commit();
             } catch (Doctrine_Exception $e) {
                 Doctrine_Manager::connection()->rollback();
                 throw $e;
@@ -97,7 +96,6 @@ class Jasius_Model_Data
                 throw $e;
             }
         }
-        return $retVal;
     }
 
     public static function getDataColumn($data)
@@ -105,9 +103,11 @@ class Jasius_Model_Data
         if (array_key_exists('timeValue', $data)) {
             return 'timeValue';
         }
+
         if (array_key_exists('textValue', $data)) {
             return 'textValue';
         }
+
         if (array_key_exists('numberValue', $data)) {
             return 'numberValue';
         }
