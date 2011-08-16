@@ -72,15 +72,33 @@ class Jasius_Model_Content
         return $retVal;
     }
 
-   
+
+    /**
+     * @static
+     * @param $typeId
+     * @param array $options
+     * @return array
+     */
     public static function getAllContentByTypeId($typeId, Array $options = array())
     {
+        $userSessionId = Zend_Auth::getInstance()->getIdentity()->id;
         $contentQuery = Doctrine_Query::create()
                             ->select('content.id')
                             ->from('Model_Entity_Content content')
                             ->leftJoin('content.Data data ON data.content_id = content.id')
+                            ->leftJoin('content.Access jaccess ON content.id = jaccess.content_id')
                             ->where('content.type_id = ?', $typeId)
+                            ->andWhere('jaccess.access = ?', 'all')
+                            ->orWhere('content.created_by = ?', $userSessionId)
                             ->setHydrationMode(Doctrine::HYDRATE_ARRAY);
+
+        // Get userId if has identity
+        if (Zend_Auth::getInstance()->hasIdentity()) {
+            $userSessionRoles = Zend_Auth::getInstance()->getIdentity()->roles;
+            $contentQuery->orWhere('jaccess.access = ?', 'user');
+            $contentQuery->orWhere('jaccess.allowUser = ?', $userSessionId);
+            $contentQuery->orWhereIn('jaccess.allowRole', $userSessionRoles);
+        };
 
         // Search Options
         if (isset($options['search'])) {
