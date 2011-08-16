@@ -81,6 +81,7 @@ class Jasius_ContentController extends Kebab_Rest_Controller
 
         $response->getResponse();
     }
+
     public function postAction()
     {
         $param = $this->_helper->param();
@@ -93,12 +94,15 @@ class Jasius_ContentController extends Kebab_Rest_Controller
             if (array_key_exists('controller', $param)) {
                 unset($param['controller']);
             }
+
             if (array_key_exists('action', $param)) {
                 unset($param['action']);
             }
+
             if (array_key_exists('module', $param)) {
                 unset($param['module']);
             }
+
             if (array_key_exists('contentId', $param)) {
                unset($param['contentId']);
             }
@@ -171,12 +175,15 @@ class Jasius_ContentController extends Kebab_Rest_Controller
            if (array_key_exists('controller', $param)) {
                unset($param['controller']);
            }
+
            if (array_key_exists('action', $param)) {
                unset($param['action']);
            }
+
            if (array_key_exists('module', $param)) {
                unset($param['module']);
            }
+
            if (array_key_exists('contentId', $param)) {
               $contentId = $param['contentId'];
               unset($param['contentId']);
@@ -202,8 +209,5 @@ class Jasius_ContentController extends Kebab_Rest_Controller
         }
 
         $response->getResponse();
-
-
     }
-
 }
