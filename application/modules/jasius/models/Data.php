@@ -80,15 +80,13 @@ class Jasius_Model_Data
             Doctrine_Manager::connection()->beginTransaction();
             try {
                 foreach ($retData as $data) {
-
                     $col = self::getDataColumn($data);
                     $query = Doctrine_Query::create()
-                        ->update('Model_Entity_Data data')
-                        ->set('data.'.$col, "$data[$col]")
-                        ->where('data.property_id = ?', $data['property_id'])
-                        ->andWhere('data.content_id = ?', $data['content_id']);
-                    die($query->getSqlQuery());
-
+                        ->update('Model_Entity_Data')
+                        ->set($col, $data[$col])
+                        ->where('property_id = ?', $data['property_id'])
+                        ->andWhere('content_id = ?', $data['content_id'])
+                        ->execute();
                 }
                 Doctrine_Manager::connection()->commit();
                 unset($retData);
