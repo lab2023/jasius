@@ -124,7 +124,7 @@ class Jasius_Model_Content
 
         $propertyList = Jasius_Model_Property::getAllPropertyByTypeId($typeId)->execute();
 
-        $retData = array();
+        $contentData = array();
         $i = 0;
         foreach ($contentList as $content){
             $val = array();
@@ -135,10 +135,23 @@ class Jasius_Model_Content
                 $val[$property['name']] = $data[$j][Jasius_Model_Data::mapping($property['dataType'])];
                 $j++;
             }
-            $retData[$i] = $val;
+            $contentData[$i] = $val;
             $i++;
         }
-        
+
+        // Pagination Option
+        // KBBTODO this area is hardcode pls send me limit and start value everytime!
+        $start = 0;
+        $limit = 25;
+        if (isset($options['pagination'])) {
+            $start = $options['pagination']['start'];
+            $limit = $options['pagination']['limit'];
+        }
+
+        $retData = array();
+        $retData['total'] = count($contentData);
+        $retData['data'] = array_values(array_slice($contentData, $start, $limit));
+
         return $retData;
     }
 }

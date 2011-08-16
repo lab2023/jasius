@@ -76,7 +76,7 @@ class Jasius_ContentController extends Kebab_Rest_Controller
         if (is_bool($content)) {
             $response->setSuccess(false);
         } else {
-            $response->setSuccess(true)->addData($content);
+            $response->setSuccess(true)->addData($content['data'])->addTotal($content['total']);
         }
 
         $response->getResponse();
