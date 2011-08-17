@@ -50,8 +50,9 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
             var grid = this.bootstrap.layout.documentsGrid;
             button.setIconClass('icon-add');
             button.enable();
+
             if (grid.setColumnModel(this.getPropertyData())) {
-                grid.getStore().load();
+                grid.getStore().load({params: {start:0, limit:25}});
             }
         });
         this.on('propertiesLoadException', function() {
