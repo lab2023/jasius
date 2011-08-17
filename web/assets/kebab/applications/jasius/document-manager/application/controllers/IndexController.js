@@ -48,11 +48,12 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
             var buttonSearch = Ext.getCmp('document-search-button');
             buttonSearch.enable();
             var grid = this.bootstrap.layout.documentsGrid;
+            grid.getBottomToolbar().refresh.show();
             button.setIconClass('icon-add');
             button.enable();
 
             if (grid.setColumnModel(this.getPropertyData())) {
-                grid.getStore().load({params: {start:0, limit:this.bootstrap.app.getSettings.project.pageSizeDefault}});
+                grid.getStore().load({params: {start:0, limit:this.bootstrap.app.getSettings().project.pageSizeDefault}});
             }
         });
         this.on('propertiesLoadException', function() {

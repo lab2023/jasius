@@ -271,8 +271,11 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
     },
 
     buildBbar: function() {
-        return new Kebab.library.ext.ExtendedPagingToolbar({
+        var paging = new Kebab.library.ext.ExtendedPagingToolbar({
             store: this.getStore()
+
         });
+        paging.refresh.hide();
+        return paging;
     }
 });
