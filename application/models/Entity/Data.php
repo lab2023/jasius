@@ -7,9 +7,20 @@
  * 
  * @property integer $property_id
  * @property integer $content_id
- * @property decimal $numberValue
- * @property string $textValue
- * @property timestamp $timeValue
+ * @property decimal $decimalValue
+ * @property int $integerValue
+ * @property decimal $floatValue
+ * @property date $dateValue
+ * @property string $stringValue
+ * @property time $timeValue
+ * @property timestamp $timestampValue
+ * @property char $booleanValue
+ * @property string $enumValue
+ * @property string $arrayValue
+ * @property string $objectValue
+ * @property string $blobValue
+ * @property string $clobValue
+ * @property string $gzipValue
  * @property Model_Entity_Property $Property
  * @property Model_Entity_Content $Content
  * 
@@ -31,17 +42,59 @@ class Model_Entity_Data extends Doctrine_Record
              'type' => 'integer',
              'notnull' => true,
              ));
-        $this->hasColumn('numberValue', 'decimal', 24, array(
+        $this->hasColumn('decimalValue', 'decimal', 24, array(
              'type' => 'decimal',
              'scale' => 6,
              'length' => '24',
              ));
-        $this->hasColumn('textValue', 'string', 255, array(
+        $this->hasColumn('integerValue', 'int', null, array(
+             'type' => 'int',
+             ));
+        $this->hasColumn('floatValue', 'decimal', 24, array(
+             'type' => 'decimal',
+             'scale' => 6,
+             'length' => '24',
+             ));
+        $this->hasColumn('dateValue', 'date', null, array(
+             'type' => 'date',
+             ));
+        $this->hasColumn('stringValue', 'string', 255, array(
              'type' => 'string',
              'length' => '255',
              ));
-        $this->hasColumn('timeValue', 'timestamp', null, array(
+        $this->hasColumn('timeValue', 'time', null, array(
+             'type' => 'time',
+             ));
+        $this->hasColumn('timestampValue', 'timestamp', null, array(
              'type' => 'timestamp',
+             ));
+        $this->hasColumn('booleanValue', 'char', 1, array(
+             'type' => 'char',
+             'length' => '1',
+             ));
+        $this->hasColumn('enumValue', 'string', 255, array(
+             'type' => 'string',
+             'length' => '255',
+             ));
+        $this->hasColumn('arrayValue', 'string', 750, array(
+             'type' => 'string',
+             'length' => '750',
+             ));
+        $this->hasColumn('objectValue', 'string', 750, array(
+             'type' => 'string',
+             'length' => '750',
+             ));
+        $this->hasColumn('blobValue', 'string', 1200, array(
+             'type' => 'string',
+             'length' => '1200',
+             ));
+        $this->hasColumn('clobValue', 'string', 1200, array(
+             'type' => 'string',
+             'length' => '1200',
+             ));
+        $this->hasColumn('gzipValue', 'string', 1200, array(
+             'type' => 'string',
+             'length' => '1200',
              ));
 
         $this->option('type', 'INNODB');
@@ -66,9 +119,20 @@ class Model_Entity_Data extends Doctrine_Record
         $searchable0 = new Doctrine_Template_Searchable(array(
              'fields' => 
              array(
-              0 => 'numberValue',
-              1 => 'textValue',
-              2 => 'timeValue',
+              0 => 'decimalValue',
+              1 => 'integerValue',
+              2 => 'floatValue',
+              3 => 'dateValue',
+              4 => 'timeValue',
+              5 => 'timestampValue',
+              6 => 'booleanValue',
+              7 => 'enumValue',
+              8 => 'blobValue',
+              9 => 'stringValue',
+              10 => 'clobValue',
+              11 => 'arrayValue',
+              12 => 'objectValue',
+              13 => 'gzipValue',
              ),
              'className' => 'JasiusDataSearch',
              ));

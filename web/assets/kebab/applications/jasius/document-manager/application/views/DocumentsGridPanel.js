@@ -13,6 +13,10 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
     
     // Application bootstrap
     bootstrap: null,
+    columnFilter : new Ext.ux.grid.GridFilters({
+            encode: true,
+            filters: [{dataIndex:'id', type :'numeric'}]
+    }),
 
     initComponent: function() {
 
@@ -29,7 +33,7 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
         };
         
         Ext.apply(this, config);
-
+        this.plugins = [this.columnFilter];
         this.columns = this.buildColumns();
         this.tbar = this.buildTbar();
         this.bbar = this.buildBbar();
@@ -42,14 +46,21 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
     },
     setColumnModel : function (propertyDt) {
         var propertyData = propertyDt.data;
+        var filter =[];
+        filter[0] = {dataIndex:'id', type:'numeric'};
+        i = 1;
         Ext.each(propertyData, function(property) {
             if(this.colModel.findColumnIndex(property.name) < 0) {
                 var field = this.getStoreField(property);
+                filter[i++] = this.getGridFilter(property);
                 var column = this.getGridColumn(property);
                 this.addColumn(field, column);
             }
         }, this);
-        
+        this.columnFilter = new Ext.ux.grid.GridFilters({
+            encode: true,
+            filters: filter
+        });
         delete this.store.reader.ef;
         this.store.reader.buildExtractors();
         return true;
@@ -59,7 +70,6 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
         var filter = {
             dataIndex: property.name
         };
-
         switch (property.dataType) {
             case "decimal":
                 Ext.apply(filter, {type : 'numeric'});
@@ -121,6 +131,21 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
                     format :'d-m-Y H:i:s'
                 });
                 break;
+            case  "decimal":
+                Ext.apply(column, {
+                    type : 'float'
+                });
+                break;
+            case  "float":
+                Ext.apply(column, {
+                    type : 'float'
+                });
+                break;
+            case  "integer":
+                Ext.apply(column, {
+                    type : 'integer'
+                });
+                break;
             default:
                 break;
         }
@@ -132,10 +157,10 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
         };
         switch (property.dataType) {
             case "decimal":
-                Ext.apply(field, {type : 'double'});
+                Ext.apply(field, {type : 'float'});
                 break;
             case "float":
-                Ext.apply(field, {type : 'double'});
+                Ext.apply(field, {type : 'float'});
                 break;
             case "integer" :
                 Ext.apply(field, {type : 'integer'});
@@ -273,7 +298,6 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
     buildBbar: function() {
         var paging = new Kebab.library.ext.ExtendedPagingToolbar({
             store: this.getStore()
-
         });
         paging.refresh.hide();
         return paging;

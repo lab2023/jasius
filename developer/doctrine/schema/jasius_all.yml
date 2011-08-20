@@ -115,13 +115,36 @@ Data:
     content_id:
       type: integer
       notnull: true
-    numberValue:
+    decimalValue:
       type: decimal(24)
       scale: 6
-    textValue:
+    integerValue:
+      type: int
+    floatValue:
+      type: decimal(24)
+      scale: 6
+    dateValue:
+      type: date
+    stringValue:
       type: string(255)
     timeValue:
+      type: time
+    timestampValue:
       type: timestamp
+    booleanValue:
+      type: char(1)
+    enumValue:
+      type: string(255)
+    arrayValue:
+      type: string(750)
+    objectValue:
+      type: string(750)
+    blobValue:
+      type: string(1200)
+    clobValue:
+      type: string(1200)
+    gzipValue:
+      type: string(1200)
 
   relations:
     Property:
@@ -134,7 +157,7 @@ Data:
     Timestampable:
     Blameable:
     Searchable:
-      fields: [numberValue, textValue, timeValue]
+      fields: [decimalValue, integerValue, floatValue, dateValue, timeValue, timestampValue, booleanValue, enumValue, blobValue, stringValue, clobValue, arrayValue, objectValue, gzipValue]
       className: JasiusDataSearch
 
   options:

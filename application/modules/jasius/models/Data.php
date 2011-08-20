@@ -100,16 +100,60 @@ class Jasius_Model_Data
 
     public static function getDataColumn($data)
     {
+        if (array_key_exists('integerValue', $data)) {
+            return 'integerValue';
+        }
+
+        if (array_key_exists('stringValue', $data)) {
+            return 'stringValue';
+        }
+
+        if (array_key_exists('decimalValue', $data)) {
+            return 'decimalValue';
+        }
+
+        if (array_key_exists('floatValue', $data)) {
+            return 'floatValue';
+        }
+
+        if (array_key_exists('dateValue', $data)) {
+            return 'dateValue';
+        }
+
         if (array_key_exists('timeValue', $data)) {
             return 'timeValue';
         }
 
-        if (array_key_exists('textValue', $data)) {
-            return 'textValue';
+        if (array_key_exists('timestampValue', $data)) {
+            return 'timestampValue';
         }
 
-        if (array_key_exists('numberValue', $data)) {
-            return 'numberValue';
+        if (array_key_exists('booleanValue', $data)) {
+            return 'booleanValue';
+        }
+
+        if (array_key_exists('enumValue', $data)) {
+            return 'enumValue';
+        }
+
+        if (array_key_exists('arrayValue', $data)) {
+            return 'arrayValue';
+        }
+
+        if (array_key_exists('objectValue', $data)) {
+            return 'objectValue';
+        }
+
+        if (array_key_exists('gzipValue', $data)) {
+            return 'gzipValue';
+        }
+
+        if (array_key_exists('clobValue', $data)) {
+            return 'clobValue';
+        }
+
+        if (array_key_exists('blobValue', $data)) {
+            return 'blobValue';
         }
     }
 
@@ -118,7 +162,6 @@ class Jasius_Model_Data
         self::$validate = false;
         $content = Doctrine_Core::getTable('Model_Entity_Content')->find($contentId);
         $propertyDataStructure = Jasius_Model_Property::getAllPropertyByTypeId($content->type_id)->execute();
-
         $i = 0;
         $errorMessage = array();
         $dataCollectionArray = array();
@@ -185,9 +228,20 @@ class Jasius_Model_Data
         $query = Doctrine_Query::create()
                     ->select('
                         data.property_id,
-                        data.numberValue,
-                        data.textValue,
+                        data.integerValue,
+                        data.decimalValue,
+                        data.floatValue,
                         data.timeValue,
+                        data.timestampValue,
+                        data.dateValue,
+                        data.booleanValue,
+                        data.stringValue,
+                        data.blobValue,
+                        data.clobValue,
+                        data.enumValue,
+                        data.arrayValue,
+                        data.objectValue,
+                        data.gzipValue,
                         property.dataType as dataType
                     ')
                     ->from('Model_Entity_Data data')
@@ -225,46 +279,46 @@ class Jasius_Model_Data
     {
         switch ($dataType) {
             case 'integer':
-                $retDataType = 'numberValue';
+                $retDataType = 'integerValue';
                 break;
             case 'string':
-                $retDataType = 'textValue';
+                $retDataType = 'stringValue';
                 break;
             case 'boolean':
-                $retDataType = 'numberValue';
+                $retDataType = 'booleanValue';
                 break;
             case 'enum':
-                $retDataType = 'textValue';
+                $retDataType = 'enumValue';
                 break;
             case 'float':
-                $retDataType = 'numberValue';
+                $retDataType = 'floatValue';
                 break;
             case 'decimal':
-                $retDataType = 'numberValue';
+                $retDataType = 'decimalValue';
                 break;
             case 'array':
-                $retDataType = 'textValue';
+                $retDataType = 'arrayValue';
                 break;
             case 'object':
-                $retDataType = 'textValue';
+                $retDataType = 'objectValue';
                 break;
             case 'blob':
-                $retDataType = 'textValue';
+                $retDataType = 'blobValue';
                 break;
             case 'clob':
-                $retDataType = 'textValue';
+                $retDataType = 'clobValue';
                 break;
             case 'timestamp':
-                $retDataType = 'timeValue';
+                $retDataType = 'timestampValue';
                 break;
             case 'time':
                 $retDataType = 'timeValue';
                 break;
             case 'date':
-                $retDataType = 'timeValue';
+                $retDataType = 'dateValue';
                 break;
             case 'gzip':
-                $retDataType = 'textValue';
+                $retDataType = 'gzipValue';
                 break;
             default:
                 throw new Kebab_Exception('Unvalid data type');
