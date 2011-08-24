@@ -201,7 +201,7 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
                     tooltip: Kebab.helper.translate('Update Content'),
                     handler: function(grid, rowIndex) {
                         var rec = grid.getStore().getAt(rowIndex);
-                        this.fireEvent('updateDocument',rec.data.id);
+                        this.fireEvent('updateDocument',rec.data.content_id);
                     },
                     scope : this
                 },{
@@ -230,7 +230,7 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
                 url: Kebab.helper.url('jasius/content'),
                 method: 'DELETE',
                 params: {
-                    contentId: rec.data.id
+                    contentId: rec.data.content_id
                 },
                 success: function(){
                     this.getStore().remove(this.getStore().getAt(rowIndex));
