@@ -15,7 +15,7 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
     bootstrap: null,
     columnFilter : new Ext.ux.grid.GridFilters({
             encode: true,
-            filters: [{dataIndex:'id', type :'numeric'}]
+            filters: [{dataIndex:'content_id', type :'numeric'}]
     }),
 
     initComponent: function() {
@@ -47,7 +47,7 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
     setColumnModel : function (propertyDt) {
         var propertyData = propertyDt.data;
         var filter =[];
-        filter[0] = {dataIndex:'id', type:'numeric'};
+        filter[0] = {dataIndex:'content_id', type:'numeric'};
         i = 1;
         Ext.each(propertyData, function(property) {
             if(this.colModel.findColumnIndex(property.name) < 0) {
@@ -217,7 +217,7 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
                 }]
         },{
             header   : 'ID',
-            dataIndex: 'id',
+            dataIndex: 'content_id',
             width:30,
             sortable:true,
             filterable:true

@@ -83,14 +83,14 @@ class Jasius_Model_Content
     {
         $userSessionId = Zend_Auth::getInstance()->getIdentity()->id;
         $contentQuery = Doctrine_Query::create()
-                            ->select('content.id')
+                            ->select('DISTINCT content.id')
                             ->from('Model_Entity_Content content')
                             ->leftJoin('content.Data data ON data.content_id = content.id')
                             ->leftJoin('content.Access jaccess ON content.id = jaccess.content_id')
                             ->where('content.type_id = ?', $typeId)
                             ->andWhere('jaccess.access = ?', 'all')
                             ->orWhere('content.created_by = ?', $userSessionId)
-                            ->setHydrationMode(Doctrine::HYDRATE_ARRAY);
+                            ->setHydrationMode(Doctrine::HYDRATE_SINGLE_SCALAR);
 
         // Get userId if has identity
         if (Zend_Auth::getInstance()->hasIdentity()) {
@@ -106,7 +106,7 @@ class Jasius_Model_Content
         }
 
         // Order Options
-        if (isset($options['order'])) {
+        /*if (isset($options['order'])) {
             $dir  = $options['order']['dir'];
             $sort = $options['order']['sort'];
             $propertyArray = explode('_', $sort);
@@ -118,11 +118,27 @@ class Jasius_Model_Content
             }
 
             $contentQuery->orderBy("data.property_id ASC, $sortKey $dir");
-        }
+        }*/
 
         $contentList = $contentQuery->execute();
-
         $propertyList = Jasius_Model_Property::getAllPropertyByTypeId($typeId)->execute();
+        $sql = '';
+
+        foreach ($propertyList as $property) {
+            $propertyArray = explode('_', $property['name']);
+            $sql = $sql.'group_concat(if(property_id = '.$propertyArray[2].','.$property['dataType'].'Value, NULL)) as '.$property['name'].', ';
+        }
+
+        $sql = substr($sql, 0, strlen($sql) - 2);
+        $contentData = Doctrine_Query::create()
+                        ->select('content_id,'.$sql)
+                        ->from('Model_Entity_Data data')
+                        ->whereIn('content_id', $contentList)
+                        ->groupBy('data.content_id')
+                        ->setHydrationMode(Doctrine::HYDRATE_ARRAY)
+                        ->execute();
+
+        /*
 
         $contentData = array();
         $i = 0;
@@ -137,7 +153,7 @@ class Jasius_Model_Content
             }
             $contentData[$i] = $val;
             $i++;
-        }
+        }*/
 
         // Pagination Option
         // KBBTODO this area is hardcode pls send me limit and start value everytime!

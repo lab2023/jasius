@@ -15,6 +15,6 @@ KebabOS.applications.documentManager.application.models.DocumentsDataStore = Ext
     restAPI: 'jasius/content',
 
     readerFields:[
-        {name: 'id', type:'integer'}
+        {name: 'content_id', type:'integer'}
     ]
 });
