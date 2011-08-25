@@ -88,25 +88,22 @@ class Jasius_Model_Content
                             ->leftJoin('content.Data data ON data.content_id = content.id')
                             ->leftJoin('content.Access jaccess ON content.id = jaccess.content_id')
                             ->where('content.type_id = ?', $typeId)
-                            ->andWhere('jaccess.access = ?', 'all')
-                            ->orWhere('content.created_by = ?', $userSessionId)
                             ->setHydrationMode(Doctrine::HYDRATE_SINGLE_SCALAR);
+        $accessStr = "jaccess.access = 'all' OR content.created_by = $userSessionId";
 
         // Get userId if has identity
         if (Zend_Auth::getInstance()->hasIdentity()) {
             $userSessionRoles = Zend_Auth::getInstance()->getIdentity()->roles;
-            $contentQuery->orWhere('jaccess.access = ?', 'user');
-            $contentQuery->orWhere('jaccess.allowUser = ?', $userSessionId);
-            $contentQuery->orWhereIn('jaccess.allowRole', $userSessionRoles);
+            $accessStr = $accessStr." OR jaccess.access = 'user' OR jaccess.allowUser = $userSessionId OR jaccess.allowRole  IN (".implode(',',$userSessionRoles).")";
         };
-
+        $contentQuery->andWhere($accessStr);
         // Search Options
         if (isset($options['search'])) {
             $contentQuery->andWhereIn('data.id', $options['search']);
         }
 
         // Order Options
-        /*if (isset($options['order'])) {
+        if (isset($options['order'])) {
             $dir  = $options['order']['dir'];
             $sort = $options['order']['sort'];
             $propertyArray = explode('_', $sort);
@@ -115,14 +112,14 @@ class Jasius_Model_Content
             } else {
                 $sortKey = 'data.'
                            . Jasius_Model_Data::mapping(Doctrine_Core::getTable('Model_Entity_Property')->find($propertyArray[2])->dataType);
+                $contentQuery->andWhere('data.property_id = ?', $propertyArray[count($propertyArray) -1]);
             }
 
-            $contentQuery->orderBy("data.property_id ASC, $sortKey $dir");
-        }*/
-
+            $contentQuery->orderBy("data.property_id $dir, $sortKey $dir");
+        }
         $contentList = $contentQuery->execute();
         $propertyList = Jasius_Model_Property::getAllPropertyByTypeId($typeId)->execute();
-        $sql = '';
+        /*$sql = '';
 
         foreach ($propertyList as $property) {
             $propertyArray = explode('_', $property['name']);
@@ -138,13 +135,13 @@ class Jasius_Model_Content
                         ->setHydrationMode(Doctrine::HYDRATE_ARRAY)
                         ->execute();
 
-        /*
+        */
 
         $contentData = array();
         $i = 0;
         foreach ($contentList as $content){
             $val = array();
-            $val['id'] = $content['id'];
+            $val['content_id'] = $content['id'];
             $data = Jasius_Model_Data::getDataForLoadDocumentForm($content['id']);
             $j = 0;
             foreach ($propertyList as $property) {
@@ -153,7 +150,7 @@ class Jasius_Model_Content
             }
             $contentData[$i] = $val;
             $i++;
-        }*/
+        }
 
         // Pagination Option
         // KBBTODO this area is hardcode pls send me limit and start value everytime!
