@@ -119,24 +119,8 @@ class Jasius_Model_Content
         }
         $contentList = $contentQuery->execute();
         $propertyList = Jasius_Model_Property::getAllPropertyByTypeId($typeId)->execute();
-        /*$sql = '';
 
-        foreach ($propertyList as $property) {
-            $propertyArray = explode('_', $property['name']);
-            $sql = $sql.'group_concat(if(property_id = '.$propertyArray[2].','.$property['dataType'].'Value, NULL)) as '.$property['name'].', ';
-        }
-
-        $sql = substr($sql, 0, strlen($sql) - 2);
-        $contentData = Doctrine_Query::create()
-                        ->select('content_id,'.$sql)
-                        ->from('Model_Entity_Data data')
-                        ->whereIn('content_id', $contentList)
-                        ->groupBy('data.content_id')
-                        ->setHydrationMode(Doctrine::HYDRATE_ARRAY)
-                        ->execute();
-
-        */
-
+        //select content property values
         $contentData = array();
         $i = 0;
         foreach ($contentList as $content){
@@ -151,7 +135,6 @@ class Jasius_Model_Content
             $contentData[$i] = $val;
             $i++;
         }
-
         // Pagination Option
         // KBBTODO this area is hardcode pls send me limit and start value everytime!
         $start = 0;
