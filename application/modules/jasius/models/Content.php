@@ -120,19 +120,59 @@ class Jasius_Model_Content
         $contentList = $contentQuery->execute();
         $propertyList = Jasius_Model_Property::getAllPropertyByTypeId($typeId)->execute();
 
+        // Filter Options
+        if (isset($options['filter'])) {
+            $filter = array();
+            foreach ($options['filter'] as $item) {
+                $filter[$item['field']] = $item;
+            }
+        }
+
         //select content property values
         $contentData = array();
         $i = 0;
-        foreach ($contentList as $content){
+        foreach ($contentList as $content) {
+            $addContentToContentData = true;
             $val = array();
             $val['content_id'] = $content['id'];
             $data = Jasius_Model_Data::getDataForLoadDocumentForm($content['id']);
             $j = 0;
             foreach ($propertyList as $property) {
-                $val[$property['name']] = $data[$j][Jasius_Model_Data::mapping($property['dataType'])];
+
+                $dataValue = $data[$j][Jasius_Model_Data::mapping($property['dataType'])];
+                
+                if (isset($filter) && array_key_exists($property['name'], $filter)) {
+                    
+                    $filterValue = $filter[$property['name']]['value'];
+                    $filterType = $filter[$property['name']]['type'];
+                    switch ($filterType) {
+                        case 'numeric' :
+                            switch ($filter[$property['name']]['comparison']) {
+                                case 'eq' :
+                                    $addContentToContentData = $filterValue == $dataValue ? true : false;
+                                    break;
+                                case 'lt' :
+                                    $addContentToContentData = $filterValue < $dataValue ? true : false;
+                                    break;
+                                case 'gt' :
+                                    $addContentToContentData = $filterValue > $dataValue ? true : false;
+                                    break;
+                            }
+                            break;
+                        case 'string' :
+                            $addContentToContentData = is_integer(strpos($dataValue, $filterValue)) ? true : false;
+                            $dataValue = str_replace($filterValue, "<b>$filterValue</b>", $dataValue);
+                            break;
+                    }
+                }
+
+                $val[$property['name']] = $dataValue;
                 $j++;
             }
-            $contentData[$i] = $val;
+
+            if ($addContentToContentData) {
+                $contentData[$i] = $val;
+            }
             $i++;
         }
         
