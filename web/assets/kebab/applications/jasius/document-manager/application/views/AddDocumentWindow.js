@@ -61,17 +61,22 @@ KebabOS.applications.documentManager.application.views.DocumentAddWindow = Ext.e
             }
         });
 
-        return [
-            this.formPanel,
-            this.accessPanel, {
-                title: 'panel 3',
-                owner: this,
-                listeners:{
-                    activate: function(){
-                        this.owner.buttonControl();
-                    }
+        this.filePanel = new KebabOS.applications.documentManager.application.views.FilePanel({
+            title: Kebab.helper.translate('Document Files'),
+            itemNumber: 1,
+            frame: true,
+            owner: this,
+            listeners:{
+                activate: function(){
+                    this.owner.buttonControl();
                 }
             }
+        });
+
+        return [
+            this.formPanel,
+            this.accessPanel,
+            this.filePanel
         ];
     },
     buttonControl: function () {

@@ -171,12 +171,15 @@ File:
     content_id:
       type: integer
       notnull: true
+    name:
+      type: string(80)
+      notnull: true
     size:
       type: integer
       notnull: true
     mime:
-      type: string(20)
-      
+      type: string(50)
+
 
   relations:
     Content:
