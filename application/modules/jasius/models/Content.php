@@ -1,7 +1,6 @@
 <?php
- 
 /**
- * Kebab Framework
+ * Kebab Project
  *
  * LICENSE
  *
@@ -13,9 +12,9 @@
  * obtain it through the world-wide-web, please send an email
  * to info@lab2023.com so we can send you a copy immediately.
  *
- * @category   Kebab (kebab-reloaded)
- * @package    Kebab
- * @subpackage Library
+ * @category   Kebab
+ * @package    Module
+ * @subpackage Model
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
@@ -25,9 +24,9 @@
 /**
  * 
  *
- * @category   Kebab (kebab-reloaded)
- * @package    
- * @subpackage 
+ * @category   Kebab
+ * @package    Module
+ * @subpackage Model
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
@@ -112,6 +111,7 @@ class Jasius_Model_Content
             } else {
                 $sortKey = 'data.'
                            . Jasius_Model_Data::mapping(Doctrine_Core::getTable('Model_Entity_Property')->find($propertyArray[2])->dataType);
+                //KBBTODO fixe the code like end($propertyArray)
                 $contentQuery->andWhere('data.property_id = ?', $propertyArray[count($propertyArray) -1]);
             }
 
@@ -135,6 +135,7 @@ class Jasius_Model_Content
             $contentData[$i] = $val;
             $i++;
         }
+        
         // Pagination Option
         // KBBTODO this area is hardcode pls send me limit and start value everytime!
         $start = 0;
