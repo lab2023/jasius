@@ -1,0 +1,15 @@
+Model_Entity_Type:
+  Identity:
+    Translation:
+      en:
+        title: Identity Cart
+      tr:
+        title: Nufüs Cüzdanı
+    active: true
+  Invoice:
+    Translation:
+      en:
+        title: Invoice
+      tr:
+        title: Fatura
+    active: true

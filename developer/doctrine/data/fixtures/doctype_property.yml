@@ -1,14 +1,46 @@
-# Invoice
-Model_Entity_Type:
-  Invoice:
+Model_Entity_Property:
+  Identity_Id:
+    Type: Identity
     Translation:
       en:
-        title: Invoice
+        title: Identity Number
       tr:
-        title: Fatura
-    active: true
+        title: Kimlik No
+    dataType: integer
+    isUnique: true
+    isRequire: true
+    #defaultValue:
+    #enum:
+    weight: 1
 
-Model_Entity_Property:
+  Identity_Surname:
+    Type: Identity
+    Translation:
+      en:
+        title: Surname
+      tr:
+        title: Soyisim
+    dataType: string
+    isUnique: false
+    isRequire: true
+    #defaultValue:
+    #enum:
+    weight: 2
+
+  Identity_Name:
+    Type: Identity
+    Translation:
+      en:
+        title: Name
+      tr:
+        title: Name
+    dataType: integer
+    isUnique: false
+    isRequire: false
+    #defaultValue:
+    #enum:
+    weight: 3
+    
   Invoice_Title:
     Type: Invoice
     Translation:
@@ -92,4 +124,5 @@ Model_Entity_Property:
     #defaultValue:
     #enum:
     weight: 6
+
 
