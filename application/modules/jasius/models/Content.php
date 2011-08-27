@@ -146,6 +146,25 @@ class Jasius_Model_Content
                     $filterValue = $filter[$property['name']]['value'];
                     $filterType = $filter[$property['name']]['type'];
                     switch ($filterType) {
+                        case 'string' :
+                            $addContentToContentData = is_integer(strpos($dataValue, $filterValue)) ? true : false;
+                            $dataValue = str_replace($filterValue, "<b>$filterValue</b>", $dataValue);
+                            break;
+                        case 'list' :
+                            if (strstr($filterValue, ',')) {
+                                $fi = explode(',', $filterValue);
+                                for ($q = 0; $q < count($fi); $q++) {
+                                    $fi[$q] = "'" . $fi[$q] . "'";
+                                }
+
+                                $addContentToContentData = in_array($dataValue, $fi);
+                            } else {
+                                 $addContentToContentData = ($dataValue == $filterValue);
+                            }
+                            break;
+                        case 'boolean' :
+                            $addContentToContentData = ($dataValue == $filterValue);
+                            break;
                         case 'numeric' :
                             switch ($filter[$property['name']]['comparison']) {
                                 case 'eq' :
@@ -159,9 +178,19 @@ class Jasius_Model_Content
                                     break;
                             }
                             break;
-                        case 'string' :
-                            $addContentToContentData = is_integer(strpos($dataValue, $filterValue)) ? true : false;
-                            $dataValue = str_replace($filterValue, "<b>$filterValue</b>", $dataValue);
+                        case 'date' :
+                            $filterValue = date('Y-m-d', strtotime($filterValue));
+                            switch ($filter[$property['name']]['comparison']) {
+                                case 'eq' :
+                                    $addContentToContentData = $filterValue == $dataValue ? true : false;
+                                    break;
+                                case 'lt' :
+                                    $addContentToContentData = $filterValue < $dataValue ? true : false;
+                                    break;
+                                case 'gt' :
+                                    $addContentToContentData = $filterValue > $dataValue ? true : false;
+                                    break;
+                            }
                             break;
                     }
                 }
