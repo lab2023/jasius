@@ -62,7 +62,7 @@ KebabOS.applications.documentManager.application.views.FileGrid = Ext.extend(Ext
                 text: Kebab.helper.translate('Upload'),
                 iconCls: 'icon-add',
                 scope: this
-            },
+            }
         ];
     }
 });

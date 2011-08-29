@@ -44,6 +44,16 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
         var rec = grid.getStore().getAt(rowIndex);
         grid.fireEvent('updateDocument',rec.data.id);
     },
+    initializeColumnModel : function () {
+        for(var i = this.colModel.getColumnCount(); i > 2 ; i--) {
+            var colName = this.colModel.getColumnHeader(i - 1);console.log(colName);
+            this.removeColumn(colName, i - 1);
+        }
+
+        delete this.store.reader.ef;
+        this.store.reader.buildExtractors();
+        return true;
+    },
     setColumnModel : function (propertyDt) {
         var propertyData = propertyDt.data;
         var filter =[];
