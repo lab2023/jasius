@@ -183,7 +183,7 @@ class Jasius_Model_Data
 
             // Check enum
             if ($propertyDataStructure[$i]['dataType'] === 'enum') {
-                $enum = unserialize($propertyDataStructure[$i]['enum']);
+                $enum = $propertyDataStructure[$i]['enum'];
                 if (!in_array($propertyValue, $enum)) {
                     $errorMessage[$propertyKey] = 'Please select from the list';
                 }
