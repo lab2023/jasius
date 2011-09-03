@@ -127,18 +127,16 @@ class Jasius_Model_Content
                 $filter[$item['field']] = $item;
             }
         }
-
         //select content property values
         $contentData = array();
         $i = 0;
         foreach ($contentList as $content) {
             $addContentToContentData = true;
             $val = array();
-            $val['content_id'] = $content['id'];
-            $data = Jasius_Model_Data::getDataForLoadDocumentForm($content['id']);
+            $val['content_id'] = $content;
+            $data = Jasius_Model_Data::getDataForLoadDocumentForm($content);
             $j = 0;
             foreach ($propertyList as $property) {
-
                 $dataValue = $data[$j][Jasius_Model_Data::mapping($property['dataType'])];
                 
                 if (isset($filter) && array_key_exists($property['name'], $filter)) {

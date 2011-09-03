@@ -71,8 +71,6 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
             encode: true,
             filters: filter
         });
-
-        console.log(this.columnFilter);
         delete this.store.reader.ef;
         this.store.reader.buildExtractors();
         return true;

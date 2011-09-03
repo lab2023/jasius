@@ -103,10 +103,7 @@ KebabOS.applications.documentManager.application.views.PropertyFormPanel = Ext.e
                     triggerAction: 'all',
                     lazyRender:true,
                     mode: 'local',
-                    store: new Ext.data.ArrayStore({
-                        fields: ['value'],
-                        data: [property.enum]
-                    }),
+                    store: Ext.util.JSON.decode(Ext.util.JSON.encode(property.enum)),
                     valueField: 'value',
                     displayField: 'value',
                     hiddenName: property.name
