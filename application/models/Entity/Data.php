@@ -8,7 +8,7 @@
  * @property integer $property_id
  * @property integer $content_id
  * @property decimal $decimalValue
- * @property int $integerValue
+ * @property integer $integerValue
  * @property decimal $floatValue
  * @property date $dateValue
  * @property string $stringValue
@@ -47,8 +47,9 @@ class Model_Entity_Data extends Doctrine_Record
              'scale' => 6,
              'length' => '24',
              ));
-        $this->hasColumn('integerValue', 'int', null, array(
-             'type' => 'int',
+        $this->hasColumn('integerValue', 'integer', 10, array(
+             'type' => 'integer',
+             'length' => '10',
              ));
         $this->hasColumn('floatValue', 'decimal', 24, array(
              'type' => 'decimal',

@@ -1,5 +1,5 @@
 Model_Entity_Property:
-  Identity_Id:
+  Identity_No:
     Type: Identity
     Translation:
       en:
@@ -34,12 +34,26 @@ Model_Entity_Property:
         title: Name
       tr:
         title: Name
-    dataType: integer
+    dataType: string
     isUnique: false
     isRequire: false
     #defaultValue:
     #enum:
     weight: 3
+
+  Identity_Type:
+    Type: Identity
+    Translation:
+      en:
+        title: Type
+      tr:
+        title: Type
+    dataType: enum
+    isUnique: false
+    isRequire: false
+    #defaultValue:
+    #enum: '[php, java, python]'
+    weight: 4
     
   Invoice_Title:
     Type: Invoice
@@ -53,7 +67,7 @@ Model_Entity_Property:
     isRequire: true
     #defaultValue:
     #enum:
-    weight: 1
+    weight: 6
 
   Invoice_No:
     Type: Invoice
@@ -67,7 +81,7 @@ Model_Entity_Property:
     isRequire: true
     #defaultValue:
     #enum:
-    weight: 2
+    weight: 5
 
   Invoice_Date:
     Type: Invoice
@@ -81,7 +95,7 @@ Model_Entity_Property:
     isRequire: true
     #defaultValue:
     #enum:
-    weight: 3
+    weight: 4
 
   Invoice_Customer:
     Type: Invoice
@@ -95,7 +109,7 @@ Model_Entity_Property:
     isRequire: true
     #defaultValue:
     #enum:
-    weight: 4
+    weight: 3
 
   Invoice_Amount:
     Type: Invoice
@@ -109,7 +123,7 @@ Model_Entity_Property:
     isRequire: true
     #defaultValue:
     #enum:
-    weight: 5
+    weight: 2
 
   Invoice_Description:
     Type: Invoice
@@ -123,6 +137,6 @@ Model_Entity_Property:
     isRequire: false
     #defaultValue:
     #enum:
-    weight: 6
+    weight: 1
 
 

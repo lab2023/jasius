@@ -151,16 +151,7 @@ class Jasius_Model_Content
                             $dataValue = str_replace($filterValue, "<b>$filterValue</b>", $dataValue);
                             break;
                         case 'list' :
-                            if (strstr($filterValue, ',')) {
-                                $fi = explode(',', $filterValue);
-                                for ($q = 0; $q < count($fi); $q++) {
-                                    $fi[$q] = "'" . $fi[$q] . "'";
-                                }
-
-                                $addContentToContentData = in_array($dataValue, $fi);
-                            } else {
-                                 $addContentToContentData = ($dataValue == $filterValue);
-                            }
+                            $addContentToContentData = in_array($dataValue, $filterValue);
                             break;
                         case 'boolean' :
                             $addContentToContentData = ($dataValue == $filterValue);

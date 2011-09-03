@@ -47,7 +47,7 @@ class Jasius_Model_Data
     public static function add($contentId, array $propertyFormData)
     {
         // Sort $propertyFormData with $item_id
-        ksort($propertyFormData);
+        //ksort($propertyFormData);
         // Validation
         $retData = self::validation($contentId, $propertyFormData);
 
@@ -171,6 +171,7 @@ class Jasius_Model_Data
 
             // Check dataType
             $dataTypeCheck = Doctrine_Validator::isValidType($propertyValue, $propertyDataStructure[$i]['dataType']);
+           
             if (!$dataTypeCheck) {
                 $errorMessage[$propertyKey] = 'Data type is not appropriate in this area';
             }

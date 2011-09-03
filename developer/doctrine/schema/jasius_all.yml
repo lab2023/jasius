@@ -119,7 +119,7 @@ Data:
       type: decimal(24)
       scale: 6
     integerValue:
-      type: int
+      type: integer(10)
     floatValue:
       type: decimal(24)
       scale: 6

@@ -46,7 +46,7 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
     },
     initializeColumnModel : function () {
         for(var i = this.colModel.getColumnCount(); i > 2 ; i--) {
-            var colName = this.colModel.getColumnHeader(i - 1);console.log(colName);
+            var colName = this.colModel.getColumnHeader(i - 1);
             this.removeColumn(colName, i - 1);
         }
 
@@ -71,6 +71,8 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
             encode: true,
             filters: filter
         });
+
+        console.log(this.columnFilter);
         delete this.store.reader.ef;
         this.store.reader.buildExtractors();
         return true;
@@ -80,6 +82,7 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
         var filter = {
             dataIndex: property.name
         };
+        
         switch (property.dataType) {
             case "decimal":
                 Ext.apply(filter, {type : 'numeric'});
@@ -90,7 +93,14 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
             case "integer" :
                 Ext.apply(filter, {type : 'numeric'});
             case "boolean":
-                Ext.apply(filter, {type : 'numeric'});
+                Ext.apply(filter, {type : 'boolean'});
+                break;
+            case "enum":
+                Ext.apply(filter, {
+                    type : 'list',
+                    options: Ext.util.JSON.decode(Ext.util.JSON.encode(property.enum)),
+                    phpMode:true
+                });
                 break;
             case "date":
                 Ext.apply(filter, {
@@ -153,7 +163,15 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
                 break;
             case  "integer":
                 Ext.apply(column, {
-                    type : 'integer'
+                    type : 'long'
+                });
+                break;
+            case  "enum":
+                Ext.apply(column, {
+                    filter : {
+                        type: 'list',
+                        options: Ext.util.JSON.decode(Ext.util.JSON.encode(property.enum))
+                    }
                 });
                 break;
             default:
@@ -173,7 +191,7 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
                 Ext.apply(field, {type : 'float'});
                 break;
             case "integer" :
-                Ext.apply(field, {type : 'integer'});
+                Ext.apply(field, {type : 'long'});
             case "boolean":
                 Ext.apply(field, {type : 'boolean'});
                 break;

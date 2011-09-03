@@ -1,8 +1,8 @@
 Model_Entity_Data:
   Data_Identity_1_1:
-    Property: Identity_Id
+    Property: Identity_No
     Content: Identity_1
-    integerValue: 30097594052
+    integerValue: 30097594051
   Data_Identity_1_2:
     Property: Identity_Surname
     Content: Identity_1
@@ -11,8 +11,12 @@ Model_Entity_Data:
     Property: Identity_Name
     Content: Identity_1
     stringValue: 'Onur Özgür'
+  Data_Identity_1_4:
+    Property: Identity_Type
+    Content: Identity_1
+    enumValue: 'php'
   Data_Identity_2_1:
-    Property: Identity_Id
+    Property: Identity_No
     Content: Identity_2
     integerValue: 30097594053
   Data_Identity_2_2:
@@ -23,8 +27,12 @@ Model_Entity_Data:
     Property: Identity_Name
     Content: Identity_2
     stringValue: 'İbrahim'
+  Data_Identity_2_4:
+    Property: Identity_Type
+    Content: Identity_2
+    enumValue: 'java'
   Data_Identity_3_1:
-    Property: Identity_Id
+    Property: Identity_No
     Content: Identity_3
     integerValue: 30097594051
   Data_Identity_3_2:
@@ -35,6 +43,10 @@ Model_Entity_Data:
     Property: Identity_Name
     Content: Identity_3
     stringValue: 'Sefer'
+  Data_Identity_3_4:
+    Property: Identity_Type
+    Content: Identity_3
+    enumValue: 'java'
 
   Data_Invoice_1_1:
     Property: Invoice_No
