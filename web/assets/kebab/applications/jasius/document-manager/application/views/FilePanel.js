@@ -22,14 +22,13 @@ KebabOS.applications.documentManager.application.views.FilePanel = Ext.extend(Ex
     border: false,
 
     initComponent: function() {
-        this.fileGrid = new KebabOS.applications.documentManager.application.views.FileGrid({
-            owner: this,
-            flex:2,
-            frame:true,
-            border:true
-        })
 
-        this.items = [this.fileGrid,
+        this.uploadPanel = new KebabOS.applications.documentManager.application.views.FileFormPanel({
+            owner: this,
+            flex:1
+        });
+        
+        this.items = [this.uploadPanel,
             {width:5, border:false},
             {xtype:'panel', title:'viewer', flex:2,border:true}]
 

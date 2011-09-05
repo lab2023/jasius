@@ -52,7 +52,7 @@ Model_Entity_Property:
     isUnique: false
     isRequire: false
     #defaultValue:
-    #enum: '[php, java, python]'
+    enum: 'a:3:{i:0;s:3:"php";i:1;s:4:"java";i:2;s:4:"ruby";}'
     weight: 4
     
   Invoice_Title:

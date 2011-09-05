@@ -38,8 +38,8 @@ KebabOS.applications.documentManager.application.views.FileGrid = Ext.extend(Ext
                     {header: Kebab.helper.translate('Size'),  dataIndex: 'size'}
                 ]
             }),
-            columnLines: true,
-            tbar : this.buildTbar()
+            columnLines: true
+
         };
 
         Ext.apply(this, config);
