@@ -130,6 +130,15 @@ class Jasius_Model_Content
         //select content property values
         $contentData = array();
         $i = 0;
+
+        //When one content record, give warning invalid argument foreach
+        if (!is_array($contentList)) {
+            $contentLst = array();
+            $contentLst[0] = $contentList;
+
+            $contentList = $contentLst;
+        }
+
         foreach ($contentList as $content) {
             $addContentToContentData = true;
             $val = array();

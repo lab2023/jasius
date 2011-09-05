@@ -251,7 +251,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                                   'user-activation',
                                   'user-invitation',
                                   'application'),
-                 'jasius' => array('type', 'property', 'content', 'access', 'is-unique', 'data')
+                 'jasius' => array('type', 'property', 'content', 'access', 'is-unique', 'data','file')
             )
         );
         $front->getRouter()->addRoute('rest', $restRoute);

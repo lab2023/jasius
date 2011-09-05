@@ -27,10 +27,16 @@ KebabOS.applications.documentManager.application.views.FilePanel = Ext.extend(Ex
             owner: this,
             flex:1
         });
+
+        this.gridPanel = new KebabOS.applications.documentManager.application.views.FileGrid({
+            owner: this,
+            frame:true,
+            border:true,
+            title:'File Table'
+        });
         
         this.items = [this.uploadPanel,
-            {width:5, border:false},
-            {xtype:'panel', title:'viewer', flex:2,border:true}]
+            {width:5, border:false},this.gridPanel];
 
         KebabOS.applications.documentManager.application.views.FilePanel.superclass.initComponent.call(this);
     },

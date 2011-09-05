@@ -79,6 +79,9 @@ Model_Entity_Controller:
   Jasius_Access:
     Module: Jasius
     name: access
+  Jasius_File:
+    Module: Jasius
+    name: file
   Jasius_IsUnique:
     Module: Jasius
     name: is-unique

@@ -96,6 +96,10 @@ Model_Entity_Service:
     Story: Jasius_Add_Document
     Resource: Jasius_Access
 
+  Jasius_Add_Document_File:
+    Story: Jasius_Add_Document
+    Resource: Jasius_File
+
   Jasius_IsUnique:
     Story: Jasius_Add_Document
     Resource: Jasius_IsUnique
