@@ -69,7 +69,7 @@ class Jasius_Model_Data
     public static function update($contentId, $propertyFormData)
     {
         // Sort $propertyFormData with $item_id
-        ksort($propertyFormData);
+        //ksort($propertyFormData);
 
         $retData = self::validation($contentId, $propertyFormData);
 

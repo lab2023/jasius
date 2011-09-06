@@ -186,25 +186,31 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
             case "decimal":
                 Ext.apply(field, {type : 'float'});
                 break;
+
             case "float":
                 Ext.apply(field, {type : 'float'});
                 break;
+
             case "integer" :
                 Ext.apply(field, {type : 'integer'});
                 break;
+
             case "boolean":
                 Ext.apply(field, {type : 'boolean'});
                 break;
+
             case "date":
                 Ext.apply(field, {
                     type : 'date'
                 });
                 break;
+
             case "time":
                 Ext.apply(field, {
                     type : 'date'
                 });
                 break;
+            
             case  "timestamp":
                 Ext.apply(field, {
                     type : 'date'
