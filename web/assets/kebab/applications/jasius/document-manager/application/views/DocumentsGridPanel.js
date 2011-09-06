@@ -90,6 +90,7 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
                 break;
             case "integer" :
                 Ext.apply(filter, {type : 'numeric'});
+                break;
             case "boolean":
                 Ext.apply(filter, {type : 'boolean'});
                 break;
@@ -161,7 +162,7 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
                 break;
             case  "integer":
                 Ext.apply(column, {
-                    type : 'long'
+                    type : 'integer'
                 });
                 break;
             case  "enum":
@@ -189,7 +190,8 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
                 Ext.apply(field, {type : 'float'});
                 break;
             case "integer" :
-                Ext.apply(field, {type : 'long'});
+                Ext.apply(field, {type : 'integer'});
+                break;
             case "boolean":
                 Ext.apply(field, {type : 'boolean'});
                 break;
