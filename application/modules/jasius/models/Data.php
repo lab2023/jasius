@@ -87,7 +87,7 @@ class Jasius_Model_Data
                         ->andWhere('content_id = ?', (int) $data['content_id']);
                     $query->execute();
                 }
-                return Doctrine_Manager::connection()->commit();
+                $retVal = Doctrine_Manager::connection()->commit();
             } catch (Doctrine_Exception $e) {
                 Doctrine_Manager::connection()->rollback();
                 throw $e;
@@ -96,6 +96,8 @@ class Jasius_Model_Data
                 throw $e;
             }
         }
+
+        return $retVal;
     }
 
     public static function getDataColumn($data)
