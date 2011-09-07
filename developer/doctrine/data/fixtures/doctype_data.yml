@@ -59,7 +59,7 @@ Model_Entity_Data:
     Content: Invoice_1
     #numberValue:
     #textValue:
-    timestampValue: '2011-08-11'
+    dateValue: '2011-08-11'
   Data_Invoice_1_3:
     Property: Invoice_Customer
     Content: Invoice_1
@@ -95,7 +95,7 @@ Model_Entity_Data:
     Content: Invoice_2
     #numberValue:
     #textValue:
-    timestampValue: '2011-08-11'
+    dateValue: '2011-08-11'
   Data_Invoice_2_3:
     Property: Invoice_Customer
     Content: Invoice_2
@@ -131,7 +131,7 @@ Model_Entity_Data:
     Content: Invoice_3
     #numberValue:
     #textValue:
-    timestampValue: '2011-08-11'
+    dateValue: '2011-08-11'
   Data_Invoice_3_3:
     Property: Invoice_Customer
     Content: Invoice_3

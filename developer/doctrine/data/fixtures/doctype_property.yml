@@ -90,7 +90,7 @@ Model_Entity_Property:
         title: Date
       tr:
         title: Tarihi
-    dataType: timestamp
+    dataType: date
     isUnique: false
     isRequire: true
     #defaultValue:
