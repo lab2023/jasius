@@ -74,7 +74,7 @@ Ext.ux.AwesomeUploader = Ext.extend(Ext.Container, {
 			,flashSwfUploadFileTypes:'*.*'
 			,flashSwfUploadFileTypesDescription:this.i18n[this.locale].browseWindowFileDescription
 			,flashUploadUrl:this.awesomeUploaderRoot+'upload.php'
-			,xhrUploadUrl:this.awesomeUploaderRoot+'xhrupload.php'
+			,xhrUploadUrl:Kebab.helper.url('jasius/file')
 			,xhrFileNameHeader:'X-File-Name'
 			,xhrExtraPostDataPrefix:'extraPostData_'
 			,xhrFilePostName:'Filedata'

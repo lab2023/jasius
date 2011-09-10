@@ -34,5 +34,14 @@
  */
 class Jasius_Model_File
 {
+    public static function getList($contentId)
+    {
+        $query =  Doctrine_Query::create()
+                    ->select('file.name, file.size, "Uploaded" as status, 100 as progress')
+                    ->from('Model_Entity_File file')
+                    ->where('file.content_id = ?', $contentId)
+                    ->setHydrationMode(Doctrine::HYDRATE_ARRAY);
+        return $query->execute();
+    }
     
 }

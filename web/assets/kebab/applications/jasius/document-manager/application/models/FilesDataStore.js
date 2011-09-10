@@ -9,15 +9,17 @@
  * @license     http://www.kebab-project.com/licensing
  */
 KebabOS.applications.documentManager.application.models.FilesDataStore = Ext.extend(Kebab.library.ext.RESTfulBasicDataStore, {
-    
+
 
     bootstrap: null,
 
     restAPI: 'jasius/file',
 
     readerFields:[
-        {name: 'name', type:'string'},
-        {name: 'mimeType', type:'string'},
-        {name: 'size', type:'numeric'}
+        {name: 'id'},
+        {name: 'name'},
+        {name: 'size'},
+        {name: 'status'},
+        {name: 'progress'}
     ]
 });

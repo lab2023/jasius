@@ -13,13 +13,43 @@ KebabOS.applications.documentManager.application.views.FileGrid = Ext.extend(Ext
 
     // Application bootstrap
     owner: null,
+    uploader : null,
 
     initComponent: function() {
 
-        // json data store
-        var store = new KebabOS.applications.documentManager.application.models.FilesDataStore();
+        var statusIconRenderer = function(value){
+            switch(value){
+                default:
+                    return value;
+                case 'Pending':
+                    return '<div class="iconStatus icon-clock" id="pending">';
+                case 'Sending':
+                    return '<div class="iconStatus icon-loading" id="sending">';
+                case 'Error':
+                    return '<div class="iconStatus icon-error" id="error">';
+                case 'Cancelled':
+                case 'Aborted':
+                    return '<div class="iconStatus icon-cancel" id="abort"';
+                case 'Uploaded':
+                    return '<div class="iconStatus icon-accept" id="uploaded">';
+            }
+        };
 
+        var progressBarColumnRenderer = function(value, meta, record, rowIndex, colIndex, store){
+            meta.css += ' x-grid3-td-progress-cell';
+            return new Ext.XTemplate(
+                '<div class="ux-progress-cell-inner ux-progress-cell-inner-center ux-progress-cell-foreground">',
+                    '<div>{value} %</div>',
+                '</div>',
+                '<div class="ux-progress-cell-inner ux-progress-cell-inner-center ux-progress-cell-background" style="left:{value}%">',
+                    '<div style="left:-{value}%">{value} %</div>',
+                '</div>'
+            ).apply({
+                value: value
+            });
+        };
         var config = {
+            enableHdMenu:false,
             stripeRows: true,
             trackMouseOver:true,
             clicksToEdit: true,
@@ -27,19 +57,23 @@ KebabOS.applications.documentManager.application.views.FileGrid = Ext.extend(Ext
                 emptyText: Kebab.helper.translate('Record not found...'),
                 forceFit: true
             },
-            store: store,
+            store: new Ext.data.JsonStore({
+                fields: ['id','name','size','status','progress'],
+                idProperty: 'id'
+            }),
             cm: new Ext.grid.ColumnModel({
                 defaults: {
                     sortable: true
                 },
                 columns: [
-                    {header: Kebab.helper.translate('Name'), width:100, dataIndex: 'name'},
-                    {header: Kebab.helper.translate('Mime'),  dataIndex: 'mime'},
-                    {header: Kebab.helper.translate('Size'),  dataIndex: 'size'}
+                    {header:'File Name',dataIndex:'name', width:150},
+                    {header:'Size',dataIndex:'size', width:60, renderer:Ext.util.Format.fileSize},
+                    {header:'Status',dataIndex:'status', width:30, renderer:statusIconRenderer},
+                    {header:'Progress',dataIndex:'progress', renderer:progressBarColumnRenderer}
                 ]
             }),
-            columnLines: true
-
+            columnLines: true,
+            tbar: this.buildTbar()
         };
 
         Ext.apply(this, config);
@@ -47,22 +81,54 @@ KebabOS.applications.documentManager.application.views.FileGrid = Ext.extend(Ext
         KebabOS.applications.documentManager.application.views.FileGrid.superclass.initComponent.apply(this, arguments);
     },
 
-    buildTbar: function() {
+    buildTbar: function() {;
         return  [{
-                xtype: 'fileuploadfield',
-                emptyText: 'Dosya seçiniz...',
-                fieldLabel: 'File',
-                name: 'ufile',
-                id: 'form-file-1',
-                button_text:'Gözat',
-                button_disabled:false,
-                buttonAlign:'right'
-            },'->',{
-                id: 'file-upload-button',
-                text: Kebab.helper.translate('Upload'),
-                iconCls: 'icon-add',
-                scope: this
+            text:'Start Upload',
+            iconCls:'icon-accept',
+            scope:this,
+            handler:function() {
+                this.uploader.startUpload();
             }
-        ];
+        },{
+            text:'Abort',
+            iconCls:'icon-cancel',
+            scope:this,
+            handler:function() {
+                var selModel = this.getSelectionModel();
+                if (!selModel.hasSelection()) {
+                    Ext.Msg.alert('', 'Please select an upload to cancel');
+                    return true;
+                }
+                var rec = selModel.getSelected();
+                this.uploader.abortUpload(rec.data.id);
+            }
+        },{
+            text:'Abort All',
+            iconCls:'icon-cancel',
+            scope:this,
+            handler:function() {
+                this.uploader.abortAllUploads();
+            }
+        },{
+            text:'Remove',
+            iconCls:'icon-delete',
+            scope:this,
+            handler:function() {
+                var selModel = this.getSelectionModel();
+                if (!selModel.hasSelection()) {
+                    Ext.Msg.alert('', 'Please select an upload to cancel');
+                    return true;
+                }
+                var rec = selModel.getSelected();
+                this.uploader.removeUpload(rec.data.id);
+            }
+        },{
+            text:'Remove All',
+            iconCls:'icon-delete',
+            scope: this,
+            handler:function() {
+                this.uploader.removeAllUploads();
+            }
+        }];
     }
 });
