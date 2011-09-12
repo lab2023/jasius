@@ -33,7 +33,7 @@ KebabOS.applications.documentManager.application.views.FilePanel = Ext.extend(Ex
             flex:1,
             uploader: this.fileUploader
         });
-        
+
         this.fileUploader.fileGrid = this.fileGrid;
         
         this.items = [this.fileUploader, this.fileGrid];
@@ -59,6 +59,11 @@ KebabOS.applications.documentManager.application.views.FilePanel = Ext.extend(Ex
                 success: function(res){
                     var response = Ext.util.JSON.decode(res.responseText);
                     this.fileGrid.getStore().loadData(response.data);
+                    var store = this.fileGrid.getStore();
+                    if (store.data.length > 0) {
+                        var rec = store.getAt(store.data.length - 1);
+                        this.fileUploader.fileId = rec.data.id;
+                    }
                 },
                 scope:this
             });

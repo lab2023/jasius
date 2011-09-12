@@ -50,6 +50,7 @@ class Jasius_FileController extends Kebab_Rest_Controller
 
     public function postAction()
     {
+        $response = $this->_helper->response();
         $relativePath = WEB_PATH.DIRECTORY_SEPARATOR.'uploads'.DIRECTORY_SEPARATOR;
         //die($relativePath);
 
@@ -71,16 +72,16 @@ class Jasius_FileController extends Kebab_Rest_Controller
 
         //Header 'X-File-Name' has the dashes converted to underscores by PHP:
         if(!isset($_SERVER['HTTP_X_FILE_NAME']) ){
-            HandleError('Missing file name!');
+            HandleError($response,'Missing file name!');
         }
 
         $file_name = preg_replace('/[^'.$valid_chars_regex.']|\.+$/i', '', $_SERVER['HTTP_X_FILE_NAME']);
         if (strlen($file_name) == 0 || strlen($file_name) > $MAX_FILENAME_LENGTH) {
-            HandleError('Invalid file name');
+            HandleError($response,'Invalid file name');
         }
 
         if(file_exists($relativePath. $file_name) ){
-            HandleError('A file with this name already exists');
+            HandleError($response,'A file with this name already exists');
         }
 
         //echo 'Reading php://input stream...<BR>Writing to file: '.$uploadPath.$fileName.'<BR>';
@@ -103,12 +104,17 @@ class Jasius_FileController extends Kebab_Rest_Controller
 
         $file = file_get_contents('php://input');
         if(FALSE === file_put_contents($relativePath.$file_name, $file) ){
-            die('{"success":false,"error":"Error saving file. Check that directory exists and permissions are set properly"}');
+            //die('{"success":false,"error":"Error saving file. Check that directory exists and permissions are set properly"}');
+            HandleError($response,'Error saving file. Check that directory exists and permissions are set properly"');
+        } else {
+            $response->setSuccess(true);
+            $response->getResponse();
         }
-        die('{"success":true}');
 
-        function HandleError($message){
-            die('{"success":false,"error":'.json_encode($message).'}');
+
+        function HandleError($response, $message){
+            $response->setSuccess(false);
+            $response->getResponse();
         }
 
     }

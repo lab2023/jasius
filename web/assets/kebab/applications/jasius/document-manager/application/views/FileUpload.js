@@ -16,7 +16,7 @@ KebabOS.applications.documentManager.application.views.FileUpload = Ext.extend(E
 
     initComponent: function() {
         var config = {
-            awesomeUploaderRoot: 'http://localhost/assets/vendors/swfupload/',
+            awesomeUploaderRoot: BASE_URL+'/assets/vendors/swfupload/',
             allowDragAndDropAnywhere:true,
             autoStartUpload:false,
             maxFileSizeBytes: 14 * 1024 * 1024 // 1 GB
@@ -30,7 +30,7 @@ KebabOS.applications.documentManager.application.views.FileUpload = Ext.extend(E
     listeners: {
         fileselected:function(awesomeUploader, file) {
             this.fileGrid.getStore().loadData({
-                id:file.id + this.fileGrid.getStore().data.length,
+                id:file.id ,
                 name:file.name,
                 size:file.size,
                 status:'Pending',
@@ -85,9 +85,9 @@ KebabOS.applications.documentManager.application.views.FileUpload = Ext.extend(E
     },
 
     updateFileUploadRecord : function(id, column, value){
-            var rec = this.fileGrid.getStore().getById(id);
-            rec.set(column, value);
-            rec.commit();
+        var rec = this.fileGrid.getStore().getAt(id - 1);
+        rec.set(column, value);
+        rec.commit();
     }
 
 });

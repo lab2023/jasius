@@ -27,7 +27,6 @@ KebabOS.applications.documentManager.application.views.FileGrid = Ext.extend(Ext
                     return '<div class="iconStatus icon-loading" id="sending">';
                 case 'Error':
                     return '<div class="iconStatus icon-error" id="error">';
-                case 'Cancelled':
                 case 'Aborted':
                     return '<div class="iconStatus icon-cancel" id="abort"';
                 case 'Uploaded':

@@ -108,7 +108,7 @@ Ext.ux.AwesomeUploader = Ext.extend(Ext.Container, {
 	,startUpload:function(){
 		var fileId;
 		for(fileId in this.fileQueue){
-			if(this.fileQueue[fileId].status == 'started'){
+			if(this.fileQueue[fileId].status == 'started' || this.fileQueue[fileId].status == 'completed'){
 				continue;
 			}
 			switch(this.fileQueue[fileId].method){
@@ -145,9 +145,7 @@ Ext.ux.AwesomeUploader = Ext.extend(Ext.Container, {
 		}
 	}
 	,abortUpload:function(fileId){
-	
 		if(this.fileQueue[fileId].status == 'started'){
-		
 			switch(this.fileQueue[fileId].method){
 				case 'swfupload':
 					this.swfUploadStopped = true;
@@ -176,6 +174,7 @@ Ext.ux.AwesomeUploader = Ext.extend(Ext.Container, {
 		}
 	}
 	,removeUpload:function(fileId){
+        if(this.fileQueue[fileId] == null) return;
 		if(this.fileQueue[fileId].status == 'started'){
 			this.abortUpload(fileId);
 		}
