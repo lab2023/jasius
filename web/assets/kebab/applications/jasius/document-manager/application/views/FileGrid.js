@@ -29,8 +29,8 @@ KebabOS.applications.documentManager.application.views.FileGrid = Ext.extend(Ext
                     return '<div class="iconStatus icon-error" id="error">';
                 case 'Aborted':
                     return '<div class="iconStatus icon-cancel" id="abort"';
-                case 'Uploaded':
-                    return '<div class="iconStatus icon-accept" id="uploaded">';
+                case 'Completed':
+                    return '<div class="iconStatus icon-accept" id="completed">';
             }
         };
 
@@ -120,6 +120,16 @@ KebabOS.applications.documentManager.application.views.FileGrid = Ext.extend(Ext
                 }
                 var rec = selModel.getSelected();
                 this.uploader.removeUpload(rec.data.id);
+                Ext.Ajax.request({
+                    url: Kebab.helper.url('jasius/file'),
+                    method: 'DELETE',
+                    params: {
+                        fileId : rec.data.id
+                    },
+                    success: function(res){
+                    },
+                    scope:this
+                });
             }
         },{
             text:'Remove All',
@@ -127,6 +137,16 @@ KebabOS.applications.documentManager.application.views.FileGrid = Ext.extend(Ext
             scope: this,
             handler:function() {
                 this.uploader.removeAllUploads();
+                Ext.Ajax.request({
+                    url: Kebab.helper.url('jasius/file'),
+                    method: 'DELETE',
+                    params: {
+                        contentId : this.owner.owner.contentId
+                    },
+                    success: function(res){
+                    },
+                    scope:this
+                });
             }
         }];
     }

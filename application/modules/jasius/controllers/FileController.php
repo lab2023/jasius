@@ -48,9 +48,26 @@ class Jasius_FileController extends Kebab_Rest_Controller
         $response->getResponse();
     }
 
+    public function deleteAction()
+    {
+        $param = $this->_helper->param();
+        $response = $this->_helper->response();
+
+        $retData = false;
+        if (array_key_exists('contentId', $param)) {
+            $retData = Jasius_Model_File::delAllByContent($param['contentId']);
+        } else {
+            $retData = Jasius_Model_File::del($param['fileId']);
+        }
+
+        $response->setSuccess($retData);
+        $response->getResponse();
+    }
+
     public function postAction()
     {
         $response = $this->_helper->response();
+        $errors = array();
         $relativePath = WEB_PATH.DIRECTORY_SEPARATOR.'uploads'.DIRECTORY_SEPARATOR;
         //die($relativePath);
 
@@ -68,20 +85,20 @@ class Jasius_FileController extends Kebab_Rest_Controller
 
         $valid_chars_regex = '.A-Z0-9_ !@#$%^&()+={}\[\]\',~`-';	// Characters allowed in the file name (in a Regular Expression format)
         //$extension_whitelist = array('csv', 'gif', 'png','tif');	// Allowed file extensions
-        $MAX_FILENAME_LENGTH = 260;
+        $MAX_FILENAME_LENGTH = 255;
 
         //Header 'X-File-Name' has the dashes converted to underscores by PHP:
         if(!isset($_SERVER['HTTP_X_FILE_NAME']) ){
-            HandleError($response,'Missing file name!');
+            $errors['fileExist'] = 'Missing file name';
         }
 
         $file_name = preg_replace('/[^'.$valid_chars_regex.']|\.+$/i', '', $_SERVER['HTTP_X_FILE_NAME']);
         if (strlen($file_name) == 0 || strlen($file_name) > $MAX_FILENAME_LENGTH) {
-            HandleError($response,'Invalid file name');
+            $errors['invalidFile'] = 'Invalid file name';
         }
 
         if(file_exists($relativePath. $file_name) ){
-            HandleError($response,'A file with this name already exists');
+            $errors['fileExist'] = 'A file with this name already exists';
         }
 
         //echo 'Reading php://input stream...<BR>Writing to file: '.$uploadPath.$fileName.'<BR>';
@@ -101,21 +118,28 @@ class Jasius_FileController extends Kebab_Rest_Controller
                 exit(0);
             }
         */
-
-        $file = file_get_contents('php://input');
-        if(FALSE === file_put_contents($relativePath.$file_name, $file) ){
-            //die('{"success":false,"error":"Error saving file. Check that directory exists and permissions are set properly"}');
-            HandleError($response,'Error saving file. Check that directory exists and permissions are set properly"');
+        if (count($errors) > 0) {
+            $response->setErrors($errors);
+            $response->getResponse();
         } else {
-            $response->setSuccess(true);
-            $response->getResponse();
+            $file = file_get_contents('php://input');
+            if(FALSE === file_put_contents($relativePath.$file_name, $file) ){
+                //die('{"success":false,"error":"Error saving file. Check that directory exists and permissions are set properly"}');
+                $errors['permissionOrDirectoryNotExist'] = 'Error saving file. Check that directory exists and permissions are set properly"';
+                $response->setErrors($errors);
+                $response->getResponse();
+            } else {
+                //die('BYTES'.filesize($relativePath.$file_name));
+                //$path_info = pathinfo($relativePath.$file_name);
+                //$file_extension = $path_info["extension"];
+                //default fileinfo dll closed in php.ini
+                //fileinfo must open for mime_content_type function
+                //die('MimeType: '.mime_content_type($relativePath.$file_name));
+                $retData = Jasius_Model_File::add($_SERVER['HTTP_EXTRAPOSTDATA_CONTENTID'],$file_name, filesize($relativePath.$file_name), mime_content_type($relativePath.$file_name) );
+
+                $response->setSuccess($retData);
+                $response->getResponse();
+            }
         }
-
-
-        function HandleError($response, $message){
-            $response->setSuccess(false);
-            $response->getResponse();
-        }
-
     }
 }

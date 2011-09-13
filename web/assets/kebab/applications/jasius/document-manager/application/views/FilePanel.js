@@ -25,7 +25,10 @@ KebabOS.applications.documentManager.application.views.FilePanel = Ext.extend(Ex
     initComponent: function(panel) {
 
         this.fileUploader = new KebabOS.applications.documentManager.application.views.FileUpload({
-            owner: this
+            owner: this,
+            extraPostData : {
+                contentId : this.owner.contentId
+            }
         });
 
         this.fileGrid = new KebabOS.applications.documentManager.application.views.FileGrid ({

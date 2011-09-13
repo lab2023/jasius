@@ -57,7 +57,7 @@ KebabOS.applications.documentManager.application.views.FileUpload = Ext.extend(E
 
             if (result.success) {
                 this.updateFileUploadRecord(file.id, 'progress', 100);
-                this.updateFileUploadRecord(file.id, 'status', 'Uploaded');
+                this.updateFileUploadRecord(file.id, 'status', 'Completed');
             } else {
                 return false;
             }
@@ -85,7 +85,7 @@ KebabOS.applications.documentManager.application.views.FileUpload = Ext.extend(E
     },
 
     updateFileUploadRecord : function(id, column, value){
-        var rec = this.fileGrid.getStore().getAt(id - 1);
+        var rec = this.fileGrid.getStore().getById(id);
         rec.set(column, value);
         rec.commit();
     }
