@@ -115,44 +115,52 @@ KebabOS.applications.documentManager.application.views.FileGrid = Ext.extend(Ext
             iconCls:'icon-delete',
             scope:this,
             handler:function() {
-                var selModel = this.getSelectionModel();
-                if (!selModel.hasSelection()) {
-                    Ext.Msg.alert('', 'Please select an upload to cancel');
-                    return true;
-                }
-                var rec = selModel.getSelected();
-                console.log(rec.data.id);
-                this.uploader.removeUpload(rec.data.id);
-                Ext.Ajax.request({
-                    url: Kebab.helper.url('jasius/file'),
-                    method: 'DELETE',
-                    params: {
-                        fileId : rec.data.id
-                    },
-                    success: function(res){
-                        console.log(this.getStore());
-                        this.getStore().remove(this.getStore().getById(rec.data.id))
-                    },
-                    scope:this
-                });
+                 Ext.Msg.confirm('Warning', 'Are you sure to delete file?', function(btn, text){
+                    if (btn == 'yes'){
+                        var selModel = this.getSelectionModel();
+                        if (!selModel.hasSelection()) {
+                            Ext.Msg.alert('', 'Please select an upload to cancel');
+                            return true;
+                        }
+                        var rec = selModel.getSelected();
+                        this.uploader.removeUpload(rec.data.id);
+                        Ext.Ajax.request({
+                            url: Kebab.helper.url('jasius/file'),
+                            method: 'DELETE',
+                            params: {
+                                fileId : rec.data.id
+                            },
+                            success: function(res){
+                                var rnum = this.getStore().find('id',rec.data.id);
+                                this.getStore().remove(this.getStore().getAt(rnum));
+                            },
+                            scope:this
+                        });
+                    }
+                 },this);
             }
         },{
             text:'Remove All',
             iconCls:'icon-delete',
             scope: this,
             handler:function() {
-                this.uploader.removeAllUploads();
-                Ext.Ajax.request({
-                    url: Kebab.helper.url('jasius/file'),
-                    method: 'DELETE',
-                    params: {
-                        contentId : this.owner.owner.contentId
-                    },
-                    success: function(res){
-                        this.getStore().loadData([],false);
-                    },
-                    scope:this
-                });
+                Ext.Msg.confirm('Warning', 'Are you sure to delete all file?', function(btn, text){
+                    if (btn == 'yes'){
+                        this.uploader.removeAllUploads();
+                        Ext.Ajax.request({
+                            url: Kebab.helper.url('jasius/file'),
+                            method: 'DELETE',
+                            params: {
+                                contentId : this.owner.owner.contentId
+                            },
+                            success: function(res){
+                                this.getStore().loadData([],false);
+                            },
+                            scope:this
+                        });
+                    }
+                },
+                this);
             }
         }];
     }

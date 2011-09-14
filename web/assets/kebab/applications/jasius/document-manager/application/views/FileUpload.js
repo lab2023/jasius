@@ -90,7 +90,6 @@ KebabOS.applications.documentManager.application.views.FileUpload = Ext.extend(E
 
     updateFileUploadRecord : function(id, column, value){
         var rec = this.fileGrid.getStore().getById(id);
-        this.fileGrid.getStore().fields.item(column).defaultValue = value;
         rec.set(column, value);
         rec.commit();
     }
