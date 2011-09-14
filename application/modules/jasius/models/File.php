@@ -37,7 +37,7 @@ class Jasius_Model_File
     public static function getList($contentId)
     {
         $query =  Doctrine_Query::create()
-                    ->select('file.name, file.size, "Completed" as status, 100 as progress')
+                    ->select('file.name, file.size, file.mime, "Completed" as status, 100 as progress')
                     ->from('Model_Entity_File file')
                     ->where('file.content_id = ?', $contentId)
                     ->setHydrationMode(Doctrine::HYDRATE_ARRAY);
@@ -53,10 +53,11 @@ class Jasius_Model_File
         $file->size = $size;
         $file->mime = $mime;
         $file->save();
-        
         unset($file);
-
-        return true;
+        
+        $statement = Doctrine_Manager::getInstance()->connection();
+        $result = $statement->execute("SELECT LAST_INSERT_ID()")->fetchColumn(0);
+        return $result;
     }
     public static function delPhysicalFile($type, $id)
     {

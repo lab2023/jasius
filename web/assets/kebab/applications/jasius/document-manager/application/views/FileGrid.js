@@ -57,7 +57,7 @@ KebabOS.applications.documentManager.application.views.FileGrid = Ext.extend(Ext
                 forceFit: true
             },
             store: new Ext.data.JsonStore({
-                fields: ['id','name','size','status','progress'],
+                fields: ['id','name','size','mime','status','progress'],
                 idProperty: 'id'
             }),
             cm: new Ext.grid.ColumnModel({
@@ -65,8 +65,10 @@ KebabOS.applications.documentManager.application.views.FileGrid = Ext.extend(Ext
                     sortable: true
                 },
                 columns: [
+                    {header:'ID',dataIndex:'id', width:30},
                     {header:'File Name',dataIndex:'name', width:150},
                     {header:'Size',dataIndex:'size', width:60, renderer:Ext.util.Format.fileSize},
+                    {header:'Mime Type', dataIndex:'mime',width:60},
                     {header:'Status',dataIndex:'status', width:30, renderer:statusIconRenderer},
                     {header:'Progress',dataIndex:'progress', renderer:progressBarColumnRenderer}
                 ]
@@ -119,6 +121,7 @@ KebabOS.applications.documentManager.application.views.FileGrid = Ext.extend(Ext
                     return true;
                 }
                 var rec = selModel.getSelected();
+                console.log(rec.data.id);
                 this.uploader.removeUpload(rec.data.id);
                 Ext.Ajax.request({
                     url: Kebab.helper.url('jasius/file'),
@@ -127,6 +130,8 @@ KebabOS.applications.documentManager.application.views.FileGrid = Ext.extend(Ext
                         fileId : rec.data.id
                     },
                     success: function(res){
+                        console.log(this.getStore());
+                        this.getStore().remove(this.getStore().getById(rec.data.id))
                     },
                     scope:this
                 });
@@ -144,6 +149,7 @@ KebabOS.applications.documentManager.application.views.FileGrid = Ext.extend(Ext
                         contentId : this.owner.owner.contentId
                     },
                     success: function(res){
+                        this.getStore().loadData([],false);
                     },
                     scope:this
                 });

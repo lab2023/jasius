@@ -33,6 +33,7 @@ KebabOS.applications.documentManager.application.views.FileUpload = Ext.extend(E
                 id:file.id ,
                 name:file.name,
                 size:file.size,
+                mime:'',
                 status:'Pending',
                 progress:0
             }, true);
@@ -54,10 +55,13 @@ KebabOS.applications.documentManager.application.views.FileUpload = Ext.extend(E
                 return false;
             }
             resultObject = result;
-
             if (result.success) {
-                this.updateFileUploadRecord(file.id, 'progress', 100);
-                this.updateFileUploadRecord(file.id, 'status', 'Completed');
+                this.updateFileUploadRecord(file.id,'name',result.data.name);
+                this.updateFileUploadRecord(file.id,'mime',result.data.mime);
+                this.updateFileUploadRecord(file.id, 'progress', 100 );
+			    this.updateFileUploadRecord(file.id, 'status', 'Completed' );
+                this.updateFileUploadRecord(file.id,'id',result.data.id);
+                file.id = result.data.id;
             } else {
                 return false;
             }
@@ -67,8 +71,8 @@ KebabOS.applications.documentManager.application.views.FileUpload = Ext.extend(E
             this.updateFileUploadRecord(file.id, 'status', 'Aborted');
         },
         uploadremoved:function(awesomeUploader, file) {
-            var store = this.fileGrid.getStore();
-            this.fileGrid.getStore().remove(store.getById(file.id));
+                var store = this.fileGrid.getStore();
+                store.remove(store.getById(file.id));
         },
         uploaderror:function(awesomeUploader, file, serverData, resultObject) {
             resultObject = resultObject || {};
@@ -86,6 +90,7 @@ KebabOS.applications.documentManager.application.views.FileUpload = Ext.extend(E
 
     updateFileUploadRecord : function(id, column, value){
         var rec = this.fileGrid.getStore().getById(id);
+        this.fileGrid.getStore().fields.item(column).defaultValue = value;
         rec.set(column, value);
         rec.commit();
     }

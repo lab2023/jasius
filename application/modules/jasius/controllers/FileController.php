@@ -93,9 +93,9 @@ class Jasius_FileController extends Kebab_Rest_Controller
         }
 
         $file_name = preg_replace('/[^'.$valid_chars_regex.']|\.+$/i', '', $_SERVER['HTTP_X_FILE_NAME']);
-        if (strlen($file_name) == 0 || strlen($file_name) > $MAX_FILENAME_LENGTH) {
-            $errors['invalidFile'] = 'Invalid file name';
-        }
+        $path_info = pathinfo($file_name);
+        $date = new DateTime();
+        $file_name = 'File_Cnt_'.$_SERVER['HTTP_EXTRAPOSTDATA_CONTENTID'].'_'.microtime().'.'.$path_info["extension"];
 
         if(file_exists($relativePath. $file_name) ){
             $errors['fileExist'] = 'A file with this name already exists';
@@ -135,9 +135,16 @@ class Jasius_FileController extends Kebab_Rest_Controller
                 //default fileinfo dll closed in php.ini
                 //fileinfo must open for mime_content_type function
                 //die('MimeType: '.mime_content_type($relativePath.$file_name));
-                $retData = Jasius_Model_File::add($_SERVER['HTTP_EXTRAPOSTDATA_CONTENTID'],$file_name, filesize($relativePath.$file_name), mime_content_type($relativePath.$file_name) );
-
-                $response->setSuccess($retData);
+                $size = filesize($relativePath.$file_name);
+                $mime = mime_content_type($relativePath.$file_name);
+                $retData = Jasius_Model_File::add($_SERVER['HTTP_EXTRAPOSTDATA_CONTENTID'],$file_name, $size , $mime);
+                $file = array(
+                    'id' => $retData,
+                    'name' => $file_name,
+                    'size' => $size,
+                    'mime' => $mime
+                );
+                $response->setSuccess(true)->addData($file);
                 $response->getResponse();
             }
         }
