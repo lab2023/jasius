@@ -85,7 +85,7 @@ class Jasius_FileController extends Kebab_Rest_Controller
         {
             $file_name = $file_name.'.'.$path_info['extension'];
         }
-
+        $file_name = str_replace(' ','',$file_name);
         if(file_exists($relativePath. $file_name) ){
             $errors['fileExist'] = 'A file with this name already exists';
         }

@@ -74,14 +74,30 @@ KebabOS.applications.documentManager.application.views.FileGrid = Ext.extend(Ext
                 ]
             }),
             columnLines: true,
-            tbar: this.buildTbar()
+            tbar: this.buildTbar(),
+            listeners: {
+                rowdblclick: this.rowDoubleClick
+            }
         };
 
         Ext.apply(this, config);
 
         KebabOS.applications.documentManager.application.views.FileGrid.superclass.initComponent.apply(this, arguments);
     },
+    rowDoubleClick : function(grid, rowIndex, obj) {
+        var rec = grid.getStore().getAt(rowIndex);
+        if (rec.data.mime.indexOf('image')!= -1) {
+            var previewWin = new Ext.Window({
+                title  : 'Preview',
+                items : new Ext.ux.Image ({
+                    id: 'imgPreview',
+                    url: BASE_URL+'/uploads/'+rec.data.name
+                })
+            });
+            previewWin.show();
+        }
 
+    },
     buildTbar: function() {;
         return  [{
             text:'Start Upload',
