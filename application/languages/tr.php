@@ -38,9 +38,9 @@ return array(
     'Turkish' => 'Türkçe',
 
     // Project Titles
-    'Kebab Project' => 'Kebab Project',
-    'Kebab Project • Web Operation System' => 'Kebab Project • Web İşletim Sistemi',
-    'Kebab Project • Front-end Area' => 'Kebab Project • Ön-uç Alanı',
+    'Jasius' => 'Jasius',
+    'Jasius • Open Source Document Manager' => 'Jasius • Açık Kaynaklı Doküman Yöneticisi ',
+    'Jasius • Front-end Area' => 'Jasius • Ön-uç Alanı',
 
     // Sample
     'Hello World!' => 'Merhaba Dünya!',
@@ -59,7 +59,7 @@ return array(
     
     //sign-in
     'Sign-in' => 'Giriş',
-    'Welcome to Kebab Project' => 'Kebab Project\'e hoşgeldiniz',
+    'Welcome to Jasius' => 'Jasius\'a hoşgeldiniz',
     'Your password will be reset and sent to<br />your email address' => 'Şifreniz sıfırlanıp e-posta adresinize<br />gönderilecektir.',
     'Forgot password' => 'Şifremi unuttum',
 

@@ -18,11 +18,10 @@
 
 /*----------------------------------BASE--------------------------------------*/
 html, body {
-    position: relative;
-    background: #FFF ;
+    background: url('images/bg.png') repeat-x;
 }
 * {
-    color: #4B4B4B;
+    color: #FFF;
 }
 a {
     outline: none;
@@ -40,4 +39,7 @@ div#beta-ribbon {
     left:0;
     top:0;
 }
-#wrapper {padding: 50px;}
+#wrapper {padding: 30px;}
+#logo {
+    margin-left:20px;
+}
