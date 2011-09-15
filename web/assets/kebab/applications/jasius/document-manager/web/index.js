@@ -46,7 +46,7 @@ KebabOS.applications.documentManager.application.Bootstrap = function() {
 
         // Application Launcher Settings
         launcher: {
-            autoStart: true,
+            autoStart: false,
             iconCls: 'documentManager-application-launcher-icon'
         }
     });

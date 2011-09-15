@@ -86,7 +86,7 @@ KebabOS.applications.documentManager.application.views.FileGrid = Ext.extend(Ext
     },
     rowDoubleClick : function(grid, rowIndex, obj) {
         var rec = grid.getStore().getAt(rowIndex);
-        if (rec.data.mime.indexOf('image')!= -1) {
+        if (rec.data.mime.indexOf('image')!= -1 && rec.data.status == 'Completed') {
             var previewWin = new Ext.Window({
                 title  : 'Preview',
                 items : new Ext.ux.Image ({
