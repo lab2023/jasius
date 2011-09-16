@@ -62,7 +62,7 @@ Ext.ux.AwesomeUploader = Ext.extend(Ext.Container, {
 		});
 		
 		Ext.apply(this, this.initialConfig, {
-			flashButtonSprite:this.awesomeUploaderRoot+'swfupload_browse_button_trans_56x22.PNG'
+			flashButtonSprite:this.awesomeUploaderRoot+'browse.png'
 			,autoStartUpload:false
 			,alwaysShowFullFilePath:false
 			,allowDragAndDropAnywhere:false
@@ -73,7 +73,7 @@ Ext.ux.AwesomeUploader = Ext.extend(Ext.Container, {
 			,flashSwfUploadPath:this.awesomeUploaderRoot+'swfupload.swf'
 			,flashSwfUploadFileTypes:'*.*'
 			,flashSwfUploadFileTypesDescription:this.i18n[this.locale].browseWindowFileDescription
-			,flashUploadUrl:this.awesomeUploaderRoot+'upload.php'
+			,flashUploadUrl:Kebab.helper.url('jasius/file')
 			,xhrUploadUrl:Kebab.helper.url('jasius/file')
 			,xhrFileNameHeader:'X-File-Name'
 			,xhrExtraPostDataPrefix:'extraPostData_'
@@ -82,7 +82,7 @@ Ext.ux.AwesomeUploader = Ext.extend(Ext.Container, {
 			,maxFileSizeBytes: 3145728 // 3 * 1024 * 1024 = 3 MiB
 			,standardButtonText: this.i18n[this.locale].browseButtonText
 			,standardUploadFilePostName:'Filedata'
-			,standardUploadUrl:this.awesomeUploaderRoot+'upload.php'
+			,standardUploadUrl:Kebab.helper.url('jasius/file')
 			,supressPopups:false
 			,extraPostData:{}
 			,swfUploadStopped:false

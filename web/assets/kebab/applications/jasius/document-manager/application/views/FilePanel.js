@@ -25,10 +25,7 @@ KebabOS.applications.documentManager.application.views.FilePanel = Ext.extend(Ex
     initComponent: function(panel) {
 
         this.fileUploader = new KebabOS.applications.documentManager.application.views.FileUpload({
-            owner: this,
-            extraPostData : {
-                contentId : this.owner.contentId
-            }
+            owner: this
         });
 
         this.fileGrid = new KebabOS.applications.documentManager.application.views.FileGrid ({
@@ -52,6 +49,9 @@ KebabOS.applications.documentManager.application.views.FilePanel = Ext.extend(Ex
     },
     onLoad: function() {
         var contentId = this.owner.contentId;
+        this.fileUploader.extraPostData = {
+            contentId : this.owner.contentId
+        };
         if(contentId != null) {
             Ext.Ajax.request({
                 url: Kebab.helper.url('jasius/file'),
