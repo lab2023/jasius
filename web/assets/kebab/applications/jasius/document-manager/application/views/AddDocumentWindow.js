@@ -93,7 +93,10 @@ KebabOS.applications.documentManager.application.views.DocumentAddWindow = Ext.e
             }
 
         } else {
-           btnNext.disable()
+            var btnSave = Ext.getCmp(this.id + '-save');
+            btnSave.setText(Kebab.helper.translate('Finish'));
+            btnSave.setTooltip(Kebab.helper.translate('Finish Document Wizard'));
+            btnNext.disable()
         }
         
         index > 0 ?  btnPrev.enable() : btnPrev.disable();

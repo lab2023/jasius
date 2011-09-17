@@ -47,6 +47,9 @@ KebabOS.applications.documentManager.application.views.FilePanel = Ext.extend(Ex
             this.onLoad();
         }
     },
+    onSubmit:function() {
+        this.owner.close();
+    },
     onLoad: function() {
         var contentId = this.owner.contentId;
         this.fileUploader.extraPostData = {
