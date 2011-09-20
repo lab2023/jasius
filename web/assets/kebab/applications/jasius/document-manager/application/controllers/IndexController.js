@@ -153,32 +153,23 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
         var data = this.getPropertyData();
         
         if (data) {
-            var win = Ext.getCmp(data.type.id + '-add-window');
+            var win = new KebabOS.applications.documentManager.application.views.DocumentAddWindow({
+                id: id + '-add-window',
+                animateTarget: 'document-add-button',
+                contentId : id,
+                title: Kebab.helper.translate('Document wizard') + ' : ' + data.type.text,
+                iconCls: 'documentManager-application-gui-icon',
+                bootstrap: this.bootstrap,
+                propertyData: this.getPropertyData(),
+                maximizable: true,
+                manager: this.bootstrap.app.getDesktop().getManager()
+            });
+            win.show();
 
-            if (!win) {
-                win = new KebabOS.applications.documentManager.application.views.DocumentAddWindow({
-                    id: data.type.id + '-add-window',
-                    animateTarget: 'document-add-button',
-                    contentId : id,
-                    title: Kebab.helper.translate('Document wizard') + ' : ' + data.type.text,
-                    iconCls: 'icon-add',
-                    bootstrap: this.bootstrap,
-                    propertyData: this.getPropertyData(),
-                    width:400,
-                    height:200,
-                    maximizable: true,
-                    manager: this.bootstrap.app.getDesktop().getManager()
-                });
-                win.show();
-
-                win.on('submitActiveForm', this.submitActiveFormAction, this);
-                win.on('showNextItem', this.wizardNext, this);
-                win.on('showPrevItem', this.wizardPrev, this);
-                win.on('buttoncontrol', this.buttonControl, this);
-
-            } else {
-                win.show();
-            }
+            win.on('submitActiveForm', this.submitActiveFormAction, this);
+            win.on('showNextItem', this.wizardNext, this);
+            win.on('showPrevItem', this.wizardPrev, this);
+            win.on('buttoncontrol', this.buttonControl, this);            
         }
     }
 });
