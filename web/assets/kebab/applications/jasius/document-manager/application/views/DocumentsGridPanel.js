@@ -41,7 +41,7 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
         KebabOS.applications.documentManager.application.views.DocumentsGridPanel.superclass.initComponent.call(this);
     },
     initializeColumnModel : function () {
-        for(var i = this.colModel.getColumnCount(); i > 2 ; i--) {
+        for(var i = this.colModel.getColumnCount(); i > 4 ; i--) {
             var colName = this.colModel.getColumnHeader(i - 1);
             this.removeColumn(colName, i - 1);
         }
@@ -224,27 +224,43 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
      */
     buildColumns: function() {
         return [{
-                xtype: 'actioncolumn',
-                width: 50,
-                items: [{
-                    iconCls   : 'icon-page-edit action-cloumn',  // Use a URL in the icon config
-                    tooltip: Kebab.helper.translate('Update Content'),
-                    handler: function(grid, rowIndex) {
-                        var rec = grid.getStore().getAt(rowIndex);
-                        this.fireEvent('updateDocument',rec.data.content_id);
-                    },
-                    scope : this
-                },{
-                    iconCls   : 'icon-page-delete action-cloumn',  // Use a URL in the icon config
-                    tooltip: Kebab.helper.translate('Delete Content'),
-                    handler: function(grid, rowIndex) {
-                        Ext.Msg.confirm('Warning', 'Are you sure to delete content?', function(btn, text){
-                            if (btn == 'yes'){
-                                grid.deleteRow(grid, rowIndex);
-                            }
-                        });
-                    }
-                }]
+            xtype: 'actioncolumn',
+            width: 40,
+            items: [{
+                iconCls   : 'icon-page-edit action-cloumn',  // Use a URL in the icon config
+                tooltip: Kebab.helper.translate('Update Content'),
+                handler: function(grid, rowIndex) {
+                    var rec = grid.getStore().getAt(rowIndex);
+                    this.fireEvent('updateDocument',rec.data.content_id);
+                },
+                scope : this
+            }]
+        },{
+            xtype: 'actioncolumn',
+            width: 30,
+            items:[{
+                iconCls   : 'icon-page-delete action-cloumn',  // Use a URL in the icon config
+                tooltip: Kebab.helper.translate('Delete Content'),
+                handler: function(grid, rowIndex) {
+                    Ext.Msg.confirm('Warning', 'Are you sure to delete content?', function(btn, text){
+                        if (btn == 'yes'){
+                            grid.deleteRow(grid, rowIndex);
+                        }
+                    });
+                }
+            }]
+        },{
+            xtype: 'actioncolumn',
+            width: 30,
+            items:[{
+                iconCls   : 'icon-book-go action-column',  // Use a URL in the icon config
+                tooltip: Kebab.helper.translate('Go Content Files'),
+                handler: function(grid, rowIndex) {
+                    var rec = grid.getStore().getAt(rowIndex);
+                    this.fireEvent('viewFileOfDocument',rec.data.content_id);
+                },
+                scope : this
+            }]
         },{
             header   : 'ID',
             dataIndex: 'content_id',

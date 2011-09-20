@@ -35,6 +35,7 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
         documentsGrid.on('addDocument', this.addDocumentAction, this);
         documentsGrid.on('updateDocument', this.updateDocumentAction, this);
         documentsGrid.on('rowDblClick',this.bootstrap.layout.documentsGrid.rowDoubleClick, this);
+        documentsGrid.on('viewFileOfDocument',this.viewFileOfDocument, this);
 
         this.on('propertiesBeforeLoad', function() {
             var button = Ext.getCmp('document-add-button');
@@ -94,7 +95,11 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
             });
         }
     },
-
+    viewFileOfDocument : function(contentId) {
+        this._buildDocumentWindow(contentId);
+        var win = Ext.getCmp(contentId + '-add-window');
+        win.getLayout().setActiveItem(2);
+    },
     updateDocumentAction : function(contentId) {
         this._buildDocumentWindow(contentId);
     },
@@ -153,23 +158,28 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
         var data = this.getPropertyData();
         
         if (data) {
-            var win = new KebabOS.applications.documentManager.application.views.DocumentAddWindow({
-                id: id + '-add-window',
-                animateTarget: 'document-add-button',
-                contentId : id,
-                title: Kebab.helper.translate('Document wizard') + ' : ' + data.type.text,
-                iconCls: 'documentManager-application-gui-icon',
-                bootstrap: this.bootstrap,
-                propertyData: this.getPropertyData(),
-                maximizable: true,
-                manager: this.bootstrap.app.getDesktop().getManager()
-            });
-            win.show();
+            var win = Ext.getCmp(id + '-add-window');
+            if (!win) {
+                var win = new KebabOS.applications.documentManager.application.views.DocumentAddWindow({
+                    id: id + '-add-window',
+                    animateTarget: 'document-add-button',
+                    contentId : id,
+                    title: Kebab.helper.translate('Document wizard') + ' : ' + data.type.text,
+                    iconCls: 'documentManager-application-gui-icon',
+                    bootstrap: this.bootstrap,
+                    propertyData: this.getPropertyData(),
+                    maximizable: true,
+                    manager: this.bootstrap.app.getDesktop().getManager()
+                });
+                win.show();
+            } else {
+                win.show();
+            }
 
             win.on('submitActiveForm', this.submitActiveFormAction, this);
             win.on('showNextItem', this.wizardNext, this);
             win.on('showPrevItem', this.wizardPrev, this);
-            win.on('buttoncontrol', this.buttonControl, this);            
+            win.on('buttoncontrol', this.buttonControl, this);
         }
     }
 });
