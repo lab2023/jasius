@@ -188,9 +188,7 @@ class Jasius_ContentController extends Kebab_Rest_Controller
         }
         $retData = Jasius_Model_Data::update($contentId, $param);
 
-        $success = is_bool($retData) && $retData === true
-                 ? true
-                 : false;
+        $success = is_bool($retData) && $retData === true ? true : false;
 
         if ($success) {
            $response->setSuccess($success)->add('contentId',$contentId)->addNotification('INFO', 'Document is saved');

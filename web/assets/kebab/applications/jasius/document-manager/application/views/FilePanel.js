@@ -42,7 +42,7 @@ KebabOS.applications.documentManager.application.views.FilePanel = Ext.extend(Ex
     },
 
     listeners: {
-        activate: function(panel) { // HBox layout bug fix
+        activate: function(panel) { //KBBTODO HBox layout bug fix
             panel.doLayout();
             this.onLoad();
         }
