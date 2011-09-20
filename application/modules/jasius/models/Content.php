@@ -195,16 +195,15 @@ class Jasius_Model_Content
 
                 $val[$property['name']] = $dataValue;
                 $j++;
-            }
+            } // eof foreach
 
             if ($addContentToContentData) {
                 $contentData[$i] = $val;
             }
             $i++;
-        }
+        } // eof foreach
         
         // Pagination Option
-        // KBBTODO this area is hardcode pls send me limit and start value everytime!
         $start = 0;
         $limit = 25;
         if (isset($options['pagination'])) {
