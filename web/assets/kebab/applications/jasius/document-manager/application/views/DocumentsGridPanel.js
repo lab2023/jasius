@@ -40,10 +40,6 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
 
         KebabOS.applications.documentManager.application.views.DocumentsGridPanel.superclass.initComponent.call(this);
     },
-    rowDoubleClick : function(grid, rowIndex, obj) {
-        var rec = grid.getStore().getAt(rowIndex);
-        grid.fireEvent('updateDocument',rec.data.id);
-    },
     initializeColumnModel : function () {
         for(var i = this.colModel.getColumnCount(); i > 2 ; i--) {
             var colName = this.colModel.getColumnHeader(i - 1);

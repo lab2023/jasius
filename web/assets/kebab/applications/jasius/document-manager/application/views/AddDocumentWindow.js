@@ -84,6 +84,7 @@ KebabOS.applications.documentManager.application.views.DocumentAddWindow = Ext.e
         var count = this.items.length;
         var btnNext = Ext.getCmp(this.id + '-next');
         var btnPrev = Ext.getCmp(this.id + '-prev');
+        var btnSave = Ext.getCmp(this.id + '-save');
         
         if (index < count - 1) {
             if (index == 0){
@@ -91,9 +92,9 @@ KebabOS.applications.documentManager.application.views.DocumentAddWindow = Ext.e
             } else {
                 btnNext.enable();
             }
-
+            btnSave.setText(Kebab.helper.translate('Save'));
+            btnSave.setTooltip(Kebab.helper.translate('Save current informations and go to next screen'));
         } else {
-            var btnSave = Ext.getCmp(this.id + '-save');
             btnSave.setText(Kebab.helper.translate('Finish'));
             btnSave.setTooltip(Kebab.helper.translate('Finish Document Wizard'));
             btnNext.disable()
