@@ -47,7 +47,7 @@ class Jasius_Model_Data
     public static function add($contentId, array $propertyFormData)
     {
         // Sort $propertyFormData with $item_id
-        //ksort($propertyFormData);
+        // ksort($propertyFormData);
         // Validation
         $retData = self::validation($contentId, $propertyFormData);
 
@@ -160,7 +160,7 @@ class Jasius_Model_Data
     }
 
     public static function validation ($contentId, $propertyFormData)
-    {
+    {;
         self::$validate = false;
         $content = Doctrine_Core::getTable('Model_Entity_Content')->find($contentId);
         $propertyDataStructure = Jasius_Model_Property::getAllPropertyByTypeId($content->type_id)->execute();
@@ -168,12 +168,13 @@ class Jasius_Model_Data
         $errorMessage = array();
         $dataCollectionArray = array();
         foreach ($propertyFormData as $propertyKey => $propertyValue) {
-
-            //KBBTODO use listlist($id, $dataType, $isUni) = $propertyDataStructure[$i];
-
             // Check dataType
+
+            if ($propertyDataStructure[$i]['dataType'] === 'clob') {
+                $propertyValue = (string) $propertyValue;
+            }
+
             $dataTypeCheck = Doctrine_Validator::isValidType($propertyValue, $propertyDataStructure[$i]['dataType']);
-           
             if (!$dataTypeCheck) {
                 $errorMessage[$propertyKey] = 'Data type is not appropriate in this area';
             }

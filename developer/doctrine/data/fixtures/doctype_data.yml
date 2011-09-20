@@ -10,7 +10,7 @@ Model_Entity_Data:
   Data_Identity_1_3:
     Property: Identity_Name
     Content: Identity_1
-    stringValue: 'Onur Özgür'
+    clobValue: 'Onur Özgür'
   Data_Identity_1_4:
     Property: Identity_Type
     Content: Identity_1
@@ -26,7 +26,7 @@ Model_Entity_Data:
   Data_Identity_2_3:
     Property: Identity_Name
     Content: Identity_2
-    stringValue: 'İbrahim'
+    clobValue: 'İbrahim'
   Data_Identity_2_4:
     Property: Identity_Type
     Content: Identity_2
@@ -42,7 +42,7 @@ Model_Entity_Data:
   Data_Identity_3_3:
     Property: Identity_Name
     Content: Identity_3
-    stringValue: 'Sefer'
+    clobValue: 'Sefer'
   Data_Identity_3_4:
     Property: Identity_Type
     Content: Identity_3
