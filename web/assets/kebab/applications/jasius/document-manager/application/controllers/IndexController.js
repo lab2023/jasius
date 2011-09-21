@@ -164,6 +164,8 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
                     id: id + '-add-window',
                     animateTarget: 'document-add-button',
                     contentId : id,
+                    width:500,
+                    height:400,
                     title: Kebab.helper.translate('Document wizard') + ' : ' + data.type.text,
                     iconCls: 'documentManager-application-gui-icon',
                     bootstrap: this.bootstrap,

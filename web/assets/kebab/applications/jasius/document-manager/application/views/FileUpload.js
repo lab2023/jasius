@@ -19,7 +19,10 @@ KebabOS.applications.documentManager.application.views.FileUpload = Ext.extend(E
             awesomeUploaderRoot: BASE_URL+'/assets/vendors/swfupload/',
             allowDragAndDropAnywhere:true,
             autoStartUpload:false,
-            maxFileSizeBytes: 14 * 1024 * 1024 // 1 GB
+            maxFileSizeBytes: 30 * 1024 * 1024, // 30 GB
+            flashUploadUrl:Kebab.helper.url('jasius/file'),
+            xhrUploadUrl: Kebab.helper.url('jasius/file'),
+            standardUploadUrl: Kebab.helper.url('jasius/file')
         };
 
         Ext.apply(this, Ext.apply(this.initialConfig, config));

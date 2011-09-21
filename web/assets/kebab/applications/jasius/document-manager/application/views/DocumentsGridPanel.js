@@ -225,7 +225,7 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
     buildColumns: function() {
         return [{
             xtype: 'actioncolumn',
-            width: 40,
+            width: 30,
             items: [{
                 iconCls   : 'icon-page-edit action-cloumn',  // Use a URL in the icon config
                 tooltip: Kebab.helper.translate('Update Content'),

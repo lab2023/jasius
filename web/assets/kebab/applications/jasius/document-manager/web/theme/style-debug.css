@@ -19,10 +19,14 @@
     color:green;
 }
 .action-cloumn {
+    align:center;
     width:16px;
     height:16px;
 }
 
+.x-grid3-cell-first .x-grid3-cell-inner {
+    padding-left :5px;
+}
 .au-hidden, .au-hidden *, *.au-hidden {
 	visibility: hidden;
 	width:1px;

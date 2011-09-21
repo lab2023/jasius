@@ -73,8 +73,8 @@ Ext.ux.AwesomeUploader = Ext.extend(Ext.Container, {
 			,flashSwfUploadPath:this.awesomeUploaderRoot+'swfupload.swf'
 			,flashSwfUploadFileTypes:'*.*'
 			,flashSwfUploadFileTypesDescription:this.i18n[this.locale].browseWindowFileDescription
-			,flashUploadUrl:Kebab.helper.url('jasius/file')
-			,xhrUploadUrl:Kebab.helper.url('jasius/file')
+			,flashUploadUrl:this.awesomeUploaderRoot+'upload.php'
+			,xhrUploadUrl:this.awesomeUploaderRoot+'xhrupload.php'
 			,xhrFileNameHeader:'X-File-Name'
 			,xhrExtraPostDataPrefix:'extraPostData_'
 			,xhrFilePostName:'Filedata'
@@ -82,7 +82,7 @@ Ext.ux.AwesomeUploader = Ext.extend(Ext.Container, {
 			,maxFileSizeBytes: 3145728 // 3 * 1024 * 1024 = 3 MiB
 			,standardButtonText: this.i18n[this.locale].browseButtonText
 			,standardUploadFilePostName:'Filedata'
-			,standardUploadUrl:Kebab.helper.url('jasius/file')
+			,standardUploadUrl:this.awesomeUploaderRoot+'upload.php'
 			,supressPopups:false
 			,extraPostData:{}
 			,swfUploadStopped:false
