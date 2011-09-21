@@ -228,7 +228,7 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
             width: 30,
             items: [{
                 iconCls   : 'icon-page-edit action-cloumn',  // Use a URL in the icon config
-                tooltip: Kebab.helper.translate('Update Content'),
+                tooltip: Kebab.helper.translate('Update Document'),
                 handler: function(grid, rowIndex) {
                     var rec = grid.getStore().getAt(rowIndex);
                     this.fireEvent('updateDocument',rec.data.content_id);
@@ -240,7 +240,7 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
             width: 30,
             items:[{
                 iconCls   : 'icon-page-delete action-cloumn',  // Use a URL in the icon config
-                tooltip: Kebab.helper.translate('Delete Content'),
+                tooltip: Kebab.helper.translate('Delete Document'),
                 handler: function(grid, rowIndex) {
                     Ext.Msg.confirm('Warning', 'Are you sure to delete content?', function(btn, text){
                         if (btn == 'yes'){
@@ -254,7 +254,7 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
             width: 30,
             items:[{
                 iconCls   : 'icon-book-go action-column',  // Use a URL in the icon config
-                tooltip: Kebab.helper.translate('Go Content Files'),
+                tooltip: Kebab.helper.translate('Document Files'),
                 handler: function(grid, rowIndex) {
                     var rec = grid.getStore().getAt(rowIndex);
                     this.fireEvent('viewFileOfDocument',rec.data.content_id);
@@ -282,7 +282,7 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
                     this.getStore().remove(this.getStore().getAt(rowIndex));
                 },
                 failure: function(){
-                    Kebab.helper.message('Error','Record can not delete',false, 'ERR');
+                    Kebab.helper.message('Error',Kebab.helper.translate('Record can not delete.'),false, 'ERR');
                 },
                 scope:this
         });
@@ -292,7 +292,7 @@ KebabOS.applications.documentManager.application.views.DocumentsGridPanel = Ext.
 
         var typesCombo = new Kebab.library.ext.AutocompleteComboBox({
             id: 'document-types-combo',
-            emptyText: Kebab.helper.translate('Please select your file type...'),
+            emptyText: Kebab.helper.translate('Please select your document type...'),
             name: 'type',
             tpl:'<tpl for="."><div class="x-combo-list-item">{title}</div></tpl>',
             triggerAction: 'all',

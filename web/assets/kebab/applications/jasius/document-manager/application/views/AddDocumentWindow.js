@@ -92,11 +92,11 @@ KebabOS.applications.documentManager.application.views.DocumentAddWindow = Ext.e
             } else {
                 btnNext.enable();
             }
-            btnSave.setText(Kebab.helper.translate('Save'));
+            btnSave.setText(Kebab.helper.translate('Save &raquo;'));
             btnSave.setTooltip(Kebab.helper.translate('Save current informations and go to next screen'));
         } else {
             btnSave.setText(Kebab.helper.translate('Finish'));
-            btnSave.setTooltip(Kebab.helper.translate('Finish Document Wizard'));
+            btnSave.setTooltip(Kebab.helper.translate('Finish document wizard'));
             btnNext.disable()
         }
         
@@ -126,7 +126,7 @@ KebabOS.applications.documentManager.application.views.DocumentAddWindow = Ext.e
             id: this.id + '-save',
             iconCls: 'icon-disk',
             tooltip: Kebab.helper.translate('Save current informations and go to next screen'),
-            text: Kebab.helper.translate('Save'),
+            text: Kebab.helper.translate('Save &raquo;'),
             handler: function() {
                 this.fireEvent('submitActiveForm', this);
             },

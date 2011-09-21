@@ -66,11 +66,11 @@ KebabOS.applications.documentManager.application.views.FileGrid = Ext.extend(Ext
                 },
                 columns: [
                     {header:'ID',dataIndex:'id', width:30},
-                    {header:'File Name',dataIndex:'name', width:150},
-                    {header:'Size',dataIndex:'size', width:60, renderer:Ext.util.Format.fileSize},
-                    {header:'Mime Type', dataIndex:'mime',width:60},
-                    {header:'Status',dataIndex:'status', width:30, renderer:statusIconRenderer},
-                    {header:'Progress',dataIndex:'progress', renderer:progressBarColumnRenderer}
+                    {header:Kebab.helper.translate('File Name'),dataIndex:'name', width:150},
+                    {header:Kebab.helper.translate('Size'),dataIndex:'size', width:60, renderer:Ext.util.Format.fileSize},
+                    {header:Kebab.helper.translate('Mime'), dataIndex:'mime',width:60},
+                    {header:Kebab.helper.translate('Status'),dataIndex:'status', width:30, renderer:statusIconRenderer},
+                    {header:Kebab.helper.translate('Progress'),dataIndex:'progress', renderer:progressBarColumnRenderer}
                 ]
             }),
             columnLines: true,
@@ -100,42 +100,42 @@ KebabOS.applications.documentManager.application.views.FileGrid = Ext.extend(Ext
     },
     buildTbar: function() {;
         return  [{
-            text:'Start Upload',
+            text:Kebab.helper.translate('Upload'),
             iconCls:'icon-accept',
             scope:this,
             handler:function() {
                 this.uploader.startUpload();
             }
         },{
-            text:'Abort',
+            text:Kebab.helper.translate('Abort'),
             iconCls:'icon-cancel',
             scope:this,
             handler:function() {
                 var selModel = this.getSelectionModel();
                 if (!selModel.hasSelection()) {
-                    Ext.Msg.alert('', 'Please select an upload to cancel');
+                    Ext.Msg.alert(Kebab.helper.translate('Warning'), Kebab.helper.translate('Please select an upload to abort'));
                     return true;
                 }
                 var rec = selModel.getSelected();
                 this.uploader.abortUpload(rec.data.id);
             }
         },{
-            text:'Abort All',
+            text:Kebab.helper.translate('Abort All'),
             iconCls:'icon-cancel',
             scope:this,
             handler:function() {
                 this.uploader.abortAllUploads();
             }
         },{
-            text:'Remove',
+            text:Kebab.helper.translate('Remove1'),
             iconCls:'icon-delete',
             scope:this,
             handler:function() {
-                 Ext.Msg.confirm('Warning', 'Are you sure to delete file?', function(btn, text){
+                 Ext.Msg.confirm('Warning', Kebab.helper.translate('Are you sure to delete file?'), function(btn, text){
                     if (btn == 'yes'){
                         var selModel = this.getSelectionModel();
                         if (!selModel.hasSelection()) {
-                            Ext.Msg.alert('', 'Please select an upload to cancel');
+                            Ext.Msg.alert(Kebab.helper.translate('Warning'), Kebab.helper.translate('Please select an upload to abort'));
                             return true;
                         }
                         var rec = selModel.getSelected();
@@ -156,11 +156,11 @@ KebabOS.applications.documentManager.application.views.FileGrid = Ext.extend(Ext
                  },this);
             }
         },{
-            text:'Remove All',
+            text:Kebab.helper.translate('Remove All'),
             iconCls:'icon-delete',
             scope: this,
             handler:function() {
-                Ext.Msg.confirm('Warning', 'Are you sure to delete all file?', function(btn, text){
+                Ext.Msg.confirm(Kebab.helper.translate('Warning'),Kebab.helper.translate('Are you sure to delete all file?'), function(btn, text){
                     if (btn == 'yes'){
                         this.uploader.removeAllUploads();
                         Ext.Ajax.request({
