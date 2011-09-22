@@ -140,18 +140,20 @@ KebabOS.applications.documentManager.application.views.FileGrid = Ext.extend(Ext
                         }
                         var rec = selModel.getSelected();
                         this.uploader.removeUpload(rec.data.id);
-                        Ext.Ajax.request({
-                            url: Kebab.helper.url('jasius/file'),
-                            method: 'DELETE',
-                            params: {
-                                fileId : rec.data.id
-                            },
-                            success: function(res){
-                                var rnum = this.getStore().find('id',rec.data.id);
-                                this.getStore().remove(this.getStore().getAt(rnum));
-                            },
-                            scope:this
-                        });
+                        if (rec.data.status == 'Completed') {
+                            Ext.Ajax.request({
+                                url: Kebab.helper.url('jasius/file'),
+                                method: 'DELETE',
+                                params: {
+                                    fileId : rec.data.id
+                                },
+                                success: function(res){
+                                    var rnum = this.getStore().find('id',rec.data.id);
+                                    this.getStore().remove(this.getStore().getAt(rnum));
+                                },
+                                scope:this
+                            });
+                        }
                     }
                  },this);
             }

@@ -145,6 +145,7 @@ Ext.ux.AwesomeUploader = Ext.extend(Ext.Container, {
 		}
 	}
 	,abortUpload:function(fileId){
+        if(this.fileQueue[fileId] == null) return;
 		if(this.fileQueue[fileId].status == 'started'){
 			switch(this.fileQueue[fileId].method){
 				case 'swfupload':
