@@ -25,4 +25,5 @@
  * @version    1.5.0
  */
 KebabOS.applications.documentManager.application.languages.en = {
+    'Remove1':'Remove'
 };

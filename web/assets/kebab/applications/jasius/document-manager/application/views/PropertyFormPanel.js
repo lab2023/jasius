@@ -176,7 +176,7 @@ KebabOS.applications.documentManager.application.views.PropertyFormPanel = Ext.e
         if (contentId != null) {
             this.getForm().load({
                 url : Kebab.helper.url('jasius/content')+'/contentId/'+contentId,
-                waitMsg: 'Loading...',
+                waitMsg: Kebab.helper.translate('Loading ...'),
                 method:'GET',
                 success : function (form, action) {
                 }

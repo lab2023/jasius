@@ -43,14 +43,14 @@ KebabOS.applications.documentManager.application.views.AccessPanel = Ext.extend(
             owner: this,
             flex:1,
             frame:true,
-            title:'Rol seç'
+            title:Kebab.helper.translate('Rol select')
         });
 
         this.userGrid = new KebabOS.applications.documentManager.application.views.UserGrid({
             owner: this,
             flex:2,
             frame:true,
-            title:'Kullanıcı seç'
+            title:Kebab.helper.translate('User select')
         });
 
         this.rolesAndUsersPanels = new Ext.Panel({
@@ -87,7 +87,7 @@ KebabOS.applications.documentManager.application.views.AccessPanel = Ext.extend(
         if (contentId != null) {
             this.accessFrom.getForm().load({
                 url : Kebab.helper.url('jasius/access'),
-                waitMsg: 'Loading...',
+                waitMsg: Kebab.helper.translate('Loading ...'),
                 params: {
                     contentId : contentId
                 },
@@ -134,7 +134,7 @@ KebabOS.applications.documentManager.application.views.AccessPanel = Ext.extend(
             accessForm.submit({
                 params: params || null,
                 url: Kebab.helper.url('jasius/access'),
-                waitMsg: 'Saving...',
+                waitMsg: Kebab.helper.translate('Saving ...'),
                 success: function(form) {
                     form.reset();
                     form.owner.roleGrid.getSelectionModel().deselectRange(0, form.owner.roleGrid.store.getCount() - 1 );
