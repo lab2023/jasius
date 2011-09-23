@@ -160,19 +160,20 @@ KebabOS.applications.documentManager.application.controllers.Index = Ext.extend(
         if (data) {
             var win = Ext.getCmp(id + '-add-window');
             if (!win) {
-                var win = new KebabOS.applications.documentManager.application.views.DocumentAddWindow({
+                var desktop = this.bootstrap.app.getDesktop();
+                console.log(desktop);
+                var win = desktop.createApplication({
                     id: id + '-add-window',
                     animateTarget: 'document-add-button',
                     contentId : id,
-                    width:500,
-                    height:400,
+                    width:desktop.getWinWidth() * 0.6,
+                    height:desktop.getWinHeight() * 0.8,
                     title: Kebab.helper.translate('Document wizard') + ' : ' + data.type.text,
                     iconCls: 'documentManager-application-gui-icon',
                     bootstrap: this.bootstrap,
                     propertyData: this.getPropertyData(),
-                    maximizable: true,
-                    manager: this.bootstrap.app.getDesktop().getManager()
-                });
+                    maximizable: true
+                }, KebabOS.applications.documentManager.application.views.DocumentAddWindow);
                 win.show();
             } else {
                 win.show();
