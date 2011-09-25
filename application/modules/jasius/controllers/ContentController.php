@@ -189,17 +189,17 @@ class Jasius_ContentController extends Kebab_Rest_Controller
         }
 
         if (array_key_exists('contentId', $param)) {
-          $contentId = $param['contentId'];
-          unset($param['contentId']);
+            $contentId = $param['contentId'];
+            unset($param['contentId']);
         }
         $retData = Jasius_Model_Data::update($contentId, $param);
 
         $success = $retData === true ? true : false;
 
         if ($success) {
-           $response->setSuccess($success)->add('contentId',$contentId)->addNotification('INFO', 'Document is saved');
+            $response->setSuccess($success)->add('contentId',$contentId)->addNotification('INFO', 'Document is saved');
         } else {
-           $response->setErrors($retData);
+            $response->setErrors($retData);
         }
         $response->getResponse();
     }
