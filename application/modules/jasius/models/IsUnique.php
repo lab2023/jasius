@@ -52,7 +52,7 @@ class Jasius_Model_IsUnique
                         : false;
 
         if ($isUniqueCheck) {
-            $errorMessage = 'Same record entered before';
+            $errorMessage = Zend_Registry::get('Zend_Translate')->_('Same record entered before');
         }
         
         if ($errorMessage != '') {

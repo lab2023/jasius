@@ -33,7 +33,7 @@ Model_Entity_Property:
       en:
         title: Name
       tr:
-        title: Name
+        title: İsim
     dataType: clob
     isUnique: false
     isRequire: false
@@ -47,7 +47,7 @@ Model_Entity_Property:
       en:
         title: Type
       tr:
-        title: Type
+        title: Tipi
     dataType: enum
     isUnique: false
     isRequire: false
