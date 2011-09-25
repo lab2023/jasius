@@ -1,9 +1,5 @@
 /**
- * Created by JetBrains PhpStorm.
- * User: m.ali
- * Date: 9/14/11
- * Time: 3:43 PM
- * To change this template use File | Settings | File Templates.
+ * Ext.ux.Image
  */
 Ext.ns('Ext.ux');
 Ext.ux.Image = Ext.extend(Ext.BoxComponent, {
