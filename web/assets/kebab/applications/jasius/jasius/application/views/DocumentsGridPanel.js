@@ -40,8 +40,9 @@ KebabOS.applications.jasius.application.views.DocumentsGridPanel = Ext.extend(Ex
 
         KebabOS.applications.jasius.application.views.DocumentsGridPanel.superclass.initComponent.call(this);
     },
+
     initializeColumnModel : function () {
-        for(var i = this.colModel.getColumnCount(); i > 4 ; i--) {
+        for(var i = this.colModel.getColumnCount(); i > 2 ; i--) {
             var colName = this.colModel.getColumnHeader(i - 1);
             this.removeColumn(colName, i - 1);
         }
@@ -50,11 +51,12 @@ KebabOS.applications.jasius.application.views.DocumentsGridPanel = Ext.extend(Ex
         this.store.reader.buildExtractors();
         return true;
     },
+    
     setColumnModel : function (propertyDt) {
         var propertyData = propertyDt.data;
         var filter =[];
         filter[0] = {dataIndex:'content_id', type:'numeric'};
-        i = 1;
+        var i = 1;
         Ext.each(propertyData, function(property) {
             if(this.colModel.findColumnIndex(property.name) < 0) {
                 var field = this.getStoreField(property);
@@ -227,7 +229,9 @@ KebabOS.applications.jasius.application.views.DocumentsGridPanel = Ext.extend(Ex
     buildColumns: function() {
         return [{
             xtype: 'actioncolumn',
-            width: 30,
+            header: Kebab.helper.translate('Operations'),
+            width: 90,
+            align:'center',
             items: [{
                 iconCls   : 'icon-page-edit action-cloumn',  // Use a URL in the icon config
                 tooltip: Kebab.helper.translate('Update Document'),
@@ -236,11 +240,7 @@ KebabOS.applications.jasius.application.views.DocumentsGridPanel = Ext.extend(Ex
                     this.fireEvent('updateDocument',rec.data.content_id);
                 },
                 scope : this
-            }]
-        },{
-            xtype: 'actioncolumn',
-            width: 30,
-            items:[{
+            },{
                 iconCls   : 'icon-page-delete action-cloumn',  // Use a URL in the icon config
                 tooltip: Kebab.helper.translate('Delete Document'),
                 handler: function(grid, rowIndex) {
@@ -250,11 +250,7 @@ KebabOS.applications.jasius.application.views.DocumentsGridPanel = Ext.extend(Ex
                         }
                     });
                 }
-            }]
-        },{
-            xtype: 'actioncolumn',
-            width: 30,
-            items:[{
+            },{
                 iconCls   : 'icon-book-go action-column',  // Use a URL in the icon config
                 tooltip: Kebab.helper.translate('Document Files'),
                 handler: function(grid, rowIndex) {

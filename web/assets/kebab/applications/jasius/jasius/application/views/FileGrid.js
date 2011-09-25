@@ -71,7 +71,50 @@ KebabOS.applications.jasius.application.views.FileGrid = Ext.extend(Ext.grid.Gri
                     {header:Kebab.helper.translate('Size'),dataIndex:'size', width:60, renderer:Ext.util.Format.fileSize},
                     {header:Kebab.helper.translate('Mime'), dataIndex:'mime',width:60},
                     {header:Kebab.helper.translate('Progress'),dataIndex:'progress', renderer:progressBarColumnRenderer},
-                    {header:Kebab.helper.translate('Status'),dataIndex:'status', width:30, renderer:statusIconRenderer}
+                    {header:Kebab.helper.translate('Status'),dataIndex:'status', align:'center', width:30, renderer:statusIconRenderer},
+                    {
+                        xtype: 'actioncolumn',
+                        header:Kebab.helper.translate('Operation'),
+                        align:'center',
+                        width: 30,
+                        items: [{
+                            getClass: function(v, meta, rec) {
+
+                                // is image ?
+                                if (rec.data.mime.indexOf('image')!= -1 && rec.data.status == 'Completed') {
+                                    this.items[0].tooltip = Kebab.helper.translate('Preview Image');
+                                    return 'icon-picture action-cloumn';
+                                }
+
+                                if (rec.data.mime.indexOf('image')== -1 && rec.data.status == 'Completed'){ // is file and upload status complated ?
+                                    this.items[0].tooltip = Kebab.helper.translate('Download / Open File');
+                                    return 'icon-disk action-cloumn';
+                                } else {
+                                    this.items[0].tooltip = Kebab.helper.translate('File or picture is not ready');
+                                    return 'icon-cancel action-cloumn';
+                                }
+                            },
+                            handler: function(grid, rowIndex) {
+                                var rec = grid.getStore().getAt(rowIndex);
+                                // is image ?
+                                if (rec.data.mime.indexOf('image')!= -1 && rec.data.status == 'Completed') {
+                                   var previewWin = new Ext.Window({
+                                        title  : 'Preview',//todo width height
+                                        items : new Ext.ux.Image ({
+                                            id: 'imgPreview',
+                                            url: BASE_URL+'/uploads/'+rec.data.name //TODO move config
+                                        })
+                                    });
+                                    previewWin.show();
+                                }
+
+                                if (rec.data.mime.indexOf('image')== -1 && rec.data.status == 'Completed'){ // is file and upload status complated ?
+                                     //TODO move config
+                                    window.open(BASE_URL+'/uploads/'+rec.data.name); // open in new window or download
+                                }
+                            }
+                        }]
+                    }
                 ]
             }),
             columnLines: true,
@@ -103,17 +146,22 @@ KebabOS.applications.jasius.application.views.FileGrid = Ext.extend(Ext.grid.Gri
     },
 
     buildTbar: function() {
+
+        var buttonWidth = 70;
+
         return  [{
-            text:Kebab.helper.translate('Upload'),
+            text:Kebab.helper.translate('Upload Now !'),
             iconCls:'icon-accept',
             scope:this,
+            width:buttonWidth,
             handler:function() {
                 this.uploader.startUpload();
             }
-        },{
+        },'->',{
             text:Kebab.helper.translate('Abort'),
             iconCls:'icon-cancel',
             scope:this,
+            width:buttonWidth,
             handler:function() {
                 var selModel = this.getSelectionModel();
                 if (!selModel.hasSelection()) {
@@ -123,17 +171,19 @@ KebabOS.applications.jasius.application.views.FileGrid = Ext.extend(Ext.grid.Gri
                 var rec = selModel.getSelected();
                 this.uploader.abortUpload(rec.data.id);
             }
-        },{
+        },'-',{
             text:Kebab.helper.translate('Abort All'),
             iconCls:'icon-cancel',
             scope:this,
+            width:buttonWidth,
             handler:function() {
                 this.uploader.abortAllUploads();
             }
-        },{
+        },'-',{
             text:Kebab.helper.translate('Remove1'),
             iconCls:'icon-delete',
             scope:this,
+            width:buttonWidth,
             handler:function() {
                  Ext.Msg.confirm(Kebab.helper.translate('Warning'), Kebab.helper.translate('Are you sure to delete file?'), function(btn, text){
                     if (btn == 'yes'){
@@ -161,10 +211,11 @@ KebabOS.applications.jasius.application.views.FileGrid = Ext.extend(Ext.grid.Gri
                     }
                  },this);
             }
-        },{
+        },'-',{
             text:Kebab.helper.translate('Remove All'),
             iconCls:'icon-delete',
             scope: this,
+            width:buttonWidth,
             handler:function() {
                 Ext.Msg.confirm(Kebab.helper.translate('Warning'),Kebab.helper.translate('Are you sure to delete all file?'), function(btn, text){
                     if (btn == 'yes'){

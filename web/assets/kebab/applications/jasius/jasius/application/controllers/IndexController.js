@@ -56,6 +56,7 @@ KebabOS.applications.jasius.application.controllers.Index = Ext.extend(Ext.util.
                 if (grid.setColumnModel(this.getPropertyData())) {
                     grid.getStore().load({params: {start:0, limit:this.bootstrap.app.getSettings().project.pageSizeDefault}});
                     grid.reconfigure(grid.getStore(), grid.getColumnModel());
+                    
                 }
             }
         });
@@ -162,13 +163,14 @@ KebabOS.applications.jasius.application.controllers.Index = Ext.extend(Ext.util.
             if (!win) {
                 var desktop = this.bootstrap.app.getDesktop();
                 console.log(desktop);
-                var win = desktop.createApplication({
+                win = desktop.createApplication({
                     id: id + '-add-window',
                     animateTarget: 'document-add-button',
                     contentId : id,
                     width:desktop.getWinWidth() * 0.6,
                     height:desktop.getWinHeight() * 0.8,
-                    title: Kebab.helper.translate('Document wizard') + ' : ' + data.type.text,
+                    title: '#' + id + ' : ' + Kebab.helper.translate('Document wizard') + ' : ' + data.type.text,
+                    description: Kebab.helper.translate('Document wizard &amp; document detail window'),
                     iconCls: 'jasius-application-gui-icon',
                     bootstrap: this.bootstrap,
                     propertyData: this.getPropertyData(),

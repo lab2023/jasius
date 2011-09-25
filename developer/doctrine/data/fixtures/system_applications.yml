@@ -121,8 +121,8 @@ Model_Entity_Application:
     active: 1
     Translation:
       en:
-        title: Jasius - Cloud Based Document Manager
+        title: Jasius - Document Manager
         description: Manage your documents on cloud
       tr:
-        title: Jasius- Bulut Tabanlı Doküman Yöneticisi
+        title: Jasius- Doküman Yöneticisi
         description: Dokümanlarınızı bulut üzerinden yönetin
