@@ -77,7 +77,9 @@ class Jasius_FileController extends Kebab_Rest_Controller
         $path_info = pathinfo($file_name);
         $file_name = 'File_Cnt_'.$_SERVER['HTTP_EXTRAPOSTDATA_CONTENTID'].'_'.microtime();
         
-        if (array_key_exists('extension',$path_info)) {
+        if (!array_key_exists('extension',$path_info)) {
+             $errors['extensionNotExist'] = 'File has not extension';
+        } else {
             $file_name = $file_name.'.'.$path_info['extension'];
         }
 
@@ -97,7 +99,10 @@ class Jasius_FileController extends Kebab_Rest_Controller
                 $response->getResponse();
             } else {
                 $size = filesize($relativePath.$file_name);
-                $mime = mime_content_type($relativePath.$file_name);
+                $mime = '';
+                if (array_key_exists('extension',$path_info)) {
+                    $mime = Jasius_Model_File::getMimeType($path_info['extension']);
+                }
                 $retData = Jasius_Model_File::add($_SERVER['HTTP_EXTRAPOSTDATA_CONTENTID'],$file_name, $size , $mime);
                 $file = array(
                     'id' => $retData,
