@@ -59,6 +59,7 @@ class Jasius_Model_File
         $result = $statement->execute("SELECT LAST_INSERT_ID()")->fetchColumn(0);
         return $result;
     }
+    
     public static function delPhysicalFile($type, $id)
     {
 
@@ -88,6 +89,7 @@ class Jasius_Model_File
 
     public static function del($fileId)
     {
+        $retVal = false;
         if (self::delPhysicalFile('File',$fileId)) {
             Doctrine_Manager::connection()->beginTransaction();
             try {
@@ -110,6 +112,7 @@ class Jasius_Model_File
 
     public static function delAllByContent($contentId)
     {
+        $retVal = false;
         if (self::delPhysicalFile('Content',$contentId)) {
             Doctrine_Manager::connection()->beginTransaction();
             try {

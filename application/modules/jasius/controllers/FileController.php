@@ -40,12 +40,9 @@ class Jasius_FileController extends Kebab_Rest_Controller
         $response = $this->_helper->response();
         $contentId = $param['contentId'];
 
-        
         $fileList = Jasius_Model_File::getList($contentId);
 
-        $response->setSuccess(true)->addData($fileList);
-
-        $response->getResponse();
+        $response->setSuccess(true)->addData($fileList)->getResponse();
     }
 
     public function deleteAction()
@@ -53,27 +50,26 @@ class Jasius_FileController extends Kebab_Rest_Controller
         $param = $this->_helper->param();
         $response = $this->_helper->response();
 
-        $retData = false;
-        if (array_key_exists('contentId', $param)) {
-            $retData = Jasius_Model_File::delAllByContent($param['contentId']);
-        } else {
-            $retData = Jasius_Model_File::del($param['fileId']);
-        }
+        $retData = array_key_exists('contentId', $param)
+                 ? Jasius_Model_File::delAllByContent($param['contentId'])
+                 : Jasius_Model_File::del($param['fileId']);
 
-        $response->setSuccess($retData);
-        $response->getResponse();
+        $response->setSuccess($retData)->getResponse();
     }
 
     public function postAction()
     {
         $response = $this->_helper->response();
         $errors = array();
+
+        //KBBTODO move this to config file this is hardcoded :S
         $relativePath = WEB_PATH.DIRECTORY_SEPARATOR.'uploads'.DIRECTORY_SEPARATOR;
 
         $valid_chars_regex = '.A-Z0-9_ !@#$%^&()+={}\[\]\',~`-';
+
         //Characters allowed in the file name (in a Regular Expression format)
         //Header 'X-File-Name' has the dashes converted to underscores by PHP:
-        if(!isset($_SERVER['HTTP_X_FILE_NAME']) ){
+        if (!isset($_SERVER['HTTP_X_FILE_NAME'])) {
             $errors['fileExist'] = 'Missing file name';
         }
 
@@ -81,23 +77,22 @@ class Jasius_FileController extends Kebab_Rest_Controller
         $path_info = pathinfo($file_name);
         $file_name = 'File_Cnt_'.$_SERVER['HTTP_EXTRAPOSTDATA_CONTENTID'].'_'.microtime();
         
-        if (array_key_exists('extension',$path_info))
-        {
+        if (array_key_exists('extension',$path_info)) {
             $file_name = $file_name.'.'.$path_info['extension'];
         }
+
         $file_name = str_replace(' ','',$file_name);
-        if(file_exists($relativePath. $file_name) ){
+
+        if (file_exists($relativePath. $file_name)) {
             $errors['fileExist'] = 'A file with this name already exists';
         }
 
         if (count($errors) > 0) {
-            $response->setErrors($errors);
-            $response->getResponse();
+            $response->setErrors($errors)->getResponse();
         } else {
             $file = file_get_contents('php://input');
             if(FALSE === file_put_contents($relativePath.$file_name, $file) ){
-                //die('{"success":false,"error":"Error saving file. Check that directory exists and permissions are set properly"}');
-                $errors['permissionOrDirectoryNotExist'] = 'Error saving file. Check that directory exists and permissions are set properly"';
+                $errors['permissionOrDirectoryNotExist'] = 'Error saving file. Check that directory exists and permissions are set properly';
                 $response->setErrors($errors);
                 $response->getResponse();
             } else {
@@ -110,8 +105,7 @@ class Jasius_FileController extends Kebab_Rest_Controller
                     'size' => $size,
                     'mime' => $mime
                 );
-                $response->setSuccess(true)->addData($file);
-                $response->getResponse();
+                $response->setSuccess(true)->addData($file)->getResponse();
             }
         }
     }

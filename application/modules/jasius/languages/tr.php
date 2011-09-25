@@ -41,5 +41,16 @@ return array(
     'Data type is not appropriate in this area' => 'Data tipi bu alan için uygun değildir',
     'Please select from the list' => 'Lütfen listeden seçiniz',
     'Same record entered before' => 'Bu kayıt daha önce girilmiş',
-    'Document is saved.' => 'Belge kaydedildi.'
+
+    // ContentController
+    'Document is saved.' => 'Belge kaydedildi.',
+    'Document\'s property can be founded.' => 'Döküman\'ın özellik bulunamadı.',
+
+    // AccessController
+    'Access rights were saved.' => 'Erişim yetkileri kaydedildi.',
+    'Access rights could not saved.' => 'Erişim yetkileri kaydedilemedi.',
+
+    // File Controller
+    'Missing file name' => 'Dosya ismi eksik',
+    'Error saving file. Check that directory exists and permissions are set properly' => 'Dosya kaydetme hatası. Dizinin olduğunu ve yetkilerinin ayarlandığını kotrol ediniz.'
 );

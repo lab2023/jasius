@@ -41,5 +41,16 @@ return array(
     'Data type is not appropriate in this area' => 'Data type is not appropriate in this area',
     'Please select from the list' => 'Please select from the list',
     'Same record entered before' => 'Same record entered before',
-    'Document is saved' => 'Document is saved'
+
+    // ContentController
+    'Document is saved.' => 'Document is saved.',
+    'Document\'s property can be founded.' => 'Document\'s property can be founded.',
+
+    // AccessController
+    'Access rights were saved.' => 'Access rights were saved.',
+    'Access rights could not saved.' => 'Access rights could not saved.',
+
+    // File Controller
+    'Missing file name' => 'Missing file name',
+    'Error saving file. Check that directory exists and permissions are set properly' => 'Error saving file. Check that directory exists and permissions are set properly'
 );

@@ -37,22 +37,19 @@ class Jasius_AccessController extends Kebab_Rest_Controller
 {
     public function postAction()
     {
-        $param = $this->_helper->param();
         $response = $this->_helper->response();
+        $param = $this->_helper->param();
         $roles = array_key_exists('roleId',$param) ? $param['roleId'] : array();
         $users = array_key_exists('userId',$param) ? $param['userId'] : array();
 
-        $sucDel = Jasius_Model_Access::del($param['contentId']);
-        if ($sucDel){
-            $success = Jasius_Model_Access::add($param['contentId'], $param['accessType'], $roles, $users);
-        } else {
-            $success = false;
-        }
+        $success = Jasius_Model_Access::del($param['contentId'])
+                 ? Jasius_Model_Access::add($param['contentId'], $param['accessType'], $roles, $users)
+                 : false;
 
         if ($success) {
-            $response->setSuccess(true)->addNotification('INFO', 'Erişimler başarı ile kaydedilmiştir.');
+            $response->setSuccess(true)->addNotification('INFO', 'Access rights were saved successfully.');
         } else {
-            $response->addNotification('ERR', 'Erişim Kaydı Başarısız..');
+            $response->addNotification('ERR', 'Access rights could not saved.');
         }
 
         $response->getResponse();
@@ -60,11 +57,11 @@ class Jasius_AccessController extends Kebab_Rest_Controller
 
     public function indexAction()
     {
-        $param = $this->_helper->param();
         $response = $this->_helper->response();
+        $param = $this->_helper->param();
         $query = Jasius_Model_Access::getAllRightAccess($param['contentId']);
 
-        if (is_bool($query)){
+        if (is_bool($query)) {
             $response->setSuccess($query);
         } else {
             $response->setSuccess(true)->addData($query);

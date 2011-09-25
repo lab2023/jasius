@@ -37,16 +37,21 @@ class Jasius_ContentController extends Kebab_Rest_Controller
 {
     public function deleteAction()
     {
-        $param = $this->_helper->param();
         $response = $this->_helper->response();
-        $retVal = Jasius_Model_Content::del($param['contentId']);
-        $response->setSuccess(true)->getResponse();
+        $param = $this->_helper->param();
+        if (Jasius_Model_Content::del($param['contentId'])) {
+            $response->setSuccess(true);
+        } else {
+            $response->setSuccess(false);
+        }
+
+        $response->getResponse();
     }
     
     public function indexAction()
     {
-        $param = $this->_helper->param();
         $response = $this->_helper->response();
+        $param = $this->_helper->param();
 
         $options = array();
         if (array_key_exists('query', $param)) {
@@ -112,7 +117,7 @@ class Jasius_ContentController extends Kebab_Rest_Controller
             $propertyId =$expProperty[count($expProperty)-1];
 
             $type = Doctrine_Core::getTable('Model_Entity_Property')->find($propertyId);
-            if (is_bool($type)){
+            if (is_bool($type)) {
                 $response->getResponse();
             }
             $content = Jasius_Model_Content::add($type->type_id);
@@ -142,22 +147,23 @@ class Jasius_ContentController extends Kebab_Rest_Controller
 
     public function getAction()
     {
-        $param = $this->_helper->param();
         $response = $this->_helper->response();
+        $param   = $this->_helper->param();
         $content = Doctrine_Core::getTable('Model_Entity_Content')->find($param['contentId']);
+        
         $rawData = is_object($content)
                 ? Jasius_Model_Data::getDataForLoadDocumentForm($content->id)
                 : array();
 
         $retData = array();
-        foreach($rawData as $item) {
+        foreach ($rawData as $item) {
             $retData['property_item_'. $item['property_id']] = $item[Jasius_Model_Data::mapping($item['dataType'])];
         }
 
-        if(count($retData)>0){
+        if (count($retData)>0) {
             $response->setSuccess(true)->addData($retData);
         } else {
-            $response->setSuccess(false)->add('msg','Property bulunamadı.');
+            $response->setSuccess(false)->add('msg','Document\'s property can be founded.');
         }
         $response->getResponse();
 
