@@ -8,19 +8,19 @@
  * @property integer $property_id
  * @property integer $content_id
  * @property decimal $decimalValue
- * @property integer $integerValue
  * @property decimal $floatValue
+ * @property integer $integerValue
  * @property date $dateValue
  * @property string $stringValue
  * @property time $timeValue
  * @property timestamp $timestampValue
- * @property char $booleanValue
+ * @property boolean $booleanValue
  * @property string $enumValue
- * @property string $arrayValue
- * @property string $objectValue
- * @property string $blobValue
- * @property string $clobValue
- * @property string $gzipValue
+ * @property array $arrayValue
+ * @property object $objectValue
+ * @property blob $blobValue
+ * @property clob $clobValue
+ * @property gzip $gzipValue
  * @property Model_Entity_Property $Property
  * @property Model_Entity_Content $Content
  * 
@@ -47,21 +47,20 @@ class Model_Entity_Data extends Doctrine_Record
              'scale' => 6,
              'length' => '24',
              ));
-        $this->hasColumn('integerValue', 'integer', 10, array(
-             'type' => 'integer',
-             'length' => '10',
-             ));
         $this->hasColumn('floatValue', 'decimal', 24, array(
              'type' => 'decimal',
              'scale' => 6,
              'length' => '24',
              ));
+        $this->hasColumn('integerValue', 'integer', 10, array(
+             'type' => 'integer',
+             'length' => '10',
+             ));
         $this->hasColumn('dateValue', 'date', null, array(
              'type' => 'date',
              ));
-        $this->hasColumn('stringValue', 'string', 255, array(
+        $this->hasColumn('stringValue', 'string', null, array(
              'type' => 'string',
-             'length' => '255',
              ));
         $this->hasColumn('timeValue', 'time', null, array(
              'type' => 'time',
@@ -69,33 +68,29 @@ class Model_Entity_Data extends Doctrine_Record
         $this->hasColumn('timestampValue', 'timestamp', null, array(
              'type' => 'timestamp',
              ));
-        $this->hasColumn('booleanValue', 'char', 1, array(
-             'type' => 'char',
-             'length' => '1',
+        $this->hasColumn('booleanValue', 'boolean', null, array(
+             'type' => 'boolean',
              ));
-        $this->hasColumn('enumValue', 'string', 255, array(
+        $this->hasColumn('enumValue', 'string', null, array(
              'type' => 'string',
-             'length' => '255',
              ));
-        $this->hasColumn('arrayValue', 'string', 750, array(
-             'type' => 'string',
-             'length' => '750',
+        $this->hasColumn('arrayValue', 'array', 10000, array(
+             'type' => 'array',
+             'length' => '10000',
              ));
-        $this->hasColumn('objectValue', 'string', 750, array(
-             'type' => 'string',
-             'length' => '750',
+        $this->hasColumn('objectValue', 'object', null, array(
+             'type' => 'object',
              ));
-        $this->hasColumn('blobValue', 'string', 1200, array(
-             'type' => 'string',
-             'length' => '1200',
+        $this->hasColumn('blobValue', 'blob', 2147483647, array(
+             'type' => 'blob',
+             'length' => '2147483647',
              ));
-        $this->hasColumn('clobValue', 'string', 1200, array(
-             'type' => 'string',
-             'length' => '1200',
+        $this->hasColumn('clobValue', 'clob', 2147483647, array(
+             'type' => 'clob',
+             'length' => '2147483647',
              ));
-        $this->hasColumn('gzipValue', 'string', 1200, array(
-             'type' => 'string',
-             'length' => '1200',
+        $this->hasColumn('gzipValue', 'gzip', null, array(
+             'type' => 'gzip',
              ));
 
         $this->option('type', 'INNODB');
@@ -126,14 +121,11 @@ class Model_Entity_Data extends Doctrine_Record
               3 => 'dateValue',
               4 => 'timeValue',
               5 => 'timestampValue',
-              6 => 'booleanValue',
-              7 => 'enumValue',
-              8 => 'blobValue',
-              9 => 'stringValue',
-              10 => 'clobValue',
-              11 => 'arrayValue',
-              12 => 'objectValue',
-              13 => 'gzipValue',
+              6 => 'enumValue',
+              7 => 'stringValue',
+              8 => 'clobValue',
+              9 => 'arrayValue',
+              10 => 'objectValue',
              ),
              'className' => 'JasiusDataSearch',
              ));

@@ -118,33 +118,33 @@ Data:
     decimalValue:
       type: decimal(24)
       scale: 6
-    integerValue:
-      type: integer(10)
     floatValue:
       type: decimal(24)
       scale: 6
+    integerValue:
+      type: integer(10)
     dateValue:
       type: date
     stringValue:
-      type: string(255)
+      type: string
     timeValue:
       type: time
     timestampValue:
       type: timestamp
     booleanValue:
-      type: char(1)
+      type: boolean
     enumValue:
-      type: string(255)
+      type: string
     arrayValue:
-      type: string(750)
+      type: array(10000)
     objectValue:
-      type: string(750)
+      type: object
     blobValue:
-      type: string(1200)
+      type: blob(2147483647)
     clobValue:
-      type: string(1200)
+      type: clob(2147483647)
     gzipValue:
-      type: string(1200)
+      type: gzip
 
   relations:
     Property:
@@ -157,7 +157,7 @@ Data:
     Timestampable:
     Blameable:
     Searchable:
-      fields: [decimalValue, integerValue, floatValue, dateValue, timeValue, timestampValue, booleanValue, enumValue, blobValue, stringValue, clobValue, arrayValue, objectValue, gzipValue]
+      fields: [decimalValue, integerValue, floatValue, dateValue, timeValue, timestampValue, enumValue, stringValue, clobValue, arrayValue, objectValue]
       className: JasiusDataSearch
 
   options:
