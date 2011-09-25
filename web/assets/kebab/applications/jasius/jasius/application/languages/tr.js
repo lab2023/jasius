@@ -73,5 +73,10 @@ KebabOS.applications.jasius.application.languages.tr = {
     'Name Surname or E-mail write...' : 'Ad soyad veya e-posta adresi yazınız...',
     'Full Name': 'Tam Adı',
     'Delete User' : 'Kullanıcıyı Sil',
-    'Title' : 'Başlık'
+    'Title' : 'Başlık',
+    'File or picture is not ready': 'Belge yada resim uygun değil',
+    'Download / Open File' : 'Dosyayı İndir / Aç',
+    'Preview Image' : 'Resmi Önizle',
+    'PDF Preview' : 'PDF Önizle',
+
 };
