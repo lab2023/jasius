@@ -46,8 +46,6 @@ class Jasius_Model_Data
     
     public static function add($contentId, array $propertyFormData)
     {
-        // Sort $propertyFormData with $item_id
-        // ksort($propertyFormData);
         // Validation
         $retData = self::validation($contentId, $propertyFormData);
 
@@ -68,9 +66,6 @@ class Jasius_Model_Data
 
     public static function update($contentId, $propertyFormData)
     {
-        // Sort $propertyFormData with $item_id
-        //ksort($propertyFormData);
-
         $retData = self::validation($contentId, $propertyFormData);
 
         if (!self::$validate) {
@@ -81,10 +76,10 @@ class Jasius_Model_Data
                 foreach ($retData as $data) {
                     $col = self::getDataColumn($data);
                     $query = Doctrine_Query::create()
-                        ->update('Model_Entity_Data')
-                        ->set("$col", '?', $data[$col])
-                        ->where('property_id = ?', (int) $data['property_id'])
-                        ->andWhere('content_id = ?', (int) $data['content_id']);
+                                ->update('Model_Entity_Data')
+                                ->set("$col", '?', $data[$col])
+                                ->where('property_id = ?', (int) $data['property_id'])
+                                ->andWhere('content_id = ?', (int) $data['content_id']);
                     $query->execute();
                 }
                 $retVal = Doctrine_Manager::connection()->commit();
@@ -157,10 +152,12 @@ class Jasius_Model_Data
         if (array_key_exists('blobValue', $data)) {
             return 'blobValue';
         }
+
+        throw new Kebab_Exception('Column data type could not detected');
     }
 
     public static function validation ($contentId, $propertyFormData)
-    {;
+    {
         self::$validate = false;
         $content = Doctrine_Core::getTable('Model_Entity_Content')->find($contentId);
         $propertyDataStructure = Jasius_Model_Property::getAllPropertyByTypeId($content->type_id)->execute();
@@ -169,11 +166,10 @@ class Jasius_Model_Data
         $dataCollectionArray = array();
         foreach ($propertyFormData as $propertyKey => $propertyValue) {
             // Check dataType
-
             if ($propertyDataStructure[$i]['dataType'] === 'clob') {
                 $propertyValue = (string) $propertyValue;
             }
-
+            
             $dataTypeCheck = Doctrine_Validator::isValidType($propertyValue, $propertyDataStructure[$i]['dataType']);
             if (!$dataTypeCheck) {
                 $errorMessage[$propertyKey] = 'Data type is not appropriate in this area';
@@ -279,6 +275,7 @@ class Jasius_Model_Data
 
         return $retVal;
     }
+    
     public static function mapping($dataType)
     {
         switch ($dataType) {
