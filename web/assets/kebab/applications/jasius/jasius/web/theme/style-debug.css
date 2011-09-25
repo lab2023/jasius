@@ -1,0 +1,108 @@
+.jasius-application-launcher-icon {
+    background-image: url(images/launcher.png);
+}
+.jasius-application-gui-icon {
+    background-image: url(images/gui.png);
+}
+#jasius-application-shortcut div {
+    background-image: url(images/shortcut.png);
+}
+
+.iconStatus {
+  width:16px;
+  height:16px;
+}
+.kirmizi{
+    color:red;
+}
+.yesil {
+    color:green;
+}
+.action-cloumn {
+    align:center;
+    width:16px;
+    height:16px;
+}
+
+.x-grid3-cell-first .x-grid3-cell-inner {
+    padding-left :5px;
+}
+.au-hidden, .au-hidden *, *.au-hidden {
+	visibility: hidden;
+	width:1px;
+	height:1px;
+	display:block;
+	z-index:-99;
+	position:absolute;
+}
+
+/*
+	For Awesome Uploader in grid with progress bar
+*/
+
+td.x-grid3-td-progress-cell {
+    padding: 0;
+}
+
+td.x-grid3-td-progress-cell div.x-grid3-cell-inner {
+    padding: 0;
+    position: relative;
+    height: 21px;
+}
+
+.ux-progress-cell-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.ux-progress-cell-background {
+    background: #E0E8F3;
+    white-space: nowrap;
+}
+.x-grid3-td-progress-cell .low {
+    background: #11aa11;
+}
+.x-grid3-td-progress-cell .medium {
+    background: #f1fa1a;
+}
+.x-grid3-td-progress-cell .high {
+    background: #ee1111;
+}
+
+.ux-progress-cell-foreground {
+    color: #000;
+    background-color: #9CBFEE;
+    white-space: nowrap;
+    overflow: hidden
+}
+
+.ux-progress-cell-inner-right {
+    text-align: right;
+}
+
+.ux-progress-cell-inner-center {
+    text-align: center;
+}
+
+.ux-progress-cell .ux-progress-cell-inner div {
+    padding: 3px 0 0 4px;
+}
+
+.ux-progress-cell-inner-right div {
+    padding: 3px 4px 0 0;
+    position: relative;
+}
+
+.ux-progress-cell-inner-center div {
+    padding: 3px 0 0 0;
+    position: relative;
+}
+
+.ux-progress-cell-inner-left div {
+    padding: 3px 0 0 4px;
+    position: relative;
+}

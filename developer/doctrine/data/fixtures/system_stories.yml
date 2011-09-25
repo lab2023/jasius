@@ -94,19 +94,19 @@ Model_Entity_Story:
     active: 1
     Translation:
       en:
-        title: Property Managment
-        description: Property Managmanent
+        title: Jasius - Property managment
+        description: Property managmanent with jasius
       tr:
-        title: Özellik Yönetimi
-        description: Özellik Yönetimi
+        title: Jasius - Özellik yönetimi
+        description: Jasius ile özellik yönetimi
 
   Jasius_Add_Document:
     name: jasius_add_document
     active: 1
     Translation:
       en:
-        title: Add a new document
-        description: Add a new document
+        title: Jasius - Add a new document
+        description: Add a new document with jasius
       tr:
-        title: Yeni döküman ekleme
-        description: Yeni döküman ekleme
+        title: Jasius - Yeni döküman ekleme
+        description: Jasius ile yeni döküman ekleme
