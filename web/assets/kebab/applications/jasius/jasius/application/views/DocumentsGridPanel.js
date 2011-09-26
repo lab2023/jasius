@@ -42,7 +42,7 @@ KebabOS.applications.jasius.application.views.DocumentsGridPanel = Ext.extend(Ex
     },
 
     initializeColumnModel : function () {
-        for(var i = this.colModel.getColumnCount(); i > 2 ; i--) {
+        for(var i = this.colModel.getColumnCount(); i > 3 ; i--) {
             var colName = this.colModel.getColumnHeader(i - 1);
             this.removeColumn(colName, i - 1);
         }
@@ -227,7 +227,7 @@ KebabOS.applications.jasius.application.views.DocumentsGridPanel = Ext.extend(Ex
      * Build grid columns
      */
     buildColumns: function() {
-        return [{
+        return [new Ext.grid.RowNumberer(),{
             xtype: 'actioncolumn',
             header: Kebab.helper.translate('Operations'),
             width: 90,

@@ -66,6 +66,7 @@ KebabOS.applications.jasius.application.views.FileGrid = Ext.extend(Ext.grid.Gri
                     sortable: true
                 },
                 columns: [
+                    new Ext.grid.RowNumberer(),
                     {header:'ID',dataIndex:'id', width:30},
                     {header:Kebab.helper.translate('File Name'),dataIndex:'name', width:150},
                     {header:Kebab.helper.translate('Size'),dataIndex:'size', width:60, renderer:Ext.util.Format.fileSize},
@@ -84,6 +85,9 @@ KebabOS.applications.jasius.application.views.FileGrid = Ext.extend(Ext.grid.Gri
                                 if (rec.data.mime.indexOf('image')!= -1 && rec.data.status == 'Completed') {
                                     this.items[0].tooltip = Kebab.helper.translate('Preview Image');
                                     return 'icon-picture action-cloumn';
+                                } else if (rec.data.mime.indexOf('pdf')!= -1 && rec.data.status == 'Completed'){ // is pdf and upload status complated ?
+                                    this.items[0].tooltip = Kebab.helper.translate('PDF Preview');
+                                    return 'icon-page-white-acrobat action-cloumn';
                                 }
 
                                 if (rec.data.mime.indexOf('image')== -1 && rec.data.status == 'Completed'){ // is file and upload status complated ?
@@ -96,16 +100,42 @@ KebabOS.applications.jasius.application.views.FileGrid = Ext.extend(Ext.grid.Gri
                             },
                             handler: function(grid, rowIndex) {
                                 var rec = grid.getStore().getAt(rowIndex);
+
                                 // is image ?
                                 if (rec.data.mime.indexOf('image')!= -1 && rec.data.status == 'Completed') {
-                                   var previewWin = new Ext.Window({
-                                        title  : 'Preview',//todo width height
-                                        items : new Ext.ux.Image ({
-                                            id: 'imgPreview',
-                                            url: BASE_URL+'/uploads/'+rec.data.name //TODO move config
-                                        })
+
+                                    var image = new Ext.ux.Image ({
+                                        url: BASE_URL+'/uploads/'+rec.data.name //TODO move config
+                                    });
+
+                                    var previewWin = new Ext.Window({
+                                        width: 500,
+                                        height: 400,
+                                        modal:true,
+                                        autoScroll:true,
+                                        maximizable:true,
+                                        iconCls: 'icon-picture',
+                                        title  : 'Preview Image' + ' : ' + rec.data.name,
+                                        items: image,
                                     });
                                     previewWin.show();
+                                }
+
+                                // is pdf ?
+                                if (rec.data.mime.indexOf('pdf')!= -1 && rec.data.status == 'Completed') {
+
+                                    var pdfWin = new Ext.Window({
+                                        width: 600,
+                                        height: 500,
+                                        modal:true,
+                                        iconCls: 'icon-page-white-acrobat',
+                                        maximizable:true,
+                                        title  : 'PDF Image' + ' : ' + rec.data.name,
+                                        html: "<iframe width='100%' height='100%' src='" + BASE_URL + '/uploads/' + rec.data.name + "' frameborder='0' />",
+                                    });
+                                    pdfWin.show();
+
+                                    return;
                                 }
 
                                 if (rec.data.mime.indexOf('image')== -1 && rec.data.status == 'Completed'){ // is file and upload status complated ?
