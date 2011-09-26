@@ -2,9 +2,9 @@ Jasi.us is open source, cloud, document management system web application
 
 Features
 --------
-* You can define your own document’s type from YAML config files
-* You can manage your documents. You can add, edit, read, delete documents, search, order, list documents.
-* You setting access permission to documents. You can say that everybody or only user or specific user whose roles are admin, sales or etc or only John, Suzan can access this documents.
+* Content Construction Kit allows you to manage fields to documents.
+* Manage your document, you can add, edit, read, delete, filter, search, order, list documents.
+* Set permission on your document by role, user based.
 * Add more attachment on documents.
 
 Requirements
