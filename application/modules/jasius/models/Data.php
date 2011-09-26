@@ -166,8 +166,16 @@ class Jasius_Model_Data
         $dataCollectionArray = array();
         foreach ($propertyFormData as $propertyKey => $propertyValue) {
             // Check dataType
+
+            // Fixed clob data type
             if ($propertyDataStructure[$i]['dataType'] === 'clob') {
                 $propertyValue = (string) $propertyValue;
+            }
+
+            // Fixed date data type
+            if ($propertyDataStructure[$i]['dataType'] === 'date') {
+                $date = explode('-', $propertyValue);
+                $propertyValue = $date[2] . '-' . $date[1] . '-' . $date[0];
             }
             
             $dataTypeCheck = Doctrine_Validator::isValidType($propertyValue, $propertyDataStructure[$i]['dataType']);
