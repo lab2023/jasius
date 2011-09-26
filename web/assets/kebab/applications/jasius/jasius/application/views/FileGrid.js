@@ -116,7 +116,7 @@ KebabOS.applications.jasius.application.views.FileGrid = Ext.extend(Ext.grid.Gri
                                         maximizable:true,
                                         iconCls: 'icon-picture',
                                         title  : 'Preview Image' + ' : ' + rec.data.name,
-                                        items: image,
+                                        items: image
                                     });
                                     previewWin.show();
                                 }
