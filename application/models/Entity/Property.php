@@ -39,15 +39,14 @@ class Model_Entity_Property extends Doctrine_Record
              'length' => 9,
              'values' => 
              array(
-              0 => 'integer',
-              1 => 'string',
-              2 => 'boolean',
-              3 => 'enum',
-              4 => 'decimal',
-              5 => 'clob',
-              6 => 'timestamp',
-              7 => 'time',
-              8 => 'date',
+              0 => 'string',
+              1 => 'clob',
+              2 => 'integer',
+              3 => 'decimal',
+              4 => 'enum',
+              5 => 'timestamp',
+              6 => 'time',
+              7 => 'date',
              ),
              'notnull' => true,
              ));
