@@ -75,9 +75,6 @@ KebabOS.applications.jasius.application.views.PropertyFormPanel = Ext.extend(Ext
             case "float":
                 field = new Ext.form.NumberField(config);
                 break;
-            case "boolean":
-                field = new Ext.form.Checkbox(config);
-                break;
             case "clob":
                 field = new Ext.form.TextArea(config);
                 break;
