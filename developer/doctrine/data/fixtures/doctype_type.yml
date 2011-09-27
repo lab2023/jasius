@@ -6,10 +6,3 @@ Model_Entity_Type:
       tr:
         title: Nufüs Cüzdanı
     active: true
-  Invoice:
-    Translation:
-      en:
-        title: Invoice
-      tr:
-        title: Fatura
-    active: true

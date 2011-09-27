@@ -1,142 +1,111 @@
 Model_Entity_Property:
-  Identity_No:
+  Identity_String:
     Type: Identity
     Translation:
       en:
-        title: Identity Number
+        title: Text
       tr:
-        title: Kimlik No
+        title: Metin
+    dataType: string
+    isUnique: false
+    isRequire: true
+    weight: 1
+
+  Identity_Clob:
+    Type: Identity
+    Translation:
+      en:
+        title: Paragraph
+      tr:
+        title: Paragraf
+    dataType: clob
+    isUnique: true
+    isRequire: true
+    weight: 2
+
+  Identity_Integer:
+    Type: Identity
+    Translation:
+      en:
+        title: Integer
+      tr:
+        title: Tam
     dataType: integer
     isUnique: true
     isRequire: true
-    #defaultValue:
-    #enum:
-    weight: 1
-
-  Identity_Surname:
-    Type: Identity
-    Translation:
-      en:
-        title: Surname
-      tr:
-        title: Soyisim
-    dataType: string
-    isUnique: false
-    isRequire: true
-    #defaultValue:
-    #enum:
-    weight: 2
-
-  Identity_Name:
-    Type: Identity
-    Translation:
-      en:
-        title: Name
-      tr:
-        title: İsim
-    dataType: clob
-    isUnique: false
-    isRequire: false
-    #defaultValue:
-    #enum:
     weight: 3
 
-  Identity_Type:
+  Identity_Decimal:
     Type: Identity
     Translation:
       en:
-        title: Type
+        title: Decimal field
       tr:
-        title: Tipi
+        title: Ondalık Sayı
+    dataType: decimal
+    isUnique: false
+    isRequire: true
+    weight: 4
+
+  Identity_Boolean:
+    Type: Identity
+    Translation:
+      en:
+        title: Checkbox
+      tr:
+        title: Onay Kutusu
+    dataType: boolean
+    isUnique: false
+    isRequire: false
+    weight: 5
+
+  Identity_Enum:
+    Type: Identity
+    Translation:
+      en:
+        title: Combobox
+      tr:
+        title: Liste
     dataType: enum
     isUnique: false
     isRequire: false
-    #defaultValue:
     enum: 'a:3:{i:0;s:3:"php";i:1;s:4:"java";i:2;s:4:"ruby";}'
-    weight: 4
-    
-  Invoice_Title:
-    Type: Invoice
-    Translation:
-      en:
-        title: Invoice Title
-      tr:
-        title: Döküman Başlığı
-    dataType: string
-    isUnique: false
-    isRequire: true
-    #defaultValue:
-    #enum:
     weight: 6
 
-  Invoice_No:
-    Type: Invoice
-    Translation:
-      en:
-        title: No
-      tr:
-        title: No
-    dataType: string
-    isUnique: true
-    isRequire: true
-    #defaultValue:
-    #enum:
-    weight: 5
-
-  Invoice_Date:
-    Type: Invoice
+  Identity_Date:
+    Type: Identity
     Translation:
       en:
         title: Date
       tr:
-        title: Tarihi
+        title: Tarih
     dataType: date
     isUnique: false
     isRequire: true
-    #defaultValue:
-    #enum:
-    weight: 4
+    weight: 7
 
-  Invoice_Customer:
-    Type: Invoice
+  Identity_Time:
+    Type: Identity
     Translation:
       en:
-        title: Customer
+        title: Time
       tr:
-        title: Müşteri
-    dataType: string
+        title: Zaman
+    dataType: time
     isUnique: false
     isRequire: true
-    #defaultValue:
-    #enum:
-    weight: 3
+    weight: 8
 
-  Invoice_Amount:
-    Type: Invoice
+  Identity_Timestamp:
+    Type: Identity
     Translation:
       en:
-        title: Amount
+        title: Date &amp; Time
       tr:
-        title: Tutar
-    dataType: decimal
+        title: Tarih &amp; Zaman
+    dataType: timestamp
     isUnique: false
     isRequire: true
-    #defaultValue:
-    #enum:
-    weight: 2
-
-  Invoice_Description:
-    Type: Invoice
-    Translation:
-      en:
-        title: Description
-      tr:
-        title: Açıklama
-    dataType: clob
-    isUnique: false
-    isRequire: false
-    #defaultValue:
-    #enum:
-    weight: 1
+    weight: 9
 
 
