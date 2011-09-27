@@ -16,12 +16,12 @@
 
     <?php // LINK AREA -------------------------------------------------------?>
     <link href="<?php echo $this->asset('kernel.css')->distribution()->theme()->get(); ?>" media="screen" rel="stylesheet" type="text/css" />
-    <link href="<?php echo @$this->assetVendor('resources/css/ext-all-notheme.css')->get('extjs', true); ?>" media="screen" rel="stylesheet" type="text/css" />
-    <link href="<?php echo @$this->assetVendor('resources/css/xtheme-gray.css')->get('extjs', true); ?>" media="screen" rel="stylesheet" type="text/css" />
-    <link href="<?php echo @$this->assetVendor('examples/ux/css/ux-all.css')->get('extjs', true); ?>" media="screen" rel="stylesheet" type="text/css" />
+    <link href="<?php echo $this->assetVendor('resources/css/ext-all-notheme.css')->get('extjs', true); ?>" media="screen" rel="stylesheet" type="text/css" />
+    <link href="<?php echo $this->assetVendor('resources/css/xtheme-gray.css')->get('extjs', true); ?>" media="screen" rel="stylesheet" type="text/css" />
+    <link href="<?php echo $this->assetVendor('examples/ux/css/ux-all.css')->get('extjs', true); ?>" media="screen" rel="stylesheet" type="text/css" />
     <link href="<?php echo $this->assetVendor('silk/famfamfam-silk-icons.css')->get('famfamfam', true); ?>" media="screen" rel="stylesheet" type="text/css" />
     <link href="<?php echo $this->assetVendor('flags/famfamfam-flag-icons.css')->get('famfamfam', true); ?>" media="screen" rel="stylesheet" type="text/css" />
-    <?php echo $this->headLink(array('rel' => 'favicon','href' => $this->asset('favicon.ico')->getWeb())); ?>
+    <?php echo $this->headLink(array('rel' => 'favicon','href' => $this->asset('favicon.ico')->get(false))); ?>
 
     <?php // STYLE AREA ------------------------------------------------------?>
     <style type="text/css">
@@ -44,13 +44,9 @@
 
     <?php
     echo $this->headScript()
+        ->prependFile($this->asset('library')->get())
         ->prependFile($this->asset('languages/'.$this->translate()->getLocale().'.js')->distribution()->get())
-        ->prependFile($this->asset('kernel/Logger.js')->distribution()->get())
-        ->prependFile($this->asset('kernel/Notification.js')->distribution()->get())
-        ->prependFile($this->asset('kernel/Translator.js')->distribution()->get())
-        ->prependFile($this->asset('kernel/OS.js')->distribution()->get())
-        ->prependFile($this->asset('kernel/Kebab.js')->distribution()->get())
-        ->prependFile($this->assetVendor('swfupload.js')->get('swfupload', true))
+        ->prependFile($this->asset('kernel/kernel-all.js')->distribution()->get())
         ->prependFile($this->assetVendor('src/locale/ext-lang-'.$this->translate()->getLocale().'.js')->get('extjs', true))
         ->prependFile($this->assetVendor('examples/ux/ux-all.js')->get('extjs'))
         ->prependFile($this->assetVendor('ext-all.js')->get('extjs'))
