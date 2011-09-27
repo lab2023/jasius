@@ -38,7 +38,11 @@ KebabOS.applications.jasius.application.views.FilePanel = Ext.extend(Ext.Panel, 
 
         this.fileUploader.fileGrid = this.fileGrid;
         
-        this.items = [this.fileUploader, {border:false, height:5, frame:false,},this.fileGrid];
+        this.items = [
+            this.fileUploader,
+            {border:false, height:5, frame:false},
+            this.fileGrid
+        ];
 
         KebabOS.applications.jasius.application.views.FilePanel.superclass.initComponent.call(this);
     },
@@ -49,9 +53,11 @@ KebabOS.applications.jasius.application.views.FilePanel = Ext.extend(Ext.Panel, 
             this.onLoad();
         }
     },
+
     onSubmit:function() {
         this.owner.close();
     },
+
     onLoad: function() {
         var contentId = this.owner.contentId;
         this.fileUploader.extraPostData = {

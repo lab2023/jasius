@@ -69,20 +69,23 @@ class Jasius_FileController extends Kebab_Rest_Controller
 
         //Characters allowed in the file name (in a Regular Expression format)
         //Header 'X-File-Name' has the dashes converted to underscores by PHP:
-        if (!isset($_SERVER['HTTP_X_FILE_NAME'])) {
-            $errors['fileExist'] = 'Missing file name';
+        if (!isset($_SERVER['HTTP_X_FILE_NAME'])) { // Drag & drop upload with ajax upload
+            $serverFileName = $this->_request->getParam('Filename');
+            $contentId = $this->_request->getParam('contentId');
+        } else { // Standart post upload (select files)
+            $serverFileName = $_SERVER['HTTP_X_FILE_NAME'];
+            $contentId = $_SERVER['HTTP_EXTRAPOSTDATA_CONTENTID'];
         }
 
-        $file_name = preg_replace('/[^'.$valid_chars_regex.']|\.+$/i', '', $_SERVER['HTTP_X_FILE_NAME']);
-        $path_info = pathinfo($file_name);
-        $file_name = 'File_Cnt_'.$_SERVER['HTTP_EXTRAPOSTDATA_CONTENTID'].'_'.microtime();
-        
+        $path_info = pathinfo(preg_replace('/[^'.$valid_chars_regex.']|\.+$/i', '', $serverFileName));
+        $file_name = 'File_Cnt_'.$contentId.'_'.microtime();
+
         if (!array_key_exists('extension',$path_info)) {
              $errors['extensionNotExist'] = 'File has not extension';
         } else {
             $file_name = $file_name.'.'.$path_info['extension'];
         }
-
+        
         $file_name = str_replace(' ','',$file_name);
 
         if (file_exists($relativePath. $file_name)) {
@@ -95,15 +98,14 @@ class Jasius_FileController extends Kebab_Rest_Controller
             $file = file_get_contents('php://input');
             if(FALSE === file_put_contents($relativePath.$file_name, $file) ){
                 $errors['permissionOrDirectoryNotExist'] = 'Error saving file. Check that directory exists and permissions are set properly';
-                $response->setErrors($errors);
-                $response->getResponse();
+                $response->setErrors($errors)->getResponse();
             } else {
                 $size = filesize($relativePath.$file_name);
                 $mime = '';
                 if (array_key_exists('extension',$path_info)) {
                     $mime = Jasius_Model_File::getMimeType($path_info['extension']);
                 }
-                $retData = Jasius_Model_File::add($_SERVER['HTTP_EXTRAPOSTDATA_CONTENTID'],$file_name, $size , $mime);
+                $retData = Jasius_Model_File::add($contentId,$file_name, $size , $mime);
                 $file = array(
                     'id' => $retData,
                     'name' => $file_name,
