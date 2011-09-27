@@ -77,7 +77,7 @@ class Jasius_FileController extends Kebab_Rest_Controller
             $contentId = $_SERVER['HTTP_EXTRAPOSTDATA_CONTENTID'];
         }
 
-        $path_info = pathinfo(preg_replace('/[^'.$valid_chars_regex.']|\.+$/i', '', $serverFileName));
+        $path_info = pathinfo(preg_replace('/[^'.$valid_chars_regex.']|\.+$/i', '', strtolower($serverFileName)));
         $file_name = 'File_Cnt_'.$contentId.'_'.microtime();
 
         if (!array_key_exists('extension',$path_info)) {
@@ -86,7 +86,7 @@ class Jasius_FileController extends Kebab_Rest_Controller
             $file_name = $file_name.'.'.$path_info['extension'];
         }
         
-        $file_name = str_replace(' ','',$file_name);
+        $file_name = strtolower(str_replace(' ','',$file_name));
 
         if (file_exists($relativePath. $file_name)) {
             $errors['fileExist'] = 'A file with this name already exists';
