@@ -43,7 +43,7 @@ Property:
     dataType:
       type: enum
       length: 9
-      values: ['integer', 'string', 'boolean', 'enum', 'decimal', 'clob', 'timestamp', 'time', 'date']
+      values: ['string','clob', 'integer', 'decimal', 'enum', 'timestamp', 'time', 'date']
       notnull: true
     isUnique:
       type: int(1)
