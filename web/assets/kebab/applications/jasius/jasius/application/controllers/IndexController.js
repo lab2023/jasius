@@ -162,7 +162,6 @@ KebabOS.applications.jasius.application.controllers.Index = Ext.extend(Ext.util.
             var win = Ext.getCmp(id + '-add-window');
             if (!win) {
                 var desktop = this.bootstrap.app.getDesktop();
-                console.log(desktop);
                 win = desktop.createApplication({
                     id: id + '-add-window',
                     animateTarget: 'document-add-button',

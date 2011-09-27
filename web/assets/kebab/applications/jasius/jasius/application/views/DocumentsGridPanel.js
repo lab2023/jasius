@@ -134,19 +134,13 @@ KebabOS.applications.jasius.application.views.DocumentsGridPanel = Ext.extend(Ex
             case "date":
                 Ext.apply(column, {
                     xtype : 'datecolumn',
-                    format :'d-m-Y'
-                });
-                break;
-            case "time":
-                Ext.apply(column, {
-                    xtype : 'datecolumn',
-                    format :'H:i:s'
+                    format :'Y-m-d'
                 });
                 break;
             case  "timestamp":
                 Ext.apply(column, {
                     xtype : 'datecolumn',
-                    format :'d-m-Y H:i:s'
+                    format :'Y-m-d H:i:s'
                 });
                 break;
             case  "decimal":
@@ -200,12 +194,6 @@ KebabOS.applications.jasius.application.views.DocumentsGridPanel = Ext.extend(Ex
                 break;
 
             case "date":
-                Ext.apply(field, {
-                    type : 'date'
-                });
-                break;
-
-            case "time":
                 Ext.apply(field, {
                     type : 'date'
                 });

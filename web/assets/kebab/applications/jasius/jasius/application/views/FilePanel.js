@@ -19,14 +19,18 @@ KebabOS.applications.jasius.application.views.FilePanel = Ext.extend(Ext.Panel, 
         align: 'stretch'
     },
     frame:true,
+    bodyCfg: {
+        cls: 'fileUploadArea'
+    },
     border: false,
-    padding: 5,
+    padding: 2,
 
 
     initComponent: function(panel) {
 
         this.fileUploader = new KebabOS.applications.jasius.application.views.FileUpload({
-            owner: this
+            owner: this,
+            height:0
         });
 
         this.fileGrid = new KebabOS.applications.jasius.application.views.FileGrid ({
@@ -40,7 +44,6 @@ KebabOS.applications.jasius.application.views.FilePanel = Ext.extend(Ext.Panel, 
         
         this.items = [
             this.fileUploader,
-            {border:false, height:5, frame:false},
             this.fileGrid
         ];
 

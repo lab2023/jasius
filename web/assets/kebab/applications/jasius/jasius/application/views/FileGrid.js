@@ -50,11 +50,11 @@ KebabOS.applications.jasius.application.views.FileGrid = Ext.extend(Ext.grid.Gri
         
         var config = {
             enableHdMenu:false,
-            stripeRows: true,
+            stripeRows: false,
             trackMouseOver:true,
             clicksToEdit: true,
             viewConfig: {
-                emptyText: Kebab.helper.translate('Record not found...'),
+                emptyText: Kebab.helper.translate('Drag &amp; drop your files here...'),
                 forceFit: true
             },
             store: new Ext.data.JsonStore({
@@ -67,8 +67,13 @@ KebabOS.applications.jasius.application.views.FileGrid = Ext.extend(Ext.grid.Gri
                 },
                 columns: [
                     new Ext.grid.RowNumberer(),
-                    {header:'ID',dataIndex:'id', width:30},
-                    {header:Kebab.helper.translate('File Name'),dataIndex:'name', width:150},
+                    {header:'ID',dataIndex:'id', width:20},
+                    {header:Kebab.helper.translate('File Name'),dataIndex:'name', width:150,
+                        renderer: function(v,m,rec) {
+                            var url = BASE_URL+'/uploads/'+rec.data.name; //TODO move config
+                            return "<a href='"+url+"' target='_blank'>"+v+"</a> ";
+                        }
+                    },
                     {header:Kebab.helper.translate('Size'),dataIndex:'size', width:60, renderer:Ext.util.Format.fileSize},
                     {header:Kebab.helper.translate('Mime'), dataIndex:'mime',width:60},
                     {header:Kebab.helper.translate('Progress'),dataIndex:'progress', renderer:progressBarColumnRenderer},
