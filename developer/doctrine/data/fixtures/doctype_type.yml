@@ -1,8 +1,8 @@
 Model_Entity_Type:
-  Identity:
+  Test:
     Translation:
       en:
-        title: Identity Cart
+        title: Test
       tr:
-        title: Nufüs Cüzdanı
+        title: Test
     active: true
