@@ -67,7 +67,12 @@ td.x-grid3-td-progress-cell div.x-grid3-cell-inner {
 .x-grid3-td-progress-cell .high {
     background: #ee1111;
 }
-
+.fileUploadArea .x-grid3-scroller {
+    background: url('images/icon-drop-file.png') no-repeat center;
+}
+.fileUploadArea .x-grid3-scroller .x-grid-empty {
+    font-size:20px;
+}
 .ux-progress-cell-foreground {
     color: #000;
     background-color: #9CBFEE;

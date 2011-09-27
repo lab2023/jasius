@@ -18,6 +18,7 @@ KebabOS.applications.jasius.application.views.FileUpload = Ext.extend(Ext.ux.Awe
         var config = {
             awesomeUploaderRoot: BASE_URL + '/assets/vendors/swfupload/',//todo move config
             allowDragAndDropAnywhere:true,
+            disableFlash: true,
             autoStartUpload:false,
             maxFileSizeBytes: 30 * 1024 * 1024, // 30 MB
             flashUploadUrl:Kebab.helper.url('jasius/file'),
