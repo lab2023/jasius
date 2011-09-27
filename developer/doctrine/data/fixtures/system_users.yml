@@ -3,8 +3,8 @@ Model_Entity_User:
   Member:
     userName: member
     password: aa08769cdcb26674c6706093503ff0a3
-    fullName: Bill Gates
-    email: member@kebab-project.com
+    fullName: Member
+    email: member@jasi.us
     language: tr
     status: approved
     active: '1'
@@ -12,8 +12,8 @@ Model_Entity_User:
   Admin:
     userName: admin
     password: 21232f297a57a5a743894a0e4a801fc3
-    fullName: Steve Jobs
-    email: admin@kebab-project.com
+    fullName: Admin
+    email: admin@jasi.us
     language: en
     status: approved
     active: '1'

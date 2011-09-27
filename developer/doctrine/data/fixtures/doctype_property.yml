@@ -1,6 +1,6 @@
 Model_Entity_Property:
-  Identity_String:
-    Type: Identity
+   Test_String:
+    Type: Test
     Translation:
       en:
         title: Text
@@ -11,8 +11,8 @@ Model_Entity_Property:
     isRequire: true
     weight: 1
 
-  Identity_Clob:
-    Type: Identity
+   Test_Clob:
+    Type:  Test
     Translation:
       en:
         title: Paragraph
@@ -23,8 +23,8 @@ Model_Entity_Property:
     isRequire: true
     weight: 2
 
-  Identity_Integer:
-    Type: Identity
+   Test_Integer:
+    Type:  Test
     Translation:
       en:
         title: Integer
@@ -35,8 +35,8 @@ Model_Entity_Property:
     isRequire: true
     weight: 3
 
-  Identity_Decimal:
-    Type: Identity
+   Test_Decimal:
+    Type:  Test
     Translation:
       en:
         title: Decimal field
@@ -47,8 +47,8 @@ Model_Entity_Property:
     isRequire: true
     weight: 4
 
-  Identity_Enum:
-    Type: Identity
+   Test_Enum:
+    Type:  Test
     Translation:
       en:
         title: Combobox
@@ -60,8 +60,8 @@ Model_Entity_Property:
     enum: 'a:3:{i:0;s:3:"php";i:1;s:4:"java";i:2;s:4:"ruby";}'
     weight: 6
 
-  Identity_Date:
-    Type: Identity
+   Test_Date:
+    Type:  Test
     Translation:
       en:
         title: Date
@@ -72,8 +72,8 @@ Model_Entity_Property:
     isRequire: true
     weight: 7
 
-  Identity_Time:
-    Type: Identity
+   Test_Time:
+    Type:  Test
     Translation:
       en:
         title: Time
@@ -84,8 +84,8 @@ Model_Entity_Property:
     isRequire: true
     weight: 8
 
-  Identity_Timestamp:
-    Type: Identity
+   Test_Timestamp:
+    Type:  Test
     Translation:
       en:
         title: Date &amp; Time
