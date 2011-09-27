@@ -40,8 +40,7 @@ KebabOS.applications.aboutMe.application.Bootstrap = function() {
     Ext.apply(this, {
         // Application Launcher Settings
         launcher: {
-            iconCls: 'aboutMe-application-launcher-icon',
-            autoStart: true
+            iconCls: 'aboutMe-application-launcher-icon'
         }
     });
 
