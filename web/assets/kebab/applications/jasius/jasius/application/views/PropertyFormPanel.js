@@ -83,7 +83,7 @@ KebabOS.applications.jasius.application.views.PropertyFormPanel = Ext.extend(Ext
                 break;
             case "date":
                 field = new Ext.form.DateField(Ext.apply(config, {
-                    format: 'd-m-Y'
+                    format: 'Y-m-d'
                 }));
                 break;
             case "time":
@@ -93,7 +93,7 @@ KebabOS.applications.jasius.application.views.PropertyFormPanel = Ext.extend(Ext
                 break;
             case "timestamp":
                 field = new Ext.ux.form.DateTime(Ext.apply(config, {
-                    dateFormat: 'd-m-Y',
+                    dateFormat: 'Y-m-d',
                     timeFormat: 'H:i:s'
                 }));
                 break;

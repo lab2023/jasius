@@ -47,18 +47,6 @@ Model_Entity_Property:
     isRequire: true
     weight: 4
 
-  Identity_Boolean:
-    Type: Identity
-    Translation:
-      en:
-        title: Checkbox
-      tr:
-        title: Onay Kutusu
-    dataType: boolean
-    isUnique: false
-    isRequire: false
-    weight: 5
-
   Identity_Enum:
     Type: Identity
     Translation:

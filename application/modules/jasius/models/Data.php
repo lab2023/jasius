@@ -172,12 +172,6 @@ class Jasius_Model_Data
                 $propertyValue = (string) $propertyValue;
             }
 
-            // Fixed date data type
-            if ($propertyDataStructure[$i]['dataType'] === 'date') {
-                $date = explode('-', $propertyValue);
-                $propertyValue = $date[2] . '-' . $date[1] . '-' . $date[0];
-            }
-            
             $dataTypeCheck = Doctrine_Validator::isValidType($propertyValue, $propertyDataStructure[$i]['dataType']);
             if (!$dataTypeCheck) {
                 $errorMessage[$propertyKey] = 'Data type is not appropriate in this area';
