@@ -103,3 +103,7 @@ Model_Entity_Service:
   Jasius_IsUnique:
     Story: Jasius_Add_Document
     Resource: Jasius_IsUnique
+
+  Jasius_GetAllRoles:
+    Story: Jasius_Add_Document
+    Action: Kebab_Role_Index
