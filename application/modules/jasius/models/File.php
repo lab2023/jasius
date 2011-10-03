@@ -428,6 +428,7 @@ class Jasius_Model_File
         $mimeTypes['qti'] = 'image/x-quicktime';
         $mimeTypes['qtif'] = 'image/x-quicktime';
         $mimeTypes['ra'] = 'audio/x-pn-realaudio';
+        $mimeTypes['rar'] = 'application/x-rar';
         $mimeTypes['ram'] = 'audio/x-pn-realaudio';
         $mimeTypes['ras'] = 'image/cmu-raster';
         $mimeTypes['rast'] = 'image/cmu-raster';
