@@ -6,3 +6,27 @@ Model_Entity_Type:
       tr:
         title: Test
     active: true
+
+  Invoice:
+    Translation:
+      en:
+        title: Invoice
+      tr:
+        title: Fatura
+    active: true
+
+  Document:
+    Translation:
+      en:
+        title: Incoming/Outgoing Document
+      tr:
+        title: Gelen/Giden Evrak
+    active: true
+
+  Order:
+    Translation:
+      en:
+        title: Order Contract
+      tr:
+        title: Sipariş Sözleşmesi
+    active: true

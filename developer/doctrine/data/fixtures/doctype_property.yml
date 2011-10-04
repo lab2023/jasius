@@ -96,4 +96,207 @@ Model_Entity_Property:
     isRequire: true
     weight: 9
 
+   Invoice_No:
+    Type:  Invoice
+    Translation:
+      en:
+        title: Invoice No
+      tr:
+        title: Invoice No
+    dataType: string
+    isUnique: true
+    isRequire: true
+    weight: 1
 
+   Invoice_Firm:
+    Type:  Invoice
+    Translation:
+      en:
+        title: Firm
+      tr:
+        title: Firma
+    dataType: string
+    isUnique: false
+    isRequire: true
+    weight: 2
+
+   Invoice_Date:
+    Type:  Invoice
+    Translation:
+      en:
+        title: Invoice Date
+      tr:
+        title: Fatura Tarihi
+    dataType: date
+    isUnique: false
+    isRequire: true
+    weight: 3
+
+   Invoice_Description:
+    Type:  Invoice
+    Translation:
+      en:
+        title: Invoice Description
+      tr:
+        title: Fatura Açıklaması
+    dataType: clob
+    isUnique: false
+    isRequire: false
+    weight: 4
+
+   Invoice_Total:
+    Type:  Invoice
+    Translation:
+      en:
+        title: Total
+      tr:
+        title: Tutar
+    dataType: decimal
+    isUnique: false
+    isRequire: true
+    weight: 5
+
+   Order_Number:
+    Type: Order
+    Translation:
+      en:
+        title: Order No
+      tr:
+        title: Sipariş No
+    dataType: string
+    isUnique: true
+    isRequire: true
+    weight: 1
+
+   Order_Date:
+    Type:  Order
+    Translation:
+      en:
+        title: Order Date
+      tr:
+        title: Sipariş Tarihi
+    dataType: date
+    isUnique: false
+    isRequire: true
+    weight: 2
+
+   Order_Duedate:
+    Type:  Order
+    Translation:
+      en:
+        title: Order Due Date
+      tr:
+        title: Sipariş Termin Tarihi
+    dataType: date
+    isUnique: false
+    isRequire: true
+    weight: 3
+
+   Order_Desc:
+    Type:  Order
+    Translation:
+      en:
+        title: Order Description
+      tr:
+        title: Sipariş Açıklaması
+    dataType: clob
+    isUnique: false
+    isRequire: true
+    weight: 4
+
+   Order_ExtDesc:
+    Type:  Order
+    Translation:
+      en:
+        title: Order Extra Description
+      tr:
+        title: Sipariş Ek Açıklama
+    dataType: clob
+    isUnique: false
+    isRequire: false
+    weight: 5
+
+   Order_Total:
+    Type:  Order
+    Translation:
+      en:
+        title: Total
+      tr:
+        title: Tutar
+    dataType: decimal
+    isUnique: false
+    isRequire: true
+    weight: 5
+
+   Order_Payment:
+    Type:  Order
+    Translation:
+      en:
+        title: Payment
+      tr:
+        title: Ödeme
+    dataType: enum
+    isUnique: false
+    isRequire: true
+    enum: 'a:6:{i:0;s:4:"Cash";i:1;s:7:"30 Days";i:2;s:7:"60 Days";i:3;s:7:"90 Days";i:4;s:8:"120 Days";i:5;s:8:"150 Days";}'
+    weight: 5
+
+   Document_No:
+    Type:  Document
+    Translation:
+      en:
+        title: Document No
+      tr:
+        title: Evrak No
+    dataType: int
+    isUnique: true
+    isRequire: true
+    weight: 1
+
+   Document_Date:
+    Type:  Document
+    Translation:
+      en:
+        title: Document Date
+      tr:
+        title: Evrak Tarihi
+    dataType: date
+    isUnique: false
+    isRequire: true
+    weight: 2
+
+   Document_Desc:
+    Type:  Document
+    Translation:
+      en:
+        title: Document Description
+      tr:
+        title: Evrak Açıklama
+    dataType: clob
+    isUnique: false
+    isRequire: true
+    weight: 3
+
+   Document_Type:
+    Type:  Document
+    Translation:
+      en:
+        title: Document Type
+      tr:
+        title: Evrak Tipi
+    dataType: string
+    isUnique: false
+    isRequire: true
+    weight: 4
+
+   Document_Palace:
+    Type:  Document
+    Translation:
+      en:
+        title: Incoming/Outgoing Palace
+      tr:
+        title: Gelecek/Gidecek Yer
+    dataType: string
+    isUnique: false
+    isRequire: true
+    weight: 5

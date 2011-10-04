@@ -11,6 +11,11 @@ Model_Entity_Action:
     Controller: Default_Backend 
     name: desktop
 
+  # Get all roles
+  Kebab_Role_Index:
+    Controller: Kebab_Role
+    name: index
+
   # Get all types
   Jasius_Type_Index:
     Controller: Jasius_Type
