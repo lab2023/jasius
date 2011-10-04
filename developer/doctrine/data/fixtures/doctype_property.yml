@@ -248,7 +248,7 @@ Model_Entity_Property:
         title: Document No
       tr:
         title: Evrak No
-    dataType: int
+    dataType: string
     isUnique: true
     isRequire: true
     weight: 1
