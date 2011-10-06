@@ -50,7 +50,7 @@ KebabOS.applications.jasius.application.languages.tr = {
     'Please type keyword here...':'Anahtar kelimeyi giriniz...',
     'Please select your document type...':'Döküman tipini seçiniz...',
     'Record not found...':'Kayıt bulunamadı...',
-    'Drag &amp; drop your files here...':'Dosyalarınızı buraya sürükleyin ve bıkarın...',
+    'Drag &amp; drop your files here...':'Dosyalarınızı buraya sürükleyin ve bırakın...',
     'File Name':'Dosya Adı',
     'Size':'Boyut',
     'Mime':'Mime',
