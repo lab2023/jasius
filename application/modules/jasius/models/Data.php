@@ -160,7 +160,8 @@ class Jasius_Model_Data
     {
         self::$validate = false;
         $content = Doctrine_Core::getTable('Model_Entity_Content')->find($contentId);
-        $propertyDataStructure = Jasius_Model_Property::getAllPropertyByTypeId($content->type_id)->execute();
+        $propertyDataStructure = Jasius_Model_Property::getAllPropertyByTypeId($content->type_id, 'NAME_ARRAY');
+        
         $i = 0;
         $errorMessage = array();
         $dataCollectionArray = array();
@@ -168,36 +169,36 @@ class Jasius_Model_Data
             // Check dataType
 
             // Fixed clob data type
-            if ($propertyDataStructure[$i]['dataType'] === 'clob') {
+            if ($propertyDataStructure[$propertyKey]['dataType'] === 'clob') {
                 $propertyValue = (string) $propertyValue;
             }
 
-            $dataTypeCheck = Doctrine_Validator::isValidType($propertyValue, $propertyDataStructure[$i]['dataType']);
+            $dataTypeCheck = Doctrine_Validator::isValidType($propertyValue, $propertyDataStructure[$propertyKey]['dataType']);
             if (!$dataTypeCheck) {
                 $errorMessage[$propertyKey] = 'Data type is not appropriate in this area';
             }
 
             // Check Require
-            if ($propertyDataStructure[$i]['isRequire'] && is_null($propertyValue)) {
+            if ($propertyDataStructure[$propertyKey]['isRequire'] && is_null($propertyValue)) {
                 $errorMessage[$propertyKey] = 'Field cannot be left blank';
             }
 
             // Check enum
-            if ($propertyDataStructure[$i]['dataType'] === 'enum') {
-                $enum = $propertyDataStructure[$i]['enum'];
+            if ($propertyDataStructure[$propertyKey]['dataType'] === 'enum') {
+                $enum = $propertyDataStructure[$propertyKey]['enum'];
                 if (!in_array($propertyValue, $enum)) {
                     $errorMessage[$propertyKey] = 'Please select from the list';
                 }
             }
 
             // Add default value if value is null and defaultValue is set
-            if (is_null($propertyValue) && !is_null($propertyDataStructure[$i]['defaultValue'])) {
-                $propertyFormData[$propertyKey] = $propertyDataStructure[$i]['defaultValue'];
+            if (is_null($propertyValue) && !is_null($propertyDataStructure[$propertyKey]['defaultValue'])) {
+                $propertyFormData[$propertyKey] = $propertyDataStructure[$propertyKey]['defaultValue'];
             }
 
             // Check isUnique
-            if ($propertyDataStructure[$i]['isUnique']) {
-                $field = self::mapping($propertyDataStructure[$i]['dataType']);
+            if ($propertyDataStructure[$propertyKey]['isUnique']) {
+                $field = self::mapping($propertyDataStructure[$propertyKey]['dataType']);
                 $isUniqueCheck = Doctrine_Query::create()->from('Model_Entity_Data data')
                                          ->where($field . '= ?', $propertyValue)
                                          ->andWhere('data.content_id != ?', $contentId)->count() > 0
@@ -209,9 +210,9 @@ class Jasius_Model_Data
                 }
             }
 
-            $dataCollectionArray[$i]['property_id'] = $propertyDataStructure[$i]['id'];
+            $dataCollectionArray[$i]['property_id'] = $propertyDataStructure[$propertyKey]['id'];
             $dataCollectionArray[$i]['content_id'] = $contentId;
-            $dataCollectionArray[$i][self::mapping($propertyDataStructure[$i]['dataType'])] = $propertyValue;
+            $dataCollectionArray[$i][self::mapping($propertyDataStructure[$propertyKey]['dataType'])] = $propertyValue;
 
             $i++;
         } // eof foreach

@@ -34,7 +34,7 @@
  */
 class Jasius_Model_Property
 {
-    public static function getAllPropertyByTypeId($typeId)
+    public static function getAllPropertyByTypeId($typeId, $arrayForm)
     {
         $lang = Zend_Auth::getInstance()->getIdentity()->language;
         $query =  Doctrine_Query::create()
@@ -54,7 +54,17 @@ class Jasius_Model_Property
                     ->andWhere('property.type_id = ?', $typeId)
                     ->orderBy('property.weight ASC')
                     ->setHydrationMode(Doctrine::HYDRATE_ARRAY);
-        return $query;
+
+        if ($arrayForm === 'NUMBER_ARRAY') {
+            return $query;
+        } else {
+            $query = $query->execute();
+            $propertyDataStructure = array();
+            foreach ($query as $property){
+                $propertyDataStructure[$property['name']] = $property;
+            }
+            return $propertyDataStructure;
+        }
     }
 
     public static function get($id)

@@ -118,7 +118,7 @@ class Jasius_Model_Content
             $contentQuery->orderBy("data.property_id $dir, $sortKey $dir");
         }
         $contentList = $contentQuery->execute();
-        $propertyList = Jasius_Model_Property::getAllPropertyByTypeId($typeId)->execute();
+        $propertyList = Jasius_Model_Property::getAllPropertyByTypeId($typeId, 'NUMBER_ARRAY')->execute();
 
         // Filter Options
         if (isset($options['filter'])) {
@@ -143,11 +143,18 @@ class Jasius_Model_Content
             $addContentToContentData = true;
             $val = array();
             $val['content_id'] = $content;
-            $data = Jasius_Model_Data::getDataForLoadDocumentForm($content);
+            $retData = Jasius_Model_Data::getDataForLoadDocumentForm($content);
+
+            $data = array();
+            foreach ($retData as $item) {
+                $data['property_item_'. $item['property_id']] = $item;
+            }
             $j = 0;
             foreach ($propertyList as $property) {
-                $dataValue = $data[$j][Jasius_Model_Data::mapping($property['dataType'])];
-                
+                $dataValue = null;
+                if (array_key_exists($property['name'],$data)){
+                    $dataValue = $data[$property['name']][Jasius_Model_Data::mapping($property['dataType'])];
+                }
                 if (isset($filter) && array_key_exists($property['name'], $filter)) {
                     
                     $filterValue = $filter[$property['name']]['value'];

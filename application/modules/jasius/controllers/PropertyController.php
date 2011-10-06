@@ -40,7 +40,7 @@ class Jasius_PropertyController extends Kebab_Rest_Controller
         $typeArray = Jasius_Model_Type::getTypeById($param['typeId'])->fetchOne();
         $type = array('id' => $typeArray['type_id'], 'text' => $typeArray['typeTranslation_title']);
 
-        $retData = Jasius_Model_Property::getAllPropertyByTypeId($param['typeId'])->execute();
+        $retData = Jasius_Model_Property::getAllPropertyByTypeId($param['typeId'],'NUMBER_ARRAY')->execute();
         $this->_helper->response(true, 200)->add('type', $type)->addTotal(count($retData))->addData($retData)->getResponse();
     }
 
