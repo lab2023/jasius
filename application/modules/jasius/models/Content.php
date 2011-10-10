@@ -84,7 +84,6 @@ class Jasius_Model_Content
         $contentQuery = Doctrine_Query::create()
                             ->select('DISTINCT content.id')
                             ->from('Model_Entity_Content content')
-                            ->leftJoin('content.Data data ON data.content_id = content.id')
                             ->leftJoin('content.Access jaccess ON content.id = jaccess.content_id')
                             ->where('content.type_id = ?', $typeId)
                             ->setHydrationMode(Doctrine::HYDRATE_SINGLE_SCALAR);
@@ -108,16 +107,19 @@ class Jasius_Model_Content
             $propertyArray = explode('_', $sort);
             if($propertyArray[count($propertyArray) -1] == 'id') {
                 $sortKey = 'content.id';
+                $contentQuery->leftJoin('content.Data data ON data.content_id = content.id');
             } else {
+                $contentQuery->leftJoin('content.Data data ON data.content_id = content.id AND data.property_id = '.$propertyArray[count($propertyArray) -1]);
                 $sortKey = 'data.'
-                           . Jasius_Model_Data::mapping(Doctrine_Core::getTable('Model_Entity_Property')->find($propertyArray[2])->dataType);
-                //KBBTODO fixe the code like end($propertyArray)
-                $contentQuery->andWhere('data.property_id = ?', $propertyArray[count($propertyArray) -1]);
+                           . Jasius_Model_Data::mapping(Doctrine_Core::getTable('Model_Entity_Property')->find($propertyArray[count($propertyArray) -1])->dataType);
             }
-
             $contentQuery->orderBy("data.property_id $dir, $sortKey $dir");
+        } else {
+            $contentQuery->leftJoin('content.Data data ON data.content_id = content.id');
         }
+
         $contentList = $contentQuery->execute();
+
         $propertyList = Jasius_Model_Property::getAllPropertyByTypeId($typeId, 'NUMBER_ARRAY')->execute();
 
         // Filter Options
