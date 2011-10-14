@@ -75,12 +75,28 @@ class Jasius_Model_Data
             try {
                 foreach ($retData as $data) {
                     $col = self::getDataColumn($data);
+
                     $query = Doctrine_Query::create()
+                            ->from('Model_Entity_Data')
+                            ->where('property_id = ?', (int) $data['property_id'])
+                            ->andWhere('content_id = ?', (int) $data['content_id'])
+                            ->setHydrationMode(Doctrine::HYDRATE_ARRAY)
+                            ->execute();
+
+                    if (count($query) > 0) {
+                        $query = Doctrine_Query::create()
                                 ->update('Model_Entity_Data')
                                 ->set("$col", '?', $data[$col])
                                 ->where('property_id = ?', (int) $data['property_id'])
                                 ->andWhere('content_id = ?', (int) $data['content_id']);
-                    $query->execute();
+                        $query->execute();
+                    } else {
+                        $query = new Model_Entity_Data();
+                        $query->property_id = (int) $data['property_id'];
+                        $query->content_id = (int) $data['content_id'];
+                        $query->$col = $data[$col];
+                        $query->save();
+                    }
                 }
                 $retVal = Doctrine_Manager::connection()->commit();
             } catch (Doctrine_Exception $e) {
