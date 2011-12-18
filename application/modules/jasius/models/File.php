@@ -20,13 +20,13 @@
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
- 
+
 /**
- * 
+ *
  *
  * @category   Kebab
- * @package    
- * @subpackage 
+ * @package
+ * @subpackage
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
@@ -54,12 +54,12 @@ class Jasius_Model_File
         $file->mime = $mime;
         $file->save();
         unset($file);
-        
+
         $statement = Doctrine_Manager::getInstance()->connection();
         $result = $statement->execute("SELECT LAST_INSERT_ID()")->fetchColumn(0);
         return $result;
     }
-    
+
     public static function delPhysicalFile($type, $id)
     {
 
@@ -73,7 +73,7 @@ class Jasius_Model_File
             $fileL->where('file.id = ?', $id);
         }
         $fileList = $fileL->execute();
-        
+
         $relativePath = WEB_PATH.DIRECTORY_SEPARATOR.'uploads'.DIRECTORY_SEPARATOR;
         $retVal = true;
         foreach ($fileList as $file) {

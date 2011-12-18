@@ -37,7 +37,7 @@ abstract class Kebab_Rest_Controller extends Zend_Rest_Controller
      * @var boolean
      */
     protected $_doctrineCaching;
-    
+
     /**
      * Set layout disable and no view renderer
      */
@@ -47,8 +47,8 @@ abstract class Kebab_Rest_Controller extends Zend_Rest_Controller
         $this->_helper->viewRenderer->setNoRender();
         $this->_doctrineCaching = Zend_Registry::get('config')->database->doctrine->caching->enable ? true : false;
     }
-    
-    public function indexAction(){}  
+
+    public function indexAction(){}
     public function getAction(){}
     public function postAction(){}
     public function putAction(){}

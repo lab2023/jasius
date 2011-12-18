@@ -1,6 +1,6 @@
 /**
  * jasius Application TypesDataStore
- * 
+ *
  * @category    Kebab (kebab-reloaded)
  * @package     Applications
  * @namespace   KebabOS.applications.jasius.application.models.RoleDataStore
@@ -9,7 +9,7 @@
  * @license     http://www.kebab-project.com/licensing
  */
 KebabOS.applications.jasius.application.models.RoleDataStore = Ext.extend(Kebab.library.ext.RESTfulBasicDataStore, {
-    
+
 
     bootstrap: null,
 

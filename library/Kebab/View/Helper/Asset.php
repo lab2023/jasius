@@ -50,7 +50,7 @@ class Kebab_View_Helper_Asset extends Zend_View_Helper_Abstract
     {
         $this->_config = Zend_Registry::get('config')->kebab;
     }
-    
+
     public function asset($asset)
     {
         $this->_asset[2] = $asset;
@@ -61,35 +61,35 @@ class Kebab_View_Helper_Asset extends Zend_View_Helper_Abstract
     public function distribution($distro = null)
     {
         $path = $this->_config->os->distributions->path;
-        
+
         $distro = is_null($distro)
                 ? $this->_config->os->distributions->current
                 : $distro;
-                
+
         $this->_asset[1] = $path . '/' . $distro;
-        
+
         return $this;
     }
-    
+
     public function theme($theme = null)
-    {   
+    {
         $theme = is_null($theme)
                ? $this->_config->os->distributions->theme
                : $theme;
 
-        $this->_asset[1] = isset($this->_asset[1]) 
+        $this->_asset[1] = isset($this->_asset[1])
                          ? $this->_asset[1] . '/themes/' . $theme
                          : 'themes/' . $theme;
-            
+
         return $this;
     }
 
     public function get($kebab = true, $clearDebug = false)
     {
         $kebab = $kebab ? '/kebab/system' : null;
-        
+
         $this->_asset[0] = $this->_root() . $kebab;
-        
+
         return $this->_generate();
     }
 
@@ -146,7 +146,7 @@ class Kebab_View_Helper_Asset extends Zend_View_Helper_Abstract
         ksort($this->_asset);
         return implode('/', $this->_asset);
     }
-    
+
     protected function _replace($asset)
     {
         return trim(str_replace(WEB_PATH, BASE_URL, $asset));

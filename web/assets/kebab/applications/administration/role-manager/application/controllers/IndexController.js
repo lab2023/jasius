@@ -33,7 +33,7 @@ KebabOS.applications.roleManager.application.controllers.Index = Ext.extend(Ext.
     // Actions -----------------------------------------------------------------
 
     showRoleStoryAction: function(role) {
-        
+
         if (role.length > 0) {
 
             // Each the selected diseases

@@ -5,7 +5,7 @@
  http://www.lab2023.com
 
     * LICENSE
-    * 
+    *
     * This source file is subject to the  Dual Licensing Model that is bundled
     * with this package in the file LICENSE.txt.
     * It is also available through the world-wide-web at this URL:
@@ -37,8 +37,8 @@ Kebab.Notification = Ext.extend(Ext.util.Observable, {
      * Object constructor
      * @param config
      */
-    constructor: function(config) { 
-        
+    constructor: function(config) {
+
         Ext.apply(this, config);
 
         Kebab.Notification.superclass.constructor.call(this, arguments);
@@ -46,7 +46,7 @@ Kebab.Notification = Ext.extend(Ext.util.Observable, {
 
     /**
      * Show messages
-     * 
+     *
      * @param title
      * @param message
      * @param keep
@@ -54,7 +54,7 @@ Kebab.Notification = Ext.extend(Ext.util.Observable, {
     message : function(title, message, keep, type){
 
         var qtipMsg = Kebab.helper.translate('Click to hide');
-        
+
         var messageBody = function(t, s){
             return ['<div ext:qtip="'+qtipMsg+'">',
             '<p><h3>', t, '</h3>', s, '</p>',
@@ -65,7 +65,7 @@ Kebab.Notification = Ext.extend(Ext.util.Observable, {
             cls:'kebab-notifications-body',
             id: 'kebab-notifications'
         }, true).alignTo(document.body, 'tr-tr', [-15, 50]);
-        
+
         var messageEl = Ext.DomHelper.append(this.messageContainer, {
             cls: 'kebab-notifications kebab-shadow-std kebab-rounded-corners ' + this.getColor(type),
             html: messageBody(Kebab.helper.translate(title), Kebab.helper.translate(message)),
@@ -102,7 +102,7 @@ Kebab.Notification = Ext.extend(Ext.util.Observable, {
 
     /**
      * Show dialog
-     * 
+     *
      * @param title
      * @param message
      * @param type
@@ -110,7 +110,7 @@ Kebab.Notification = Ext.extend(Ext.util.Observable, {
     dialog: function(title, message, type) {
 
         var icon = this.getIcon(type);
-        
+
         Ext.Msg.show({
             modal:true,
             title: Kebab.helper.translate(title),

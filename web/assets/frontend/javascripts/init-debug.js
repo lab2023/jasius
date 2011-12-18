@@ -20,9 +20,9 @@
 Application = function(){
 
    return {
-        
+
         init: function(){
-            
+
         }
     };
 }();

@@ -20,9 +20,9 @@
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
- 
+
 /**
- * 
+ *
  *
  * @category   Kebab
  * @package    Modules
@@ -85,7 +85,7 @@ class Jasius_FileController extends Kebab_Rest_Controller
         } else {
             $file_name = $file_name.'.'.$path_info['extension'];
         }
-        
+
         $file_name = strtolower(str_replace(' ','',$file_name));
 
         if (file_exists($relativePath. $file_name)) {

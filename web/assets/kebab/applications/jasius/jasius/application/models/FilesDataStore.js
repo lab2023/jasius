@@ -1,6 +1,6 @@
 /**
  * jasius Application TypesDataStore
- * 
+ *
  * @category    Kebab (kebab-reloaded)
  * @package     Applications
  * @namespace   KebabOS.applications.jasius.application.models.RoleDataStore

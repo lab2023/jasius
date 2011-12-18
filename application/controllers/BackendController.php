@@ -50,10 +50,10 @@ class BackendController extends Kebab_Controller_Action
         $this->_auth = Zend_Auth::getInstance();
         $this->view->user = $this->_auth->getIdentity();
     }
-    
+
     /**
      * Sign-in screen
-     * 
+     *
      * @return void
      */
     public function indexAction()
@@ -81,10 +81,10 @@ class BackendController extends Kebab_Controller_Action
         // Bind activation key to view layer
         $this->view->activationKey = $this->_request->getParam('key') ? $this->_request->getParam('key') : 0;
     }
-    
+
     /**
      * Desktop screen
-     * 
+     *
      * @return void
      */
     public function desktopAction()

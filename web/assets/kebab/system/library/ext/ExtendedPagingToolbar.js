@@ -1,6 +1,6 @@
 /**
  * ExtendedPagingToolbar extend by Ext.PagingToolbar
- * 
+ *
  * @category    Kebab
  * @package     Kebab
  * @namespace   Kebab.library
@@ -30,13 +30,13 @@ Kebab.library.ext.ExtendedPagingToolbar = Ext.extend(Ext.PagingToolbar, {
             editable      : false,
             forceSelection: true
         });
-        
-        
+
+
         this.perPageCombo.on('select', function(combo, record) {
             this.pageSize = parseInt(record.get('id'), 10);
             this.doLoad(this.cursor);
         }, this);
-        
+
         // Base Config
         var config = {
             pageSize: 25,

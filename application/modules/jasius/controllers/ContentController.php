@@ -1,5 +1,5 @@
 <?php
- 
+
 /**
  * Kebab Framework
  *
@@ -21,13 +21,13 @@
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
- 
+
 /**
- * 
+ *
  *
  * @category   Kebab (kebab-reloaded)
- * @package    
- * @subpackage 
+ * @package
+ * @subpackage
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
@@ -47,7 +47,7 @@ class Jasius_ContentController extends Kebab_Rest_Controller
 
         $response->getResponse();
     }
-    
+
     public function indexAction()
     {
         $response = $this->_helper->response();
@@ -150,7 +150,7 @@ class Jasius_ContentController extends Kebab_Rest_Controller
         $response = $this->_helper->response();
         $param   = $this->_helper->param();
         $content = Doctrine_Core::getTable('Model_Entity_Content')->find($param['contentId']);
-        
+
         $rawData = is_object($content)
                 ? Jasius_Model_Data::getDataForLoadDocumentForm($content->id)
                 : array();

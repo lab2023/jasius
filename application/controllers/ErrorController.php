@@ -14,7 +14,7 @@
  *
  * @category   KEBAB
  * @package    Controller
- * @subpackage Error 
+ * @subpackage Error
  * @author     Tayfun Öziş ERİKAN <tayfun.ozis.erikan@lab2023.com>
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
@@ -24,7 +24,7 @@
 
 /**
  * Kebab Application Error Controller
- * 
+ *
  * <p>If the request is ajax, response's type is json or html/text </p>
  *
  * @category   Kebab
@@ -41,15 +41,15 @@ class ErrorController extends Kebab_Controller_Action
     public function init()
     {
         $this->_helper->layout->disableLayout();
-        
+
         // If request is ajax or not
         if ($this->_request->isXmlHttpRequest()) {
            $this->xmlHttpRequestErrorAction();
         } else {
            $this->errorAction();
-        }        
+        }
     }
-    
+
     public function errorAction()
     {
         $errors = $this->_getParam('error_handler');
@@ -91,19 +91,19 @@ class ErrorController extends Kebab_Controller_Action
             $errors, Zend_Log::ERR
         );
     }
-    
+
     public function xmlHttpRequestErrorAction()
     {
         if ($this->_request->isXmlHttpRequest()) {
-            
+
             $responseData = array();
             $errors = $this->_getParam('error_handler');
-            
+
             if (!$errors) {
                 $responseData['message'] = 'You have reached the error page';
                 return;
             }
-            
+
             switch ($errors->type) {
                 case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:
                 case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
@@ -119,25 +119,25 @@ class ErrorController extends Kebab_Controller_Action
                     $responseData['message'] = 'Application error';
                     break;
             }
-            
+
             // Log exception, if logger available
             if ($log = $this->getLog()) {
                 $log->crit($this->view->message, $errors->exception);
             }
-            
+
             // conditionally display exceptions
             if ($this->getInvokeArg('displayExceptions') == true) {
                 $responseData['exception']['message']        = $errors->exception->getMessage();
                 $responseData['exception']['traceAsSttring'] = $errors->exception->getTraceAsString();
                 $responseData['request']['params']           = $errors->request->getParams();
             }
-            
+
             $this->_helper->response()->addData($responseData)->getResponse();
         } else {
             throw new Zend_Exception('Request isn\'t ajax');
         }
     }
-    
+
     public function getLog()
     {
         $bootstrap = $this->getInvokeArg('bootstrap');

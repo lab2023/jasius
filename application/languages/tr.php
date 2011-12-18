@@ -56,7 +56,7 @@ return array(
 
     // Desktop
     'Desktop' => 'Masaüstü',
-    
+
     //sign-in
     'Sign-in' => 'Giriş',
     'Welcome to Jasius' => 'Jasius\'a hoşgeldiniz',

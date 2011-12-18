@@ -5,7 +5,7 @@
  http://www.lab2023.com
 
     * LICENSE
-    * 
+    *
     * This source file is subject to the  Dual Licensing Model that is bundled
     * with this package in the file LICENSE.txt.
     * It is also available through the world-wide-web at this URL:
@@ -27,15 +27,15 @@ Ext.namespace('Kebab.OS.Desktop');
  * @version    1.5.0
  */
 Kebab.OS.Desktop = Ext.extend(Ext.util.Observable, {
-    
+
     kernel: null,
-    
+
     activeApplicationWindow : null,
-    
+
     applicationWindowManager : new Ext.WindowGroup(),
-    
+
     contextMenu :null,
-    
+
     constructor : function(kernel){
 
         this.kernel = kernel;
@@ -85,11 +85,11 @@ Kebab.OS.Desktop = Ext.extend(Ext.util.Observable, {
         this.initEvents();
         this.layout();
     },
-    
+
     initEvents : function(){
         Ext.EventManager.onWindowResize(this.layout, this);
-        
-        this.kebabOsDesktop.on('contextmenu', function(e) {            
+
+        this.kebabOsDesktop.on('contextmenu', function(e) {
             if(e.target.id === this.kebabOsDesktop.id){
                 e.stopEvent();
                 if(!this.contextMenu.el){
@@ -98,7 +98,7 @@ Kebab.OS.Desktop = Ext.extend(Ext.util.Observable, {
                 this.contextMenu.showAt(e.getXY());
             }
         },this);
-        
+
         if (this.kebabOsDesktopShortcuts) {
             this.kebabOsDesktopShortcuts.on('click',
             function(e, t) {
@@ -113,11 +113,11 @@ Kebab.OS.Desktop = Ext.extend(Ext.util.Observable, {
             },this);
         }
     },
-    
+
     layout: function() {
        this.kebabOsDesktop.setHeight(Ext.lib.Dom.getViewHeight() - this.kebabOsPanel.getHeight());
     },
-    
+
     createApplication : function(config, cls) {
 
         var appWin = new(cls || Ext.Window)(

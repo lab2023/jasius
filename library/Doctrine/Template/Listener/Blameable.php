@@ -39,25 +39,25 @@ class Doctrine_Template_Listener_Blameable extends Doctrine_Record_Listener
      * @var string
      */
     protected $_options = array();
-    
+
     /**
      * The default value of the blameVar if one isn't available
-     * 
+     *
      * @var string
      */
     protected $_default = null;
-    
-    
+
+
     /**
      * __construct
      *
-     * @param string $options 
+     * @param string $options
      * @return void
      */
     public function __construct(array $options)
     {
         $this->_options = $options;
- 
+
     }
 
     /**
@@ -134,23 +134,23 @@ class Doctrine_Template_Listener_Blameable extends Doctrine_Record_Listener
         if (PHP_SAPI === 'cli') {
             $ident = 0;
         } else {
-            $ident = is_object($identity) ? $identity->id : null;     
+            $ident = is_object($identity) ? $identity->id : null;
         }
-        
+
         if (is_null($ident) && $this->_options['default'] !== false) {
             if (is_null($this->_default)) {
-            
+
                 /*
                  * Try to parse the default value as a dql string, if that fails
                  * set the default value equal to the literal value of the string
                  */
-    
+
                 try {
                     $default = Doctrine_Query::create()
                         ->parseDqlQuery($this->_options['default'])
                         ->useQueryCache(Kebab_Cache_Query::isEnable())
                         ->fetchOne($this->_options['params']);
-    
+
                     $this->_default = $default[$this->_options['blameVar']];
                 } catch (Doctrine_Query_Tokenizer_Exception $e) {
                     $this->_default = $this->_options['default'];
@@ -158,8 +158,8 @@ class Doctrine_Template_Listener_Blameable extends Doctrine_Record_Listener
             }
             $ident = $this->_default;
         }
-        
-        return $ident;    
-        
+
+        return $ident;
+
     }
 }

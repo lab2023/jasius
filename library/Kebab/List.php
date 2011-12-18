@@ -1,5 +1,5 @@
 <?php
- 
+
 /**
  * Kebab Project
  *
@@ -22,10 +22,10 @@
  * @version    1.5.0
  */
 
- 
+
 /**
  * Kebab List Class
- * 
+ *
  * This class help developer to manage list. The main problem is you can pass one item to all other item at list.
  * Thats why we write a $_rules array like
  *
@@ -80,7 +80,7 @@ class Kebab_List
                 throw new Kebab_List_Exception("$rules should be array.");
             }
         }
-        
+
         $this->_rules = $rules;
 
         return $this;
@@ -147,7 +147,7 @@ class Kebab_List
 
     /**
      * Check that $source item has $target item.
-     * 
+     *
      * @param  $from
      * @param  $to
      * @return bool

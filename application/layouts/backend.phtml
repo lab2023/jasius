@@ -1,6 +1,6 @@
 <?php echo $this->doctype() . PHP_EOL; ?>
 <html>
-<head>    
+<head>
     <?php // META AREA -------------------------------------------------------?>
     <meta charset="UTF-8" />
     <meta name="Author" content="lab2023 Dev. Team: http://www.lab2023.com/" />
@@ -28,7 +28,7 @@
         body {background:<?php echo $this->variable('os')->distributions->background->color; ?> url('<?php echo $this->asset('wallpapers/'.$this->variable('os')->distributions->background->image)->get(); ?>') center;}
     </style>
     <?php echo $this->headStyle(); ?>
-    
+
     <?php // SCRIPT AREA -----------------------------------------------------?>
     <script type="text/javascript">
     var APPLICATION_ENV = "<?php echo APPLICATION_ENV; ?>";

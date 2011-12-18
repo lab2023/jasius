@@ -24,11 +24,11 @@
 
 /**
  * System_Controller_Helper_Array
- * 
+ *
  * <p>
  * If an array stores one object, it is record array. For example
  *      array('title' => 'Developer', 'name' => 'Onur');
- * 
+ *
  * if an array stores more objects, it is collection array. For example
  *      array(
  *          array('title' => 'Developer', 'name' => 'Onur'),
@@ -49,61 +49,61 @@ class Kebab_Controller_Helper_Array extends Zend_Controller_Action_Helper_Abstra
 {
     /**
      * This method check the array is a collection array or not
-     * 
+     *
      * @param   array $data
-     * @throws  Kebab_Controller_Helper_Exception 
-     * @return  boolean    
+     * @throws  Kebab_Controller_Helper_Exception
+     * @return  boolean
      */
     public function isCollection($data)
     {
         if (!is_array($data) && !is_object($data) && !($data instanceof Traversable)) {
             throw new Kebab_Controller_Helper_Exception('$data type must be array, object or instanceof Traversable.');
         }
-        
-        $retVal = true;        
+
+        $retVal = true;
         while ($retVal && list(, $value) = each($data)) {
             $retVal = is_array($value) || is_object($value) || ($value instanceof Traversable) ? true : false;
         }
-        
+
         return $retVal;
     }
-    
+
     /**
      * First check the array is Record array or Collection array,
      * If array is record array, convert record array to collection array
-     * 
+     *
      * <code>
      * $a = array(
      *      'name' => 'Onur',
      *      'surname' => 'Ozkan'
      * );
-     * 
+     *
      * $retVal = convertRecordtoCollection($a);
      * print_r($retVal);
-     * 
+     *
      * //Output array(array('title'=>'onur', 'surname'=>'Ozkan'));
      * </code>
-     *            
+     *
      * @param   array   $data
      * @throws  Kebab_Controller_Helper_Exception
-     * @return  boolean 
+     * @return  boolean
      */
     public function convertRecordtoCollection($data)
     {
         if (!is_array($data)) {
             throw new Kebab_Controller_Helper_Exception('$data type must be array.');
         }
-        
+
         $retVal[] = $data;
-        
+
         return $retVal;
     }
-    
+
     /**
      * Convert all type to array
-     * 
+     *
      * @param  unknown $data
-     * @return array 
+     * @return array
      */
     public function convertArray($data)
     {
@@ -112,10 +112,10 @@ class Kebab_Controller_Helper_Array extends Zend_Controller_Action_Helper_Abstra
         } else {
             $retVal = $data;
         }
-        
+
         return (array) $retVal;
     }
-    
+
     /**
      * @return Kebab_Controller_Helper_Array
      */
@@ -123,5 +123,5 @@ class Kebab_Controller_Helper_Array extends Zend_Controller_Action_Helper_Abstra
     {
         return $this;
     }
-    
+
 }

@@ -1,9 +1,9 @@
 Application:
   tableName: system_application
   columns:
-    identity: 
+    identity:
       type: string(255)
-      unique: true    
+      unique: true
     className:
       type: string(255)
     name:
@@ -19,7 +19,7 @@ Application:
     title:
       type: string(255)
     description:
-      type: clob    
+      type: clob
     active:
       type: boolean
   actAs:
@@ -31,7 +31,7 @@ Application:
         Searchable:
           fields: [title, description]
           className: SystemApplicationSearch
-      
+
   options:
     type: INNODB
     collate: utf8_bin

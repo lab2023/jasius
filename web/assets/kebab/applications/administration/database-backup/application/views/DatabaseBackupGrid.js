@@ -45,7 +45,7 @@ KebabOS.applications.databaseBackup.application.views.DatabaseBackupGrid = Ext.e
                 this.fireEvent('backupRequest', {from:this, url:this.url, method:'POST', store:this.store})
             }, scope:this
         }];
-        
+
         this.columns = [
             {
                 header   : Kebab.helper.translate('Date'),

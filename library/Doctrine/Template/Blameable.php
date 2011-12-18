@@ -63,15 +63,15 @@ class Doctrine_Template_Blameable extends Doctrine_Template
                                 'relations'       => array('created' => array('disabled'      => true,
                                                                               'name'          => 'CreatedBy',
                                                                               'class'         => 'Model_User',
-                                                                              'foreign'       => 'id', 
+                                                                              'foreign'       => 'id',
                                                                               ),
                                                            'updated' => array('disabled'      => true,
                                                                               'name'          => 'UpdatedBy',
                                                                               'class'         => 'Model_User',
-                                                                              'foreign'       => 'id', 
+                                                                              'foreign'       => 'id',
                                                                               ),
                                                         ));
-    
+
 
     /**
      * __construct
@@ -81,15 +81,15 @@ class Doctrine_Template_Blameable extends Doctrine_Template
      */
     public function __construct(array $options = array())
     {
-    	
+
         if (!class_exists($this->_options['listener'], true)) {
             throw new Exception('Class: ' . $this->_options['listener'] . ' not found');
         }
-        
+
         parent::__construct($options);
-        
+
     }
-    
+
     /**
      * Set table definition for Blameable behavior
      *
@@ -112,26 +112,26 @@ class Doctrine_Template_Blameable extends Doctrine_Template
             if ($this->_options['columns']['updated']['alias']) {
                 $name .= ' as ' . $this->_options['columns']['updated']['alias'];
             }
-            
+
             if ($this->_options['columns']['updated']['onInsert'] !== true &&
               $this->_options['columns']['updated']['options']['notnull'] === true) {
                 $this->_options['columns']['updated']['options']['notnull'] = false;
             }
-            
+
             $this->hasColumn($name, $this->_options['columns']['updated']['type'],
                              $this->_options['columns']['updated']['length'],
                              $this->_options['columns']['updated']['options']);
         }
 
         $listener = new $this->_options['listener']($this->_options);
-        
-        if (get_class($listener) !== 'Doctrine_Template_Listener_Blameable' && 
+
+        if (get_class($listener) !== 'Doctrine_Template_Listener_Blameable' &&
             !is_subclass_of($listener, 'Doctrine_Template_Listener_Blameable')) {
             	throw new Exception('Invalid listener. Must be Doctrine_Template_Listener_Blameable or subclass');
         }
         $this->addListener($listener, 'Blameable');
     }
-    
+
     /**
      * Setup the relations for the Blameable behavior
      *
@@ -139,23 +139,23 @@ class Doctrine_Template_Blameable extends Doctrine_Template
      */
     public function setUp()
     {
-     
+
       if( ! $this->_options['relations']['created']['disabled']) {
-        $this->hasOne($this->_options['relations']['created']['class'] . ' as ' . $this->_options['relations']['created']['name'], 
+        $this->hasOne($this->_options['relations']['created']['class'] . ' as ' . $this->_options['relations']['created']['name'],
           array('local' => $this->_options['columns']['created']['name'],
                 'foreign' => $this->_options['relations']['created']['foreign'],
           )
         );
       }
-      
+
       if( ! $this->_options['relations']['updated']['disabled'] && ! $this->_options['columns']['updated']['disabled']) {
-        $this->hasOne($this->_options['relations']['updated']['class'] . ' as ' . $this->_options['relations']['updated']['name'], 
+        $this->hasOne($this->_options['relations']['updated']['class'] . ' as ' . $this->_options['relations']['updated']['name'],
           array('local' => $this->_options['columns']['updated']['name'],
                 'foreign' => $this->_options['relations']['updated']['foreign'],
           )
         );
       }
-      
-      
+
+
     }
 }

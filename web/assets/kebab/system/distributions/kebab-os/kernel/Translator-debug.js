@@ -58,7 +58,7 @@ Kebab.Translator = function(i18n) {
                 return args[i];
             });
         };
-        
+
         return _replace(key, args);
     };
 

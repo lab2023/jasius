@@ -5,7 +5,7 @@
  http://www.lab2023.com
 
     * LICENSE
-    * 
+    *
     * This source file is subject to the  Dual Licensing Model that is bundled
     * with this package in the file LICENSE.txt.
     * It is also available through the world-wide-web at this URL:
@@ -20,9 +20,9 @@
     font-family: 'Ubuntu';
     font-style: normal;
     font-weight: normal;
-    src: local('Ubuntu'), 
-         local('Ubuntu-Regular'), 
-         url('fonts/Ubuntu-Regular.ttf') 
+    src: local('Ubuntu'),
+         local('Ubuntu-Regular'),
+         url('fonts/Ubuntu-Regular.ttf')
          format('truetype');
 }
 * {
@@ -62,7 +62,7 @@ p.kebab-paragraph {
     height:250px;
     text-align:center;
 }
-.kebab-container, 
+.kebab-container,
 .kebab-container button,
 .kebab-container p,
 .kebab-container strong,

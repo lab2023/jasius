@@ -59,7 +59,7 @@ class Kebab_Model_Application
 
         return $query;
     }
-    
+
     /**
      *<p>This function return applications and their stories which are allowed in ACL.</p>
      *

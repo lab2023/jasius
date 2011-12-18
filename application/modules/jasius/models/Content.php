@@ -20,9 +20,9 @@
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
- 
+
 /**
- * 
+ *
  *
  * @category   Kebab
  * @package    Module
@@ -44,7 +44,7 @@ class Jasius_Model_Content
     }
     /**
      * Delete by contentId
-     * 
+     *
      * @static
      * @throws Doctrine_Exception|Zend_Exception
      * @param $contentId
@@ -158,7 +158,7 @@ class Jasius_Model_Content
                     $dataValue = $data[$property['name']][Jasius_Model_Data::mapping($property['dataType'])];
                 }
                 if (isset($filter) && array_key_exists($property['name'], $filter)) {
-                    
+
                     $filterValue = $filter[$property['name']]['value'];
                     $filterType = $filter[$property['name']]['type'];
                     switch ($filterType) {
@@ -211,7 +211,7 @@ class Jasius_Model_Content
             }
             $i++;
         } // eof foreach
-        
+
         // Pagination Option
         $start = 0;
         $limit = 25;

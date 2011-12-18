@@ -27,7 +27,7 @@ KebabOS.applications.jasius.application.views.FileUpload = Ext.extend(Ext.ux.Awe
         };
 
         Ext.apply(this, Ext.apply(this.initialConfig, config));
-        
+
         KebabOS.applications.jasius.application.views.FileUpload.superclass.initComponent.call(this);
     },
 

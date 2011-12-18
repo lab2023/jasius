@@ -12,7 +12,7 @@
 KebabOS.applications.jasius.application.views.AccessPanel = Ext.extend(Ext.Panel, {
 
     owner: null,
-    
+
     layout: {
         type: 'vbox',
         align : 'stretch',
@@ -107,14 +107,14 @@ KebabOS.applications.jasius.application.views.AccessPanel = Ext.extend(Ext.Panel
         var rowIndex = this.getStore().find('id',role.id);
         this.getSelectionModel().selectRow(rowIndex, true);
     },
-    
+
     onSubmit: function() {
-        
+
         var accessForm = this.accessFrom.getForm(), userIds = [], roleIds = [], i = 0, y = 0;
         var params = {
             contentId : this.owner.contentId
         };
-        
+
         if (accessForm.findField('accessType').getGroupValue() == 'specific') {
 
             Ext.each(this.roleGrid.getSelectionModel().getSelections(), function(data) {

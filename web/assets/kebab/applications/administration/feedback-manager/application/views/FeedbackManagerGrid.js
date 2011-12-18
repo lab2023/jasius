@@ -43,7 +43,7 @@ KebabOS.applications.feedbackManager.application.views.FeedbackManagerGrid = Ext
             ['progress', Kebab.helper.translate('In Progress')],
             ['closed', Kebab.helper.translate('Closed')]
         ];
-        
+
         var statusCombobox = new Ext.form.ComboBox({
             typeAhead: true,
             triggerAction: 'all',

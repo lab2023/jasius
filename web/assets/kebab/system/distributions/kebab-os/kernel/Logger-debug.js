@@ -27,13 +27,13 @@
 Kebab.Logger = function(env) {
 
     var logEnv = "production";
-    
+
     /**
      * General Logs
      * @return void
      */
     this.log = function(message, type) {
-        
+
         if (env != logEnv) {
             switch(type) {
                 default:
@@ -82,6 +82,6 @@ Kebab.Logger = function(env) {
             console.error(message);
         }
     };
-    
+
 };
 

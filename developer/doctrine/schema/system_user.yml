@@ -46,5 +46,4 @@ User:
     type: INNODB
     collate: utf8_bin
     charset: utf8
-    
-    
+

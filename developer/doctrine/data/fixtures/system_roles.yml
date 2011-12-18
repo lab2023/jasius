@@ -8,7 +8,7 @@ Model_Entity_Role:
       tr:
         title: Üye
         description: Üye Rolü
-  
+
   Admin:
     active: 1
     Translation:

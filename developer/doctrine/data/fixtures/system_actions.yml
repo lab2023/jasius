@@ -5,10 +5,10 @@ Model_Entity_Action:
   Kebab_Session_Delete:
     Controller: Kebab_Session
     name: delete
-    
+
   # Access the desktop
   Default_Backend_Desktop:
-    Controller: Default_Backend 
+    Controller: Default_Backend
     name: desktop
 
   # Get all roles
@@ -20,7 +20,7 @@ Model_Entity_Action:
   Jasius_Type_Index:
     Controller: Jasius_Type
     name: index
-    
+
   Jasius_Content_Post:
     Controller: Jasius_Content
     name: post

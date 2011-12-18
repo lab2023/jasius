@@ -54,23 +54,23 @@ class Kebab_View_Helper_AssetApplication extends Kebab_View_Helper_Asset
     public function department($department = null)
     {
         $this->_asset[1] = $department;
-        
+
         return $this;
     }
-    
+
     public function version($version = '0.0.1')
     {
         $this->_asset[3] = "?version=" . $version;
-        
+
         return $this;
     }
-    
+
     public function get()
     {
-        $this->_asset[0] = $this->_root() 
-                         . '/kebab/' 
+        $this->_asset[0] = $this->_root()
+                         . '/kebab/'
                          . $this->_config->os->applications->path;
-        
+
         return $this->_generate();
     }
 }

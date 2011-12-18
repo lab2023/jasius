@@ -44,7 +44,7 @@ abstract class Kebab_Application_Module_Bootstrap extends Zend_Application_Modul
 
     /**
      * Initialize class and log debug message
-     * 
+     *
      * @return void
      * @access protected
      */
@@ -52,12 +52,12 @@ abstract class Kebab_Application_Module_Bootstrap extends Zend_Application_Modul
     {
         // Fiter SeperatorToCamelCase Setup
         $filter = new Zend_Filter_Word_CamelCaseToSeparator('-');
-        
+
         $this->_module['class'] = $this->getModuleName();
         $this->_module['folder']  = strtolower(
             $filter->filter($this->_module['class'])
         );
-        
+
         // Info Log
         Zend_Registry::get('logging')->log(
             $this->_module['class'] . ' bootstrap initialized...',
@@ -67,7 +67,7 @@ abstract class Kebab_Application_Module_Bootstrap extends Zend_Application_Modul
 
     /**
      * Initialize module config options
-     * 
+     *
      * @return void
      */
     protected function _initConfig()
@@ -109,7 +109,7 @@ abstract class Kebab_Application_Module_Bootstrap extends Zend_Application_Modul
 
     /**
      * Create a new layer for Validations
-     * 
+     *
      * @return Zend_Loader_Autoloader_Resource
      */
     protected function _initResource()

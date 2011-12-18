@@ -28,7 +28,7 @@
 /**
  * System_Controller_Helper_Filter
  *
- * This helper add andWhere query to DQL from client filter. 
+ * This helper add andWhere query to DQL from client filter.
  *
  * @category   Kebab
  * @package    Controller
@@ -48,7 +48,7 @@ class Kebab_Controller_Helper_Filter extends Zend_Controller_Action_Helper_Abstr
     private   $_request;
 
     /**
-     * @var 
+     * @var
      */
     protected $filters;
 
@@ -91,7 +91,7 @@ class Kebab_Controller_Helper_Filter extends Zend_Controller_Action_Helper_Abstr
                             for ($q = 0; $q < count($fi); $q++) {
                                 $fi[$q] = "'" . $fi[$q] . "'";
                             }
-                            
+
                             $query->andWhereIn("$mapping[$field] IN $fi");
                         } else {
                             $query->andWhere("$mapping[$field] = '$value'");
@@ -103,7 +103,7 @@ class Kebab_Controller_Helper_Filter extends Zend_Controller_Action_Helper_Abstr
                     case 'numeric' :
                         switch ($compare) {
                             case 'eq' :
-                                $query->andWhere("$mapping[$field] = $value"); 
+                                $query->andWhere("$mapping[$field] = $value");
                                 break;
                             case 'lt' :
                                 $query->andWhere("$mapping[$field] < $value");
@@ -133,7 +133,7 @@ class Kebab_Controller_Helper_Filter extends Zend_Controller_Action_Helper_Abstr
 
         return $query;
     }
-    
+
     /**
      * direct() : Strategy Design Pattern
      */

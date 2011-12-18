@@ -121,7 +121,7 @@ Model_Entity_Application:
     active: 1
     Translation:
       en:
-        title: Jasius 
+        title: Jasius
         description: Manage your documents on cloud
       tr:
         title: Jasius

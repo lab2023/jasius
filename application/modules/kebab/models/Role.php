@@ -51,14 +51,14 @@ class Kebab_Model_Role
                 ->whereIn('role.id', $whereInIds)
                 ->andWhere('role.active = 1')
                 ->useQueryCache(Kebab_Cache_Query::isEnable());
-        
+
         if ($userId) {
             $query->addSelect('(SELECT COUNT(userRole2.user_id)
                                 FROM Model_Entity_UserRole userRole2
                                 WHERE userRole2.user_id = ' . $userId . '
                                       and userRole2.role_id = role.id) as allow');
         }
-        
+
         return $query;
     }
 

@@ -1,6 +1,6 @@
 /**
  * Kebab AboutMe Application Bootstrap Class
- * 
+ *
  * @category    Kebab
  * @package     Applications
  * @namespace   KebabOS.applications.aboutMe.application.controllers
@@ -9,21 +9,21 @@
  * @license     http://www.kebab-project.com/cms/licensing
  */
 KebabOS.applications.aboutMe.application.controllers.Index = Ext.extend(Ext.util.Observable, {
-    
+
     // Application bootstrap
     bootstrap: null,
-    
+
     constructor: function(config) {
-        
+
         // Base Config
         Ext.apply(this, config || {});
-        
+
         // Call Superclass initComponent() method
         KebabOS.applications.aboutMe.application.controllers.Index.superclass.constructor.apply(this, arguments);
-        
+
         this.init();
     },
-    
+
     // Initialize and define routing settings
     init: function() {
         this.bootstrap.layout.profileForm.on('showHideForms', this.showHideFormsAction, this);
@@ -31,7 +31,7 @@ KebabOS.applications.aboutMe.application.controllers.Index = Ext.extend(Ext.util
         this.bootstrap.layout.passwordForm.on('showHideForms', this.showHideFormsAction, this);
         this.bootstrap.layout.passwordForm.on('formOnSave', this.formOnSaveAction, this);
     },
-    
+
     // Actions -----------------------------------------------------------------
 
     showHideFormsAction: function(item) {
@@ -41,7 +41,7 @@ KebabOS.applications.aboutMe.application.controllers.Index = Ext.extend(Ext.util
     formOnSaveAction: function(data) {
 
         if (data.from.getForm().isValid()) {
-            
+
             data.from.getForm().submit({
                 url: data.url,
                 method: 'PUT',

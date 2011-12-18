@@ -133,7 +133,7 @@ KebabOS.applications.jasius.application.views.PropertyFormPanel = Ext.extend(Ext
                 contentId :this.owner.contentId
             })
         }
-        
+
         Ext.Ajax.request({
             url: Kebab.helper.url('jasius/is-unique'),
             method: 'GET',

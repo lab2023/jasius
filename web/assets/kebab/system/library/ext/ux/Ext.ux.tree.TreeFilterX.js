@@ -19,7 +19,7 @@
  * the Open Source LGPL 3.0 license.  Commercial use is permitted to the extent
  * that the code/component(s) do NOT become part of another Open Source or Commercially
  * licensed development library or toolkit without explicit permission.
- * 
+ *
  * <p>License details: <a href="http://www.gnu.org/licenses/lgpl.html"
  * target="_blank">http://www.gnu.org/licenses/lgpl.html</a></p>
  *
@@ -30,7 +30,7 @@
  * <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
  * <input type="hidden" name="cmd" value="_s-xclick">
  * <input type="hidden" name="hosted_button_id" value="3430419">
- * <input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-butcc-donate.gif" 
+ * <input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-butcc-donate.gif"
  * border="0" name="submit" alt="PayPal - The safer, easier way to pay online.">
  * <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
  * </form>
@@ -54,7 +54,7 @@ Ext.ux.tree.TreeFilterX = Ext.extend(Ext.tree.TreeFilter, {
     /**
      * Filter the data by a specific attribute.
 	 *
-     * @param {String/RegExp} value Either string that the attribute value 
+     * @param {String/RegExp} value Either string that the attribute value
      * should start with or a RegExp to test against the attribute
      * @param {String} attr (optional) The attribute passed in your node's attributes collection. Defaults to "text".
      * @param {TreeNode} startNode (optional) The node to start the filter at.
@@ -83,13 +83,13 @@ Ext.ux.tree.TreeFilterX = Ext.extend(Ext.tree.TreeFilter, {
 	// }}}
 	// {{{
     /**
-     * Filter by a function. The passed function will be called with each 
-     * node in the tree (or from the startNode). If the function returns true, the node is kept 
+     * Filter by a function. The passed function will be called with each
+     * node in the tree (or from the startNode). If the function returns true, the node is kept
      * otherwise it is filtered. If a node is filtered, its children are also filtered.
 	 * Shows parents of matching nodes.
 	 *
      * @param {Function} fn The filter function
-     * @param {Object} scope (optional) The scope of the function (defaults to the current node) 
+     * @param {Object} scope (optional) The scope of the function (defaults to the current node)
      */
 	,filterBy:function(fn, scope, startNode) {
 		startNode = startNode || this.tree.root;
@@ -132,7 +132,7 @@ Ext.ux.tree.TreeFilterX = Ext.extend(Ext.tree.TreeFilter, {
                        n.parentNode.removeChild(n);
                    }
                }
-           } 
+           }
         }
 	} // eo function filterBy
 	// }}}

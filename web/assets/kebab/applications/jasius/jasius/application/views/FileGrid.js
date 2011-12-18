@@ -47,7 +47,7 @@ KebabOS.applications.jasius.application.views.FileGrid = Ext.extend(Ext.grid.Gri
                 value: value
             });
         };
-        
+
         var config = {
             enableHdMenu:false,
             stripeRows: false,

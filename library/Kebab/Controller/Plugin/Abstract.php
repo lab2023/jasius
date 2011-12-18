@@ -59,7 +59,7 @@ abstract class Kebab_Controller_Plugin_Abstract extends Zend_Controller_Plugin_A
             } else {
                 throw new Zend_Exception($class . ' config file not found!');
             }
-        
+
     }
 
 }
