@@ -34,7 +34,7 @@ KebabOS.applications.jasius.application.views.DocumentAddWindow = Ext.extend(Ext
 
         KebabOS.applications.jasius.application.views.DocumentAddWindow.superclass.initComponent.call(this);
     },
-    
+
     buildItems: function() {
 
         this.formPanel = new KebabOS.applications.jasius.application.views.PropertyFormPanel({
@@ -85,7 +85,7 @@ KebabOS.applications.jasius.application.views.DocumentAddWindow = Ext.extend(Ext
         var btnNext = Ext.getCmp(this.id + '-next');
         var btnPrev = Ext.getCmp(this.id + '-prev');
         var btnSave = Ext.getCmp(this.id + '-save');
-        
+
         if (index < count - 1) {
             if (index == 0){
                 this.contentId != null ? btnNext.enable() : btnNext.disable();
@@ -99,7 +99,7 @@ KebabOS.applications.jasius.application.views.DocumentAddWindow = Ext.extend(Ext
             btnSave.setTooltip(Kebab.helper.translate('Finish document wizard'));
             btnNext.disable()
         }
-        
+
         index > 0 ?  btnPrev.enable() : btnPrev.disable();
     },
     buildFbar: function() {

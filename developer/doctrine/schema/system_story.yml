@@ -9,7 +9,7 @@ Story:
       type: clob
     active:
       type: boolean
-      
+
   actAs:
     I18n:
       fields: [title, description]
@@ -29,7 +29,7 @@ Story:
       foreignAlias: Role
       class: Role
       refClass: Permission
-      
+
   options:
     type: INNODB
     collate: utf8_bin

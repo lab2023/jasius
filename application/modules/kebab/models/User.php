@@ -61,8 +61,8 @@ class Kebab_Model_User
     }
 
     /**
-     * Sign a new user 
-     * 
+     * Sign a new user
+     *
      * @static
      * @throws Doctrine_Exception|Zend_Exception
      * @param string $fullName

@@ -83,9 +83,9 @@ KebabOS.applications.aboutMe.application.views.PasswordForm = Ext.extend(Ext.for
 
         this.addEvents('showHideForms');
         this.addEvents('formOnSave');
-        
+
         Ext.apply(this, Ext.apply(this.initialConfig, config));
-        
+
         KebabOS.applications.aboutMe.application.views.PasswordForm.superclass.initComponent.apply(this, arguments);
     },
 

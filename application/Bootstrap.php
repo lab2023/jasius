@@ -85,7 +85,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             if ($this->_config->kebab->logging->firebug->enable) {
 
                 $firebugWriter = new Zend_Log_Writer_Firebug();
-                //$firebugWriter->setFormatter(new Zend_Log_Formatter_Simple());               
+                //$firebugWriter->setFormatter(new Zend_Log_Formatter_Simple());
                 $this->_logging->addWriter($firebugWriter);
             }
         } else {
@@ -104,7 +104,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     /**
      * Plugin Initializer
-     * 
+     *
      * @return string
      */
     public function _initPlugins()
@@ -182,10 +182,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     /**
      * Zend Translate Initialization
-     * 
+     *
      * First we look the user identity if null, we look the default language from languages.ini
-     * 
-     * @return Zend_Translate 
+     *
+     * @return Zend_Translate
      */
     public function _initTranslator()
     {
@@ -213,7 +213,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                     )
                 );
             }
-            
+
             Zend_Registry::set('Zend_Translate', $translator);
 
             return $translator;

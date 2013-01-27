@@ -31,7 +31,7 @@ Kebab.OS.Indicators.Session = Ext.extend(Kebab.OS.Indicator, {
      * Component identity
      */
     id: 'kebab-os-panel-indicators-session',
-    
+
     initComponent : function() {
 
         // Setup Indicator Config

@@ -5,7 +5,7 @@
  http://www.lab2023.com
 
     * LICENSE
-    * 
+    *
     * This source file is subject to the  Dual Licensing Model that is bundled
     * with this package in the file LICENSE.txt.
     * It is also available through the world-wide-web at this URL:
@@ -33,7 +33,7 @@ Activation = function(){
 
             // Call builders
             this.buildActivationForm();
-            
+
             Ext.fly('login-link').on('click', function(e) {
                 e.stopEvent();
                 Kebab.helper.redirect('backend');
@@ -158,7 +158,7 @@ Activation = function(){
                 }
             });
         },
-        
+
         // UTILS -------------------------------------------------------------------------------------------------------
 
         /**
@@ -179,7 +179,7 @@ Activation = function(){
             form.buttons[0].setText(Kebab.helper.translate('Invalid activation key !&nbsp;'));
             form.buttons[0].disable();
         },
-                
+
         getActivationKey: function() {
             return activationKey;
         },
@@ -227,7 +227,7 @@ Activation = function(){
                 scope:this
             });
         },
-        
+
         /**
          * Activation action
          */

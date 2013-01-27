@@ -24,7 +24,7 @@
 
 /**
  * System_Controller_Helper_Param
- * 
+ *
  * @category   Kebab
  * @package    Controller
  * @subpackage Helper
@@ -38,15 +38,15 @@ class Kebab_Controller_Helper_Param extends Zend_Controller_Action_Helper_Abstra
 {
 
     /**
-     * @var array Parameters detected in raw content body 
+     * @var array Parameters detected in raw content body
      */
     protected $_bodyParams = array();
     protected $_decodeJsonFieldTypeArray = true; //true is array, false is object
 
     /**
-     * Do detection of content type, and retrieve parameters from raw body if present 
-     * 
-     * @return void 
+     * Do detection of content type, and retrieve parameters from raw body if present
+     *
+     * @return void
      */
 
     public function init()
@@ -65,10 +65,10 @@ class Kebab_Controller_Helper_Param extends Zend_Controller_Action_Helper_Abstra
     }
 
     /**
-     * Set body params 
-     * 
-     * @param  array $params 
-     * @return Scrummer_Controller_Action 
+     * Set body params
+     *
+     * @param  array $params
+     * @return Scrummer_Controller_Action
      */
     public function setBodyParams(array $params)
     {
@@ -77,9 +77,9 @@ class Kebab_Controller_Helper_Param extends Zend_Controller_Action_Helper_Abstra
     }
 
     /**
-     * Retrieve body parameters 
-     * 
-     * @return array 
+     * Retrieve body parameters
+     *
+     * @return array
      */
     public function getBodyParams()
     {
@@ -87,10 +87,10 @@ class Kebab_Controller_Helper_Param extends Zend_Controller_Action_Helper_Abstra
     }
 
     /**
-     * Get body parameter 
-     * 
-     * @param  string $name 
-     * @return mixed 
+     * Get body parameter
+     *
+     * @param  string $name
+     * @return mixed
      */
     public function getBodyParam($name)
     {
@@ -101,10 +101,10 @@ class Kebab_Controller_Helper_Param extends Zend_Controller_Action_Helper_Abstra
     }
 
     /**
-     * Is the given body parameter set? 
-     * 
-     * @param  string $name 
-     * @return bool 
+     * Is the given body parameter set?
+     *
+     * @param  string $name
+     * @return bool
      */
     public function hasBodyParam($name)
     {
@@ -115,9 +115,9 @@ class Kebab_Controller_Helper_Param extends Zend_Controller_Action_Helper_Abstra
     }
 
     /**
-     * Do we have any body parameters? 
-     * 
-     * @return bool 
+     * Do we have any body parameters?
+     *
+     * @return bool
      */
     public function hasBodyParams()
     {
@@ -128,9 +128,9 @@ class Kebab_Controller_Helper_Param extends Zend_Controller_Action_Helper_Abstra
     }
 
     /**
-     * Get submit parameters 
-     * 
-     * @return array 
+     * Get submit parameters
+     *
+     * @return array
      */
     public function getSubmitParams($decodeJsonFields)
     {
@@ -171,7 +171,7 @@ class Kebab_Controller_Helper_Param extends Zend_Controller_Action_Helper_Abstra
 
     /**
      * direct() : Stragry Design Pattern
-     * 
+     *
      */
     public function direct($decodeJsonFields = true)
     {

@@ -12,31 +12,31 @@
  * obtain it through the world-wide-web, please send an email
  * to info@lab2023.com so we can send you a copy immediately.
  *
- * @category   
- * @package    
- * @subpackage 
+ * @category
+ * @package
+ * @subpackage
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
- 
+
 /**
- * 
  *
- * @category   
- * @package    
- * @subpackage 
+ *
+ * @category
+ * @package
+ * @subpackage
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
-class Kebab_Validation_Email 
+class Kebab_Validation_Email
 {
     /**
      * Validate email
-     * 
+     *
      * @static
      * @param $email
      * @return bool

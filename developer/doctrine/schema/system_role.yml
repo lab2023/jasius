@@ -11,7 +11,7 @@ Role:
       type: clob
     active:
       type: boolean
-      
+
   actAs:
     Timestampable:
     Blameable:
@@ -29,7 +29,7 @@ Role:
       foreignAlias : Roles
       class: User
       refClass: UserRole
-     
+
     Stories:
       foreignAlias : Stories
       class: Story

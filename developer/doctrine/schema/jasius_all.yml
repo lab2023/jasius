@@ -85,7 +85,7 @@ Content:
     type_id:
       type: integer
       notnull: true
-          
+
   relations:
     Type:
       type: one
@@ -227,7 +227,7 @@ Access:
 
 
 
-        
+
 
 
 

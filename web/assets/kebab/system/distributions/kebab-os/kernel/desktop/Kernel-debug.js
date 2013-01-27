@@ -101,7 +101,7 @@ Ext.extend(Kebab.OS.Kernel, Ext.util.Observable, {
         });
 
         Kebab.helper.log('Kebab applications loaded...');
-        
+
         return applicationInstances;
     },
 

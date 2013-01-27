@@ -50,8 +50,8 @@ class Kebab_Controller_Helper_Sort extends Zend_Controller_Action_Helper_Abstrac
         $this->setSort($this->_request->getParam('sort', $this->_sort));
         $this->setDir($this->_request->getParam('dir', $this->_dir));
     }
-    
-    public function getSortString()     
+
+    public function getSortString()
     {
         return $this->_sortString;
     }
@@ -61,17 +61,17 @@ class Kebab_Controller_Helper_Sort extends Zend_Controller_Action_Helper_Abstrac
         if ($sortString !== false && is_string($sortString)) {
             $this->_sortString = $sortString;
         }
-        
+
         if (array_key_exists($this->getSort(), $this->_mapping)){
             $this->_sortString = $this->_mapping[$this->getSort()] . ' ' . $this->getDir();
         } else {
             throw new Kebab_Controller_Helper_Exception('Sort value isn\'t at mapping');
         }
-        
+
         return $this;
     }
 
-    public function getMapping()     
+    public function getMapping()
     {
         return $this->_mapping;
     }
@@ -81,8 +81,8 @@ class Kebab_Controller_Helper_Sort extends Zend_Controller_Action_Helper_Abstrac
         $this->_mapping = $_mapping;
     }
 
-            
-    public function getSort()     
+
+    public function getSort()
     {
         return $this->_sortValue;
     }
@@ -101,10 +101,10 @@ class Kebab_Controller_Helper_Sort extends Zend_Controller_Action_Helper_Abstrac
     {
         $this->_dirValue = $_dirValue;
     }
-    
+
     /**
      * direct()
-     * 
+     *
      * @return  System_Controller_Helper_Pager
      */
     public function direct($mapping)
@@ -113,11 +113,11 @@ class Kebab_Controller_Helper_Sort extends Zend_Controller_Action_Helper_Abstrac
         if (!is_array($mapping)) {
             throw new Kebab_Controller_Helper_Exception('Mapping type should be array.');
         }
-        
+
         $this->setMapping($mapping);
         $this->setSortString();
-        return $this->getSortString();        
-    }    
+        return $this->getSortString();
+    }
 }
 
 

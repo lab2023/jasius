@@ -1,6 +1,6 @@
 <?php
 /**
- * 
+ *
  * Imind Library
  *
  * @category   Imind
@@ -36,25 +36,25 @@ class Imind_Profiler_Doctrine_Firebug extends Doctrine_Connection_Profiler {
      * @param array $_events an array containing all listened events
      */
     private $_events     = array();
-    
+
     /**
      * The original label for this profiler.
      * @var string
      */
     protected $_label = null;
-  
+
     /**
      * The message envelope holding the profiling summary
      * @var Zend_Wildfire_Plugin_FirePhp_TableMessage
      */
     protected $_message = null;
-  
+
     /**
      * The total time taken for all profiled queries.
      * @var float
      */
     protected $_totalElapsedTime = 0;
-  
+
     /**
      * Constructor
      *
@@ -67,7 +67,7 @@ class Imind_Profiler_Doctrine_Firebug extends Doctrine_Connection_Profiler {
         if(!$this->_label) {
             $this->_label = 'Imind_Profiler_Doctrine_Firebug';
         }
-    
+
         if (!$this->_message) {
             $this->_message = new Zend_Wildfire_Plugin_FirePhp_TableMessage($this->_label);
             $this->_message->setBuffered(true);
@@ -76,7 +76,7 @@ class Imind_Profiler_Doctrine_Firebug extends Doctrine_Connection_Profiler {
             Zend_Wildfire_Plugin_FirePhp::getInstance()->send($this->_message);
         }
     }
-    
+
     /**
      * method overloader
      * this method is used for invoking different listeners, for the full
@@ -93,8 +93,8 @@ class Imind_Profiler_Doctrine_Firebug extends Doctrine_Connection_Profiler {
         }
         if (substr($methodName, 0, 3) == 'pre') {
             $arguments[0]->start();
-            if (!in_array($arguments[0], $this->_events, true)) { 
-                $this->_events[] = $arguments[0]; 
+            if (!in_array($arguments[0], $this->_events, true)) {
+                $this->_events[] = $arguments[0];
             }
         } else {
             // we need after-event listeners
@@ -106,14 +106,14 @@ class Imind_Profiler_Doctrine_Firebug extends Doctrine_Connection_Profiler {
                         $arguments[0]->getQuery(),
                         ($params=$arguments[0]->getParams())?$params:null);
             $this->_message->addRow($row);
-            $this->updateMessageLabel();                
+            $this->updateMessageLabel();
         }
 
     }
-    
+
     /**
      * Update the label of the message holding the profile info.
-     * 
+     *
      * @return void
      */
     protected function updateMessageLabel()

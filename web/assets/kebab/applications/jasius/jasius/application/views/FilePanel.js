@@ -12,7 +12,7 @@
 KebabOS.applications.jasius.application.views.FilePanel = Ext.extend(Ext.Panel, {
 
     owner: null,
-    
+
     layout: {
         type: 'vbox',
         pack: 'start',
@@ -41,7 +41,7 @@ KebabOS.applications.jasius.application.views.FilePanel = Ext.extend(Ext.Panel, 
         });
 
         this.fileUploader.fileGrid = this.fileGrid;
-        
+
         this.items = [
             this.fileUploader,
             this.fileGrid

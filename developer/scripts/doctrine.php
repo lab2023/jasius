@@ -118,7 +118,7 @@ if ($moduleNameIndex !== false) {   // Module argument is set
         if (!is_dir(MODULES_PATH . "/" . $moduleName)) {
             die("** Module path not found! **" . PHP_EOL);
         }
-        
+
         // Fiter SeperatorToCamelCase Setup
         $filter = new Zend_Filter_Word_UnderscoreToCamelCase();
         $camelCaseModuleName = $filter->setSeparator('-')->filter($moduleName);
@@ -136,7 +136,7 @@ if ($moduleNameIndex !== false) {   // Module argument is set
                 $camelCaseModuleName . "_Model_"
             )
         );
-        
+
         // Apply New Cli Settings
         $doctrineCliCfgs = str_replace(
             $mapping['find'],
@@ -152,7 +152,7 @@ if ($moduleNameIndex !== false) {   // Module argument is set
         );
 
         echo "** '" . $moduleName ."' module is being processed... **" . PHP_EOL;
-        
+
     } else {
         //KBBTODO: Add console code color
         die("** Please type your module path! **"

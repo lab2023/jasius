@@ -36,7 +36,7 @@ Kebab.OS.Indicators.Connection = Ext.extend(Kebab.OS.Indicator, {
      * Initialize the component
      */
     initComponent : function() {// Setup Indicator Config
-        
+
         var indicatorCfg = {
             iconCls: 'icon-server-connect',
             handler:function() {
@@ -117,9 +117,9 @@ Kebab.OS.Indicators.Connection = Ext.extend(Kebab.OS.Indicator, {
      */
     requestCompleteAction: function(connection, response, options) {
         // KBBTODO Listen and notice requests for server side messages
-        
+
         this.reqStop = new Date();
-        
+
         // Request diff time
         var reqDiff = (this.reqStop.getTime() - this.reqStart.getTime()) / 1000;
 
@@ -152,7 +152,7 @@ Kebab.OS.Indicators.Connection = Ext.extend(Kebab.OS.Indicator, {
      * Request exception action
      */
     requestExceptionAction: function(connection, response, options) {
-        
+
         this.setIconClass('icon-server-disconnect');
         if (response.status == 401) {
             // KBBTODO This way is too bad but time is everything :( I will review code and implement observer design pattern later.

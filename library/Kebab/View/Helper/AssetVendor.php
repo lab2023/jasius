@@ -56,7 +56,7 @@ class Kebab_View_Helper_AssetVendor extends Kebab_View_Helper_Asset
         $config = $this->_config->assets->vendors;
 
         $root = $config->$vendor->path;
-        $cdn  = $config->$vendor->cdn 
+        $cdn  = $config->$vendor->cdn
                     ? $config->$vendor->cdn
                     : $this->_config->assets->loading->cdn->url . '/' . $this->_config->assets->path . '/vendors';
 

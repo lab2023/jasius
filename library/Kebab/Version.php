@@ -22,7 +22,7 @@
 
 /**
  * Kebab_Version
- * 
+ *
  * Class to store and retrieve the version of Zend Framework.
  *
  * @category   Kebab

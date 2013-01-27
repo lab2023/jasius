@@ -38,13 +38,13 @@
 class Kebab_View_Helper_Settings extends Zend_View_Helper_Abstract
 {
     protected $_config = array();
-    
+
     public function  __construct()
     {
         $this->_config['kebab'] = Zend_Registry::get('config')->kebab;
         $this->_config['project'] = Zend_Registry::get('config')->project;
     }
-    
+
     public function settings($configName = null)
     {
         if (!is_null($configName)) {

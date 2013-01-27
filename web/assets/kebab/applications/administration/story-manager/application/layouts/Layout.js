@@ -17,7 +17,7 @@ KebabOS.applications.storyManager.application.layouts.Layout = Ext.extend(Ext.Pa
         this.storyGrid = new KebabOS.applications.storyManager.application.views.StoryGrid({
             bootstrap: this.bootstrap
         });
-        
+
         var config = {
             layout:'fit',
             items : this.storyGrid

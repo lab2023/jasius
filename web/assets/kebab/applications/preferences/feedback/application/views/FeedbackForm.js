@@ -12,7 +12,7 @@ KebabOS.applications.feedback.application.views.FeedbackForm = Ext.extend(Ext.fo
 
     // Application bootstrap
     bootstrap: null,
-    
+
     //POST url
     url : 'kebab/feedback',
 
@@ -78,7 +78,7 @@ KebabOS.applications.feedback.application.views.FeedbackForm = Ext.extend(Ext.fo
 
         this.addEvents('feedbackFormOnSave');
         this.addEvents('loadGrid');
-        
+
         Ext.apply(this, Ext.apply(this.initialConfig, config));
 
         KebabOS.applications.feedback.application.views.FeedbackForm.superclass.initComponent.apply(this, arguments);

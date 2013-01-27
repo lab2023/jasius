@@ -38,12 +38,12 @@
 class Kebab_View_Helper_Language extends Zend_View_Helper_Abstract
 {
     protected $_config;
-    
+
     public function  __construct()
     {
         $this->_config = Zend_Registry::get('config')->kebab;
     }
-    
+
     public function language()
     {
         // Access to zend auth

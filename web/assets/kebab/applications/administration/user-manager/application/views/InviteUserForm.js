@@ -14,7 +14,7 @@ KebabOS.applications.userManager.application.views.InviteUserForm = Ext.extend(E
     bootstrap: null,
 
     initComponent: function() {
-        
+
         // form config
         var config = {
             url: Kebab.helper.url('kebab/user-invitation'),

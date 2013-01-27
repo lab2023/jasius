@@ -56,7 +56,7 @@ KebabOS.applications.jasius.application.controllers.Index = Ext.extend(Ext.util.
                 if (grid.setColumnModel(this.getPropertyData())) {
                     grid.getStore().load({params: {start:0, limit:this.bootstrap.app.getSettings().project.pageSizeDefault}});
                     grid.reconfigure(grid.getStore(), grid.getColumnModel());
-                    
+
                 }
             }
         });
@@ -123,7 +123,7 @@ KebabOS.applications.jasius.application.controllers.Index = Ext.extend(Ext.util.
             window.getLayout().setActiveItem(window.items.indexOf(activeItem) + 1);
         }
     },
-    
+
     wizardPrev : function (window) {
         var activeItem = window.getLayout().activeItem;
         if (window.items.indexOf(activeItem)> 0){
@@ -157,7 +157,7 @@ KebabOS.applications.jasius.application.controllers.Index = Ext.extend(Ext.util.
     _buildDocumentWindow: function(id) {
 
         var data = this.getPropertyData();
-        
+
         if (data) {
             var win = Ext.getCmp(id + '-add-window');
             if (!win) {

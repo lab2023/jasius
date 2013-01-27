@@ -14,14 +14,14 @@
  *
  * @category   Kebab
  * @package    System
- * @subpackage 
+ * @subpackage
  * @author	   lab2023 Dev Team
- * @copyright  Copyright (c) 2010-2011 lab2023 - 
+ * @copyright  Copyright (c) 2010-2011 lab2023 -
  *             internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
- 
+
  /**
  * Kebab Project Application Loader
  *
@@ -47,9 +47,9 @@ $scanner = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(BASE_PAT
 while($scanner->valid()) {
 
     if (!$scanner->isDot() && $scanner->isFile()) {
-        
+
         $pathInfo = pathinfo($scanner->key());
-        
+
         if (@$pathInfo['extension'] == 'js' && $scanner->getFilename() !== 'index.js') {
             @readfile($scanner->key());
             print PHP_EOL;

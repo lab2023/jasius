@@ -26,7 +26,7 @@ class Kebab_Access
     public static function allow($storyName)
     {
         $retVal = false;
-        
+
         if (Zend_Auth::getInstance()->hasIdentity()) {
             $userStoriesName = Zend_Auth::getInstance()->getIdentity()->stories;
             $retVal = in_array($storyName, $userStoriesName);
@@ -34,4 +34,4 @@ class Kebab_Access
 
         return $retVal;
     }
-} 
+}

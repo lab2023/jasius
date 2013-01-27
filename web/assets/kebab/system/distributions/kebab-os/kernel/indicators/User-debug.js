@@ -29,7 +29,7 @@ Kebab.OS.Indicators.User = Ext.extend(Kebab.OS.Indicator, {
 
     // User Object
     user:null,
-    
+
     initComponent : function() {
 
         // Setup Indicator Config

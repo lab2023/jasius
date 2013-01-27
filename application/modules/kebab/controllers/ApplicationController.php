@@ -45,7 +45,7 @@ class Kebab_ApplicationController extends Kebab_Rest_Controller
             'description' => 'applicationTranslation.description',
             'title' => 'title',
         );
-        
+
         $ids = $this->_helper->search('Model_Entity_Application', true);
         $order = $this->_helper->sort($mapping);
 

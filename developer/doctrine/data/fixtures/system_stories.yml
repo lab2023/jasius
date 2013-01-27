@@ -4,7 +4,7 @@ Model_Entity_Story:
     Translation:
       en:
         title: Access to desktop
-        description: Access the desktop after login. 
+        description: Access the desktop after login.
       tr:
         title: Masaüstüne erişim
         description: Çevirimiçi olduktan sonra masaüstüne erişim
@@ -42,7 +42,7 @@ Model_Entity_Story:
       tr:
         title: Rol yönetimi
         description: Sistem rollerini yönetin
-    
+
   Story_Management:
     name: story_management
     active: 1

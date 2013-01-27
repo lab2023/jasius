@@ -38,16 +38,16 @@
 class Kebab_View_Helper_Variable extends Zend_View_Helper_Abstract
 {
     protected $_config;
-    
+
     public function  __construct()
     {
         $this->_config = Zend_Registry::get('config')->kebab;
     }
-    
+
     public function variable($var = null)
     {
         if (!is_null($var)) {
-            
+
             $vars = new stdClass();
             $vars->os = $this->_config->os;
             $vars->assets = $this->_config->assets;

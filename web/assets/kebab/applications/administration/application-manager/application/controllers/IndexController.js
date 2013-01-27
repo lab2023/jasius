@@ -29,5 +29,5 @@ KebabOS.applications.applicationManager.application.controllers.Index = Ext.exte
 
     }
 
-    // Actions ----------------------------------------------------------------- 
+    // Actions -----------------------------------------------------------------
 });

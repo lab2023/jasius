@@ -11,7 +11,7 @@ $this->headScript()
     <?php
     // BEGIN: Kernel Boot & All Applications Load ------------------------------
     foreach ($this->applications as $application) {  // KBBTODO Move to DOM
-        
+
         // TODO Load on-demand
         $this->headLink()->appendStylesheet(
             $this->assetApplication($application['name'] .'/web/theme/style.css')
@@ -19,7 +19,7 @@ $this->headScript()
                  ->get(),
             'screen', true, array('id' => $application['identity'] . '-style')
         );
-        
+
         $this->headScript()->appendFile(
             $this->assetApplication($application['name'])
              ->department($application['department'])
@@ -51,7 +51,7 @@ $this->headScript()
     <?php // END: OS Panel ---------------------------------------------------?>
 
     <?php // BEGIN: OS Desktop Environment -----------------------------------?>
-    <div id="kebab-os-desktop"> 
+    <div id="kebab-os-desktop">
         <dl id="kebab-os-desktop-shortcuts">
             <?php foreach ($this->applications as $application): // KBBTODO Move to DOM ?>
             <dt ext:qtip="<?php echo $application['title']['description']; ?>" id="<?php echo $application['identity']; ?>-shortcut">

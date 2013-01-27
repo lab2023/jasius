@@ -44,7 +44,7 @@ class Plugin_KebabAccess extends Kebab_Controller_Plugin_Abstract
         // Requests
         $resource = $request->getModuleName() . '_' . $request->getControllerName();
         $action = $request->getActionName();
-        
+
         // Check Acl
         if ($this->_isCheckAccess($request)) {
             if (Zend_Auth::getInstance()->hasIdentity()) {

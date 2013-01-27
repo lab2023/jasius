@@ -19,7 +19,7 @@ KebabOS.applications.aboutMe.application.views.ProfileForm = Ext.extend(Ext.form
         labelAlign: 'top',
         anchor: '100%'
     },
-    
+
     initComponent: function() {
 
         this.url = Kebab.helper.url('kebab/profile');
@@ -50,7 +50,7 @@ KebabOS.applications.aboutMe.application.views.ProfileForm = Ext.extend(Ext.form
                 }
             }
         });
-        
+
         var config = {
             items: [{
                 layout:'column',
@@ -120,7 +120,7 @@ KebabOS.applications.aboutMe.application.views.ProfileForm = Ext.extend(Ext.form
         this.addEvents('formOnSave');
 
         Ext.apply(this, Ext.apply(this.initialConfig, config));
-        
+
         KebabOS.applications.aboutMe.application.views.ProfileForm.superclass.initComponent.apply(this, arguments);
     },
 
@@ -135,14 +135,14 @@ KebabOS.applications.aboutMe.application.views.ProfileForm = Ext.extend(Ext.form
             }
         }
     },
-    
+
     onRender:function() {
 
         this.load({
             url: this.url + '/' + this.bootstrap.app.getUser().id,
             method: 'GET'
         });
-        
+
         KebabOS.applications.aboutMe.application.views.ProfileForm.superclass.onRender.apply(this, arguments);
     },
 

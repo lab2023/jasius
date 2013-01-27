@@ -21,13 +21,13 @@
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
- 
+
 /**
- * 
+ *
  *
  * @category   Kebab
- * @package    
- * @subpackage 
+ * @package
+ * @subpackage
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
@@ -43,7 +43,7 @@ class Jasius_Model_Data
      * @return array|bool
      */
     public static $validate = false;
-    
+
     public static function add($contentId, array $propertyFormData)
     {
         // Validation
@@ -57,7 +57,7 @@ class Jasius_Model_Data
             $dataCollection->fromArray($retData);
             $dataCollection->save();
             unset($dataCollection);
-            
+
             $retVal = true;
         }
 
@@ -177,7 +177,7 @@ class Jasius_Model_Data
         self::$validate = false;
         $content = Doctrine_Core::getTable('Model_Entity_Content')->find($contentId);
         $propertyDataStructure = Jasius_Model_Property::getAllPropertyByTypeId($content->type_id, 'NAME_ARRAY');
-        
+
         $i = 0;
         $errorMessage = array();
         $dataCollectionArray = array();
@@ -282,7 +282,7 @@ class Jasius_Model_Data
                     ->delete('Model_Entity_Data data')
                     ->where('data.content_id = ?', $contentId)
                     ->execute();
-            
+
             $retVal = Doctrine_Manager::connection()->commit();
         } catch (Doctrine_Exception $e) {
             Doctrine_Manager::connection()->rollback();
@@ -294,7 +294,7 @@ class Jasius_Model_Data
 
         return $retVal;
     }
-    
+
     public static function mapping($dataType)
     {
         switch ($dataType) {

@@ -13,7 +13,7 @@ KebabOS.applications.jasius.application.layouts.Layout = Ext.extend(Ext.Panel, {
     bootstrap: null,
 
     layout: 'fit',
-    
+
     border: false,
 
     initComponent: function() {
@@ -21,7 +21,7 @@ KebabOS.applications.jasius.application.layouts.Layout = Ext.extend(Ext.Panel, {
         this.documentsGrid = new KebabOS.applications.jasius.application.views.DocumentsGridPanel({
             bootstrap: this.bootstrap
         });
-        
+
         Ext.apply(this, {
             items: this.documentsGrid
 

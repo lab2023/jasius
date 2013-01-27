@@ -42,7 +42,7 @@ KebabOS.applications.feedback.application.views.FeedbackGrid = Ext.extend(Ext.gr
             ['progress', Kebab.helper.translate('In Progress')],
             ['closed', Kebab.helper.translate('Closed')]
         ];
-        
+
         this.columns = [
             expander,
             {

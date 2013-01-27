@@ -36,7 +36,7 @@ KebabOS.applications.databaseBackup.application.controllers.Index = Ext.extend(E
     loadGridAction: function(component) {
         component.load();
     },
-    
+
     requestAction: function(data) {
         Ext.Ajax.request({
             url: Kebab.helper.url(data.url),

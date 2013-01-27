@@ -9,7 +9,7 @@ Module:
     Controllers:
       class: Controller
       type: many
-      
+
   options:
     type: INNODB
     collate: utf8_bin

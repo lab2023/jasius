@@ -38,7 +38,7 @@ final class Kebab_Authentication
     public static function signIn($userName, $password, $rememberMe = false, $md5 = true)
     {
         $retVal = false;
-        
+
         // set ZendX_Doctrine_Auth_Adapter
         $auth = Zend_Auth::getInstance();
         $authAdapter = new ZendX_Doctrine_Auth_Adapter(Doctrine::getConnectionByTableName('Model_Entity_User'));
@@ -53,7 +53,7 @@ final class Kebab_Authentication
                 ->setCredential($password);
 
         // set Zend_Auth
-        $result = $auth->authenticate($authAdapter); 
+        $result = $auth->authenticate($authAdapter);
 
         // Check Auth Validation
         if ($result->isValid()) {

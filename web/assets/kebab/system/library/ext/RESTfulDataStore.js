@@ -1,6 +1,6 @@
 /**
- * RESTfulDataStore extend by Ext.data.Store 
- * 
+ * RESTfulDataStore extend by Ext.data.Store
+ *
  * @category    Kebab
  * @package     Kebab
  * @namespace   Kebab.library
@@ -10,30 +10,30 @@
  */
 Ext.namespace('Kebab.library.ext');
 Kebab.library.ext.RESTfulDataStore = Ext.extend(Ext.data.Store, {
-    
+
     // RESTful enable
-    restful: true,    
-    
+    restful: true,
+
     // Auto-load enable
     autoLoad: false,
-    
+
     // Auto-destroy enable
     autoDestroy: true,
-    
+
     // Remote sort enable
     remoteSort: true,
-    
+
     // Auto-save default disable
     autoSave: false,
-    
+
     // Batch editing default enable
     batch: false,
-    
+
     // System REST API
     restAPI: 'api/url',
-    
+
     // Json Reader Config
-    readerConfig: {            
+    readerConfig: {
         idProperty: 'id',
         root: 'data',
         totalProperty: 'total',
@@ -46,45 +46,45 @@ Kebab.library.ext.RESTfulDataStore = Ext.extend(Ext.data.Store, {
         {name: 'title', type: 'string', allowBlank: false},
         {name: 'description', type: 'string'}
     ],
-    
+
     // Store Constructor
     constructor : function() {
-        
+
         // HTTP Proxy
         this.proxy = new Ext.data.HttpProxy({
             url : Kebab.helper.url(this.restAPI)
         });
-        
+
         // JSON Reader
         this.reader = new Ext.data.JsonReader(
-            this.readerConfig, 
+            this.readerConfig,
             this.buildReaderFields()
         );
-        
+
         // JSON Writer
         this.writer = new Ext.data.JsonWriter({
             encode: true,
             writeAllFields: false
         });
-        
+
         // Base Config
         var config = {
             proxy: this.proxy,
             reader: this.reader,
             writer: this.writer
         };
-        
+
         // Merge initialConfig and base config
         Ext.apply(this, config);
-        
+
         // Call Superclass initComponent() method
         Kebab.library.ext.RESTfulDataStore.superclass.constructor.apply(this, arguments);
     },
-    
-    buildReaderFields: function() {        
+
+    buildReaderFields: function() {
         return this.readerFields;
     },
-    
+
     listeners : {
         write : function(){
             Kebab.helper.message(

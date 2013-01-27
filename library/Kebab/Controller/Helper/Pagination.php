@@ -44,17 +44,17 @@ class Kebab_Controller_Helper_Pagination extends Zend_Controller_Action_Helper_A
     protected $_resultsPerPage;
     protected $_currentPage;
     protected $_pager;
-    
+
     public function init()
     {
         $this->setRequest($this->getRequest());
         $this->setStartValue($this->_request->getParam($this->_startKey, $this->_startValue));
         $this->setLimitValue($this->_request->getParam($this->_limitKey, $this->_limitValue));
         $this->setResultsPerPage($this->_limitValue);
-        $this->setCurrentPage();     
+        $this->setCurrentPage();
     }
-    
-    public function getStartKey()     
+
+    public function getStartKey()
     {
         return $this->_startKey;
     }
@@ -118,9 +118,9 @@ class Kebab_Controller_Helper_Pagination extends Zend_Controller_Action_Helper_A
         } else {
             $this->_currentPage = ceil($this->_startValue / $this->_resultsPerPage);
         }
-    }    
+    }
 
-    public function getPager()     
+    public function getPager()
     {
         return $this->_pager;
     }
@@ -130,13 +130,13 @@ class Kebab_Controller_Helper_Pagination extends Zend_Controller_Action_Helper_A
         $this->_pager = new Doctrine_Pager(
             $query,
             $this->getCurrentPage(),
-            $this->getResultsPerPage()            
+            $this->getResultsPerPage()
         );
     }
 
     /**
      * direct()
-     * 
+     *
      * @return  System_Controller_Helper_Pager
      */
     public function direct($query = null)
@@ -144,11 +144,11 @@ class Kebab_Controller_Helper_Pagination extends Zend_Controller_Action_Helper_A
         if (is_null($query)) {
             return $this;
         }
-        
+
         $this->setPager($query);
         return $this->_pager;
     }
-    
+
     private function setRequest($_request)
     {
         $this->_request = $_request;

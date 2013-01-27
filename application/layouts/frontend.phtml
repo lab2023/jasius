@@ -1,6 +1,6 @@
 <?php echo $this->doctype() . PHP_EOL; ?>
 <html>
-<head>    
+<head>
     <?php // META AREA -------------------------------------------------------?>
     <meta charset="UTF-8" />
     <meta name="Author" content="lab2023 Dev. Team: http://www.lab2023.com/" />
@@ -20,7 +20,7 @@
         echo $this->headLink(array('rel' => 'favicon','href' => $this->asset('favicon.ico')->getWeb()))
                 ->prependStylesheet($this->asset('frontend/layout.css')->get(false));
     ?>
-    
+
     <?php // STYLE AREA ------------------------------------------------------?>
     <?php echo $this->headStyle(); ?>
 </head>
@@ -28,7 +28,7 @@
 
     <!-- RIBBOn & PAGE LOADER -->
     <div id="beta-ribbon"></div>
-    
+
     <div id="wrapper" class="container_12">
 
         <img id="logo" src="<?php echo $this->asset('frontend/images/logo.png')->get(false)?>" />

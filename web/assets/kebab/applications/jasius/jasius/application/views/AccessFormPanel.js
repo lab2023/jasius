@@ -12,9 +12,9 @@
 KebabOS.applications.jasius.application.views.AccessFormPanel = Ext.extend(Ext.FormPanel, {
 
     owner: this,
-    
+
     url: null,
-    
+
     border:false,
 
     initComponent: function() {

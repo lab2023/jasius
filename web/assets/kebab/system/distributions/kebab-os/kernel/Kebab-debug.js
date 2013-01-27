@@ -36,7 +36,7 @@ Kebab = function() {
     var os = null;
 
     return {
-        
+
         /**
          * Application environment
          */
@@ -75,7 +75,7 @@ Kebab = function() {
          * Helpers
          */
         helper: {
-            
+
             /**
              * Pre-loader helper
              * @param show

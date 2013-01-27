@@ -1,6 +1,6 @@
 /**
  * jasius Application TypesDataStore
- * 
+ *
  * @category    Kebab (kebab-reloaded)
  * @package     Applications
  * @namespace   KebabOS.applications.jasius.application.models.TypesDataStore
@@ -9,13 +9,13 @@
  * @license     http://www.kebab-project.com/licensing
  */
 KebabOS.applications.jasius.application.models.TypesDataStore = Ext.extend(Kebab.library.ext.RESTfulBasicDataStore, {
-    
+
     // Application Bootstrap
     bootstrap: null,
-    
+
     // System REST API
     restAPI: 'jasius/type',
-    
+
     readerFields: [
         {name: 'id', type: 'integer'},
         {name: 'title', type: 'string'}

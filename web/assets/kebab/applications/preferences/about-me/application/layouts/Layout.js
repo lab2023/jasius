@@ -1,6 +1,6 @@
 /**
  * Kebab Application Bootstrap Class
- * 
+ *
  * @category    Kebab
  * @package     Applications
  * @namespace   KebabOS.applications.aboutMe.application.layouts
@@ -9,14 +9,14 @@
  * @license     http://www.kebab-project.com/cms/licensing
  */
 KebabOS.applications.aboutMe.application.layouts.Layout = Ext.extend(Ext.Panel, {
-    
+
     // Application bootstrap
     bootstrap: null,
-    
+
     layout: 'card',
     activeItem: 0,
     border: false,
-    
+
     initComponent: function() {
 
         this.profileForm = new KebabOS.applications.aboutMe.application.views.ProfileForm({

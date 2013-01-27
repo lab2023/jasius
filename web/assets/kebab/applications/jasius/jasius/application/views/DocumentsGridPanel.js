@@ -10,7 +10,7 @@
  */
 
 KebabOS.applications.jasius.application.views.DocumentsGridPanel = Ext.extend(Ext.grid.GridPanel, {
-    
+
     // Application bootstrap
     bootstrap: null,
     columnFilter : new Ext.ux.grid.GridFilters({
@@ -31,7 +31,7 @@ KebabOS.applications.jasius.application.views.DocumentsGridPanel = Ext.extend(Ex
                 forceFit: false
             }
         };
-        
+
         Ext.apply(this, config);
         this.plugins = [this.columnFilter];
         this.columns = this.buildColumns();
@@ -51,7 +51,7 @@ KebabOS.applications.jasius.application.views.DocumentsGridPanel = Ext.extend(Ex
         this.store.reader.buildExtractors();
         return true;
     },
-    
+
     setColumnModel : function (propertyDt) {
         var propertyData = propertyDt.data;
         var filter =[];
@@ -78,7 +78,7 @@ KebabOS.applications.jasius.application.views.DocumentsGridPanel = Ext.extend(Ex
         var filter = {
             dataIndex: property.name
         };
-        
+
         switch (property.dataType) {
             case "decimal":
                 Ext.apply(filter, {type : 'numeric'});
@@ -121,7 +121,7 @@ KebabOS.applications.jasius.application.views.DocumentsGridPanel = Ext.extend(Ex
 
         return filter;
     },
-    
+
     getGridColumn : function(property) {
         var column = {
             header : property.title,
@@ -198,7 +198,7 @@ KebabOS.applications.jasius.application.views.DocumentsGridPanel = Ext.extend(Ex
                     type : 'date'
                 });
                 break;
-            
+
             case  "timestamp":
                 Ext.apply(field, {
                     type : 'date'

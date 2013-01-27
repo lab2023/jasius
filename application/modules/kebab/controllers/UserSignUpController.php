@@ -55,7 +55,7 @@ class Kebab_UserSignUpController extends Kebab_Rest_Controller
         } else {
             $response->addError('email', 'An other user uses this email');
         }
-        
+
         $response->getResponse();
     }
 

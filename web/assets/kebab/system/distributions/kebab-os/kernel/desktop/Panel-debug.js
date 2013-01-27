@@ -5,7 +5,7 @@
  http://www.lab2023.com
 
     * LICENSE
-    * 
+    *
     * This source file is subject to the  Dual Licensing Model that is bundled
     * with this package in the file LICENSE.txt.
     * It is also available through the world-wide-web at this URL:
@@ -46,7 +46,7 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
         '</em></td>',
         '</tr></tbody></table>'
     ),
-    
+
     init : function(){
 
         // Access to active user data
@@ -118,14 +118,14 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
             el: 'kebab-os-panel-window-list',
             region:'center'
         });
-        
+
     },
 
     /**
      * Build system indicators area
      */
     buildIndicatorsArea: function() {
-        
+
         // Indicator Objects
         var indicators = [
             new Kebab.OS.Indicators.QuickStart({kernel: this.kernel}),
@@ -169,7 +169,7 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
         var launcherMenu = (menu == 'application')
                         ? this.applicationsMenu
                         : this.systemMenu;
-        
+
         launcherMenu.menu.add(item);
     },
 
@@ -196,9 +196,9 @@ Ext.extend(Kebab.OS.Panel.WindowList, Ext.util.Observable, {
  * @version    1.5.0
  */
 Kebab.OS.Panel.Container = Ext.extend(Ext.Container, {
-    
+
     initComponent : function() {
-        
+
         Kebab.OS.Panel.Container.superclass.initComponent.call(this);
 
         this.el = Ext.get(this.el) || Ext.getBody();
@@ -247,9 +247,9 @@ Kebab.OS.Panel.WindowList.Buttons = Ext.extend(Ext.BoxComponent, {
     buttonWidthSet: false,
 
     initComponent : function() {
-        
+
         this.on('resize', this.delegateUpdates);
-        
+
         this.items = [];
 
         this.stripWrap = Ext.get(this.el).createChild({
@@ -270,7 +270,7 @@ Kebab.OS.Panel.WindowList.Buttons = Ext.extend(Ext.BoxComponent, {
         this.strip.createChild({
             cls:'x-clear'
         });
-        
+
         Kebab.OS.Panel.WindowList.Buttons.superclass.initComponent.call(this);
 
     },
@@ -508,9 +508,9 @@ Kebab.OS.Panel.WindowList.Buttons = Ext.extend(Ext.BoxComponent, {
  * @version    1.5.0
  */
 Kebab.OS.Panel.WindowList.TaskButton = function(win, el){
-    
+
     this.win = win;
-    
+
     Kebab.OS.Panel.WindowList.TaskButton.superclass.constructor.call(this, {
         iconCls: win.iconCls,
         //text: Ext.util.Format.ellipsis(win.title, 18),

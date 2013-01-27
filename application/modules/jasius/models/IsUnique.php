@@ -1,5 +1,5 @@
 <?php
- 
+
 /**
  * Kebab Framework
  *
@@ -21,13 +21,13 @@
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
- 
+
 /**
- * 
+ *
  *
  * @category   Kebab (kebab-reloaded)
- * @package    
- * @subpackage 
+ * @package
+ * @subpackage
  * @author     Onur Özgür ÖZKAN <onur.ozgur.ozkan@lab2023.com>
  * @copyright  Copyright (c) 2010-2011 lab2023 - internet technologies TURKEY Inc. (http://www.lab2023.com)
  * @license    http://www.kebab-project.com/cms/licensing
@@ -38,7 +38,7 @@ class Jasius_Model_IsUnique
     public static function isUniqueProperty($propertyId, $value, $contentId)
     {
         $retVal = true;
-        
+
         $property = Jasius_Model_Property::get($propertyId)->fetchOne();
 
         $errorMessage = '';
@@ -54,7 +54,7 @@ class Jasius_Model_IsUnique
         if ($isUniqueCheck) {
             $errorMessage = Zend_Registry::get('Zend_Translate')->_('Same record entered before');
         }
-        
+
         if ($errorMessage != '') {
             $retVal = $errorMessage;
         }

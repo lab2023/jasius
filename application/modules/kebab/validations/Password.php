@@ -20,9 +20,9 @@
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
- 
+
 /**
- * 
+ *
  *
  * @category   Kebab
  * @package    Module
@@ -32,11 +32,11 @@
  * @license    http://www.kebab-project.com/cms/licensing
  * @version    1.5.0
  */
-class Kebab_Validation_Password 
+class Kebab_Validation_Password
 {
     /**
      * Validate the password
-     * 
+     *
      * @static
      * @param $password
      * @return bool

@@ -5,7 +5,7 @@ Controller:
       type: integer
     name:
       type: string(255)
-      
+
   relations:
     Module:
       class: Module

@@ -27,7 +27,7 @@ Ext.namespace('Kebab.OS');
  * @version    1.5.0
  */
 Kebab.OS = function(kebab){
-    
+
     /**
      * Base variables
      */
@@ -84,7 +84,7 @@ Kebab.OS = function(kebab){
         new Ext.util.DelayedTask(function(){
             this.hidePreLoader(.5);
         }, this).delay(delay);
-        
+
         Kebab.helper.log('Kebab.OS initialized...');
 
         return this;
@@ -100,7 +100,7 @@ Kebab.OS = function(kebab){
 
         // Set translator object
         this.translator = new Kebab.Translator(this.getKebab().i18n);
-        
+
         // Set logger object
         this.logger = new Kebab.Logger(this.getKebab().applicationEnvironment);
 

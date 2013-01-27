@@ -7,7 +7,7 @@ $this->headLink()
     <?php if ($this->data->position == "top"): ?>
         <?php echo $this->render('console.phtml'); ?>
     <?php endif; ?>
-    
+
     <div id="kebab-developer-tools-terminal-icon"></div>
     <p>
         <strong>Page render time :</strong>
@@ -15,7 +15,7 @@ $this->headLink()
             <?php echo $this->data->scriptExecutingTime; ?> seconds
         </span>
         <strong>&nbsp;&nbsp;•&nbsp;&nbsp;</strong>
-        
+
         <strong>Memory peak usage :</strong>
         <span>
             <?php echo $this->data->memoryPeakUsage; ?> bytes
@@ -27,15 +27,15 @@ $this->headLink()
             <?php //$this->data->resource; ?> bytes
         </span>
         <strong>&nbsp;&nbsp;·&nbsp;&nbsp;</strong> -->
-        
+
         <strong>Environment: </strong>
-        <span class="env-<?php echo APPLICATION_ENV ?>"><?php echo APPLICATION_ENV; ?></span>        
+        <span class="env-<?php echo APPLICATION_ENV ?>"><?php echo APPLICATION_ENV; ?></span>
         <strong>&nbsp;&nbsp;•&nbsp;&nbsp;</strong>
-        
+
         <strong>Kebab Version :</strong>
         <span><?php echo Kebab_Version::VERSION; ?></span>
         <strong>&nbsp;&nbsp;•&nbsp;&nbsp;</strong>
-        
+
         <strong>Zend Version :</strong>
         <span><?php echo Zend_Version::VERSION; ?></span>
     </p>
@@ -43,5 +43,5 @@ $this->headLink()
 
     <?php if ($this->data->position == "bottom"): ?>
         <?php echo $this->render('console.phtml'); ?>
-    <?php endif; ?>    
+    <?php endif; ?>
 </div>
